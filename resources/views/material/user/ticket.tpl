@@ -31,7 +31,7 @@
                                             <!--  <th>ID</th>   -->
                                             <th>发起日期</th>
                                             <th>工单标题</th>
-                                            <th>工单状态</th>
+                                            <th>gggggg</th>
                                             <th>操作</th>
                                         </tr>
                                         {foreach $tickets as $ticket}
