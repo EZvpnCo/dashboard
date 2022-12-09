@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use App\Services\{Auth, Mail, Config, Payment, MetronSetting};
-use App\Models\{Ip,
+use App\Models\{
+    Ip,
     Ann,
     Code,
     Node,
@@ -30,7 +31,8 @@ use App\Models\{Ip,
     EmailVerify,
     UserSubscribeLog
 };
-use App\Utils\{GA,
+use App\Utils\{
+    GA,
     Pay,
     URL,
     Hash,
@@ -504,7 +506,6 @@ class MetronController extends BaseController
                         $nodeinfo = $node->getItem($user, $mu_user, 0, 1);
                         $url = URL::getItemUrl($nodeinfo, 1);
                     }
-
                 } else {
                     $mu_user = 0;
                     $nodeinfo = $node->getItem($user, 0);
@@ -573,7 +574,6 @@ class MetronController extends BaseController
         }
 
         return $response->getBody()->write(json_encode($res));
-
     }
 
     /**
@@ -668,7 +668,7 @@ class MetronController extends BaseController
                                                                 </a>
                                                             </li>
                                                             ' . ($shop_conversion ?
-                            '<li class="navi-item">
+                        '<li class="navi-item">
                                                                 <a href="javascript:;" class="navi-link" onclick="code.PackageConversion(\'' . $shop->id . '\')">
                                                                     <span class="navi-icon"><i class="la la-leaf"></i></span>
                                                                     <span class="navi-text">折算返还余额</span>
@@ -704,7 +704,7 @@ class MetronController extends BaseController
                     }
 
                     $dataarr['id'] = $log->id;
-                    $dataarr['title'] = $log->title;
+                    $dataarr['title'] = $log->title . ")))";
                     $dataarr['user_name'] = $replyUser->user_name;
                     $dataarr['user_pic'] = $replyUser->gravatar;
                     $dataarr['datetime'] = $log->datetime;
@@ -755,7 +755,6 @@ class MetronController extends BaseController
                             } else {
                                 $shop_status = 1;
                             }
-
                         } else {
                             $shop_status = 0;
                         }
@@ -1166,7 +1165,7 @@ class MetronController extends BaseController
                 }
 
                 break;
-            case('subscribe_log'):
+            case ('subscribe_log'):
                 $table = UserSubscribeLog::find($id);
 
                 if ($table->user_id !== $this->user->id) {
@@ -1214,10 +1213,10 @@ class MetronController extends BaseController
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);    //要求结果为字符串且输出到屏幕上
         curl_setopt($curl, CURLOPT_POST, 1);  //post提交方式
         curl_setopt($curl, CURLOPT_HTTPHEADER, $header);  // 发送 header
-        curl_setopt($curl, CURLOPT_AUTOREFERER, 0);//自动设置referer
+        curl_setopt($curl, CURLOPT_AUTOREFERER, 0); //自动设置referer
         curl_setopt($curl, CURLOPT_ENCODING, "");   //解压缩防止乱码
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);//设置跟踪页面的跳转，有时候你打开一个链接，在它内部又会跳到另外一个，就是这样理解
-        curl_setopt($curl, CURLOPT_TIMEOUT, 60);//设置超时限制，防止死循环
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1); //设置跟踪页面的跳转，有时候你打开一个链接，在它内部又会跳到另外一个，就是这样理解
+        curl_setopt($curl, CURLOPT_TIMEOUT, 60); //设置超时限制，防止死循环
         //curl_setopt($curl, CURLOPT_COOKIEJAR, 'cookie.txt');//获取的cookie 保存到指定的 文件路径，我这里是相对路径，可以是$变量
         //curl_setopt($curl, CURLOPT_COOKIEFILE, 'cookie.txt');//要发送的cookie文件，注意这里是文件，还一个是变量形式发送
         //curl_setopt ($curl, CURLOPT_REFERER,$referer_); //在HTTP请求中包含一个'referer'头的字符串。告诉服务器我是从哪个页面链接过来的，服务器籍此可以获得一些信息用于处理。
