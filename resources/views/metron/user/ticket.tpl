@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>The work order system &mdash; {$config["appName"]}</title>
+        <title>Ticketing &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">The work order system</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Ticketing</h2>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
@@ -31,8 +31,8 @@
                                         <div class="card card-custom gutter-b {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">
                                                 <div class="card-title">
-                                                    <h3 class="card-label text-primary"><strong>Workers single-row table</strong>
-                                                    <span class="d-block text-muted pt-2 font-size-sm">You can initiate the repair order support list</span></h3>
+                                                    <h3 class="card-label text-primary"><strong>Tickets</strong>
+                                                    <span class="d-block text-muted pt-2 font-size-sm">You can solve your problem easy</span></h3>
                                                 </div>
                                                 <div class="card-toolbar">
                                                     <a href="JavaScript:;" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#ticket-create-modal">
@@ -45,7 +45,7 @@
                                                                 </g>
                                                             </svg>
                                                         </span>
-                                                        Create a work order
+                                                        New ticket
                                                     </a>
                                                 </div>
 
@@ -59,9 +59,9 @@
                                                                     <div class="d-flex align-items-center">
                                                                         <label class="mr-3 mb-0 d-none d-md-block">state:</label>
                                                                         <select class="form-control" id="ticket_status">
-                                                                            <option value="">all</option>
-                                                                            <option value="1">In the processing</option>
-                                                                            <option value="0">Has been completed</option>
+                                                                            <option value="">All</option>
+                                                                            <option value="1">In Process</option>
+                                                                            <option value="0">Completed</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -91,22 +91,22 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Create a new work order</strong></h5>
+                <h5 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>New ticket</strong></h5>
             </div>
             <form id="ticket-create-text-form">
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="recipient-name" class="form-control-label">The title</label>
+                    <label for="recipient-name" class="form-control-label">Title</label>
                     <input type="text" class="form-control" id="ticket-create-title-text" name="ticket_create_title_text" placeholder="Please enter a title">
                 </div>
                 <div class="form-group d-block">
-                    <label for="message-text" class="form-control-label">content</label>
+                    <label for="message-text" class="form-control-label">Content</label>
                     <div id="ticket_reply_editor" class="border-0" style="height: 150px"></div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="ticket-create-click" onclick="ticket.create();">determine</button>
-                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']}" data-dismiss="modal">cancel</button>
+                <button type="button" class="btn btn-primary" id="ticket-create-click" onclick="ticket.create();">Submit</button>
+                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']}" data-dismiss="modal">Cancel</button>
             </div>
             </form>
         </div>

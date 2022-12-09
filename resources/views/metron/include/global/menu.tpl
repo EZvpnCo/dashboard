@@ -20,7 +20,7 @@
                                             </li>
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/code" class="menu-link">
-                                                    <span class="menu-text"><strong>wallet</strong></span>
+                                                    <span class="menu-text"><strong>Wallet</strong></span>
                                                 </a>
                                             </li>
                                             <li class="menu-item menu-item-submenu menu-item-rel">
