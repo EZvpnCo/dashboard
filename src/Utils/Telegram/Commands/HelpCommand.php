@@ -20,7 +20,7 @@ class HelpCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = '[群组/私聊] 系统中可用的所有命令.';
+    protected $description = '[Group/Private Chat] All commands available in the system.';
 
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class HelpCommand extends Command
         }
         $this->replyWithChatAction(['action' => Actions::TYPING]);
         $commands = $this->telegram->getCommands();
-        $text = '系统中可用的所有命令.';
+        $text = 'All commands available in the system.';
         $text .= PHP_EOL . PHP_EOL;
         foreach ($commands as $name => $handler) {
             $text .= '/' . $name . PHP_EOL . '`    - ' . $handler->getDescription() . '`' . PHP_EOL;

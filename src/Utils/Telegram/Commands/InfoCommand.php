@@ -21,7 +21,7 @@ class InfoCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = '[群组]     获取被回复消息的用户信息，管理员命令.';
+    protected $description = '[Group] Get the user information of the reply message, administrator command.';
 
     /**
      * {@inheritdoc}
@@ -100,7 +100,7 @@ class InfoCommand extends Command
             } else {
                 $response = $this->replyWithMessage(
                     [
-                        'text'                  => '请回复消息使用.',
+                        'text'                  => 'Please reply message to use.',
                         'reply_to_message_id'   => $MessageID,
                     ]
                 );

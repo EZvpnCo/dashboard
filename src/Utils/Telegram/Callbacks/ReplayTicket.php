@@ -71,10 +71,10 @@ class ReplayTicket
             return;
         }
         // 如果不是管理员
-        if (!$AdminUser){
+        if (!$AdminUser) {
             return;
         }
-        if ($ticketId){
+        if ($ticketId) {
             $ticket_main = Ticket::where('id', $ticketId)->where('rootid', 0)->first();
             $content = $Message->getText();
             $antiXss              = new AntiXSS();
@@ -87,7 +87,7 @@ class ReplayTicket
             $ticket_main->status  = 1;
             $ticket_main->save();
             $ticket->save();
-            MtTelegram::Send("# {$ticketId} 的工单已回复成功", $this->ChatID);
+            MtTelegram::Send("# {$ticketId} Ticket send successfully", $this->ChatID);
         }
     }
 }

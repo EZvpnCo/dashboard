@@ -21,7 +21,7 @@ class StartCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = '[群组/私聊] Bot 初始命令.';
+    protected $description = '[Group/Private chat] Bot initial command.';
 
     /**
      * {@inheritdoc}
@@ -59,7 +59,7 @@ class StartCommand extends Command
             // 回送信息
             $this->replyWithMessage(
                 [
-                    'text'       => '发送 /help 获取帮助',
+                    'text'       => 'Send /help for help',
                     'parse_mode' => 'Markdown',
                 ]
             );
@@ -83,7 +83,7 @@ class StartCommand extends Command
             // 回送信息
             $response = $this->replyWithMessage(
                 [
-                    'text' => '喵喵喵.',
+                    'text' => 'Meow meow meow.',
                 ]
             );
             // 消息删除任务
@@ -98,7 +98,7 @@ class StartCommand extends Command
     {
         $Uid = TelegramSessionManager::verify_bind_session($MessageText);
         if ($Uid == 0) {
-            $text = '绑定失败了呢，经检查发现：【' . $MessageText . '】的有效期为 10 分钟，您可以在我们网站上的 **资料编辑** 页面刷新后重试.';
+            $text = 'The binding failed, after inspection, it was found that：【' . $MessageText . '】is valid for 10 minutes, you can try again after refreshing the **Profile Edit** page on our website.';
         } else {
             $BinsUser              = User::where('id', $Uid)->first();
             $BinsUser->telegram_id = $SendUser['id'];
@@ -106,12 +106,12 @@ class StartCommand extends Command
             $BinsUser->im_value    = $SendUser['username'];
             $BinsUser->save();
             if ($BinsUser->is_admin >= 1) {
-                $text = '尊敬的**管理员**您好，恭喜绑定成功。' . PHP_EOL . '当前绑定邮箱为：' . $BinsUser->email;
+                $text = 'Dear **Administrator** Hello, congratulations on the successful binding。' . PHP_EOL . 'The current bound email address is：' . $BinsUser->email;
             } else {
                 if ($BinsUser->class >= 1) {
-                    $text = '尊敬的 **VIP ' . $BinsUser->class . '** 用户您好.' . PHP_EOL . '恭喜您绑定成功，当前绑定邮箱为：' . $BinsUser->email;
+                    $text = 'Dear **VIP ' . $BinsUser->class . '** Hello user.' . PHP_EOL . 'Congratulations on your successful binding, the current bound email address is：' . $BinsUser->email;
                 } else {
-                    $text = '绑定成功了，您的邮箱为：' . $BinsUser->email;
+                    $text = 'The binding is successful, your email is：' . $BinsUser->email;
                 }
             }
         }

@@ -100,29 +100,29 @@ class TelegramTools
             case 'enable':
             case 'is_admin':
                 $strArray = [
-                    '// 支持的写法',
-                    '// [启用|是] —— 字面意思',
-                    '// [禁用|否] —— 字面意思',
+                    '// Supported writing',
+                    '// [enabled|yes] - literally',
+                    '// [disable|no] - literally',
                 ];
                 if (strpos($value, ' ') !== false) {
                     return [
                         'ok'  => false,
-                        'msg' => '处理出错，不支持的写法.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                        'msg' => 'Error handling, unsupported writing method.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                     ];
                 }
-                if (in_array($value, ['启用', '是'])) {
+                if (in_array($value, ['enabled', 'yes'])) {
                     $User->$useOptionMethod = 1;
-                    $new = '启用';
-                } elseif (in_array($value, ['禁用', '否'])) {
+                    $new = 'enabled';
+                } elseif (in_array($value, ['disabled', 'no'])) {
                     $User->$useOptionMethod = 0;
-                    $new = '禁用';
+                    $new = 'disabled';
                 } else {
                     return [
                         'ok'  => false,
-                        'msg' => '处理出错，不支持的写法.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                        'msg' => 'Error handling, unsupported writing method.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                     ];
                 }
-                $old = ($old ? '启用' : '禁用');
+                $old = ($old ? 'enabled' : 'disabled');
                 break;
                 // ##############
             case 'port':
@@ -130,7 +130,7 @@ class TelegramTools
                 if (!is_numeric($value) || strpos($value, '-') === 0) {
                     return [
                         'ok'  => false,
-                        'msg' => '提供的端口非数值，如要随机重置请指定为 0.',
+                        'msg' => 'Provided port is non-numeric, specify 0 for random reset.',
                     ];
                 }
                 if ((int) $value === 0) {
@@ -139,11 +139,11 @@ class TelegramTools
                 $temp = $User->setPort($value);
                 if ($temp['ok'] === false) {
                     $strArray = [
-                        '目标用户：' . $Email,
-                        '欲修改项：' . $useOptionMethodName . '[' . $useOptionMethod . ']',
-                        '当前值为：' . $old,
-                        '欲修改为：' . $value,
-                        '错误详情：' . $temp['msg'],
+                        'Target users：' . $Email,
+                        'Item to be modified：' . $useOptionMethodName . '[' . $useOptionMethod . ']',
+                        'The current value is：' . $old,
+                        'want to change to：' . $value,
+                        'error details：' . $temp['msg'],
                     ];
                     return [
                         'ok'  => false,
@@ -156,25 +156,25 @@ class TelegramTools
                 // ##############
             case 'transfer_enable':
                 $strArray = [
-                    '// 支持的写法，不支持单位 b，不区分大小写',
-                    '// 支持的单位：kb | mb | gb | tb | pb',
-                    '//  2kb —— 指定为该值得流量',
-                    '// +2kb —— 增加流量',
-                    '// -2kb —— 减少流量',
-                    '// *2   —— 以当前流量做乘法，不支持填写单位',
-                    '// /2   —— 以当前流量做除法，不支持填写单位',
+                    '// Supported writing, does not support unit b, case insensitive',
+                    '// supported units：kb | mb | gb | tb | pb',
+                    '//  2kb —— Designated as the value flow',
+                    '// +2kb —— increase traffic',
+                    '// -2kb —— reduce traffic',
+                    '// *2   —— Multiply with the current traffic, does not support filling in the unit',
+                    '// /2   —— Divide by the current traffic, does not support filling in the unit',
                 ];
                 if (strpos($value, ' ') !== false) {
                     return [
                         'ok'  => false,
-                        'msg' => '处理出错，不支持的写法.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                        'msg' => 'Processing error, unsupported writing.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                     ];
                 }
                 $new = self::TrafficMethod($User->$useOptionMethod, $value);
                 if ($new === null) {
                     return [
                         'ok'  => false,
-                        'msg' => '处理出错，不支持的写法.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                        'msg' => 'Processing error, unsupported writing.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                     ];
                 }
                 $User->$useOptionMethod = $new;
@@ -185,14 +185,14 @@ class TelegramTools
             case 'expire_in':
             case 'class_expire':
                 $strArray = [
-                    '// 支持的写法，单位：天',
-                    '// 使用天数设置不能包含空格',
-                    '//  2 —— 以当前时间为基准的天数设置',
-                    '// +2 —— 增加天数',
-                    '// -2 —— 减少天数',
-                    '// 指定日期，在日期与时间中含有一个空格',
-                    '// 2020-02-30 —— 指定日期',
-                    '// 2020-02-30 08:00:00 —— 指定日期精确到秒',
+                    '// Supported writing methods, unit: day',
+                    '// Use days setting cannot contain spaces',
+                    '//  2 —— Set the number of days based on the current time',
+                    '// +2 —— increase the number of days',
+                    '// -2 —— reduce the number of days',
+                    '// Specify a date with a space between the date and time',
+                    '// 2020-02-30 —— Specified date',
+                    '// 2020-02-30 08:00:00 —— The specified date is accurate to the second',
                 ];
                 if (
                     strpos($value, '+') === 0
@@ -210,7 +210,7 @@ class TelegramTools
                         if (strtotime($value) === false) {
                             return [
                                 'ok'  => false,
-                                'msg' => '处理出错，不支持的写法.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                                'msg' => 'Processing error, unsupported writing.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                             ];
                         }
                         $new = strtotime($value);
@@ -226,7 +226,7 @@ class TelegramTools
                         if (strtotime($value) === false) {
                             return [
                                 'ok'  => false,
-                                'msg' => '处理出错，不支持的写法.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                                'msg' => 'Processing error, unsupported writing.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                             ];
                         }
                         $new = strtotime($value);

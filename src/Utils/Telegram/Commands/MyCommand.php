@@ -22,7 +22,7 @@ class MyCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = '[群组/私聊] 我的个人信息.';
+    protected $description = '[Group/private chat] My personal information.';
 
     /**
      * {@inheritdoc}
@@ -100,7 +100,7 @@ class MyCommand extends Command
         $text .= PHP_EOL . PHP_EOL;
         $text .= Reply::getUserTrafficInfo($User);
         $text .= PHP_EOL;
-        $text .= '流量重置时间：' . $User->valid_use_loop();
+        $text .= 'Flow reset time：' . $User->valid_use_loop();
         // 回送信息
         return $this->replyWithMessage(
             [
@@ -112,7 +112,7 @@ class MyCommand extends Command
                         'inline_keyboard' => [
                             [
                                 [
-                                    'text'          => (!$User->isAbleToCheckin() ? '已签到' : '签到'),
+                                    'text'          => (!$User->isAbleToCheckin() ? 'Signed in' : 'Check in'),
                                     'callback_data' => 'user.checkin.' . $SendUser['id']
                                 ]
                             ],

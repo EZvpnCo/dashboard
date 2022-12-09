@@ -21,7 +21,7 @@ class SetuserCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = '[群组/私聊] 修改用户数据，管理员命令.';
+    protected $description = '[Group/private chat] Modify user data, administrator commands.';
 
     /**
      * {@inheritdoc}
@@ -136,18 +136,18 @@ class SetuserCommand extends Command
 
         if ($arguments == '') {
             $strArray = [
-                '/setuser [用户识别] [操作字段] [操作参数]',
+                '/setuser [user ID] [operation field] [operation parameter]',
                 '',
-                '用户识别：[使用回复消息方式则无需填写]',
-                '- [' . implode(' | ', array_keys(TelegramTools::getUserSearchMethods())) . ']，可省略，默认：email',
-                '- 例 1：/setuser admin@admin 操作字段 操作参数',
-                '- 例 2：/setuser port:10086  操作字段 操作参数',
+                'User identification: [If you use the reply message method, you don’t need to fill in]',
+                '- [' . implode(' | ', array_keys(TelegramTools::getUserSearchMethods())) . ']，Can be omitted, default：email',
+                '- EX 1：/setuser admin@admin Action Field Action Parameters',
+                '- EX 2：/setuser port:10086  Action Field Action Parameters',
                 '',
-                '操作字段：',
+                'Action Field：',
                 '[' . implode(' | ', array_keys(TelegramTools::getUserActionOption())) . ']',
                 '',
-                '操作参数：',
-                '- 请查看对应选项支持的写法.',
+                'Action Parameters：',
+                '- Please check the writing method supported by the corresponding option.',
             ];
             $response = $this->replyWithMessage(
                 [
@@ -175,7 +175,7 @@ class SetuserCommand extends Command
             if (count($Options) < 3) {
                 $response = $this->replyWithMessage(
                     [
-                        'text'                  => '没有提供选项或操作值.',
+                        'text'                  => 'No option or action value provided.',
                         'parse_mode'            => 'HTML',
                         'reply_to_message_id'   => $MessageID,
                     ]
@@ -199,7 +199,7 @@ class SetuserCommand extends Command
             if (count($Options) < 2) {
                 $response = $this->replyWithMessage(
                     [
-                        'text'                  => '没有提供选项或操作值.',
+                        'text'                  => 'No option or action value provided.',
                         'parse_mode'            => 'HTML',
                         'reply_to_message_id'   => $MessageID,
                     ]

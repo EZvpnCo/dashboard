@@ -53,7 +53,7 @@ class TelegramProcess
         if ($user != null) {
             switch ($command) {
                 case 'traffic':
-                    $reply['message'] = '您当前的流量状况：
+                    $reply['message'] = 'Your current traffic status：
 Used today ' . $user->TodayusedTraffic() . ' ' . number_format(($user->u + $user->d - $user->last_day_t) / $user->transfer_enable * 100, 2) . '%
 Used before today ' . $user->LastusedTraffic() . ' ' . number_format($user->last_day_t / $user->transfer_enable * 100, 2) . '%
 Unused ' . $user->unusedTraffic() . ' ' . number_format(($user->transfer_enable - ($user->u + $user->d)) / $user->transfer_enable * 100, 2) . '%';

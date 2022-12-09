@@ -108,16 +108,16 @@ class Callback
         $Keyboard = [
             [
                 [
-                    'text'          => '产品介绍',
-                    'callback_data' => 'general.pricing'
+                    'text' => 'Product Introduction',
+                    'callback_data' => 'general. pricing'
                 ],
                 [
-                    'text'          => '服务条款',
+                    'text' => 'Terms of Service',
                     'callback_data' => 'general.terms'
                 ]
             ]
         ];
-        $text = '游客您好，以下是 BOT 菜单：' . PHP_EOL . PHP_EOL . '本站用户请前往用户中心进行 Telegram 绑定操作.';
+        $text = 'Hello visitor, the following is the BOT menu:' . PHP_EOL . PHP_EOL . 'Users of this site, please go to the user center for Telegram binding operation.';
         return [
             'text'     => $text,
             'keyboard' => $Keyboard,
@@ -235,27 +235,27 @@ class Callback
         $Keyboard = [
             [
                 [
-                    'text'          => '用户中心',
+                    'text' => 'User Center',
                     'callback_data' => 'user.center'
                 ],
                 [
-                    'text'          => '资料编辑',
+                    'text' => 'Edit profile',
                     'callback_data' => 'user.edit'
                 ],
             ],
             [
                 [
-                    'text'          => '订阅中心',
+                    'text' => 'Subscription',
                     'callback_data' => 'user.subscribe'
                 ],
                 [
-                    'text'          => '分享计划',
+                    'text' => 'Invitation',
                     'callback_data' => 'user.invite'
                 ],
             ],
             [
                 [
-                    'text'          => $checkin,
+                    'text' => $checkin,
                     'callback_data' => 'user.checkin.' . $user->telegram_id
                 ],
             ],
@@ -264,11 +264,11 @@ class Callback
         $text .= PHP_EOL . PHP_EOL;
         $text .= Reply::getUserInfo($user);
         $text .= PHP_EOL;
-        $text .= '流量重置时间：' . $user->valid_use_loop();
+        $text .= 'Flow reset time：' . $user->valid_use_loop();
         if (Config::getconfig('Telegram.bool.show_group_link')) {
             $Keyboard[] = [
                 [
-                    'text' => '加入用户群',
+                    'text' => 'Join user group',
                     'url'  => Config::getconfig('Telegram.string.group_link')
                 ]
             ];
@@ -290,7 +290,7 @@ class Callback
             if ($this->ChatID < 0) {
                 // 群组内提示
                 return $this->answerCallbackQuery([
-                    'text'       => '您好，您尚未绑定账户，无法进行操作.',
+                    'text' => 'Hello, you have not bound an account and cannot perform operations.',
                     'show_alert' => true,
                 ]);
             } else {
@@ -317,7 +317,7 @@ class Callback
                 // 签到
                 if ($Operate[2] != $this->triggerUser['id']) {
                     $this->answerCallbackQuery([
-                        'text'       => '您好，您无法操作他人的账户.',
+                        'text'       => 'Hello, you cannot operate other people\'s accounts.',
                         'show_alert' => true,
                     ]);
                     return;
@@ -354,27 +354,27 @@ class Callback
         $keyboard = [
             [
                 [
-                    'text'          => '登录记录',
+                    'text' => 'login record',
                     'callback_data' => 'user.center.login_log'
                 ],
                 [
-                    'text'          => '使用记录',
+                    'text' => 'use record',
                     'callback_data' => 'user.center.usage_log'
                 ],
             ],
             [
                 [
-                    'text'          => '返利记录',
+                    'text' => 'rebate record',
                     'callback_data' => 'user.center.rebate_log'
                 ],
                 [
-                    'text'          => '订阅记录',
+                    'text' => 'subscription record',
                     'callback_data' => 'user.center.subscribe_log'
                 ],
             ],
             [
                 [
-                    'text'          => '回主菜单',
+                    'text' => 'back to main menu',
                     'callback_data' => 'user.index'
                 ]
             ],
@@ -395,11 +395,11 @@ class Callback
         $back = [
             [
                 [
-                    'text'          => '回主菜单',
+                    'text' => 'back to main menu',
                     'callback_data' => 'user.index'
                 ],
                 [
-                    'text'          => '回上一页',
+                    'text' => 'back to the previous page',
                     'callback_data' => 'user.center'
                 ]
             ]
@@ -420,15 +420,15 @@ class Callback
                         $userloginip[] = $loginiplocation;
                     }
                 }
-                $text  = '<strong>以下是您最近 10 次的登录位置：</strong>';
+                $text = '<strong>Here are your last 10 logins:</strong>';
                 $text .= PHP_EOL . PHP_EOL;
-                $text .= implode('、', $userloginip);
+                $text .= implode(',', $userloginip);
                 $sendMessage = [
-                    'text'                     => $text,
+                    'text' => $text,
                     'disable_web_page_preview' => false,
-                    'parse_mode'               => 'HTML',
-                    'reply_to_message_id'      => null,
-                    'reply_markup'             => json_encode(
+                    'parse_mode' => 'HTML',
+                    'reply_to_message_id' => null,
+                    'reply_markup' => json_encode(
                         [
                             'inline_keyboard' => $back
                         ]
@@ -449,15 +449,15 @@ class Callback
                     $location            = $iplocation->getlocation($single->ip);
                     $userip[$single->ip] = '[' . $single->ip . '] ' . iconv('gbk', 'utf-8//IGNORE', $location['country'] . $location['area']);
                 }
-                $text  = '<strong>以下是您最近 5 分钟的使用 IP：</strong>';
+                $text = '<strong>The following are your IPs used in the last 5 minutes:</strong>';
                 $text .= PHP_EOL . PHP_EOL;
                 $text .= implode(PHP_EOL, $userip);
                 $sendMessage = [
-                    'text'                     => $text,
+                    'text' => $text,
                     'disable_web_page_preview' => false,
-                    'parse_mode'               => 'HTML',
-                    'reply_to_message_id'      => null,
-                    'reply_markup'             => json_encode(
+                    'parse_mode' => 'HTML',
+                    'reply_to_message_id' => null,
+                    'reply_markup' => json_encode(
                         [
                             'inline_keyboard' => $back
                         ]
@@ -469,17 +469,17 @@ class Callback
                 $paybacks = Payback::where('ref_by', $this->User->id)->orderBy('datetime', 'desc')->take(10)->get();
                 $temp     = [];
                 foreach ($paybacks as $payback) {
-                    $temp[] = '<code>#' . $payback->id . '：' . ($payback->user() != null ? $payback->user()->user_name : '已注销') . '：' . $payback->ref_get . ' 元</code>';
+                    $temp[] = '<code>#' . $payback->id . '：' . ($payback->user() != null ? $payback->user()->user_name : 'Logged out') . '：' . $payback->ref_get . ' $</code>';
                 }
-                $text  = '<strong>以下是您最近 10 条返利记录：</strong>';
+                $text = '<strong>The following are your last 10 rebate records:</strong>';
                 $text .= PHP_EOL . PHP_EOL;
                 $text .= implode(PHP_EOL, $temp);
                 $sendMessage = [
-                    'text'                     => $text,
+                    'text' => $text,
                     'disable_web_page_preview' => false,
-                    'parse_mode'               => 'HTML',
-                    'reply_to_message_id'      => null,
-                    'reply_markup'             => json_encode(
+                    'parse_mode' => 'HTML',
+                    'reply_to_message_id' => null,
+                    'reply_markup' => json_encode(
                         [
                             'inline_keyboard' => $back
                         ]
@@ -493,9 +493,9 @@ class Callback
                 $temp       = [];
                 foreach ($logs as $log) {
                     $location = $iplocation->getlocation($log->request_ip);
-                    $temp[]   = '<code>' . $log->request_time . ' 在 [' . $log->request_ip . '] ' . iconv('gbk', 'utf-8//IGNORE', $location['country'] . $location['area']) . ' 访问了 ' . $log->subscribe_type . ' 订阅</code>';
+                    $temp[]   = '<code>' . $log->request_time . ' exist [' . $log->request_ip . '] ' . iconv('gbk', 'utf-8//IGNORE', $location['country'] . $location['area']) . ' visited ' . $log->subscribe_type . ' subscription</code>';
                 }
-                $text  = '<strong>以下是您最近 10 条订阅记录：</strong>';
+                $text  = '<strong>Here are your last 10 subscription records:</strong>';
                 $text .= PHP_EOL . PHP_EOL;
                 $text .= implode(PHP_EOL . PHP_EOL, $temp);
                 $sendMessage = [
@@ -534,47 +534,47 @@ class Callback
         $keyboard = [
             [
                 [
-                    'text'          => '重置订阅链接',
+                    'text' => 'Reset subscription link',
                     'callback_data' => 'user.edit.update_link'
                 ],
                 [
-                    'text'          => '重置链接密码',
+                    'text' => 'Reset link password',
                     'callback_data' => 'user.edit.update_passwd'
                 ]
             ],
             [
                 [
-                    'text'          => '更改加密方式',
+                    'text' => 'Change encryption method',
                     'callback_data' => 'user.edit.encrypt'
                 ],
                 [
-                    'text'          => '更改协议类型',
+                    'text' => 'Change protocol type',
                     'callback_data' => 'user.edit.protocol'
                 ]
             ],
             [
                 [
-                    'text'          => '更改混淆类型',
+                    'text' => 'Change confusion type',
                     'callback_data' => 'user.edit.obfs'
                 ],
                 [
-                    'text'          => '每日邮件接收',
+                    'text' => 'daily mail reception',
                     'callback_data' => 'user.edit.sendemail'
                 ],
             ],
             [
                 [
-                    'text'          => '账户解绑',
+                    'text' => 'account unlock',
                     'callback_data' => 'user.edit.unbind'
                 ],
                 [
-                    'text'          => '群组解封',
+                    'text' => 'group unblock',
                     'callback_data' => 'user.edit.unban'
                 ],
             ],
             [
                 [
-                    'text'          => '回主菜单',
+                    'text' => 'back to main menu',
                     'callback_data' => 'user.index'
                 ]
             ]
@@ -594,18 +594,18 @@ class Callback
     {
         if ($this->ChatID < 0) {
             return $this->answerCallbackQuery([
-                'text'       => '无法在群组中进行该操作.',
+                'text'       => 'This operation cannot be performed in a group.',
                 'show_alert' => true,
             ]);
         }
         $back = [
             [
                 [
-                    'text'          => '回主菜单',
+                    'text'          => 'back to main menu',
                     'callback_data' => 'user.index'
                 ],
                 [
-                    'text'          => '回上一页',
+                    'text'          => 'back to previous page',
                     'callback_data' => 'user.edit'
                 ]
             ]
@@ -618,7 +618,7 @@ class Callback
                 // 重置订阅链接
                 $this->User->clean_link();
                 $this->answerCallbackQuery([
-                    'text'       => '订阅链接重置成功，请在下方重新更新订阅.',
+                    'text'       => 'The subscription link has been reset successfully, please renew the subscription below.',
                     'show_alert' => true,
                 ]);
                 $temp        = $this->getUserSubscribeKeyboard();
@@ -637,11 +637,11 @@ class Callback
                 // 重置链接密码
                 $this->User->passwd = Tools::genRandomChar(16);
                 if ($this->User->save()) {
-                    $answerCallbackQuery = '连接密码更新成功，请在下方重新更新订阅.';
-                    $temp                = $this->getUserSubscribeKeyboard();
+                    $answerCallbackQuery = 'The connection password has been updated successfully, please renew the subscription below.';
+                    $temp = $this->getUserSubscribeKeyboard();
                 } else {
-                    $answerCallbackQuery = '出现错误，连接密码更新失败，请联系管理员.';
-                    $temp                = $this->getUserEditKeyboard();
+                    $answerCallbackQuery = 'An error occurred, the connection password update failed, please contact the administrator.';
+                    $temp = $this->getUserEditKeyboard();
                 }
                 $this->answerCallbackQuery([
                     'text'       => $answerCallbackQuery,
@@ -665,12 +665,12 @@ class Callback
                     if (in_array($CallbackDataExplode[1], Config::getSupportParam('method'))) {
                         $temp = $this->User->setMethod($CallbackDataExplode[1]);
                         if ($temp['ok'] === true) {
-                            $text = '您当前的加密方式为：' . $this->User->method . PHP_EOL . PHP_EOL . $temp['msg'];
+                            $text = 'Your current encryption method is:' . $this->User->method . PHP_EOL . PHP_EOL . $temp['msg'];
                         } else {
-                            $text = '发生错误，请重新选择.' . PHP_EOL . PHP_EOL . $temp['msg'];
+                            $text = 'An error occurred, please reselect.' . PHP_EOL . PHP_EOL . $temp['msg'];
                         }
                     } else {
-                        $text = '发生错误，请重新选择.';
+                        $text = 'An error occurred, please try again.';
                     }
                 } else {
                     $Encrypts = [];
@@ -686,7 +686,7 @@ class Callback
                         $keyboard[] = $Encrypt;
                     }
                     $keyboard[] = $back[0];
-                    $text       = '您当前的加密方式为：' . $this->User->method;
+                    $text       = 'Your current encryption method is: ' . $this->User->method;
                 }
                 $sendMessage = [
                     'text'                     => $text,
@@ -706,12 +706,12 @@ class Callback
                     if (in_array($CallbackDataExplode[1], Config::getSupportParam('protocol'))) {
                         $temp = $this->User->setProtocol($CallbackDataExplode[1]);
                         if ($temp['ok'] === true) {
-                            $text = '您当前的协议为：' . $this->User->protocol . PHP_EOL . PHP_EOL . $temp['msg'];
+                            $text = 'Your current protocol is:' . $this->User->protocol . PHP_EOL . PHP_EOL . $temp['msg'];
                         } else {
-                            $text = '发生错误，请重新选择.' . PHP_EOL . PHP_EOL . $temp['msg'];
+                            $text = 'An error occurred, please reselect.' . PHP_EOL . PHP_EOL . $temp['msg'];
                         }
                     } else {
-                        $text = '发生错误，请重新选择.';
+                        $text = 'An error occurred, please try again.';
                     }
                 } else {
                     $Protocols = [];
@@ -727,7 +727,7 @@ class Callback
                         $keyboard[] = $Protocol;
                     }
                     $keyboard[] = $back[0];
-                    $text       = '您当前的协议为：' . $this->User->protocol;
+                    $text       = 'Your current agreement is：' . $this->User->protocol;
                 }
                 $sendMessage = [
                     'text'                     => $text,
@@ -747,12 +747,12 @@ class Callback
                     if (in_array($CallbackDataExplode[1], Config::getSupportParam('obfs'))) {
                         $temp = $this->User->setObfs($CallbackDataExplode[1]);
                         if ($temp['ok'] === true) {
-                            $text = '您当前的协议为：' . $this->User->obfs . PHP_EOL . PHP_EOL . $temp['msg'];
+                            $text = 'Your current agreement is：' . $this->User->obfs . PHP_EOL . PHP_EOL . $temp['msg'];
                         } else {
-                            $text = '发生错误，请重新选择.' . PHP_EOL . PHP_EOL . $temp['msg'];
+                            $text = 'An error occurred, please try again.' . PHP_EOL . PHP_EOL . $temp['msg'];
                         }
                     } else {
-                        $text = '发生错误，请重新选择.';
+                        $text = 'An error occurred, please try again.';
                     }
                 } else {
                     $Obfss = [];
@@ -768,7 +768,7 @@ class Callback
                         $keyboard[] = $Obfs;
                     }
                     $keyboard[] = $back[0];
-                    $text       = '您当前的协议为：' . $this->User->obfs;
+                    $text       = 'Your current agreement is：' . $this->User->obfs;
                 }
                 $sendMessage = [
                     'text'                     => $text,
@@ -786,7 +786,7 @@ class Callback
                 $keyboard = [
                     [
                         [
-                            'text'          => '更改开启/关闭',
+                            'text' => 'Change on/off',
                             'callback_data' => 'user.edit.sendemail.update'
                         ]
                     ],
@@ -797,26 +797,26 @@ class Callback
                     case 'update':
                         $this->User->sendDailyMail = ($this->User->sendDailyMail == 0 ? 1 : 0);
                         if ($this->User->save()) {
-                            $text  = '设置更改成功，每日邮件接收当前设置为：';
+                            $text = 'Settings changed successfully, daily mail reception is currently set to:';
                             $text .= '<strong>';
-                            $text .= ($this->User->sendDailyMail == 0 ? '不发送' : '发送');
+                            $text .= ($this->User->sendDailyMail == 0 ? 'Do not send' : 'Send');
                             $text .= '</strong>';
                         } else {
-                            $text = '发生错误.';
+                            $text = 'An error occurred.';
                         }
                         break;
                     default:
-                        $text  = '每日邮件接收当前设置为：';
+                        $text = 'Daily mail reception is currently set to:';
                         $text .= '<strong>';
-                        $text .= ($this->User->sendDailyMail == 0 ? '不发送' : '发送');
+                        $text .= ($this->User->sendDailyMail == 0 ? 'Do not send' : 'Send');
                         $text .= '</strong>';
                         break;
                 }
                 $sendMessage = [
-                    'text'                     => $text,
+                    'text' => $text,
                     'disable_web_page_preview' => false,
-                    'reply_to_message_id'      => null,
-                    'reply_markup'             => json_encode(
+                    'reply_to_message_id' => null,
+                    'reply_markup' => json_encode(
                         [
                             'inline_keyboard' => $keyboard
                         ]
@@ -824,22 +824,22 @@ class Callback
                 ];
                 break;
             case 'unbind':
-                // Telegram 账户解绑
+                // Unbind Telegram account
                 $this->AllowEditMessage = false;
-                $text                   = '发送 **/unbind 账户邮箱** 进行解绑.';
+                $text = 'Send **/unbind account email** to unbind.';
                 if (Config::getconfig('Telegram.bool.unbind_kick_member') === true) {
-                    $text .= PHP_EOL . PHP_EOL . '根据管理员的设定，您解绑账户将会被自动移出用户群.';
+                    $text .= PHP_EOL . PHP_EOL . 'According to the administrator\'s settings, your unbound account will be automatically removed from the user group.';
                 }
                 $sendMessage = [
-                    'text'                     => $text,
+                    'text' => $text,
                     'disable_web_page_preview' => false,
-                    'reply_to_message_id'      => null,
-                    'parse_mode'               => 'Markdown',
-                    'reply_markup'             => null
+                    'reply_to_message_id' => null,
+                    'parse_mode' => 'Markdown',
+                    'reply_markup' => null
                 ];
                 break;
             case 'unban':
-                // 群组解封
+                // group unblock
                 if (isset($Operate[3]) && $Operate[3] == 'update') {
                     TelegramTools::SendPost(
                         'unbanChatMember',
@@ -849,20 +849,20 @@ class Callback
                         ]
                     );
                     $this->answerCallbackQuery([
-                        'text'       => '已提交解封，如您仍无法加入群组，请联系管理员.',
+                        'text' => 'Submitted to unblock, if you still can not join the group, please contact the administrator.',
                         'show_alert' => true,
                     ]);
                 }
                 $sendMessage = [
-                    'text'                     => '如果您已经身处用户群，请勿随意点击解封，否则会导致您被移除出群组.',
+                    'text' => 'If you are already in the user group, please do not click to unblock, otherwise you will be removed from the group.',
                     'disable_web_page_preview' => false,
-                    'reply_to_message_id'      => null,
-                    'reply_markup'             => json_encode(
+                    'reply_to_message_id' => null,
+                    'reply_markup' => json_encode(
                         [
                             'inline_keyboard' => [
                                 [
                                     [
-                                        'text'          => '点击提交解封',
+                                        'text' => 'Click to submit to unblock',
                                         'callback_data' => 'user.edit.unban.update'
                                     ]
                                 ],
@@ -873,18 +873,18 @@ class Callback
                 ];
                 break;
             default:
-                $temp  = $this->getUserEditKeyboard();
-                $text  = '您可在此编辑您的资料或连接信息：' . PHP_EOL . PHP_EOL;
-                $text .= '端口：' . $this->User->port . PHP_EOL;
-                $text .= '密码：' . $this->User->passwd . PHP_EOL;
-                $text .= '加密：' . $this->User->method . PHP_EOL;
-                $text .= '协议：' . $this->User->protocol . PHP_EOL;
-                $text .= '混淆：' . $this->User->obfs;
+                $temp = $this->getUserEditKeyboard();
+                $text = 'You can edit your profile or connection information here:' . PHP_EOL . PHP_EOL;
+                $text .= 'Port:' . $this->User->port . PHP_EOL;
+                $text .= 'Password:' . $this->User->passwd . PHP_EOL;
+                $text .= 'Encryption:' . $this->User->method . PHP_EOL;
+                $text .= 'Protocol:' . $this->User->protocol . PHP_EOL;
+                $text .= 'Confused:' . $this->User->obfs;
                 $sendMessage = [
-                    'text'                     => $text,
+                    'text' => $text,
                     'disable_web_page_preview' => false,
-                    'reply_to_message_id'      => null,
-                    'reply_markup'             => json_encode(
+                    'reply_to_message_id' => null,
+                    'reply_markup' => json_encode(
                         [
                             'inline_keyboard' => $temp['keyboard']
                         ]
@@ -904,93 +904,93 @@ class Callback
 
     public function getUserSubscribeKeyboard()
     {
-        $text     = '订阅中心.';
+        $text     = 'Subscription Center.';
         $keyboard = [
             [
                 [
-                    'text'          => 'SSR 订阅',
+                    'text' => 'SSR subscription',
                     'callback_data' => 'user.subscribe|?sub=1'
                 ],
                 [
-                    'text'          => 'SSD 订阅',
+                    'text' => 'SSD subscription',
                     'callback_data' => 'user.subscribe|?ssd=1'
                 ],
             ],
             [
                 [
-                    'text'          => 'SS-Android 订阅',
+                    'text' => 'SS-Android Subscription',
                     'callback_data' => 'user.subscribe|?list=ssa'
                 ],
                 [
-                    'text'          => 'V2RayN 订阅',
+                    'text' => 'V2RayN subscription',
                     'callback_data' => 'user.subscribe|?sub=3'
                 ],
             ],
             [
                 [
-                    'text'          => 'Shadowrocket',
+                    'text' => 'Shadowrocket',
                     'callback_data' => 'user.subscribe|?list=shadowrocket'
                 ],
                 [
-                    'text'          => 'Kitsunebi',
+                    'text' => 'Kitsunebi',
                     'callback_data' => 'user.subscribe|?list=kitsunebi'
                 ]
             ],
             [
                 [
-                    'text'          => 'Clash',
+                    'text' => 'Clash',
                     'callback_data' => 'user.subscribe|?clash=1'
                 ],
             ],
             [
                 [
-                    'text'          => 'Clash Provider',
+                    'text' => 'Clash Provider',
                     'callback_data' => 'user.subscribe|?list=clash'
                 ]
             ],
             [
                 [
-                    'text'          => 'Surge List',
+                    'text' => 'Surge List',
                     'callback_data' => 'user.subscribe|?list=surge'
                 ],
                 [
-                    'text'          => 'Surge 4',
+                    'text' => 'Surge 4',
                     'callback_data' => 'user.subscribe|?surge=4'
                 ],
             ],
             [
                 [
-                    'text'          => 'Surge 2',
+                    'text' => 'Surge 2',
                     'callback_data' => 'user.subscribe|?surge=2'
                 ],
                 [
-                    'text'          => 'Surge 3',
+                    'text' => 'Surge 3',
                     'callback_data' => 'user.subscribe|?surge=3'
                 ],
             ],
             [
                 [
-                    'text'          => 'Quantumult',
+                    'text' => 'Quantumult',
                     'callback_data' => 'user.subscribe|?list=quantumult'
                 ],
                 [
-                    'text'          => 'QuantumultX',
+                    'text' => 'QuantumultX',
                     'callback_data' => 'user.subscribe|?list=quantumultx'
                 ],
             ],
             [
                 [
-                    'text'          => 'Quantumult Conf',
+                    'text' => 'Quantumult Conf',
                     'callback_data' => 'user.subscribe|?quantumult=3'
                 ],
                 [
-                    'text'          => 'Surfboard',
+                    'text' => 'Surfboard',
                     'callback_data' => 'user.subscribe|?surfboard=1'
                 ],
             ],
             [
                 [
-                    'text'          => '回主菜单',
+                    'text' => 'back to main menu',
                     'callback_data' => 'user.index'
                 ]
             ]
@@ -1011,92 +1011,92 @@ class Callback
         $CallbackDataExplode = explode('|', $this->CallbackData);
         // 订阅中心
         if (isset($CallbackDataExplode[1])) {
-            $temp             = [];
+            $temp = [];
             $temp['keyboard'] = [
                 [
                     [
-                        'text'          => '回主菜单',
+                        'text' => 'back to main menu',
                         'callback_data' => 'user.index'
                     ],
                     [
-                        'text'          => '回上一页',
+                        'text' => 'back to the previous page',
                         'callback_data' => 'user.subscribe'
                     ]
                 ]
             ];
-            $token      = LinkController::GenerateSSRSubCode($this->User->id, 0);
+            $token = LinkController::GenerateSSRSubCode($this->User->id, 0);
             $UserApiUrl = LinkController::getSubinfo($this->User, 0)['link'];
             switch ($CallbackDataExplode[1]) {
                 case '?clash=1':
-                    $temp['text'] = '您的 Clash 配置文件.' . PHP_EOL . '同时，您也可使用该订阅链接：' . $UserApiUrl . $CallbackDataExplode[1];
-                    $filename     = 'Clash_' . $token . '_' . time() . '.yaml';
-                    $filepath     = BASE_PATH . '/storage/SendTelegram/' . $filename;
-                    $fh           = fopen($filepath, 'w+');
-                    $string       = LinkController::getClash($this->User, 1, [], [], false);
+                    $temp['text'] = 'Your Clash configuration file.' . PHP_EOL . 'Also, you can use this subscription link:' . $UserApiUrl . $CallbackDataExplode[1];
+                    $filename = 'Clash_' . $token . '_' . time() . '.yaml';
+                    $filepath = BASE_PATH . '/storage/SendTelegram/' . $filename;
+                    $fh = fopen($filepath, 'w+');
+                    $string = LinkController::getClash($this->User, 1, [], [], false);
                     fwrite($fh, $string);
                     fclose($fh);
                     $this->bot->sendDocument(
                         [
-                            'chat_id'  => $this->ChatID,
+                            'chat_id' => $this->ChatID,
                             'document' => $filepath,
-                            'caption'  => $temp['text'],
+                            'caption' => $temp['text'],
                         ]
                     );
                     unlink($filepath);
                     break;
                 case '?quantumult=3':
-                    $temp['text'] = '点击打开配置文件，选择分享 拷贝到 Quantumult，选择更新配置.';
-                    $filename     = 'Quantumult_' . $token . '_' . time() . '.conf';
-                    $filepath     = BASE_PATH . '/storage/SendTelegram/' . $filename;
-                    $fh           = fopen($filepath, 'w+');
-                    $string       = LinkController::GetQuantumult($this->User, 3, [], [], false);
+                    $temp['text'] = 'Click to open the configuration file, choose to share and copy to Quantumult, choose to update the configuration.';
+                    $filename = 'Quantumult_' . $token . '_' . time() . '.conf';
+                    $filepath = BASE_PATH . '/storage/SendTelegram/' . $filename;
+                    $fh = fopen($filepath, 'w+');
+                    $string = LinkController::GetQuantumult($this->User, 3, [], [], false);
                     fwrite($fh, $string);
                     fclose($fh);
                     $this->bot->sendDocument(
                         [
-                            'chat_id'  => $this->ChatID,
+                            'chat_id' => $this->ChatID,
                             'document' => $filepath,
-                            'caption'  => $temp['text'],
+                            'caption' => $temp['text'],
                         ]
                     );
                     unlink($filepath);
                     break;
                 case '?surge=2':
-                    $temp['text'] = '点击打开配置文件，选择分享 拷贝到 Surge，点击启动.';
-                    $filename     = 'Surge_' . $token . '_' . time() . '.conf';
-                    $filepath     = BASE_PATH . '/storage/SendTelegram/' . $filename;
-                    $fh           = fopen($filepath, 'w+');
-                    $string       = LinkController::getSurge($this->User, 2, [], [], false);
+                    $temp['text'] = 'Click to open the configuration file, choose to share and copy to Surge, click to start.';
+                    $filename = 'Surge_' . $token . '_' . time() . '.conf';
+                    $filepath = BASE_PATH . '/storage/SendTelegram/' . $filename;
+                    $fh = fopen($filepath, 'w+');
+                    $string = LinkController::getSurge($this->User, 2, [], [], false);
                     fwrite($fh, $string);
                     fclose($fh);
                     $this->bot->sendDocument(
                         [
-                            'chat_id'  => $this->ChatID,
+                            'chat_id' => $this->ChatID,
                             'document' => $filepath,
-                            'caption'  => $temp['text'],
+                            'caption' => $temp['text'],
                         ]
                     );
                     unlink($filepath);
                     break;
                 case '?surge=3':
-                    $temp['text'] = '点击打开配置文件，选择分享 拷贝到 Surge，点击启动.';
-                    $filename     = 'Surge_' . $token . '_' . time() . '.conf';
-                    $filepath     = BASE_PATH . '/storage/SendTelegram/' . $filename;
-                    $fh           = fopen($filepath, 'w+');
-                    $string       = LinkController::getSurge($this->User, 3, [], [], false);
+                    $temp['text'] = 'Click to open the configuration file, choose to share and copy to Surge, click to start.';
+                    $filename = 'Surge_' . $token . '_' . time() . '.conf';
+                    $filepath = BASE_PATH . '/storage/SendTelegram/' . $filename;
+                    $fh = fopen($filepath, 'w+');
+                    $string = LinkController::getSurge($this->User, 3, [], [], false);
                     fwrite($fh, $string);
                     fclose($fh);
                     $this->bot->sendDocument(
                         [
-                            'chat_id'  => $this->ChatID,
+                            'chat_id' => $this->ChatID,
                             'document' => $filepath,
-                            'caption'  => $temp['text'],
+                            'caption' => $temp['text'],
                         ]
                     );
                     unlink($filepath);
                     break;
                 default:
-                    $temp['text'] = '该订阅链接为：' . PHP_EOL . PHP_EOL . $UserApiUrl . $CallbackDataExplode[1];
+                    $temp['text'] = 'The subscription link is:' . PHP_EOL . PHP_EOL . $UserApiUrl . $CallbackDataExplode[1];
                     break;
             }
         } else {
@@ -1128,24 +1128,24 @@ class Callback
             $paybacks_sum = 0;
         }
         $text = [
-            '<strong>分享计划，您每邀请 1 位用户注册：</strong>',
+            '<strong>Share plan, for every 1 user you invite to sign up：</strong>',
             '',
-            '- 您会获得 <strong>' . $_ENV['invite_gift'] . 'G</strong> 流量奖励.',
-            '- 对方将获得 <strong>' . (int) Config::getconfig('Register.string.defaultInvite_get_money') . ' 元</strong> 奖励作为初始资金.',
-            '- 对方充值时您还会获得对方充值金额的 <strong>' . $_ENV['code_payback'] . '%</strong> 的返利.',
+            '- You will get <strong>' . $_ENV['invite_gift'] . 'G</strong> traffic reward.',
+            '- the other side will get <strong>' . (int) Config::getconfig('Register.string.defaultInvite_get_money') . ' $</strong> Rewards as initial funding.',
+            '- When the other party recharges, you will also get the recharge amount of the other party <strong>' . $_ENV['code_payback'] . '%</strong> rebate.',
             '',
-            '已获得返利：' . $paybacks_sum . ' 元.',
+            'Received rebate：' . $paybacks_sum . ' $.',
         ];
         $keyboard = [
             [
                 [
-                    'text'          => '获取我的邀请链接',
+                    'text'          => 'Get my invite link',
                     'callback_data' => 'user.invite.get'
                 ]
             ],
             [
                 [
-                    'text'          => '回主菜单',
+                    'text'          => 'Back to main menu',
                     'callback_data' => 'user.index'
                 ]
             ]
@@ -1223,15 +1223,15 @@ class Callback
         if ($this->ChatID > 0) {
             $temp = self::getUserIndexKeyboard($this->User);
         } else {
-            $temp['text']     = Reply::getUserTitle($this->User);
-            $temp['text']    .= PHP_EOL . PHP_EOL;
-            $temp['text']    .= Reply::getUserTrafficInfo($this->User);
-            $temp['text']    .= PHP_EOL;
-            $temp['text']    .= '流量重置时间：' . $this->User->valid_use_loop();
+            $temp['text'] = Reply::getUserTitle($this->User);
+            $temp['text'] .= PHP_EOL . PHP_EOL;
+            $temp['text'] .= Reply::getUserTrafficInfo($this->User);
+            $temp['text'] .= PHP_EOL;
+            $temp['text'] .= 'Traffic reset time:' . $this->User->valid_use_loop();
             $temp['keyboard'] = [
                 [
                     [
-                        'text'          => (!$this->User->isAbleToCheckin() ? '已签到' : '签到'),
+                        'text' => (!$this->User->isAbleToCheckin() ? 'checked in' : 'checked in'),
                         'callback_data' => 'user.checkin.' . $this->triggerUser['id']
                     ]
                 ],

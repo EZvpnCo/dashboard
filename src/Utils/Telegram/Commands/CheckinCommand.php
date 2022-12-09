@@ -20,7 +20,7 @@ class CheckinCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = '[群组/私聊] 每日签到.';
+    protected $description = '[Group/private chat] Daily check-in.';
 
     /**
      * {@inheritdoc}
