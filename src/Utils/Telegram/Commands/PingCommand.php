@@ -19,7 +19,7 @@ class PingCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = '[群组/私聊] 获取我或者群组的唯一 ID.';
+    protected $description = '[Group/Private chat] Get the unique ID of me or group.';
 
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class PingCommand extends Command
 
             $text = [
                 'Pong！',
-                'The ID of this group is ' . $ChatID . '.',
+                'Your ID is: ' . $ChatID . '.',
             ];
 
             // 回送信息
@@ -70,8 +70,8 @@ class PingCommand extends Command
 
             $text = [
                 'Pong！',
-                '您的 ID 是 ' . $Message->getFrom()->getId() . '.',
-                '这个群组的 ID 是 ' . $ChatID . '.',
+                'Your ID is: ' . $Message->getFrom()->getId() . '.',
+                'The ID of this group is: ' . $ChatID . '.',
             ];
 
             // 回送信息

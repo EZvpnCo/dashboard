@@ -106,7 +106,7 @@ class TelegramProcess
 
             switch ($command) {
                 case 'ping':
-                    $reply['message'] = 'Pong! Your ID is: ' . $message->getChat()->getId() . '!';
+                    $reply['message'] = 'Pong!您的 ID 是 ' . $message->getChat()->getId() . '!';
                     break;
                 case 'traffic':
                 case 'checkin':
@@ -251,7 +251,7 @@ class TelegramProcess
 
             switch ($command) {
                 case 'ping':
-                    $reply['message'] = 'Pong! The ID of this group is: ' . $message->getChat()->getId() . '!';
+                    $reply['message'] = 'Pong!这个群组的 ID 是 ' . $message->getChat()->getId() . '!';
                     break;
                 case 'traffic':
                 case 'checkin':
