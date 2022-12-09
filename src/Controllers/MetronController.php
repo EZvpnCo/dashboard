@@ -704,7 +704,7 @@ class MetronController extends BaseController
                     }
 
                     $dataarr['id'] = $log->id;
-                    $dataarr['title'] = $log->title . ")))";
+                    $dataarr['title'] = $log->title;
                     $dataarr['user_name'] = $replyUser->user_name;
                     $dataarr['user_pic'] = $replyUser->gravatar;
                     $dataarr['datetime'] = $log->datetime;

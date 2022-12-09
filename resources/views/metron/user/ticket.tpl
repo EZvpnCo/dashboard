@@ -69,7 +69,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="datatable datatable-bordered datatable-head-custom" id="ajax_ticket_data"></div>
+                                                <div class="datatable datatable-bordered datatable-head-custom" id="aajax_ticket_data"></div>
                                             </div>
                                         </div>
 
