@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>The user center &mdash; {$config["appName"]}</title>
+    <title>User center &mdash; {$config["appName"]}</title>
     <link href="{$metron['assets_url']}/css/client/metron-icon.css" rel="stylesheet" type="text/css"/>
     <link href="/assets/css/components.css" rel="stylesheet" type="text/css"/>
     {include file='include/global/head.tpl'}
@@ -14,7 +14,7 @@
                         <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                             <div class="d-flex align-items-center flex-wrap mr-2">
                                 <div class="d-flex flex-column">
-                                    <h2 class="text-white font-weight-bold my-2 mr-5">The user center</h2>
+                                    <h2 class="text-white font-weight-bold my-2 mr-5">User center</h2>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
@@ -61,9 +61,9 @@
                                                             <strong>{if $user->class_expire!="1989-06-04 00:05:00" && $user->class >= 1}
                                                                     <span class="counter">{$class_left_days}</span>
                                                                     day{elseif $user->class <= 0}
-                                                                    <span class="counter">expired</span>
+                                                                    <span class="counter">Expired</span>
                                                                 {else}The unknown{/if}</strong></div>
-                                                        <p class="text-dark-50">Member length</p>
+                                                        <p class="text-dark-50">Time</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,12 +107,12 @@
                                                     <div class="d-flex flex-column ml-3 mr-5">
                                                         <div class="font-size-h4 {$style[$theme_style]['index']['text']} mb-2">
                                                             <strong>{$user->unusedTraffic()}</strong></div>
-                                                        <p class="text-dark-50">The remaining traffic</p>
+                                                        <p class="text-dark-50">Traffic</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body pt-2 pl-5 pr-3 pb-1">
-                                                <p class="text-dark-50">The next time reset:{$user->valid_use_loop()}
+                                                <p class="text-dark-50">Next reset:&nbsp{$user->valid_use_loop()}
                                                     {if $metron['advanceResetFlow'] === true}
                                                         <span id="advance_reset_flow_onclick"
                                                               class="label {$style[$theme_style]['index']['dash2']['btn']} label-inline font-weight-lighter ml-1 mr-2 cursor_onclick"
@@ -145,13 +145,13 @@
                                                             <strong>{$user->online_ip_count()}
                                                                 / {if $user->node_connector == 0}unlimited{else}{$user->node_connector}{/if}</strong>
                                                         </div>
-                                                        <p class="text-dark-50">Online equipment</p>
+                                                        <p class="text-dark-50">Devices</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body pt-2 pl-5 pr-3 pb-1">
                                                 <p class="text-dark-50">
-                                                    The last time to use: {if $user->lastSsTime() == 'Never use meow'}Never used{else}{substr($user->lastSsTime(), 5)}{/if}</p>
+                                                    Last used:&nbsp{if $user->lastSsTime() == 'Never use meow'}Never used{else}{substr($user->lastSsTime(), 5)}{/if}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -179,12 +179,12 @@
                                                     <div class="d-flex flex-column ml-3 mr-5">
                                                         <div class="font-size-h4 {$style[$theme_style]['index']['text']} mb-2">
                                                             <strong>$ {$user->money}</strong></div>
-                                                        <p class="text-dark-50">The wallet balance</p>
+                                                        <p class="text-dark-50">Balance</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body pt-2 pl-5 pr-3 pb-1">
-                                                <p class="text-dark-50">Rebate cumulative: ¥ {$paybacks_sum}</p>
+                                                <p class="text-dark-50">Rebate cumulative:&nbsp$ {$paybacks_sum}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -200,9 +200,9 @@
                                                 <div class="card-title font-weight-bolder">
                                                     <div class="card-label {$style[$theme_style]['global']['title']} font-weight-bold font-size-h3">
                                                         <i class="fas fa-bullhorn icon-md {$style[$theme_style]['global']['title']}"></i><strong>
-                                                            The latest announcement</strong>
+                                                            The latest news</strong>
                                                         <div class="font-size-sm text-muted mt-2">
-                                                            Updated:{$ann->date}</div>
+                                                            Updated:&nbsp{$ann->date}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,7 +219,7 @@
                                                 <div class="card-title font-weight-bolder">
                                                     <div class="card-label {$style[$theme_style]['global']['title']} font-weight-bold font-size-h3">
                                                         <i class="fa fa-magic icon-md {$style[$theme_style]['global']['title']}"></i><strong>
-                                                            Subscribe to the address</strong>
+                                                            Subscription</strong>
                                                         <div class="font-size-sm text-muted mt-2"></div>
                                                     </div>
                                                 </div>
@@ -240,8 +240,7 @@
                                                     <div class="card-label {$style[$theme_style]['global']['title']} font-weight-bold font-size-h3">
                                                         <i class="fa fa-fill-drip icon-md {$style[$theme_style]['global']['title']}"></i><strong>
                                                             Traffic statistics</strong>
-                                                        <div class="font-size-sm text-muted mt-2">72Traffic more than hours 10 MB
-                                                            The nodes of the statistics
+                                                        <div class="font-size-sm text-muted mt-2">In last 72 hours
                                                         </div>
                                                     </div>
                                                 </div>
