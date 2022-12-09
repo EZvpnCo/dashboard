@@ -18,7 +18,8 @@ class TelegramProcess
         '?mu=1' => 'SSR单端口订阅',
         '?mu=3' => 'SS/SSD订阅',
         '?mu=2' => 'V2ray订阅',
-        '?mu=4' => 'Clash订阅'];
+        '?mu=4' => 'Clash订阅'
+    ];
 
     private static function callback_bind_method($bot, $callback)
     {
@@ -105,7 +106,7 @@ class TelegramProcess
 
             switch ($command) {
                 case 'ping':
-                    $reply['message'] = 'Pong!您的 ID 是 ' . $message->getChat()->getId() . '!';
+                    $reply['message'] = 'Pong! Your ID is: ' . $message->getChat()->getId() . '!';
                     break;
                 case 'traffic':
                 case 'checkin':
@@ -140,7 +141,7 @@ class TelegramProcess
                             $imtype = 4; // Telegram
                             $imvalue = $username;
                             $name = $username;
-                            if ( !$name ) {
+                            if (!$name) {
                                 $name = 'telegram.' . $telegram_id;
                             }
                             $code = 0; // TODO: Refer Code
