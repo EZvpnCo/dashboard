@@ -63,9 +63,9 @@ class Message
                     if (is_numeric($MessageData) && strlen($MessageData) == 6) {
                         $uid = TelegramSessionManager::verify_login_number($MessageData, $this->User->id);
                         if ($uid != 0) {
-                            $text = '登录验证成功，邮箱：' . $this->User->email;
+                            $text = 'Login verification successful, email：' . $this->User->email;
                         } else {
-                            $text = '登录验证失败，数字无效';
+                            $text = 'Login verification failed, invalid number';
                         }
                         $bot->sendMessage(
                             [
@@ -79,7 +79,7 @@ class Message
                     if (strlen($MessageData) == 16) {
                         $Uid = TelegramSessionManager::verify_bind_session($MessageData);
                         if ($Uid == 0) {
-                            $text = '绑定失败了呢，经检查发现：【' . $MessageData . '】的有效期为 10 分钟，您可以在我们网站上的 **资料编辑** 页面刷新后重试.';
+                            $text = 'The binding failed, after inspection, it was found that：【' . $MessageData . '】is valid for 10 minutes, you can try again after refreshing the **Profile Edit** page on our website.';
                         } else {
                             $BinsUser              = TelegramTools::getUser($Uid, 'id');
                             $BinsUser->telegram_id = $this->triggerUser['id'];
@@ -87,12 +87,12 @@ class Message
                             $BinsUser->im_value    = $this->triggerUser['username'];
                             $BinsUser->save();
                             if ($BinsUser->is_admin >= 1) {
-                                $text = '尊敬的**管理员**您好，恭喜绑定成功。' . PHP_EOL . '当前绑定邮箱为：' . $BinsUser->email;
+                                $text = 'Dear **Administrator** Hello, congratulations on the successful binding.' . PHP_EOL . 'The current bound email address is：' . $BinsUser->email;
                             } else {
                                 if ($BinsUser->class >= 1) {
-                                    $text = '尊敬的 **VIP ' . $BinsUser->class . '** 用户您好.' . PHP_EOL . '恭喜您绑定成功，当前绑定邮箱为：' . $BinsUser->email;
+                                    $text = 'Dear **VIP ' . $BinsUser->class . '** Hello user.' . PHP_EOL . 'Congratulations on your successful binding，The current bound email address is：' . $BinsUser->email;
                                 } else {
-                                    $text = '绑定成功了，您的邮箱为：' . $BinsUser->email;
+                                    $text = 'The binding is successful, your email is：' . $BinsUser->email;
                                 }
                             }
                         }
@@ -149,7 +149,7 @@ class Message
                 // 退群
                 $this->replyWithMessage(
                     [
-                        'text' => '不约，叔叔我们不约.'
+                        'text' => 'No date, uncle, we don\'t make a date.'
                     ]
                 );
                 TelegramTools::SendPost(
@@ -163,7 +163,7 @@ class Message
                     foreach ($_ENV['telegram_admins'] as $id) {
                         $this->bot->sendMessage(
                             [
-                                'text'      => '根据您的设定，Bot 退出了一个群组.' . PHP_EOL . PHP_EOL . '群组名称：' . $this->Message->getChat()->getTitle(),
+                                'text'      => 'Bot left a group based on your settings.' . PHP_EOL . PHP_EOL . 'Group name:' . $this->Message->getChat()->getTitle(),
                                 'chat_id'   => $id
                             ]
                         );
@@ -172,7 +172,7 @@ class Message
             } else {
                 $this->replyWithMessage(
                     [
-                        'text' => '同志们好，同志们辛苦了.'
+                        'text' => 'Hello friends, thank you for invite'
                     ]
                 );
             }
@@ -191,7 +191,7 @@ class Message
             ) {
                 $this->replyWithMessage(
                     [
-                        'text' => '由于 ' . $Member['name'] . ' 未绑定账户，将被移除.'
+                        'text' => '由于 ' . $Member['name'] . ' Unbound accounts will be removed.'
                     ]
                 );
                 TelegramTools::SendPost(
@@ -204,7 +204,7 @@ class Message
                 return;
             }
             if ($_ENV['enable_welcome_message'] === true) {
-                $text = ($NewUser->class >= 1 ? '欢迎 VIP' . $NewUser->class . ' 用户 ' . $Member['name'] . '回到组织.' : '欢迎 ' . $Member['name']);
+                $text = ($NewUser->class >= 1 ? 'Welcome VIPs' . $NewUser->class . ' User ' . $Member['name'] . 'Back to organization.' : 'Welcome ' . $Member['name']);
                 $this->replyWithMessage(
                     [
                         'text' => $text
