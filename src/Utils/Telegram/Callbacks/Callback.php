@@ -231,7 +231,7 @@ class Callback
 
     public static function getUserIndexKeyboard($user)
     {
-        $checkin = (!$user->isAbleToCheckin() ? '已签到' : '签到');
+        $checkin = (!$user->isAbleToCheckin() ? 'Signed in' : 'Check in');
         $Keyboard = [
             [
                 [
