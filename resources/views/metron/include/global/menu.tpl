@@ -15,27 +15,27 @@
                                         <ul class="menu-nav">
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user" class="menu-link">
-                                                    <span class="menu-text"><strong>Home page</strong></span>
+                                                    <span class="menu-text"><strong>Dashboard</strong></span>
                                                 </a>
                                             </li>
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/code" class="menu-link">
-                                                    <span class="menu-text"><strong>My wallet</strong></span>
+                                                    <span class="menu-text"><strong>wallet</strong></span>
                                                 </a>
                                             </li>
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/shop" class="menu-link">
-                                                    <span class="menu-text"><strong>The store service</strong></span>
+                                                    <span class="menu-text"><strong>Shop</strong></span>
                                                 </a>
                                             </li>
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/node" class="menu-link">
-                                                    <span class="menu-text"><strong>The node list</strong></span>
+                                                    <span class="menu-text"><strong>Servers</strong></span>
                                                 </a>
                                             </li>
                                             <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
                                                 <a href="javascript:;" class="menu-link menu-toggle">
-                                                    <span class="menu-text"><strong>My account</strong></span>
+                                                    <span class="menu-text"><strong>Account</strong></span>
                                                     <span class="menu-desc"></span>
                                                     <i class="menu-arrow"></i>
                                                 </a>
@@ -79,7 +79,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Data editor</span>
+                                                                <span class="menu-text">Edit profile</span>
                                                             </a>
                                                         </li>
                                                         <li class="menu-item" aria-haspopup="true">
@@ -152,7 +152,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Invitation to register</span>
+                                                                <span class="menu-text">Invitation</span>
                                                             </a>
                                                         </li>
                                                         <li class="menu-item" aria-haspopup="true">
@@ -165,7 +165,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Telegram Set up the</span>
+                                                                <span class="menu-text">Telegram Bot</span>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -181,13 +181,13 @@
                                             {if $config['enable_ticket'] === true}
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/ticket" class="menu-link">
-                                                    <span class="menu-text"><strong>The repair order support</strong></span>
+                                                    <span class="menu-text"><strong>Ticketing</strong></span>
                                                 </a>
                                             </li>
                                             {/if}
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/help" class="menu-link">
-                                                    <span class="menu-text"><strong>Using the tutorial</strong></span>
+                                                    <span class="menu-text"><strong>Tutorial</strong></span>
                                                 </a>
                                             </li>
                                             {if $metron['agent_menu_enable'] === true && $user->agent > 0}
@@ -200,14 +200,14 @@
                                             {if $user->isAdmin()}
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/admin" class="menu-link">
-                                                    <span class="menu-text"><strong>Administration panel</strong></span>
+                                                    <span class="menu-text"><strong>Admin</strong></span>
                                                 </a>
                                             </li>
                                             {/if}
                                             {if $can_backtoadmin}
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/backtoadmin" class="menu-link">
-                                                    <span class="menu-text"><strong>Returns the management status</strong></span>
+                                                    <span class="menu-text"><strong>Back to Management</strong></span>
                                                 </a>
                                             </li>
                                             {/if}
