@@ -2,7 +2,7 @@
                                             <div class="card-header border-0 pt-5">
                                                 <div class="card-title font-weight-bolder">
                                                     <div class="card-label {$style[$theme_style]['global']['title']} font-weight-bold font-size-h3">
-                                                        <i class="fas fa-leaf icon-md {$style[$theme_style]['global']['title']}"></i><strong>Clients & tutorial</strong>
+                                                        <i class="fas fa-leaf icon-md {$style[$theme_style]['global']['title']}"></i> <strong>Clients & tutorial</strong>
                                                     </div>
                                                 </div>
                                             </div>
