@@ -244,23 +244,23 @@ class TelegramTools
                 $temp = $User->$MethodClass($value);
                 if ($temp['ok'] === true) {
                     $strArray = [
-                        '目标用户：' . $Email,
-                        '被修改项：' . $useOptionMethodName . '[' . $useOptionMethod . ']',
-                        '修改前值：' . $old,
-                        '修改后值：' . $User->$useOptionMethod,
-                        '修改备注：' . $temp['msg'],
+                        'Target user:' . $Email,
+                        'Modified item:' . $useOptionMethodName . '[' . $useOptionMethod . ']',
+                        'Value before modification:' . $old,
+                        'Modified value:' . $User->$useOptionMethod,
+                        'Modify remarks:' . $temp['msg'],
                     ];
                 } else {
                     $strArray = [
-                        '目标用户：' . $Email,
-                        '欲修改项：' . $useOptionMethodName . '[' . $useOptionMethod . ']',
-                        '当前值为：' . $old,
-                        '欲修改为：' . $value,
-                        '错误详情：' . $temp['msg'],
+                        'Target user:' . $Email,
+                        'Item to modify:' . $useOptionMethodName . '[' . $useOptionMethod . ']',
+                        'The current value is:' . $old,
+                        'To be changed to:' . $value,
+                        'Error details:' . $temp['msg'],
                     ];
                 }
                 return [
-                    'ok'  => $temp['ok'],
+                    'ok' => $temp['ok'],
                     'msg' => self::StrArrayToCode($strArray),
                 ];
                 break;
@@ -271,8 +271,8 @@ class TelegramTools
                 // 参数值中不允许有空格
                 if (strpos($value, ' ') !== false) {
                     return [
-                        'ok'  => false,
-                        'msg' => '处理出错，协议中含有空格等字符.',
+                        'ok' => false,
+                        'msg' => 'Processing error, the protocol contains characters such as spaces.',
                     ];
                 }
                 $new = $value;
@@ -281,18 +281,18 @@ class TelegramTools
                 // ##############
             case 'money':
                 $strArray = [
-                    '// 参数值中不允许有空格，结果会含小数 2 位',
-                    '// +2  —— 增加余额',
-                    '// -2  —— 减少余额',
-                    '// *2  —— 以当前余额做乘法',
-                    '// /2  —— 以当前余额做除法',
+                    '// There is no space allowed in the parameter value, the result will contain 2 decimal places',
+                    '// +2 - increase balance',
+                    '// -2 - reduce balance',
+                    '// *2——Multiply with the current balance',
+                    '// /2 - divide by current balance',
                 ];
                 $value = explode(' ', $value)[0];
                 $new = self::ComputingMethod($User->$useOptionMethod, $value, true);
                 if ($new === null) {
                     return [
-                        'ok'  => false,
-                        'msg' => '处理出错，不支持的写法.'  . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                        'ok' => false,
+                        'msg' => 'Processing error, unsupported writing method.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                     ];
                 }
                 $User->$useOptionMethod = $new;
@@ -304,18 +304,18 @@ class TelegramTools
             case 'node_connector':
             case 'node_speedlimit':
                 $strArray = [
-                    '// 参数值中不允许有空格',
-                    '// +2  —— 增加值',
-                    '// -2  —— 减少值',
-                    '// *2  —— 以当前值做乘法',
-                    '// /2  —— 以当前值做除法',
+                    '// Spaces are not allowed in the parameter value',
+                    '// +2 - increase value',
+                    '// -2 - decrease value',
+                    '// *2——Multiply with the current value',
+                    '// /2 - divide by the current value',
                 ];
                 $value = explode(' ', $value)[0];
                 $new = self::ComputingMethod($User->$useOptionMethod, $value, false);
                 if ($new === null) {
                     return [
-                        'ok'  => false,
-                        'msg' => '处理出错，不支持的写法.'  . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
+                        'ok' => false,
+                        'msg' => 'Processing error, unsupported writing method.' . PHP_EOL . PHP_EOL . self::StrArrayToCode($strArray),
                     ];
                 }
                 $User->$useOptionMethod = $new;
@@ -323,8 +323,8 @@ class TelegramTools
                 // ##############
             default:
                 return [
-                    'ok'  => false,
-                    'msg' => '尚不支持.',
+                    'ok' => false,
+                    'msg' => 'Not yet supported.',
                 ];
                 break;
         }
@@ -333,10 +333,10 @@ class TelegramTools
                 $User->addMoneyLog($new - $old);
             }
             $strArray = [
-                '目标用户：' . $Email,
-                '被修改项：' . $useOptionMethodName . '[' . $useOptionMethod . ']',
-                '修改前为：' . $old,
-                '修改后为：' . $new,
+                'Target user:' . $Email,
+                'Modified item:' . $useOptionMethodName . '[' . $useOptionMethod . ']',
+                'Before modification:' . $old,
+                'Modified to:' . $new,
             ];
             return [
                 'ok'  => true,
@@ -345,7 +345,7 @@ class TelegramTools
         } else {
             return [
                 'ok'  => false,
-                'msg' => '保存出错',
+                'msg' => 'Save error',
             ];
         }
     }
