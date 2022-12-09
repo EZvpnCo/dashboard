@@ -6,7 +6,7 @@
 // └──────────────────────────────────────────────── ──────────────────────────────────────────────────────────────────────────────────────────────────── ───────┘ \\
 
 ##### Theme Settings -------------------------------------------- --------------------------------------------------
-$_MT['assets_true'] = false; // don't move yet, keep true
+$_MT['assets_true'] = true; // don't move yet, keep true
 $_MT['assets_bb'] = '3.0.2'; // version
 $_MT['assets_url']  = $_MT['assets_true'] ? 'https://cdn.jsdelivr.net/gh/mt-theme/metron-assets@' . $_MT['assets_bb'] . '/metron' : '/theme/metron';
 
