@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Document center &mdash; {$config["appName"]}</title>
+        <title>Help center &mdash; {$config["appName"]}</title>
         <link href="{$metron['assets_url']}/css/client/metron-icon.css" rel="stylesheet" type="text/css" />
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
@@ -13,7 +13,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">Document center</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Help center</h2>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
@@ -121,7 +121,7 @@
                                                 </span>
                                             </div>
                                             <div class="card-body d-flex justify-content-center flex-column col-lg-6 px-8 py-20 px-lg-20 py-lg-40">
-                                                <h2 class="{$style[$theme_style]['global']['title']} font-weight-bolder mb-8">What can we help you?</h2>
+                                                <h2 class="{$style[$theme_style]['global']['title']} font-weight-bolder mb-8">How can we help you?</h2>
                                                 <form class="d-flex position-relative flex-row-fluid">
                                                     <div class="input-group shadow-sm">
                                                         <div class="input-group-prepend">

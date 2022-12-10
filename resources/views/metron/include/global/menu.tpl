@@ -187,13 +187,13 @@
                                             {/if}
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/help" class="menu-link">
-                                                    <span class="menu-text"><strong>Tutorial</strong></span>
+                                                    <span class="menu-text"><strong>Help</strong></span>
                                                 </a>
                                             </li>
                                             {if $metron['agent_menu_enable'] === true && $user->agent > 0}
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/agent" class="menu-link">
-                                                    <span class="menu-text"><strong>The agency</strong></span>
+                                                    <span class="menu-text"><strong>Agency</strong></span>
                                                 </a>
                                             </li>
                                             {/if}
@@ -207,7 +207,7 @@
                                             {if $can_backtoadmin}
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/backtoadmin" class="menu-link">
-                                                    <span class="menu-text"><strong>Back to Management</strong></span>
+                                                    <span class="menu-text"><strong>Back to Admin</strong></span>
                                                 </a>
                                             </li>
                                             {/if}
