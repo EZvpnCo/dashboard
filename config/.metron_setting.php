@@ -223,8 +223,7 @@ $_MT['resetFlow_maxValue'] = 5; // When the user flow is lower than the number (
 
 $_MT['shop_pop_enable'] = true; // Display information on the top of the store package, which can be used to display promotions, offers, etc. to users
 $_MT['shop_pop_info'] = '
-<p>Display available coupon codes to the user</p>
-<p>Or write discounts for related packages and wait</p>
+<p>Available packages </p>
 '; // The content displayed at the top of the package is written in html
 
 $_MT['shop_activity_true'] = false; //Whether to display activity packages
@@ -246,19 +245,32 @@ $_MT['shop_Experience_plan'] = [
  * The support features of the product are directly edited in the [Service Support] of the package, and the format is true-global node distribution; false-fast customer service response minus sign on the left true: means support false: means not supported The right side is text, with English semicolons; separated
  */
 $_MT['shop_plan'] = array(
-    'Bronze package' => array( // corresponding to the name displayed in the store
-        'Description' => array( // Corresponding product description, currently canceled
-            'Monthly payment' => 1, // corresponding product ID
-            'Quarter' => 2,
-            'half a year' => 3,
-            'Annual payment' => 4,
+    'Bronze' => array(
+        'Description' => array(
+            '1 Month' => 1,
+            '3 Month' => 2,
+            '6 Month' => 3,
         ),
     ),
-    'Silver package' => array( // If you need multiple packages, you can copy the array and add it below
+    'Silver' => array(
         'Description' => array(
-            'Monthly payment' => 5,
-            'Quarter' => 6,
-            'Annual payment' => 8,
+            '1 Month' => 4,
+            '3 Month' => 5,
+            '6 Month' => 6,
+        ),
+    ),
+    'Golden' => array(
+        'Description' => array(
+            '1 Month' => 7,
+            '3 Month' => 8,
+            '6 Month' => 9,
+        ),
+    ),
+    'Diamond' => array(
+        'Description' => array(
+            '1 Month' => 7,
+            '3 Month' => 8,
+            '6 Month' => 9,
         ),
     ),
 );
@@ -273,10 +285,11 @@ $_MT['enable_online_user'] = true; // Whether to display the online number of no
 $_MT['enable_node_load'] = true; // Whether to display the load of the node
 $_MT['node_flag_mode'] = 'name'; // name: regular matching region of the slave node name (the regular method is in the flag option of . A node with a status of us displays the American flag. us This is the national ISO 3166 code, Google it if you don’t understand it.
 $_MT['node_class_name'] = [ // The name corresponding to the class of the node
-    0 => 'Public Welfare Node', // format is node level => node level name
-    1 => 'Bronze Node',
-    2 => 'Silver node',
-    3 => 'Diamond Node',
+    0 => 'Public',
+    1 => 'Bronze',
+    2 => 'Silver',
+    3 => 'Golden',
+    4 => 'Diamond',
 ];
 # ┌────────────────────────────────────────────────────────────────────────────────────────── ──────────────────────────────────────────────────────────────────────────────────────────────────── ─────────┐
 # │ TG robot settings │

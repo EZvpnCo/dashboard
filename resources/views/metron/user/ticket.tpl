@@ -60,8 +60,8 @@
                                                                         <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                                                         <select class="form-control" id="ticket_status">
                                                                             <option value="">All</option>
-                                                                            <option value="1">In Process</option>
-                                                                            <option value="0">Completed</option>
+                                                                            <option value="1">Open</option>
+                                                                            <option value="0">Closed</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>

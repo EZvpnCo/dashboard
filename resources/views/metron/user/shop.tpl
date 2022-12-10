@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Set store &mdash; {$config["appName"]}</title>
+        <title>Shop &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="btn {$style[$theme_style]['global']['btn_subheader']} font-weight-bold py-3 px-6" data-toggle="modal" data-target="#traffic_package_modal">Buy traffic package</a>
+                                    <a href="javascript:;" class="btn {$style[$theme_style]['global']['btn_subheader']} font-weight-bold py-3 px-6" data-toggle="modal" data-target="#traffic_package_modal">Buy traffic</a>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                                             {if $shop->id !== $shop_id}{continue}{/if}
                                                             <div class="row">
                                                                 <div class="col pl-6 pt-6 pb-0">
-                                                                    <div class="display-3 text-primary font-weight-bolder"><small><i class="fa fa-yen-sign text-primary"></i></small> <strong>{$shop->price}</strong></div>
+                                                                    <div class="display-3 text-primary font-weight-bolder"><small><i class="fa fa-dollar-sign text-primary"></i></small> <strong>{$shop->price}</strong></div>
                                                                 </div>
                                                             </div>
                                                             {$shopLt = $shop->limitamount()}
@@ -186,7 +186,7 @@
                                                             {$shopCan = $shop->limitamount('can')}
                                                             <div class="d-flex flex-column w-100 pl-2 pt-3">
                                                                 <span class="font-size-sm text-muted font-weight-bold pb-3">
-                                                                    {if $shopLt == 0}The unlimited purchase goods{else}<span class="{if $shopBi < 5}text-danger{else}text-primary{/if}">{if $shopCan === 0}The goods has been sold out, Try to buy the other time{else}This commodity purchase surplus {$shopCan} Copy of the{/if}{/if}</span>
+                                                                    {if $shopLt == 0}Unlimited{else}<span class="{if $shopBi < 5}text-danger{else}text-primary{/if}">{if $shopCan === 0}Sold out{else}This commodity purchase surplus {$shopCan} Copy of the{/if}{/if}</span>
                                                                 </span>
                                                                 <div class="progress progress-md w-100">
                                                                     <div class="progress-bar progress-bar-striped {if $shopBi < 5}bg-danger{else}bg-primary{/if}" role="progressbar" style="width: {$shopBi}%;" aria-valuenow="{$shopBi}" aria-valuemin="0" aria-valuemax="100">
@@ -195,32 +195,32 @@
                                                             </div>
                                                             <div class="row text-center {$style[$theme_style]['shop']['card_text']}">
                                                                 <div class="col pl-6 pt-6 pb-0">
-                                                                    <div class="font-size-sm text-muted font-weight-bold">Membership grade</div>
+                                                                    <div class="font-size-sm text-muted font-weight-bold">Membership</div>
                                                                     <div class="font-size-h4 font-weight-bolder">{$metron['user_level'][$shop->user_class()]}</div>
                                                                 </div>
                                                                 <div class="col pl-6 pt-6 pb-0">
-                                                                    <div class="font-size-sm text-muted font-weight-bold">Rank the length</div>
-                                                                    <div class="font-size-h4 font-weight-bolder">{$shop->class_expire()} day</div>
+                                                                    <div class="font-size-sm text-muted font-weight-bold">Time</div>
+                                                                    <div class="font-size-h4 font-weight-bolder">{$shop->class_expire()} Day</div>
                                                                 </div>
                                                             </div>
                                                             <div class="row text-center {$style[$theme_style]['shop']['card_text']}">
                                                                 <div class="col pl-6 pt-6 pb-0">
-                                                                    <div class="font-size-sm text-muted font-weight-bold">Add traffic</div>
+                                                                    <div class="font-size-sm text-muted font-weight-bold">Traffic</div>
                                                                     <div class="font-size-h4 font-weight-bolder">{$shop->bandwidth()} GB</div>
                                                                 </div>
                                                                 <div class="col pl-6 pt-6 pb-0">
-                                                                    <div class="font-size-sm text-muted font-weight-bold">The reset cycle</div>
-                                                                    <div class="font-size-h4 font-weight-bolder">{if $shop->reset()!=0}{$shop->reset()}Day to reset the{else}Due to reset{/if}</div>
+                                                                    <div class="font-size-sm text-muted font-weight-bold">Reset cycle</div>
+                                                                    <div class="font-size-h4 font-weight-bolder">{if $shop->reset()!=0}Every {$shop->reset()}Day{else}No-reset{/if}</div>
                                                                 </div>
                                                             </div>
                                                             <div class="row text-center {$style[$theme_style]['shop']['card_text']}">
                                                                 <div class="col pl-6 pt-6 pb-0">
-                                                                    <div class="font-size-sm text-muted font-weight-bold">At the same time online</div>
-                                                                    <div class="font-size-h4 font-weight-bolder">{if {$shop->connector()} == '0' }unlimited{else}{$shop->connector()}A device{/if}</div>
+                                                                    <div class="font-size-sm text-muted font-weight-bold">Devices</div>
+                                                                    <div class="font-size-h4 font-weight-bolder">{if {$shop->connector()} == '0' }Unlimited{else}{$shop->connector()}Device{/if}</div>
                                                                 </div>
                                                                 <div class="col pl-6 pt-6 pb-0">
                                                                     <div class="font-size-sm text-muted font-weight-bold">Peak rate</div>
-                                                                    <div class="font-size-h4 font-weight-bolder">{if {$shop->speedlimit()} == '0' }unlimited{else}{$shop->speedlimit()}Mbps{/if}</div>
+                                                                    <div class="font-size-h4 font-weight-bolder">{if {$shop->speedlimit()} == '0' }Unlimited{else}{$shop->speedlimit()}Mbps{/if}</div>
                                                                 </div>
                                                             </div>
                                                             {if $shop_info !== ''}
@@ -243,9 +243,9 @@
                                                             {/foreach}
                                                             <div class="pt-8">
                                                                 {if $shopLt != 0 && $shopCan <= 0}
-                                                                <button class="btn {$style[$theme_style]['shop']['card_btn']} btn-block btn-pill" href="javascript:void(0);" type="button" onClick="shop.metronBuy('{$shop->id}',{$shop->auto_renew});" id="buytext-{$shop->id}" disabled="true">The goods has reached the upper limit</button>
+                                                                <button class="btn {$style[$theme_style]['shop']['card_btn']} btn-block btn-pill" href="javascript:void(0);" type="button" onClick="shop.metronBuy('{$shop->id}',{$shop->auto_renew});" id="buytext-{$shop->id}" disabled="true">Finished</button>
                                                                 {else}
-                                                                <button class="btn {$style[$theme_style]['shop']['card_btn']} btn-block btn-pill" href="javascript:void(0);" type="button" onClick="shop.metronBuy('{$shop->id}',{$shop->auto_renew});" id="buytext-{$shop->id}">buy</button>
+                                                                <button class="btn {$style[$theme_style]['shop']['card_btn']} btn-block btn-pill" href="javascript:void(0);" type="button" onClick="shop.metronBuy('{$shop->id}',{$shop->auto_renew});" id="buytext-{$shop->id}">Buy</button>
                                                                 {/if}
                                                             </div>
                                                             {/foreach}
@@ -279,7 +279,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}" id="exampleModalLongTitle"><strong>Order confirmation</strong></h4>
+                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}" id="exampleModalLongTitle"><strong>Confirm buy</strong></h4>
             </div>
             <div class="modal-body">
                 <label class="row col-12 col-form-label kt-font-boldest" id="shop_name">Name of commodity:</label>

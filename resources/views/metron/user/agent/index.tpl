@@ -51,7 +51,7 @@
 																<div class="font-size-sm text-muted font-weight-bold mt-1">{$back_new['time']}</div>
 															</div>
 														</div>
-														<div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base">+ ¥{$back_new['ref_get']}</div>
+														<div class="label label-light label-inline font-weight-bold text-dark-50 py-4 px-3 font-size-base">+ ${$back_new['ref_get']}</div>
 													</div>
                                                     {/foreach}
 												</div>
@@ -67,7 +67,7 @@
 														<div>
 															<h3 class="text-white font-weight-bolder line-height-lg mb-5">Can withdrawal
 															<br>$ {$user->back_money}</h3>
-															<a href="#" class="btn btn-success font-weight-bold px-6 py-3" data-toggle="modal" data-target="#take_money_modal">To apply for cash withdrawals</a>
+															<a href="#" class="btn btn-success font-weight-bold px-6 py-3" data-toggle="modal" data-target="#take_money_modal" style="display: none;ANB">withdraw</a>
 														</div>
 													</div>
 												</div>
@@ -239,7 +239,7 @@
 
 
 
-                                <div class="row">
+                                <div class="row" style="display: none;ANB">
                                     <div class="col-12">
                                         <div class="card card-custom gutter-b {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">

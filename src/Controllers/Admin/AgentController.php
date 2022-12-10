@@ -74,8 +74,8 @@ class AgentController extends AdminController
         $datatables->edit('status', static function ($data) {
             $status = [
                 -1 => 'Returned',
-                0 => 'In process',
-                1 => 'Completed',
+                0 => 'Open',
+                1 => 'Closed',
             ];
             return $status[$data['status']];
         });
