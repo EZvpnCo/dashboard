@@ -123,7 +123,7 @@
 																		</g>
 																	</svg>
 																</span>
-																<div class="{$style[$theme_style]['global']['text']} font-weight-bolder font-size-h2 mt-3">{$user_num} a</div>
+																<div class="{$style[$theme_style]['global']['text']} font-weight-bolder font-size-h2 mt-3">{$user_num}</div>
 																<span class="text-muted font-weight-bold font-size-lg mt-1">Total users</span>
 															</div>
 														</div>
