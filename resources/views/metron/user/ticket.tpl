@@ -57,7 +57,7 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-md-4 my-2 my-md-0">
                                                                     <div class="d-flex align-items-center">
-                                                                        <label class="mr-3 mb-0 d-none d-md-block">state:</label>
+                                                                        <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                                                         <select class="form-control" id="ticket_status">
                                                                             <option value="">All</option>
                                                                             <option value="1">In Process</option>
