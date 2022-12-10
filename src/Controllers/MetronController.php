@@ -659,12 +659,12 @@ class MetronController extends BaseController
                                                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                         <ul class="navi flex-column navi-hover py-2">
                                                             <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">
-                                                                选择操作:
+                                                                Action:
                                                             </li>
                                                             <li class="navi-item">
                                                                 <a href="javascript:;" class="navi-link">
                                                                     <span class="navi-icon"><i class="la la-edit"></i></span>
-                                                                    <span class="navi-text">关闭自动续费</span>
+                                                                    <span class="navi-text">Edit</span>
                                                                 </a>
                                                             </li>
                                                             ' . ($shop_conversion ?
@@ -781,12 +781,12 @@ class MetronController extends BaseController
                                                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                         <ul class="navi flex-column navi-hover py-2">
                                                             <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">
-                                                                选择操作:
+                                                                Action:
                                                             </li>
                                                             <li class="navi-item">
                                                                 <a href="javascript:;" class="navi-link" onclick="code.metronPay_restart(\'\', \'\', \'0\' , ' . $pay->id . ')">
                                                                     <span class="navi-icon"><i class="fab fa-amazon-pay"></i></span>
-                                                                    <span class="navi-text">重新支付</span>
+                                                                    <span class="navi-text">Pay again</span>
                                                                 </a>
                                                             </li>
                                                         </ul>
