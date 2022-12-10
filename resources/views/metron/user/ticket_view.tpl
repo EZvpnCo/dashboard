@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="/user/ticket" class="btn btn-white font-weight-bold py-3 px-6">Returns a single table</a>
+                                    <a href="/user/ticket" class="btn btn-white font-weight-bold py-3 px-6">Back to list</a>
                                 </div>
                             </div>
                         </div>
