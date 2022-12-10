@@ -3,9 +3,9 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\{MetronController, AdminController};
-use App\Models\{ User, Paytake };
-use App\Utils\{ DatatablesHelper };
-use App\Metron\{ Metron, MtAuth };
+use App\Models\{User, Paytake};
+use App\Utils\{DatatablesHelper};
+use App\Metron\{Metron, MtAuth};
 use Ozdemir\Datatables\Datatables;
 use Exception;
 
@@ -13,23 +13,23 @@ class AgentController extends AdminController
 {
     public function take_log($request, $response, $args)
     {
-        if ( MtAuth::Auth()['agent'] !== 1) {
-            die( '无 Agent 授权' );
+        if (MtAuth::Auth()['agent'] !== 1) {
+            die('无 Agent 授权');
         }
 
         $table_config['total_column'] = array(
-            'op' => '操作', 
+            'op' => '操作',
             'id' => 'ID',
-            'type' => '提现类型', 
-            'userid' => '用户', 
-            'total' => '金额', 
+            'type' => '提现类型',
+            'userid' => '用户',
+            'total' => '金额',
             'status' => '状态',
             'datetime' => '时间',
         );
         $table_config['default_show_column'] = array(
-            'op', 
+            'op',
             'id',
-            'type', 
+            'type',
             'userid',
             'total',
             'status',
@@ -73,9 +73,9 @@ class AgentController extends AdminController
 
         $datatables->edit('status', static function ($data) {
             $status = [
-               -1 => '已退回',
-                0 => '处理中',
-                1 => '已完成',
+                -1 => 'Returned',
+                0 => 'In process',
+                1 => 'Completed',
             ];
             return $status[$data['status']];
         });
@@ -94,18 +94,18 @@ class AgentController extends AdminController
         $id   = $request->getParam('id');
 
         switch ($mode) {
-            case 'mark_done': 
+            case 'mark_done':
                 $paytake = Paytake::find($id);
                 $paytake->status = 1;
                 if (!$paytake->save()) {
                     $res['ret'] = 0;
                     $res['msg'] = '标记失败';
-                    return $response->getBody()->write(json_encode($res));   
+                    return $response->getBody()->write(json_encode($res));
                 }
                 $res['ret'] = 1;
                 $res['msg'] = '标记成功';
                 return $response->getBody()->write(json_encode($res));
-            case 'go_back': 
+            case 'go_back':
                 $paytake = Paytake::find($id);
                 $paytake->status = -1;
                 $paytake->save();
@@ -114,12 +114,11 @@ class AgentController extends AdminController
                 if (!$go_user->save()) {
                     $res['ret'] = 0;
                     $res['msg'] = '退回失败';
-                    return $response->getBody()->write(json_encode($res));   
+                    return $response->getBody()->write(json_encode($res));
                 }
                 $res['ret'] = 1;
                 $res['msg'] = '退回成功';
                 return $response->getBody()->write(json_encode($res));
         }
     }
-
 }
