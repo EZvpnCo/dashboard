@@ -326,7 +326,7 @@ $I18N['cancel'] = array(
 );
 $I18N['action'] = array(
     'en' => 'Action',
-    'zh-cn' => '操作'
+    'zh-cn' => '操作Action'
 );
 $I18N['logout'] = array(
     'en' => 'Logout',

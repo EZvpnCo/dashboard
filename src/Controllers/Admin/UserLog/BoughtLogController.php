@@ -26,7 +26,7 @@ class BoughtLogController extends AdminController
         $id = $args['id'];
         $user = User::find($id);
         $table_config['total_column'] = array(
-            'op'         => '操作',
+            'op'         => '操作yy',
             'id'         => 'ID',
             'name'       => '商品名称',
             'valid'      => '是否有效期内',

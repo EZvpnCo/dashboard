@@ -15,7 +15,7 @@ class DetectController extends AdminController
     public function index($request, $response, $args)
     {
         $table_config['total_column'] = array(
-            'op' => '操作', 'id' => 'ID', 'name' => '名称',
+            'op' => '操作RRR', 'id' => 'ID', 'name' => '名称',
             'text' => '介绍', 'regex' => '正则表达式',
             'type' => '类型'
         );
