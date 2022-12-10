@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>The work order system &mdash; {$config["appName"]}</title>
+        <title>Ticket &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">The repair order #{$id}</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Ticket #{$id}</h2>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
@@ -84,7 +84,7 @@
                                                                 <div class="d-flex align-items-center justify-content-between py-5 pl-8 pr-5 border-top">
                                                                     <div class="d-flex align-items-center mr-3">
                                                                         <div class="btn-group mr-4">
-                                                                            <span class="btn btn-primary font-weight-bold px-6" id="ticket_reply_submit" onclick="ticket.reply();">Reply to the repair order</span>
+                                                                            <span class="btn btn-primary font-weight-bold px-6" id="ticket_reply_submit" onclick="ticket.reply();">Send replay</span>
                                                                         </div>
                                                                         <!--<span class="btn btn-icon btn-sm btn-clean mr-2" id="ticket_reply_attachments_select">
                                                                             <i class="flaticon2-clip-symbol"></i>

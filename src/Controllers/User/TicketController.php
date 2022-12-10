@@ -79,7 +79,7 @@ class TicketController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => 'Input error'
+                    'msg' => 'Failed'
                 ]
             );
         }
@@ -164,7 +164,7 @@ class TicketController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '非法输入'
+                    'msg' => 'Failed'
                 ]
             );
         }
@@ -173,7 +173,7 @@ class TicketController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '请求中有不当词语'
+                    'msg' => 'Ticket failed'
                 ]
             );
         }
@@ -189,10 +189,10 @@ class TicketController extends UserController
                 $adminUser = User::where('is_admin', '=', '1')->get();
                 foreach ($adminUser as $user) {
                     $user->sendMail(
-                        $_ENV['appName'] . '-工单被重新开启',
+                        $_ENV['appName'] . ' - New answer',
                         'news/warn.tpl',
                         [
-                            'text' => '管理员，有人重新开启了<a href="' . $_ENV['baseUrl'] . '/admin/ticket/' . $ticket_main->id . '/view">工单</a>，请您及时处理。'
+                            'text' => 'Administrator, someone re -open<a href="' . $_ENV['baseUrl'] . '/admin/ticket/' . $ticket_main->id . '/view">Ticket</a>，Please answer it in soon :)'
                         ],
                         []
                     );
@@ -205,7 +205,7 @@ class TicketController extends UserController
                 $ScFtqq_SCKEY = $_ENV['ScFtqq_SCKEY'];
                 $postdata = http_build_query(
                     [
-                        'text' => $_ENV['appName'] . '-工单被重新开启',
+                        'text' => $_ENV['appName'] . ' - New answer',
                         'desp' => $markdown
                     ]
                 );
@@ -226,10 +226,10 @@ class TicketController extends UserController
                 $adminUser = User::where('is_admin', '=', '1')->get();
                 foreach ($adminUser as $user) {
                     $user->sendMail(
-                        $_ENV['appName'] . '-工单被回复',
+                        $_ENV['appName'] . ' - New answer',
                         'news/warn.tpl',
                         [
-                            'text' => '管理员，有人回复了<a href="' . $_ENV['baseUrl'] . '/admin/ticket/' . $ticket_main->id . '/view">工单</a>，请您及时处理。'
+                            'text' => 'Administrator, someone responded <a href="' . $_ENV['baseUrl'] . '/admin/ticket/' . $ticket_main->id . '/view">Ticket</a>，Please answer it in soon :)'
                         ],
                         []
                     );
@@ -242,7 +242,7 @@ class TicketController extends UserController
                 $ScFtqq_SCKEY = $_ENV['ScFtqq_SCKEY'];
                 $postdata = http_build_query(
                     [
-                        'text' => $_ENV['appName'] . '-工单被回复',
+                        'text' => $_ENV['appName'] . ' - New answer',
                         'desp' => $markdown
                     ]
                 );
@@ -275,7 +275,7 @@ class TicketController extends UserController
         return $response->withJson(
             [
                 'ret' => 1,
-                'msg' => '提交成功'
+                'msg' => 'Submitted successfully'
             ]
         );
     }
@@ -295,7 +295,7 @@ class TicketController extends UserController
                 return $response->withJson(
                     [
                         'ret' => 0,
-                        'msg' => '这不是你的工单！'
+                        'msg' => 'You do not have access'
                     ]
                 );
             }
