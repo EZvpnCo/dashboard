@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>The agency &mdash; {$config["appName"]}</title>
+        <title>Agency &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">The agency</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Agency</h2>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
@@ -24,13 +24,14 @@
                             <div class="container">
 
                                 <div class="row">
+
 									<div class="col-xl-4">
 										<div class="card card-custom gutter-b card-stretch {$metron['style_shadow']}">
 											<div class="card-header border-0 pt-5">
 												<div class="card-title">
 													<div class="card-label">
-														<div class="font-weight-bolder text-primary">The latest rebate and statistics</div>
-														<div class="font-size-sm text-muted mt-2">Recent records for rebates and rebate total daily</div>
+														<div class="font-weight-bolder text-primary">The latest payback and statistics</div>
+														<div class="font-size-sm text-muted mt-2">Recent records for paybacks and payback total daily</div>
 													</div>
 												</div>
 											</div>
@@ -57,19 +58,21 @@
 											</div>
 										</div>
 									</div>
+
 									<div class="col-xl-8">
 										<div class="row">
 											<div class="col-xl-6">
 												<div class="card card-custom bgi-no-repeat gutter-b {$metron['style_shadow']}" style="height: 175px; background-color: #663259; background-position: calc(100% + 0.5rem) 100%; background-size: 100% auto; background-image: url({$metron['assets_url']}/media/svg/patterns/taieri.svg)">
 													<div class="card-body d-flex align-items-center">
 														<div>
-															<h3 class="text-white font-weight-bolder line-height-lg mb-5">Can mention amount
-															<br>¥ {$user->back_money}</h3>
+															<h3 class="text-white font-weight-bolder line-height-lg mb-5">Can withdrawal
+															<br>$ {$user->back_money}</h3>
 															<a href="#" class="btn btn-success font-weight-bold px-6 py-3" data-toggle="modal" data-target="#take_money_modal">To apply for cash withdrawals</a>
 														</div>
 													</div>
 												</div>
 												<div class="row">
+
 													<div class="col-6">
 														<div class="card card-custom bg-primary gutter-b {$metron['style_shadow']}" style="height: 150px">
 															<div class="card-body">
@@ -82,8 +85,8 @@
 																		</g>
 																	</svg>
 																</span>
-																<div class="text-inverse-primary font-weight-bolder font-size-h2 mt-3">¥ {$today_back}</div>
-																<span class="text-inverse-primary font-weight-bold font-size-lg mt-1">Today's rebate</span>
+																<div class="text-inverse-primary font-weight-bolder font-size-h2 mt-3">$ {$today_back}</div>
+																<span class="text-inverse-primary font-weight-bold font-size-lg mt-1">Today's payback</span>
 															</div>
 														</div>
 													</div>
@@ -99,12 +102,14 @@
 																		</g>
 																	</svg>
 																</span>
-																<div class="{$style[$theme_style]['global']['text']} font-weight-bolder font-size-h2 mt-3">{$today_user} a</div>
-																<span class="text-muted font-weight-bold font-size-lg mt-1">Today the customer</span>
+																<div class="{$style[$theme_style]['global']['text']} font-weight-bolder font-size-h2 mt-3">{$today_user}</div>
+																<span class="text-muted font-weight-bold font-size-lg mt-1">Today's users</span>
 															</div>
 														</div>
 													</div>
+
 												</div>
+
 												<div class="row">
 													<div class="col-6">
 														<div class="card card-custom gutter-b {$metron['style_shadow']}" style="height: 150px">
@@ -119,7 +124,7 @@
 																	</svg>
 																</span>
 																<div class="{$style[$theme_style]['global']['text']} font-weight-bolder font-size-h2 mt-3">{$user_num} a</div>
-																<span class="text-muted font-weight-bold font-size-lg mt-1">The cumulative customer</span>
+																<span class="text-muted font-weight-bold font-size-lg mt-1">Total users</span>
 															</div>
 														</div>
 													</div>
@@ -135,23 +140,25 @@
 																		</g>
 																	</svg>
 																</span>
-																<div class="text-inverse-primary font-weight-bolder font-size-h2 mt-3">¥ {$back_sum}</div>
-																<span class="text-inverse-primary font-weight-bold font-size-lg mt-1">The cumulative rebate</span>
+																<div class="text-inverse-primary font-weight-bolder font-size-h2 mt-3">$ {$back_sum}</div>
+																<span class="text-inverse-primary font-weight-bold font-size-lg mt-1">Total payback</span>
 															</div>
 														</div>
 													</div>
 												</div>
+
 											</div>
+
 											<div class="col-xl-6">
 												<div class="card card-custom bgi-no-repeat bgi-size-cover gutter-b card-stretch {$metron['style_shadow']}" style="background-image: url({$metron['assets_url']}/media/stock-600x600/img-16.jpg)">
 													<div class="card-body d-flex flex-column align-items-start justify-content-start">
 														<div class="p-1 flex-grow-1">
-															<h3 class="text-white font-weight-bolder line-height-lg mb-5">The agent details
+															<h3 class="text-white font-weight-bolder line-height-lg mb-5">Agent details
 														</div>
                                                         <div class="body">
-                                                            <p class="text-white"><strong>Smoking is proportional to:{if $user->rebate === -1}{$config['code_payback']}{else}{$user->rebate}{/if} %</strong></p>
+                                                            <p class="text-white"><strong>Your payback percent: {if $user->rebate === -1}{$config['code_payback']}{else}{$user->rebate}{/if}%</strong></p>
                                                             {if $take_total !== 0}
-                                                            <p class="text-white"><strong>Do you have ¥ {$take_total} Is withdrawal process</strong></p>
+                                                            <p class="text-white"><strong>You have ${$take_total} in withdrawal process</strong></p>
                                                             {/if}
                                                         </div>
 														<a href="#" class="btn btn-link btn-link-warning font-weight-bold" data-toggle="modal" data-target="#agent_setting_modal">Withdrawal account Settings
@@ -167,50 +174,20 @@
 													</div>
 												</div>
 											</div>
+
 										</div>
 									</div>
 								</div>
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card card-custom gutter-b {$metron['style_shadow']}">
-                                            <div class="card-header flex-wrap border-0 pt-6">
-                                                <div class="card-title">
-                                                    <h3 class="card-label text-primary"><strong>Withdrawal record</strong>
-                                                    <span class="d-block text-muted pt-2 font-size-sm">Extract the rebate amount of records</span></h3>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="mb-7">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-9 col-xl-8">
-                                                            <div class="row align-items-center">
-                                                                <div class="col-md-4 my-2 my-md-0">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <label class="mr-3 mb-0 d-none d-md-block">state</label>
-                                                                        <select class="form-control" id="agent_take_log_query_status">
-                                                                            <option value="">all</option>
-                                                                            <option value="1">Have to deal with</option>
-                                                                            <option value="0">In the processing</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="datatable datatable-bordered datatable-head-custom" id="ajax_agent_take_log_data"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+
 
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card card-custom gutter-b {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">
                                                 <div class="card-title">
-                                                    <h3 class="card-label text-primary"><strong>Client list</strong>
+                                                    <h3 class="card-label text-primary"><strong>Users list</strong>
                                                     <span class="d-block text-muted pt-2 font-size-sm">Invitation list of users under your account</span></h3>
                                                 </div>
                                                 <div class="card-toolbar">
@@ -223,9 +200,8 @@
                                                                 <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3"></path>
                                                             </g>
                                                         </svg>
-                                                    </span>Create a new customer</a>
+                                                    </span>Create a new user</a>
                                                 </div>
-
                                             </div>
                                             <div class="card-body">
                                                 <div class="mb-7">
@@ -234,7 +210,7 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-md-4 my-2 my-md-0">
                                                                     <div class="input-icon">
-                                                                        <input type="text" class="form-control" placeholder="search..." id="agent_user_search_query" />
+                                                                        <input type="text" class="form-control" placeholder="Search..." id="agent_user_search_query" />
                                                                         <span>
                                                                             <i class="flaticon2-search-1 text-muted"></i>
                                                                         </span>
@@ -242,9 +218,9 @@
                                                                 </div>
                                                                 <div class="col-md-4 my-2 my-md-0">
                                                                     <div class="d-flex align-items-center">
-                                                                        <label class="mr-3 mb-0 d-none d-md-block">level</label>
+                                                                        <label class="mr-3 mb-0 d-none d-md-block">Level</label>
                                                                         <select class="form-control" id="agent_user_query_class">
-                                                                            <option value="">All the customers</option>
+                                                                            <option value="">All users</option>
                                                                             {foreach $metron['user_level'] as $level => $levelName}
                                                                                 <option value="{$level}">{$levelName}</option>
                                                                             {/foreach}
@@ -260,6 +236,43 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card card-custom gutter-b {$metron['style_shadow']}">
+                                            <div class="card-header flex-wrap border-0 pt-6">
+                                                <div class="card-title">
+                                                    <h3 class="card-label text-primary"><strong>Withdrawal list</strong>
+                                                    <span class="d-block text-muted pt-2 font-size-sm">Extract the payback amount of list</span></h3>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-7">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-4 my-2 my-md-0">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <label class="mr-3 mb-0 d-none d-md-block">Status</label>
+                                                                        <select class="form-control" id="agent_take_log_query_status">
+                                                                            <option value="">All</option>
+                                                                            <option value="1">Completed</option>
+                                                                            <option value="0">In process</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="datatable datatable-bordered datatable-head-custom" id="ajax_agent_take_log_data"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>

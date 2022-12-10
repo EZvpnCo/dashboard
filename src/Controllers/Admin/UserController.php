@@ -85,7 +85,7 @@ class UserController extends AdminController
         $email = $request->getParam('userEmail');
         $email = trim($email);
         $email = strtolower($email);
-        if (!$email){
+        if (!$email) {
             $res['ret'] = 0;
             $res['msg'] = '邮箱不能为空';
             return $response->getBody()->write(json_encode($res));
@@ -140,7 +140,7 @@ class UserController extends AdminController
         $user->reg_ip               = $_SERVER['REMOTE_ADDR'];
         $user->plan                 = 'A';
         $user->theme                = $_ENV['theme'];
-        $user->uuid            		= Uuid::uuid3(Uuid::NAMESPACE_DNS, ($user->passwd) . $_ENV['key'])->toString();
+        $user->uuid                    = Uuid::uuid3(Uuid::NAMESPACE_DNS, ($user->passwd) . $_ENV['key'])->toString();
 
         $groups = explode(',', $_ENV['random_group']);
 
@@ -153,7 +153,7 @@ class UserController extends AdminController
         $user->ga_enable = 0;
         if ($user->save()) {
             $res['ret']         = 1;
-            $res['msg']         = '新用户注册成功 用户名: ' . $email . ' 随机初始密码: ' . $pass;
+            $res['msg']         = 'New user added username: ' . $email . ' Random password: ' . $pass;
             $res['email_error'] = 'success';
             if ($shop_id > 0) {
                 $shop = Shop::find($shop_id);
@@ -589,8 +589,8 @@ class UserController extends AdminController
 
             $tempdata['top_up'] = $user->get_top_up();
 
-            $tempdata['c_rebate'] = ($user->c_rebate ? '循环': '首次');
-            $tempdata['rebate']   = ($user->rebate <= 0 ? $user->rebate < 0 ? $_ENV['code_payback'].'%' : '不返利' : $user->rebate.'%');
+            $tempdata['c_rebate'] = ($user->c_rebate ? '循环' : '首次');
+            $tempdata['rebate']   = ($user->rebate <= 0 ? $user->rebate < 0 ? $_ENV['code_payback'] . '%' : '不返利' : $user->rebate . '%');
 
             $data[] = $tempdata;
         }

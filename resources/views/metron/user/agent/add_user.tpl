@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="/user/agent" class="btn btn-white font-weight-bold py-3 px-6">Return to the agent center</a>
+                                    <a href="/user/agent" class="btn btn-white font-weight-bold py-3 px-6">Back to the agent center</a>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
 																</svg>
 															</span>
 														</span>
-														<span class="nav-text font-size-lg">Create a new customer</span>
+														<span class="nav-text font-size-lg">Create a new user</span>
 													</a>
 												</li>
 											</ul>
@@ -57,7 +57,7 @@
 														<div class="col-xl-2"></div>
 														<div class="col-xl-7 my-2">
 															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">Customers email</label>
+																<label class="col-form-label col-3 text-lg-right text-left">User email</label>
 																{if $metron['register_restricted_email'] === true}
 																<div class="col-9">
 																	<div class="input-group input-group-lg input-group-solid">
@@ -80,7 +80,7 @@
 															<div class="form-group row">
 																<label class="col-form-label col-3 text-lg-right text-left"> </label>
 																<div class="col-9">
-																	<button type="button" class="btn btn-primary" id="add_user_save" onclick="agent.add_user();">save</button>
+																	<button type="button" class="btn btn-primary" id="add_user_save" onclick="agent.add_user();">Add</button>
 																</div>
 															</div>
 														</div>

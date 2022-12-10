@@ -42,7 +42,7 @@
 																</svg>
 															</span>
 														</span>
-														<span class="nav-text font-size-lg">The user to edit</span>
+														<span class="nav-text font-size-lg">Edit profile</span>
 													</a>
 												</li>
 												<li class="nav-item mr-3">
@@ -58,7 +58,7 @@
 																</svg>
 															</span>
 														</span>
-														<span class="nav-text font-size-lg">Opening packages</span>
+														<span class="nav-text font-size-lg">Plans</span>
 													</a>
 												</li>
 												<li class="nav-item mr-3">
@@ -74,7 +74,7 @@
 																</svg>
 															</span>
 														</span>
-														<span class="nav-text font-size-lg">The user details</span>
+														<span class="nav-text font-size-lg">Subscription</span>
 													</a>
 												</li>
 											</ul>
@@ -92,11 +92,11 @@
 															<div class="row">
 																<label class="col-3"></label>
 																<div class="col-9">
-																	<h6 class="text-dark font-weight-bold mb-10">The user data:</h6>
+																	<h6 class="text-dark font-weight-bold mb-10">User profile:</h6>
 																</div>
 															</div>
 															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">Head portrait</label>
+																<label class="col-form-label col-3 text-lg-right text-left">Avatar</label>
 																<div class="col-9">
 																	<div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url({$edituser->getGravatarAttribute()})">
 																		<div class="image-input-wrapper"></div>
@@ -115,13 +115,13 @@
 																</div>
 															</div>
 															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">nickname</label>
+																<label class="col-form-label col-3 text-lg-right text-left">Username</label>
 																<div class="col-9">
 																	<input class="form-control form-control-lg form-control-solid" type="text" value="{$edituser->user_name}" name="user_name"/>
 																</div>
 															</div>
 															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">email</label>
+																<label class="col-form-label col-3 text-lg-right text-left">Email</label>
 																{if $metron['register_restricted_email'] === true}
 																<div class="col-9">
 																	<div class="input-group input-group-lg input-group-solid">
@@ -142,14 +142,14 @@
 																{/if}
 															</div>
 															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">The new password</label>
+																<label class="col-form-label col-3 text-lg-right text-left">New password</label>
 																<div class="col-9">
 																	<input class="form-control form-control-lg form-control-solid" type="password" value="" name="password"/>
 																	<span class="form-text text-muted">Do not change the password leave blank</span>
 																</div>
 															</div>
 															<div class="form-group row mb-2">
-																<label class="col-form-label col-3 text-lg-right text-left">The user is enabled</label>
+																<label class="col-form-label col-3 text-lg-right text-left">Status</label>
 																<div class="col-3">
 																	<span class="switch">
 																		<label>
@@ -162,7 +162,7 @@
 															<div class="form-group row">
 																<label class="col-form-label col-3 text-lg-right text-left"> </label>
 																<div class="col-9">
-																	<button type="button" class="btn btn-primary" id="edit_user_save" onclick="agent.edit_user('edit_user');">save</button>
+																	<button type="button" class="btn btn-primary" id="edit_user_save" onclick="agent.edit_user('edit_user');">Save</button>
 																</div>
 															</div>
 														</div>
@@ -174,7 +174,7 @@
 														<div class="col-xl-2"></div>
 														<div class="col-xl-7 my-2">
 															<div class="form-group row">
-																<label class="col-form-label col-3 text-lg-right text-left">Opening packages</label>
+																<label class="col-form-label col-3 text-lg-right text-left">Choose plan</label>
 																<div class="col-9">
 																	<select class="form-control" id="edit_user_shop" >
 																		<optgroup label="{$shop_plan@key}" data-max-options="2">
@@ -186,7 +186,7 @@
 																		{foreach $shop_info as $shop_id}
 																			{foreach $shops as $shop}
 																			{if $shop->id === $shop_id}
-																			<option value="{$shop->id}">{$shop_plan@key} - {$shop_id@key} - {$shop->price} yuan</option>
+																			<option value="{$shop->id}">{$shop_plan@key} - {$shop_id@key} - ${$shop->price}</option>
 																			{/if}
 																			{/foreach}
 																		{/foreach}
@@ -194,15 +194,16 @@
 																		</optgroup>
 																		{/foreach}
 																	</select>
-																	<span class="form-text text-muted">For the user to specify packages need to deduct the corresponding amount from your account balance, 
-																	<br />At the same time obtain the corresponding percentage of rebate amount balance to the agent
-																	<br />Package details to store view</span>
+																	<span class="form-text text-muted">
+																	You must have sufficient credit in your account
+																	<br />You can see detail of plans in Shop
+																	</span>
 																</div>
 															</div>
 															<div class="form-group row">
 																<label class="col-form-label col-3 text-lg-right text-left"> </label>
 																<div class="col-9">
-																	<button type="button" class="btn btn-primary" id="edit_user_buy_shop" onclick="agent.edit_user('buy_shop');">save</button>
+																	<button type="button" class="btn btn-primary" id="edit_user_buy_shop" onclick="agent.edit_user('buy_shop');">Buy</button>
 																</div>
 															</div>
 														</div>
@@ -215,16 +216,16 @@
 														<div class="col-xl-7">
 															<div class="my-2">
 																<div class="form-group row">
-																	<label class="col-form-label col-3 text-lg-right text-left">Subscribe to the address</label>
+																	<label class="col-form-label col-3 text-lg-right text-left">Subscription</label>
 																	<div class="col-9">
 																		{include file='include/index/sub_button.tpl'}
 																	</div>
 																</div>
 																<div class="form-group row">
-																	<label class="col-form-label col-3 text-lg-right text-left">Reset the subscription</label>
+																	<label class="col-form-label col-3 text-lg-right text-left">Reset subscription</label>
 																	<div class="col-9">
-																		<button type="button" class="btn btn-primary font-weight-bold btn-sm" id="edit_user_reset_link" onclick="agent.edit_user('reset_link');">reset</button>
-																		<div class="form-text text-muted mt-3">Reset the user's subscription link, Users will not be able to use the old signed after reset</div>
+																		<button type="button" class="btn btn-primary font-weight-bold btn-sm" id="edit_user_reset_link" onclick="agent.edit_user('reset_link');">Reset</button>
+																		<div class="form-text text-muted mt-3">Reset the user's subscription link, Users will not be able to use the old subscription after reset</div>
 																	</div>
 																</div>
 															</div>

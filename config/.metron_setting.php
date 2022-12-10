@@ -76,9 +76,9 @@ $_MT['take_account_type'] = ['Alipay', 'USDT-ERC20', 'USDT-TRC20']; // Allow the
 $_MT['user_level'] = [ // level => corresponding name display
     -1 => 'NotActive',
     0 => 'Free membership',
-    1 => 'Bronze Member',
-    2 => 'Silver member',
-    3 => 'Diamond Member',
+    1 => 'Bronze',
+    2 => 'Silver',
+    3 => 'Diamond',
 ];
 ##### User Registration ------------------------------------------- --------------------------------------------------
 $_MT['register_code'] = false; // true: the invitation code is required for registration, false: the invitation code is optional (admin panel - user registration - change the registration mode to invite)
