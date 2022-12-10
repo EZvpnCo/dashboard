@@ -298,7 +298,7 @@ $I18N['plans-info'] = array(
 ## General 通用 ##
 $I18N['email'] = array(
     'en' => 'Email',
-    'zh-cn' => '邮箱'
+    'zh-cn' => '邮箱Email'
 );
 $I18N['password'] = array(
     'en' => 'Password',
@@ -404,7 +404,7 @@ $I18N['index-offer-bar'] = array(
 );
 $I18N['not-a-reason-to-use'] = array(
     'en' => 'Not a reason to use',
-    'zh-cn' => '为什么选择 '. $I18N['appName']['zh-cn']
+    'zh-cn' => '为什么选择 ' . $I18N['appName']['zh-cn']
 );
 $I18N['just-a-statistic'] = array(
     'en' => '<span class="font-weight-500">just a</span> statistic',
@@ -501,7 +501,7 @@ $I18N['index-section-3-title'] = array(
 );
 $I18N['index-section-3-desc'] = array(
     'en' => 'Using service provided by ' . $I18N['appName']['en'] . ', you may unblock media streaming services like Netflix, Hulu, HBO, TVB, Happyon, and AbemaTV, and listen to streaming music provided by services like Spotify and Pandora',
-    'zh-cn' => '通过 '.$I18N['appName']['zh-cn'].' 的服务，可以观看包括 Netflix、Hulu、HBO、TVB、Happyon、AbemaTV 等在内的多种流媒体视频，聆听包括 Spotify、Pandora 等在内的流媒体音乐。'
+    'zh-cn' => '通过 ' . $I18N['appName']['zh-cn'] . ' 的服务，可以观看包括 Netflix、Hulu、HBO、TVB、Happyon、AbemaTV 等在内的多种流媒体视频，聆听包括 Spotify、Pandora 等在内的流媒体音乐。'
 );
 $I18N['index-section-4-title'] = array(
     'en' => 'Even More Built-in Features',
@@ -541,7 +541,7 @@ $I18N['index-section-6-card-2-title'] = array(
 );
 $I18N['index-section-6-card-2-desc'] = array(
     'en' => $I18N['appName']['en'] . ' provides certain tech support during your subscription.',
-    'zh-cn' => $I18N['appName']['zh-cn'].' 在您的订阅周期内为您提供一定程度上的技术支持。'
+    'zh-cn' => $I18N['appName']['zh-cn'] . ' 在您的订阅周期内为您提供一定程度上的技术支持。'
 );
 $I18N['start-now'] = array(
     'en' => 'Start Now',
