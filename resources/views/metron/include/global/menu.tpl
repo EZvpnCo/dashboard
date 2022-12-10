@@ -18,11 +18,11 @@
                                                     <span class="menu-text"><strong>Dashboard</strong></span>
                                                 </a>
                                             </li>
-                                            // <li class="menu-item menu-item-submenu menu-item-rel">
-                                            //     <a href="/user/code" class="menu-link">
-                                            //         <span class="menu-text"><strong>Wallet</strong></span>
-                                            //     </a>
-                                            // </li>
+                                            <li class="menu-item menu-item-submenu menu-item-rel" style="display: none">
+                                                <a href="/user/code" class="menu-link">
+                                                    <span class="menu-text"><strong>Wallet</strong></span>
+                                                </a>
+                                            </li>
                                             <li class="menu-item menu-item-submenu menu-item-rel">
                                                 <a href="/user/shop" class="menu-link">
                                                     <span class="menu-text"><strong>Shop</strong></span>
