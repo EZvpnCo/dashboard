@@ -378,7 +378,7 @@ $_ENV['sales_period'] = 30; //Statistics of sales in the specified period, the v
 
 #flag
 $_ENV['enable_flag'] = true; //Be sure to read the tutorial carefully before enabling this item
-$_ENV['flag_regex'] = '/(Hong Kong|USA|Japan|China|Russia|Korea|UK|Singapore|Malaysia|Taiwan|Canada|Philippines|Germany)/'; //Match [country from the full name of the site /region] regular expression (php version)
+$_ENV['flag_regex'] = '/(nl|de|tr|ir|us)/'; //Match [country from the full name of the site /region] regular expression (php version)
 
 #donate
 $_ENV['enable_donate'] = false; // Whether to display user donations (all earnings will be public)
