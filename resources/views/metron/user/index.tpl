@@ -74,7 +74,7 @@
                                                     {/foreach}
                                                     :
                                                     {if $user->class_expire != "1989-06-04 00:05:00" && $user->class >= 1}
-                                                        {substr($user->class_expire, 0, 10)} Due to
+                                                        {substr($user->class_expire, 0, 10)}
                                                     {elseif $user->class == 0}
                                                         expired
                                                     {elseif $user->class == -1}
@@ -184,7 +184,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-body pt-2 pl-5 pr-3 pb-1">
-                                                <p class="text-dark-50">Rebate cumulative:&nbsp$ {$paybacks_sum}</p>
+                                                <p class="text-dark-50">Total payback:&nbsp$ {$paybacks_sum}</p>
                                             </div>
                                         </div>
                                     </div>

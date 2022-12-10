@@ -67,7 +67,7 @@ class User extends Model
     public function lastSsTime()
     {
         if ($this->attributes['t'] == 0) {
-            return '从未使用喵';
+            return 'Never used';
         }
         return Tools::toDateTime($this->attributes['t']);
     }
@@ -856,7 +856,7 @@ class User extends Model
             if ($bought) {
                 return $bought->reset_time();
             }
-            return '无流量重置';
+            return 'No-reset';
         }
         $boughts = Bought::where('userid', $this->id)->orderBy('id', 'desc')->get();
         $data = [];
@@ -867,12 +867,12 @@ class User extends Model
             }
         }
         if (count($data) == 0) {
-            return '未购买套餐.';
+            return 'No plan';
         }
         if (count($data) == 1) {
             return $data[0];
         }
-        return '多个有效套餐无法显示.';
+        return 'Not valid plan';
     }
 
     /**

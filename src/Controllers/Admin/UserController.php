@@ -34,15 +34,15 @@ class UserController extends AdminController
     public function index($request, $response, $args)
     {
         $table_config['total_column'] = array(
-            'op'                    => '操作',
-            'querys'                => '查询',
+            'op'                    => 'Do',
+            'querys'                => 'Query',
             'id'                    => 'ID',
-            'user_name'             => '用户名',
-            'remark'                => '备注',
-            'email'                 => '邮箱',
-            'money'                 => '金钱',
-            'im_type'               => '联络方式类型',
-            'im_value'              => '联络方式详情',
+            'user_name'             => 'Username',
+            'remark'                => 'Remark',
+            'email'                 => 'Email',
+            'money'                 => 'Money',
+            'im_type'               => 'Contact type',
+            'im_value'              => 'Contact detail',
             'node_group'            => '群组',
             'expire_in'             => '账户过期时间',
             'class'                 => '等级',
