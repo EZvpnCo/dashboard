@@ -95,7 +95,7 @@ class User extends Model
     public function lastCheckInTime()
     {
         if ($this->attributes['last_check_in_time'] == 0) {
-            return '从未签到';
+            return 'Never used meow';
         }
         return Tools::toDateTime($this->attributes['last_check_in_time']);
     }

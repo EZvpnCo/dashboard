@@ -36,7 +36,7 @@ class Reply
     {
         $text = [
             'Balance：' . $user->money,
-            'Devices：' . ($user->node_connector != 0 ? $user->online_ip_count() . ' / ' . $user->node_connector : $user->online_ip_count() . ' / 不限制'),
+            'Devices：' . ($user->node_connector != 0 ? $user->online_ip_count() . ' / ' . $user->node_connector : $user->online_ip_count() . ' / unlimited'),
             'Speed：' . ($user->node_speedlimit != 0 ? $user->node_speedlimit . 'Mbps' : 'unlimited'),
             'Last used：' . $user->lastSsTime(),
             'Expiration：' . $user->class_expire,
