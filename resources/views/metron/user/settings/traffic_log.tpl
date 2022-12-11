@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Traffic records &mdash; {$config["appName"]}</title>
+        <title>Traffic logs &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">Traffic records</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Traffic logs</h2>
                                     </div>
                                 </div>
                                 {include file='include/settings/menu.tpl'}
@@ -20,8 +20,8 @@
                                         <div class="card card-custom gutter-b {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">
                                                 <div class="card-title">
-                                                    <h3 class="card-label text-primary"><strong>Traffic records</strong>
-                                                    <span class="d-block text-muted pt-2 font-size-sm">record72Hours using the node flow</span></h3>
+                                                    <h3 class="card-label text-primary"><strong>Traffic logs</strong>
+                                                    <span class="d-block text-muted pt-2 font-size-sm">Last 72 hours traffics</span></h3>
                                                 </div>
                                                 <div class="card-toolbar">
                                                     <a href="JavaScript:;" class="btn btn-primary font-weight-bolder" id="ajax_traffic_log_data_reload">
