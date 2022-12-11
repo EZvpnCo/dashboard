@@ -819,7 +819,7 @@ class MetronController extends BaseController
                     $location = $iplocation->getlocation($logIp);
                     $dataarr['id'] = $log->id;
                     $dataarr['ip'] = $logIp;
-                    $dataarr['location'] = $location['country'] . $location['area'] . iconv("gbk", "utf-8//IGNORE", $location['country']) . iconv("gbk", "utf-8//IGNORE", $location['area']);;
+                    $dataarr['location'] =  iconv("gbk", "utf-8//IGNORE", $location['country']) . iconv("gbk", "utf-8//IGNORE", $location['area']);;
                     $dataarr['datetime'] = $log->datetime;
                     $data[$logIp] = $dataarr;
                     if (count($data) === 3) {
