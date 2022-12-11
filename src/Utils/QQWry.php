@@ -219,7 +219,7 @@ class QQWry
             $location['area'] = '';
         }
 
-        return ['country' => "Germany", 'area' => "Frunkfurt"];
+        return ['country' => "-", 'area' => ""];
 
         return $location;
     }
