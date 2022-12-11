@@ -52,7 +52,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Account record</span>
+                                                                <span class="menu-text">Account logs</span>
                                                             </a>
                                                         </li>
                                                         <li class="menu-item" aria-haspopup="true">
@@ -66,7 +66,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Traffic records</span>
+                                                                <span class="menu-text">Traffic logs</span>
                                                             </a>
                                                         </li>
                                                         <li class="menu-item" aria-haspopup="true">
@@ -79,7 +79,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Edit profile</span>
+                                                                <span class="menu-text">Profile</span>
                                                             </a>
                                                         </li>
                                                         <li class="menu-item" aria-haspopup="true">
@@ -93,7 +93,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Account security</span>
+                                                                <span class="menu-text">Security</span>
                                                             </a>
                                                         </li>
                                                         <li class="menu-item" aria-haspopup="true">
@@ -120,7 +120,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Subscription Settings</span>
+                                                                <span class="menu-text">Subscription</span>
                                                             </a>
                                                         </li>
                                                         {if $metron['node_relay_enable'] === true}
@@ -152,7 +152,7 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                                                <span class="menu-text">Invitation</span>
+                                                                <span class="menu-text">Invite</span>
                                                             </a>
                                                         </li>
                                                         <li class="menu-item" aria-haspopup="true">

@@ -19,7 +19,7 @@ $_MT['index_enable'] = false; // true: enable the landing page false: close the 
 // login/registration page background image
 $_MT['index_background_image'] = "/theme/metron/images/bg-2.jpg";
 // login/register page LOGO
-$_MT['index_background_logo'] = "/assets/public/img/main-logo.png";
+$_MT['index_background_logo'] = "/assets/public/img/ez-logo-w.png";
 // User center top background image
 $_MT['user_background_top'] = "/theme/metron/images/bg-01-450.jpg";
 
@@ -105,7 +105,7 @@ $_MT['chatra_id'] = ''; // Chatra's ChatraID can be found in the website code pr
 # │ Page Content Settings │
 # └──────────────────────────────────────────────── ──────────────────────────────────────────────────────────────────────────────────────────────────── ─────────┘
 # Node transit rules
-$_MT['node_relay_enable'] = true; // Navigation menu display node relay setting
+$_MT['node_relay_enable'] = false; // Navigation menu display node relay setting
 # Restricted region access
 $_MT['Restricted_access'] = false; // Enable access to websites in restricted areas
 $_MT['Restricted_area'] = [ // array, restricted areas

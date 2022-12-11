@@ -1,5 +1,5 @@
                                 <div class="d-flex align-items-center">
-                                    <button class="btn {$style[$theme_style]['global']['btn_subheader']} font-weight-bold mr-4 d-inline-block d-lg-none" id="user_profile_mobile_toggle">The menu</button>
+                                    <button class="btn {$style[$theme_style]['global']['btn_subheader']} font-weight-bold mr-4 d-inline-block d-lg-none" id="user_profile_mobile_toggle">User menu</button>
                                 </div>
                             </div>
                         </div>
@@ -18,20 +18,20 @@
                                                     </div>
                                                     <div>
                                                         <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{$user->user_name}</a>
-                                                        <div class="text-muted">This guy is lazy, nothing left.</div>
+                                                        <div class="text-muted">nothing ;)</div>
                                                     </div>
                                                 </div>
                                                 <div class="py-9">
                                                     <div class="d-flex align-items-center justify-content-between mb-2">
-                                                        <span class="font-weight-bold mr-2">Email address:</span>
+                                                        <span class="font-weight-bold mr-2">Email:</span>
                                                         <span class="text-muted">{$user->email}</span>
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between mb-2">
-                                                        <span class="font-weight-bold mr-2">Registration time:</span>
+                                                        <span class="font-weight-bold mr-2">Registration:</span>
                                                         <span class="text-muted">{$user->reg_date}</span>
                                                     </div>
                                                     <div class="d-flex align-items-center justify-content-between">
-                                                        <span class="font-weight-bold mr-2">Overdue account:</span>
+                                                        <span class="font-weight-bold mr-2">Expiration:</span>
                                                         <span class="text-muted">{$user->expire_in}</span>
                                                     </div>
                                                 </div>
@@ -49,7 +49,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="navi-text font-size-lg">Account record</span>
+                                                            <span class="navi-text font-size-lg">Account logs</span>
                                                         </a>
                                                     </div>
                                                     <div class="navi-item mb-2">
@@ -65,7 +65,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="navi-text font-size-lg">Traffic records</span>
+                                                            <span class="navi-text font-size-lg">Traffic logs</span>
                                                         </a>
                                                     </div>
                                                     <div class="navi-item mb-2">
@@ -80,7 +80,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="navi-text font-size-lg">Data editor</span>
+                                                            <span class="navi-text font-size-lg">Profile</span>
                                                         </a>
                                                     </div>
                                                     <div class="navi-item mb-2">
@@ -96,7 +96,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="navi-text font-size-lg">Account security</span>
+                                                            <span class="navi-text font-size-lg">Security</span>
                                                         </a>
                                                     </div>
                                                     <div class="navi-item mb-2">
@@ -127,7 +127,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="navi-text">Subscription Settings</span>
+                                                            <span class="navi-text">Subscription</span>
                                                         </a>
                                                     </div>
                                                     {if $metron['node_relay_enable'] === true}
@@ -163,7 +163,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="navi-text">Invitation to register</span>
+                                                            <span class="navi-text">Invite</span>
                                                         </a>
                                                     </div>
                                                     <div class="navi-item mb-2">
@@ -178,7 +178,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="navi-text font-size-lg">Telegram Set up the</span>
+                                                            <span class="navi-text font-size-lg">Telegram Bot</span>
                                                         </a>
                                                     </div>
                                                 </div>

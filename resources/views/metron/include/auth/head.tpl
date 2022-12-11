@@ -23,6 +23,6 @@
 
                         <div class="d-flex flex-center mb-15">
                             <a href="/">
-                                <img src="{$metron['index_background_logo']}" class="max-h-100px bg-white shadow-light rounded-circle shadow" alt="" />
+                                <img src="{$metron['index_background_logo']}" class="max-h-100px rounded-circle" alt="" />
                             </a>
                         </div>
