@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Record to view &mdash; {$config["appName"]}</title>
+        <title>Account logs &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">Record to view</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Account logs</h2>
                                     </div>
                                 </div>
                                 {include file='include/settings/menu.tpl'}
@@ -25,8 +25,8 @@
                                                 <div class="card card-custom gutter-b card-stretch {$metron['style_shadow']}">
                                                     <div class="card-header flex-wrap border-0 pt-6">
                                                         <div class="card-title">
-                                                            <h3 class="card-label text-primary"><strong>Login record</strong>
-                                                            <span class="d-block text-muted pt-2 font-size-sm">Record the account login web siteIP</span></h3>
+                                                            <h3 class="card-label text-primary"><strong>Login</strong>
+                                                            <span class="d-block text-muted pt-2 font-size-sm">List of login activity</span></h3>
                                                         </div>
                                                     </div>
                                                     <div class="card-body pt-0">
@@ -40,8 +40,8 @@
                                                 <div class="card card-custom gutter-b card-stretch {$metron['style_shadow']}">
                                                     <div class="card-header flex-wrap border-0 pt-6">
                                                         <div class="card-title">
-                                                            <h3 class="card-label text-primary"><strong>Using the record</strong>
-                                                            <span class="d-block text-muted pt-2 font-size-sm">Record the client use the nodeIP</span></h3>
+                                                            <h3 class="card-label text-primary"><strong>Using</strong>
+                                                            <span class="d-block text-muted pt-2 font-size-sm">List of using nodes activity</span></h3>
                                                         </div>
                                                     </div>
                                                     <div class="card-body pt-0">
@@ -54,8 +54,8 @@
                                         <div class="card card-custom gutter-b {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">
                                                 <div class="card-title">
-                                                    <h3 class="card-label text-primary"><strong>Subscribe to the record</strong>
-                                                    <span class="d-block text-muted pt-2 font-size-sm">Record each node was obtained from the subscription link under account</span></h3>
+                                                    <h3 class="card-label text-primary"><strong>List of subscribe</strong>
+                                                    <span class="d-block text-muted pt-2 font-size-sm">List of subscription activity</span></h3>
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
@@ -67,7 +67,7 @@
                                                                     <div class="d-flex align-items-center">
                                                                         <label class="mr-3 mb-0 d-none d-md-block">state:</label>
                                                                         <select class="form-control" id="subscribe_log_type">
-                                                                            <option value="">all</option>
+                                                                            <option value="">All</option>
                                                                             {foreach $metron['index_sub'] as $subtype}
                                                                             <option value="{$subtype}">{$subtype}</option>
                                                                             {/foreach}

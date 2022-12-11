@@ -136,14 +136,14 @@ $_MT['index_sub'] = [
     'stash'
 ];
 # share account
-$_MT['shared_account_enable'] = true; // show shared account navigation menu
+$_MT['shared_account_enable'] = false; // show shared account navigation menu
 $_MT['shared_account'] = [
     'AppleID' => [ // The type of shared account, do not change this character
         'show' => true, // Whether to display this type of shared account
         # Start:: an account An array(), for an account, can be copied and added
         array(
             'name' => 'Apple ID 1', // name
-            'account' => '123456@qq.com', // account
+            'account' => 'test', // account
             'passwd' => '123456', // password
             'class' => 1, // users greater than or equal to this class are visible
             'check' => true, // enable checking account status
