@@ -99,6 +99,7 @@
                                                             <span class="navi-text font-size-lg">Security</span>
                                                         </a>
                                                     </div>
+                                                    {if $metron['node_relay_enable'] === true}
                                                     <div class="navi-item mb-2">
                                                         <a href="/user/setting/detect" class="navi-link py-4">
                                                             <span class="navi-icon mr-2">
@@ -115,6 +116,7 @@
                                                             <span class="navi-text font-size-lg">Audit banned</span>
                                                         </a>
                                                     </div>
+                                                    {/if}
                                                     <div class="navi-item mb-2">
                                                         <a href="/user/setting/sublink" class="navi-link py-4">
                                                             <span class="navi-icon mr-2">

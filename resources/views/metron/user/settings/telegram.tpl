@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
      <head>
-         <title>Telegram Settings &mdash; {$config["appName"]}</title>
+         <title>Telegram settings &mdash; {$config["appName"]}</title>
          {include file='include/global/head.tpl'}
          <div class="d-flex flex-column flex-root">
              <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                              <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                  <div class="d-flex align-items-center flex-wrap mr-2">
                                      <div class="d-flex flex-column">
-                                         <h2 class="text-white font-weight-bold my-2 mr-5">Telegram Settings</h2>
+                                         <h2 class="text-white font-weight-bold my-2 mr-5">Telegram settings</h2>
                                      </div>
                                  </div>
                                 {include file='include/settings/menu.tpl'}
@@ -36,7 +36,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-3 col-xl-3 col-lg-3 col-form-label text-right">current binding</label>
+                                                    <label class="col-3 col-xl-3 col-lg-3 col-form-label text-right">Current binding</label>
                                                      <div class="col-9 col-md-6 col-lg-9 col-xl-6">
                                                          <p class="pt-3">{if $user->telegram_id == 0}unbound account{else}<a href="https://t.me/{$user->im_value}" target ="blank"> @{$user->im_value}</a>{/if}</p>
                                                      </div>
@@ -94,8 +94,8 @@
                 <span class="kt-font-bolder pt-2">2. Send command<code class="cursor_onclick copy-modal" data-clipboard-text="/start {$bind_token}">/start {$bind_token}</code>(click to copy) to the robot</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="window.location.reload();">I am bound</button>
-                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">closure</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.reload();">Done</button>
+                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -42,7 +42,7 @@
                                 <label for="value">
                                     <label class="floating-label" for="value">Configure the switch</label>
                                     <select id="value" class="form-control maxwidth-edit" name="value">
-                                        <option value="0" {if !$edit_config->getValue()}selected{/if}>Shut down</option>
+                                        <option value="0" {if !$edit_config->getValue()}selected{/if}>Close</option>
                                         <option value="1" {if $edit_config->getValue()}selected{/if}>open</option>
                                     </select>
                                 </label>

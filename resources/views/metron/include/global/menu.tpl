@@ -96,6 +96,7 @@
                                                                 <span class="menu-text">Security</span>
                                                             </a>
                                                         </li>
+                                                        {if $metron['node_relay_enable'] === true}
                                                         <li class="menu-item" aria-haspopup="true">
                                                             <a href="/user/setting/detect" class="menu-link">
                                                                 <span class="svg-icon menu-icon">
@@ -110,6 +111,7 @@
                                                                 <span class="menu-text">Audit banned</span>
                                                             </a>
                                                         </li>
+                                                        {/if}
                                                         <li class="menu-item" aria-haspopup="true">
                                                             <a href="/user/setting/sublink" class="menu-link">
                                                                 <span class="svg-icon menu-icon">

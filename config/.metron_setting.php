@@ -105,7 +105,7 @@ $_MT['chatra_id'] = ''; // Chatra's ChatraID can be found in the website code pr
 # │ Page Content Settings │
 # └──────────────────────────────────────────────── ──────────────────────────────────────────────────────────────────────────────────────────────────── ─────────┘
 # Node transit rules
-$_MT['node_relay_enable'] = true; // Navigation menu display node relay setting
+$_MT['node_relay_enable'] = false; // Navigation menu display node relay setting
 # Restricted region access
 $_MT['Restricted_access'] = false; // Enable access to websites in restricted areas
 $_MT['Restricted_area'] = [ // array, restricted areas

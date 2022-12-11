@@ -211,7 +211,7 @@
             </div>
             <div class="modal-footer">
                 <a id="to-pay" href="##" class="btn btn-primary">To pay</a>
-                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">Shut down</button>
+                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

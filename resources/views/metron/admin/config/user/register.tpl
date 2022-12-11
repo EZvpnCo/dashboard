@@ -21,7 +21,7 @@
                                     <select id="value" class="form-control maxwidth-edit" name="value">
                                         {$value = $edit_config->getValue()}
                                         <option value="open" {if $value == 'open'}selected{/if}>open</option>
-                                        <option value="close" {if $value == 'close'}selected{/if}>Shut down</option>
+                                        <option value="close" {if $value == 'close'}selected{/if}>Close</option>
                                         <option value="invite" {if $value == 'invite'}selected{/if}>Invite code only</option>
                                     </select>
                                 </label>

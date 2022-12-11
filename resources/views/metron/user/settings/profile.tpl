@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Data editor &mdash; {$config["appName"]}</title>
+        <title>Profile &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">Data editor</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Profile</h2>
                                     </div>
                                 </div>
                                 {include file='include/settings/menu.tpl'}
@@ -21,11 +21,11 @@
                                         <div class="card card-custom {$metron['style_shadow']}">
                                             <div class="card-header py-3">
                                                 <div class="card-title align-items-start flex-column">
-                                                    <h3 class="card-label font-weight-bolder text-primary">Data editor</h3>
-                                                    <span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal information</span>
+                                                    <h3 class="card-label font-weight-bolder text-primary">Profile</h3>
+                                                    <span class="text-muted font-weight-bold font-size-sm mt-1">Edit your personal information</span>
                                                 </div>
                                                 <div class="card-toolbar">
-                                                    <button type="reset" class="btn btn-success mr-2" id="profile_save_submit">Save the changes</button>
+                                                    <button type="reset" class="btn btn-success mr-2" id="profile_save_submit">Save changes</button>
                                                 </div>
                                             </div>
                                             <form class="form" id="profile_form">
@@ -37,7 +37,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-3 ol-xl-3 col-lg-3 col-form-label text-right">Head portrait</label>
+                                                        <label class="col-3 ol-xl-3 col-lg-3 col-form-label text-right">Avatar</label>
                                                         <div class="col-9 col-lg-9 col-xl-6">
                                                             <div class="image-input image-input-outline" id="kt_profile_avatar" style="background-image: url({$metron['assets_url']}/media/users/blank.png)">
                                                                 <div class="image-input-wrapper" style="background-image: url({$user->gravatar})"></div>
@@ -57,13 +57,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-3 col-xl-3 col-lg-3 col-form-label text-right">nickname</label>
+                                                        <label class="col-3 col-xl-3 col-lg-3 col-form-label text-right">Username</label>
                                                         <div class="col-9 col-md-6 col-lg-9 col-xl-6">
                                                             <div class="input-group input-group-lg input-group-solid">
                                                                 <input type="text" class="form-control" {if $metron['change_username'] !== true}disabled="disabled" {/if} value="{$user->user_name}" name="user_name" oldvalue="{$user->user_name}"/>
                                                             </div>
                                                             {if $metron['change_username'] !== true}
-                                                            <span class="form-text text-muted">From modification nickname</span>
+                                                            <span class="form-text text-muted">Can't modify username</span>
                                                             {/if}
                                                         </div>
                                                     </div>
@@ -90,7 +90,7 @@
                                                     </div>-->
                                                     {if $metron['register_restricted_email'] === true}
                                                     <div class="form-group row">
-                                                        <label class="col-3 col-xl-3 col-lg-3 col-form-label text-right">Email address</label>
+                                                        <label class="col-3 col-xl-3 col-lg-3 col-form-label text-right">Email</label>
                                                         <div class="col-9 col-md-6 col-lg-9 col-xl-6">
                                                             <div class="input-group input-group-lg input-group-solid">
                                                                 <input type="text" class="form-control" {if $metron['change_usermail'] !== true}disabled="disabled"{/if}value="{$email_name}" name="email_name" oldvalue="{$email_name}"/>
