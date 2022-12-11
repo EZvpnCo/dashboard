@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>My wallet &mdash; {$config["appName"]}</title>
+        <title>Wallet &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
@@ -12,7 +12,7 @@
                             <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <div class="d-flex flex-column">
-                                        <h2 class="text-white font-weight-bold my-2 mr-5">My wallet</h2>
+                                        <h2 class="text-white font-weight-bold my-2 mr-5">Wallet</h2>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
@@ -27,9 +27,9 @@
                                         <div id="code-getmoney" class="card card-custom bgi-no-repeat gutter-b card-stretch {$metron['style_shadow']}" style="min-height: 400px; background-position: calc(100% + 0.5rem) calc(100% + 0.5rem); background-size: 150% auto; background-image: url({$metron['assets_url']}/media/svg/patterns/taieri.svg)">
                                             <div class="card-body">
                                                 <div class="p-4">
-                                                    <h3 class="{$style[$theme_style]['global']['title']} font-weight-bolder my-7">The wallet balance</h3>
-                                                    <p class="{$style[$theme_style]['global']['title']} display-2 display1-lg pb-10" style="padding-top: 10px; padding-bottom: 10px"><span class="display-4"><strong>¥</strong> </span><strong>{$user->money}</strong></p>
-                                                    <a href="Javascript:;" class="btn btn-danger font-weight-bold px-6 py-3" onclick="code.payTab();">The balance of prepaid phone</a>
+                                                    <h3 class="{$style[$theme_style]['global']['title']} font-weight-bolder my-7">Balance</h3>
+                                                    <p class="{$style[$theme_style]['global']['title']} display-2 display1-lg pb-10" style="padding-top: 10px; padding-bottom: 10px"><span class="display-4"><strong>$</strong> </span><strong>{$user->money}</strong></p>
+                                                    <a href="Javascript:;" class="btn btn-danger font-weight-bold px-6 py-3" onclick="code.payTab();">Increase wallet balance</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -37,8 +37,8 @@
                                             <div class="card-header border-0 pt-5">
                                                 <div class="card-title font-weight-bolder">
                                                     <div class="card-label {$style[$theme_style]['global']['title']} font-weight-bold font-size-h3">
-                                                        <i class="fab fa-cc-amazon-pay icon-lg {$style[$theme_style]['global']['title']}"></i><strong>&nbsp;&nbsp;The balance of prepaid phone</strong>
-                                                        &nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm" onclick="code.payTab();">return</button>
+                                                        <i class="fab fa-cc-amazon-pay icon-lg {$style[$theme_style]['global']['title']}"></i><strong>&nbsp;&nbsp;Increase wallet balance</strong>
+                                                        &nbsp;&nbsp;<button type="button" class="btn btn-primary btn-sm" onclick="code.payTab();">Back</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -57,7 +57,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Online top-up</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Online pay</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
@@ -73,7 +73,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </span>
-                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Top-up code conversion</span>
+                                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Conversion code</span>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -83,12 +83,12 @@
                                                         <div class="card-body pb-0">
                                                             <div class="form-group" id="pay_amount_form">
                                                                 <div class="input-group input-group-solid">
-                                                                    <input type="number" class="form-control" placeholder="Input amount full" id="amount" name="amount"/>
+                                                                    <input type="number" class="form-control" placeholder="Amount" id="amount" name="amount"/>
                                                                 </div>
                                                             </div>
                                                             <div class="text-right">
                                                                 {if $config['payment_system'] == 'metronpay'}
-                                                                <button type="button" class="btn btn-primary btn-shadow btn-lg" onclick="code.metronPay('modal');">Confirm the payment</button>
+                                                                <button type="button" class="btn btn-primary btn-shadow btn-lg" onclick="code.metronPay('modal');">Confirm</button>
                                                                 {/if}
                                                             </div>
                                                         </div>
@@ -97,11 +97,11 @@
                                                         <div class="card-body pb-0">
                                                             <div class="form-group" id="pay_code_form">
                                                                 <div class="input-group input-group-solid">
-                                                                    <input type="text" class="form-control" placeholder="Input for code" id="pay_code" name="pay_code"/>
+                                                                    <input type="text" class="form-control" placeholder="Code" id="pay_code" name="pay_code"/>
                                                                 </div>
                                                             </div>
                                                             <div class="text-right">
-                                                                <button type="button" class="btn btn-primary btn-shadow btn-lg" id="code-update" onclick="code.update();">Confirm the change</button>
+                                                                <button type="button" class="btn btn-primary btn-shadow btn-lg" id="code-update" onclick="code.update();">Confirm</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -114,8 +114,8 @@
                                         <div class="card card-custom gutter-b card-stretch {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">
                                                 <div class="card-title">
-                                                    <h3 class="card-label {$style[$theme_style]['global']['title']}"><strong>Prepaid phone records</strong>
-                                                    <span class="d-block text-muted pt-2 font-size-sm">Record of successful top-up</span></h3>
+                                                    <h3 class="card-label {$style[$theme_style]['global']['title']}"><strong>Payment list</strong>
+                                                    <span class="d-block text-muted pt-2 font-size-sm">List of pay</span></h3>
                                                 </div>
                                             </div>
                                             <div class="card-body pt-0">
@@ -127,12 +127,11 @@
 
                                 <div class="row">
                                     <div class="col-12">
-
                                         <div class="card card-custom gutter-b {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">
                                                 <div class="card-title">
-                                                    <h3 class="card-label {$style[$theme_style]['global']['title']}"><strong>Pay order record</strong>
-                                                    <span class="d-block text-muted pt-2 font-size-sm">All payment orders under the current account records</span></h3>
+                                                    <h3 class="card-label {$style[$theme_style]['global']['title']}"><strong>Pay orders</strong>
+                                                    <span class="d-block text-muted pt-2 font-size-sm">All pay orders list</span></h3>
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -142,11 +141,11 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-md-4 my-2 my-md-0">
                                                                     <div class="d-flex align-items-center">
-                                                                        <label class="mr-3 mb-0 d-none d-md-block">state:</label>
+                                                                        <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                                                         <select class="form-control" id="kt_form_status">
-                                                                            <option value="">all</option>
-                                                                            <option value="0">Did not pay</option>
-                                                                            <option value="1">Have to account</option>
+                                                                            <option value="">All</option>
+                                                                            <option value="0">Unpaid</option>
+                                                                            <option value="1">Paid</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -161,8 +160,8 @@
                                         <div class="card card-custom gutter-b {$metron['style_shadow']}">
                                             <div class="card-header flex-wrap border-0 pt-6">
                                                 <div class="card-title">
-                                                    <h3 class="card-label {$style[$theme_style]['global']['title']}"><strong>Set records</strong>
-                                                    <span class="d-block text-muted pt-2 font-size-sm">All buy package goods under the current account</span></h3>
+                                                    <h3 class="card-label {$style[$theme_style]['global']['title']}"><strong>Packages orders</strong>
+                                                    <span class="d-block text-muted pt-2 font-size-sm">All buy package orders</span></h3>
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -172,11 +171,11 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-md-4 my-2 my-md-0">
                                                                     <div class="d-flex align-items-center">
-                                                                        <label class="mr-3 mb-0 d-none d-md-block">state:</label>
+                                                                        <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                                                         <select class="form-control" id="kt_form_usedd">
-                                                                            <option value="">all</option>
-                                                                            <option value="0">Has the failure</option>
-                                                                            <option value="1">In the use</option>
+                                                                            <option value="">All</option>
+                                                                            <option value="0">Failure</option>
+                                                                            <option value="1">Using</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>

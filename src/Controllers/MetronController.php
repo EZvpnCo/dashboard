@@ -640,13 +640,13 @@ class MetronController extends BaseController
                     $dataarr['shopid'] = $shop->shopid;
                     $dataarr['shopname'] = $shop->shop()->name;
                     $dataarr['datetime'] = date('Y-m-d H:i:s', $shop->datetime);
-                    $dataarr['renew'] = $shop->renew != 0 ? $shop->renew_date() : '不自动续费';
-                    $dataarr['auto_reset'] = $shop->shop()->auto_reset_bandwidth != 0 ? '自动重置' : '不自动重置';
+                    $dataarr['renew'] = $shop->renew != 0 ? $shop->renew_date() : 'No automatic renewal';
+                    $dataarr['auto_reset'] = $shop->shop()->auto_reset_bandwidth != 0 ? 'auto reset' : 'no automatic reset';
                     $dataarr['price'] = $shop->price;
                     $dataarr['usedd'] = $shop->usedd;
                     $dataarr['shop_pkcs'] = ($shop_conversion === true ? $shop_pkcs : 0);
                     $dataarr['caozuo'] = '<div class="dropdown dropdown-inline">
-                                                    <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">
+                                                <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">
                                                         <span class="svg-icon svg-icon-md">
                                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -655,11 +655,11 @@ class MetronController extends BaseController
                                                                 </g>
                                                             </svg>
                                                         </span>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                         <ul class="navi flex-column navi-hover py-2">
                                                             <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">
-                                                                Action:
+                                                                Actions:
                                                             </li>
                                                             <li class="navi-item">
                                                                 <a href="javascript:;" class="navi-link">
@@ -671,12 +671,12 @@ class MetronController extends BaseController
                         '<li class="navi-item">
                                                                 <a href="javascript:;" class="navi-link" onclick="code.PackageConversion(\'' . $shop->id . '\')">
                                                                     <span class="navi-icon"><i class="la la-leaf"></i></span>
-                                                                    <span class="navi-text">折算返还余额</span>
+                                                                    <span class="navi-text">Converted refund balance</span>
                                                                 </a>
                                                             </li>' : '') .
                         '</ul>
-                                                    </div>
-                                                </div>';
+                                                </div>
+                                            </div>';
                     $data[] = $dataarr;
                 }
                 break;
@@ -733,16 +733,16 @@ class MetronController extends BaseController
                 }
                 foreach ($pays as $pay) {
                     if ($pay->shop === null) {
-                        $shop_data = '钱包充值';
+                        $shop_data = 'wallet recharge';
                         $shop_status = $pay->status;
                     } else {
                         $shopinfo = json_decode($pay->shop, true);
                         if (isset($shopinfo['telegram']['the']) && $shopinfo['telegram']['the'] == 'code') {
-                            $shop_data = 'Telegram 充值';
+                            $shop_data = 'Telegram recharge';
                         } elseif ($shopinfo['id'] == 0) {
-                            $shop_data = '钱包充值';
+                            $shop_data = 'Wallet recharge';
                         } else {
-                            $shop_data = '购买【' . Shop::where('id', $shopinfo['id'])->value('name') . '】';
+                            $shop_data = 'Buy【' . Shop::where('id', $shopinfo['id'])->value('name') . '】';
                         }
 
                         if ($pay->status === 1) {
@@ -761,7 +761,7 @@ class MetronController extends BaseController
                     }
 
                     $dataarr['id'] = $pay->id;
-                    $dataarr['total'] = $pay->total . '元';
+                    $dataarr['total'] = $pay->total . '$';
                     $dataarr['status'] = $pay->status;
                     $dataarr['shop_status'] = $shop_status;
                     $dataarr['tradeno'] = $pay->tradeno;
@@ -781,7 +781,7 @@ class MetronController extends BaseController
                                                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                                         <ul class="navi flex-column navi-hover py-2">
                                                             <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">
-                                                                Action:
+                                                                Actions:
                                                             </li>
                                                             <li class="navi-item">
                                                                 <a href="javascript:;" class="navi-link" onclick="code.metronPay_restart(\'\', \'\', \'0\' , ' . $pay->id . ')">
