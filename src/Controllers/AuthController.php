@@ -34,7 +34,7 @@ class AuthController extends BaseController
 {
     public function login($request, $response)
     {
-        if ($this->user->isLogin){
+        if ($this->user->isLogin) {
             return $response->withStatus(302)->withHeader('Location', '/user');
         }
         $GtSdk = null;
@@ -120,7 +120,7 @@ class AuthController extends BaseController
             }
             if (!$ret) {
                 $res['ret'] = 0;
-                $res['msg'] = '请点击按钮进行验证';
+                $res['msg'] = 'Please click the button to verify';
                 return $response->getBody()->write(json_encode($res));
             }
         }
@@ -129,13 +129,13 @@ class AuthController extends BaseController
         $user = User::where('email', '=', $email)->first();
         if ($user == null) {
             $rs['ret'] = 0;
-            $rs['msg'] = '邮箱不存在';
+            $rs['msg'] = 'Email not found';
             return $response->getBody()->write(json_encode($rs));
         }
 
         if (!Hash::checkPassword($user->pass, $passwd)) {
             $rs['ret'] = 0;
-            $rs['msg'] = '邮箱或者密码错误';
+            $rs['msg'] = 'E-mail or password is incorrect';
 
 
             $loginIP = new LoginIp();
@@ -159,19 +159,19 @@ class AuthController extends BaseController
 
             if (!$code) {
                 $res['ret'] = 2;
-                $res['msg'] = '该账户已开启二步验证，请输入6位动态码';
+                $res['msg'] = 'Two-step verification has been enabled for this account, please enter a 6-digit dynamic code';
                 return $response->getBody()->write(json_encode($res));
             }
             if (!$rcode) {
                 $res['ret'] = 0;
-                $res['msg'] = '两步验证码错误，如果您是丢失了生成器或者错误地设置了这个选项，您可以尝试重置密码，即可取消这个选项。';
+                $res['msg'] = 'The two-step verification code is wrong. If you lost the generator or set this option by mistake, you can try to reset the password to cancel this option';
                 return $response->getBody()->write(json_encode($res));
             }
         }
 
         Auth::login($user->id, $time);
         $rs['ret'] = 1;
-        $rs['msg'] = '登录成功';
+        $rs['msg'] = 'Login successful';
 
         $loginIP = new LoginIp();
         $loginIP->ip = $_SERVER['REMOTE_ADDR'];
@@ -192,7 +192,7 @@ class AuthController extends BaseController
         $ret = TelegramSessionManager::step2_verify_login_session($token, $number);
         if (!$ret) {
             $res['ret'] = 0;
-            $res['msg'] = '此令牌无法被使用。';
+            $res['msg'] = 'This token cannot be used.';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -204,7 +204,7 @@ class AuthController extends BaseController
 
         Auth::login($user->id, $time);
         $rs['ret'] = 1;
-        $rs['msg'] = '登录成功';
+        $rs['msg'] = 'Login successful';
 
         $this->logUserIp($user->id, $_SERVER['REMOTE_ADDR']);
 
@@ -274,55 +274,55 @@ class AuthController extends BaseController
 
             if ($email == '') {
                 $res['ret'] = 0;
-                $res['msg'] = '未填写邮箱';
+                $res['msg'] = 'Email address required';
                 return $response->getBody()->write(json_encode($res));
             }
 
             // check email format
             if (!Check::isEmailLegal($email)) {
                 $res['ret'] = 0;
-                $res['msg'] = '邮箱无效';
+                $res['msg'] = 'Invalid email address';
                 return $response->getBody()->write(json_encode($res));
             }
             // 注册邮箱黑名单
-            $email_postfix = '@'.(explode("@",$email)[1]);
+            $email_postfix = '@' . (explode("@", $email)[1]);
             if (in_array($email_postfix, MetronSetting::get('disable_mailbox_list')) === true) {
                 $res['ret'] = 0;
-                $res['msg'] = '禁止的邮箱后缀';
+                $res['msg'] = 'Prohibited email suffixes';
                 return $response->getBody()->write(json_encode($res));
             }
             // 注册邮箱白名单
             if (MetronSetting::get('register_restricted_email') === true) {
                 if (in_array($email_postfix, MetronSetting::get('list_of_available_mailboxes')) === false) {
                     $res['ret'] = 0;
-                    $res['msg'] = '非法请求';
+                    $res['msg'] = 'Illegal request';
                     return $response->getBody()->write(json_encode($res));
                 }
             }
             if (!Check::isGmailSmall($email)) {
                 $res['ret'] = 0;
-                $res['msg'] = '禁止使用带+号的Gmail虚拟邮箱';
+                $res['msg'] = 'The use of Gmail virtual mailboxes with a + sign is prohibited';
                 return $response->getBody()->write(json_encode($res));
             }
 
             $user = User::where('email', '=', $email)->first();
             if ($user != null) {
                 $res['ret'] = 0;
-                $res['msg'] = '此邮箱已经注册';
+                $res['msg'] = 'This email is already registered';
                 return $response->getBody()->write(json_encode($res));
             }
 
             $ipcount = EmailVerify::where('ip', '=', $_SERVER['REMOTE_ADDR'])->where('expire_in', '>', time())->count();
             if ($ipcount >= (int) Config::getconfig('Register.string.Email_verify_iplimit')) {
                 $res['ret'] = 0;
-                $res['msg'] = '此IP请求次数过多';
+                $res['msg'] = 'Too many requests from this IP';
                 return $response->getBody()->write(json_encode($res));
             }
 
             $mailcount = EmailVerify::where('email', '=', $email)->where('expire_in', '>', time())->count();
             if ($mailcount >= 3) {
                 $res['ret'] = 0;
-                $res['msg'] = '此邮箱请求次数过多';
+                $res['msg'] = 'This email has been requested too many times';
                 return $response->getBody()->write(json_encode($res));
             }
 
@@ -335,7 +335,7 @@ class AuthController extends BaseController
             $ev->code = $code;
             $ev->save();
 
-            $subject = $_ENV['appName'] . '- 验证邮件';
+            $subject = $_ENV['appName'] . '- Verification email';
 
             try {
                 Mail::send($email, $subject, 'auth/verify.tpl', [
@@ -345,12 +345,12 @@ class AuthController extends BaseController
                 ]);
             } catch (Exception $e) {
                 $res['ret'] = 1;
-                $res['msg'] = '邮件发送失败，请联系网站管理员。';
+                $res['msg'] = 'Email sending failed, please contact the site administrator.';
                 return $response->getBody()->write(json_encode($res));
             }
 
             $res['ret'] = 1;
-            $res['msg'] = '验证码发送成功，请查收邮件。';
+            $res['msg'] = 'The verification code has been sent successfully, please check your email.';
             return $response->getBody()->write(json_encode($res));
         }
         $res['ret'] = 0;
@@ -361,25 +361,25 @@ class AuthController extends BaseController
     {
         if (Config::getconfig('Register.string.Mode') === 'close') {
             $res['ret'] = 0;
-            $res['msg'] = '未开放注册。';
+            $res['msg'] = 'Registration is not open.';
             return $res;
         }
 
-        if ($name){
-            if (empty($name)){
+        if ($name) {
+            if (empty($name)) {
                 $res['ret'] = 0;
-                $res['msg'] = '昵称不能为空';
+                $res['msg'] = 'Username can not be blank';
                 return $res;
             }
             $regname = '#[^\x{4e00}-\x{9fa5}A-Za-z0-9]#u';
             if (preg_match($regname, $name)) {
                 $res['ret'] = 0;
-                $res['msg'] = '昵称不能包含符号';
+                $res['msg'] = 'Username cannot contain symbols';
                 return $res;
             }
             if (strlen($name) > 15) {
                 $res['ret'] = 0;
-                $res['msg'] = '昵称太长了';
+                $res['msg'] = 'Username is too long';
                 return $res;
             }
         } else {
@@ -387,9 +387,9 @@ class AuthController extends BaseController
         }
 
 
-        if (User::where("reg_ip", $_SERVER['REMOTE_ADDR'])->count() >= 5){
+        if (User::where("reg_ip", $_SERVER['REMOTE_ADDR'])->count() >= 5) {
             $res['ret'] = 0;
-            $res['msg'] = '请不要频繁注册账号！';
+            $res['msg'] = 'Please do not frequently register an account!';
             return $res;
         }
 
@@ -398,26 +398,26 @@ class AuthController extends BaseController
         if ($c == null) {
             if (Config::getconfig('Register.string.Mode') === 'invite' && MetronSetting::get('register_code') === true) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请码无效';
+                $res['msg'] = 'The invitation code is invalid';
                 return $res;
             }
         } elseif ($c->user_id != 0) {
             $gift_user = User::where('id', '=', $c->user_id)->first();
             if ($gift_user == null) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请人不存在';
+                $res['msg'] = 'Inviter does not exist';
                 return $res;
             }
 
             if ($gift_user->class == 0) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请人不是VIP';
+                $res['msg'] = 'The inviter is not a VIP';
                 return $res;
             }
 
             if ($gift_user->invite_num == 0) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请人可用邀请次数为0';
+                $res['msg'] = 'The number of invitations available to the inviter is 0';
                 return $res;
             }
         }
@@ -496,13 +496,13 @@ class AuthController extends BaseController
             $this->logUserIp($user->id, $_SERVER['REMOTE_ADDR']);
 
             $res['ret'] = 1;
-            $res['msg'] = '注册成功！正在进入登录界面';
+            $res['msg'] = 'Registration success! Entering the login interface';
 
             Radius::Add($user, $user->passwd);
             return $res;
         }
         $res['ret'] = 0;
-        $res['msg'] = '未知错误';
+        $res['msg'] = 'Unknown error';
         return $res;
     }
 
@@ -510,7 +510,7 @@ class AuthController extends BaseController
     {
         if (Config::getconfig('Register.string.Mode') === 'close') {
             $res['ret'] = 0;
-            $res['msg'] = '未开放注册。';
+            $res['msg'] = 'Registration is not open.';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -547,7 +547,7 @@ class AuthController extends BaseController
             }
             if (!$ret) {
                 $res['ret'] = 0;
-                $res['msg'] = '请点击按钮进行验证';
+                $res['msg'] = 'Please click the button to verify';
                 return $response->getBody()->write(json_encode($res));
             }
         }
@@ -555,34 +555,34 @@ class AuthController extends BaseController
         // check email format
         if (!Check::isEmailLegal($email)) {
             $res['ret'] = 0;
-            $res['msg'] = '邮箱无效';
+            $res['msg'] = 'Invalid email address';
             return $response->getBody()->write(json_encode($res));
         }
         // 注册邮箱黑名单
-        $email_postfix = '@'.(explode("@",$email)[1]);
+        $email_postfix = '@' . (explode("@", $email)[1]);
         if (in_array($email_postfix, MetronSetting::get('disable_mailbox_list')) === true) {
             $res['ret'] = 0;
-            $res['msg'] = '禁止的邮箱后缀';
+            $res['msg'] = 'Prohibited email suffixes';
             return $response->getBody()->write(json_encode($res));
         }
         // 注册邮箱白名单
         if (MetronSetting::get('register_restricted_email') === true) {
             if (in_array($email_postfix, MetronSetting::get('list_of_available_mailboxes')) === false) {
                 $res['ret'] = 0;
-                $res['msg'] = '非法请求';
+                $res['msg'] = 'Illegal request';
                 return $response->getBody()->write(json_encode($res));
             }
         }
         if (!Check::isGmailSmall($email)) {
             $res['ret'] = 0;
-            $res['msg'] = '禁止使用带+号的Gmail虚拟邮箱';
+            $res['msg'] = 'The use of Gmail virtual mailboxes with a + sign is prohibited';
             return $response->getBody()->write(json_encode($res));
         }
         // check email
         $user = User::where('email', $email)->first();
         if ($user != null) {
             $res['ret'] = 0;
-            $res['msg'] = '邮箱已经被注册了';
+            $res['msg'] = 'Email has been already registered';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -590,7 +590,7 @@ class AuthController extends BaseController
             $mailcount = EmailVerify::where('email', '=', $email)->where('code', '=', $emailcode)->where('expire_in', '>', time())->first();
             if ($mailcount == null) {
                 $res['ret'] = 0;
-                $res['msg'] = '您的邮箱验证码不正确';
+                $res['msg'] = 'Your email verification code is incorrect';
                 return $response->getBody()->write(json_encode($res));
             }
         }
@@ -598,18 +598,18 @@ class AuthController extends BaseController
         // check pwd length
         if (strlen($passwd) < 8) {
             $res['ret'] = 0;
-            $res['msg'] = '密码请大于8位';
+            $res['msg'] = 'Password should be greater than 8 characters';
             return $response->getBody()->write(json_encode($res));
         }
 
         // check pwd re
         if ($passwd != $repasswd) {
             $res['ret'] = 0;
-            $res['msg'] = '两次密码输入不符';
+            $res['msg'] = 'The two passwords entered do not match';
             return $response->getBody()->write(json_encode($res));
         }
 
-/*
+        /*
         if ($imtype == '' || $imvalue == '') {
             $res['ret'] = 0;
             $res['msg'] = '请填上你的联络方式';
@@ -664,16 +664,16 @@ class AuthController extends BaseController
                 $telegram_id = $auth_data['id'];
                 $user = User::where('telegram_id', $telegram_id)->first(); // Welcome Back :)
                 if ($user == null) {
-                    return $this->view()->assign('title', '您需要先进行邮箱注册后绑定Telegram才能使用授权登录')->assign('message', '很抱歉带来的不便，请重新试试')->assign('redirect', '/auth/login')->display('telegram_error.tpl');
+                    return $this->view()->assign('title', 'You need to register your email first and then bind Telegram to log in with authorization')->assign('message', 'Sorry for the inconvenience, please try again')->assign('redirect', '/auth/login')->display('telegram_error.tpl');
                 }
                 Auth::login($user->id, 3600);
                 $this->logUserIp($user->id, $_SERVER['REMOTE_ADDR']);
 
                 // 登陆成功！
-                return $this->view()->assign('title', '登录成功')->assign('message', '正在前往仪表盘')->assign('redirect', '/user')->display('telegram_success.tpl');
+                return $this->view()->assign('title', 'Login successful')->assign('message', 'heading to dashboard')->assign('redirect', '/user')->display('telegram_success.tpl');
             }
             // 验证失败
-            return $this->view()->assign('title', '登陆超时或非法构造信息')->assign('message', '很抱歉带来的不便，请重新试试')->assign('redirect', '/auth/login')->display('telegram_error.tpl');
+            return $this->view()->assign('title', 'Login timeout or illegally constructed information')->assign('message', 'Sorry for the inconvenience, please try again')->assign('redirect', '/auth/login')->display('telegram_error.tpl');
         }
         return $response->withRedirect('/404');
     }
