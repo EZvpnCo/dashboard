@@ -17,7 +17,7 @@
                 },
                 'register': {
                     'code': {if $config['register_mode'] == 'invite' && $metron['register_code'] === true}true{else}false{/if},
-                },
+                }
             };
         </script>
 
@@ -47,10 +47,10 @@
             <script src="https://recaptcha.net/recaptcha/api.js" async defer></script>
         {/if}
 
-        <script src="{$metron['assets_url']}/plugins/global/plugins.bundle.js"></script>
-        <script src="{$metron['assets_url']}/js/metron-plugin.js"></script>
-        <script src="{$metron['assets_url']}/js/scripts.js"></script>
-        <script src="{$metron['assets_url']}/js/auth.js"></script>
+        <script src="/theme/metron/plugins/global/plugins.bundle.js"></script>
+        <script src="/theme/metron/js/metron-plugin.js"></script>
+        <script src="/theme/metron/js/scripts.js"></script>
+        <script src="/theme/metron/js/auth.js"></script>
 
         {if $metron['enable_cust_auth'] === true}
         {if $metron['enable_cust'] === 'crisp' && $metron['crisp_id'] != ''}
