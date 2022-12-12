@@ -609,23 +609,7 @@ class AuthController extends BaseController
             return $response->getBody()->write(json_encode($res));
         }
 
-        /*
-        if ($imtype == '' || $imvalue == '') {
-            $res['ret'] = 0;
-            $res['msg'] = '请填上你的联络方式';
-            return $response->getBody()->write(json_encode($res));
-        }
 
-        $user = User::where('im_value', $imvalue)->where('im_type', $imtype)->first();
-        if ($user != null) {
-            $res['ret'] = 0;
-            $res['msg'] = '此联络方式已注册';
-            return $response->getBody()->write(json_encode($res));
-        }
-        if (Config::getconfig('Register.bool.Enable_email_verify')) {
-            EmailVerify::where('email', '=', $email)->delete();
-        }
-*/
         $res = $this->register_helper($name, $email, $passwd, $code, $imtype, $imvalue, 0);
         return $response->getBody()->write(json_encode($res));
     }

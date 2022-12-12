@@ -62,14 +62,14 @@ class PasswordController extends BaseController
         $user = User::where('email', $email)->first();
         if ($user == null) {
             $rs['ret'] = 0;
-            $rs['msg'] = '此邮箱不存在.';
+            $rs['msg'] = 'This mailbox does not exist.';
             return $response->getBody()->write(json_encode($rs));
         }
         $rs['ret'] = 1;
-        $rs['msg'] = '重置邮件已经发送,请检查邮箱.';
+        $rs['msg'] = 'The reset email has been sent, please check your email.';
         if (!Password::sendResetEmail($email)) {
             $rs['ret'] = 0;
-            $rs['msg'] = '邮件发送失败，请联系网站管理员。';
+            $rs['msg'] = 'Email sending failed, please contact the site administrator.';
         }
 
         return $response->getBody()->write(json_encode($rs));
@@ -89,13 +89,13 @@ class PasswordController extends BaseController
 
         if ($password != $repasswd) {
             $res['ret'] = 0;
-            $res['msg'] = '两次输入不符合';
+            $res['msg'] = 'The two entries do not match';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (strlen($password) < 8) {
             $res['ret'] = 0;
-            $res['msg'] = '密码太短啦';
+            $res['msg'] = 'password is too short';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -103,14 +103,14 @@ class PasswordController extends BaseController
         $token = PasswordReset::where('token', $tokenStr)->where('expire_time', '>', time())->orderBy('id', 'desc')->first();
         if ($token == null) {
             $rs['ret'] = 0;
-            $rs['msg'] = '链接已经失效，请重新获取';
+            $rs['msg'] = 'The link has expired, please try again';
             return $response->getBody()->write(json_encode($rs));
         }
 
         $user = User::where('email', $token->email)->first();
         if ($user == null) {
             $rs['ret'] = 0;
-            $rs['msg'] = '链接已经失效，请重新获取';
+            $rs['msg'] = 'The link has expired, please try again';
             return $response->getBody()->write(json_encode($rs));
         }
 
@@ -121,10 +121,10 @@ class PasswordController extends BaseController
 
         if (!$user->save()) {
             $rs['ret'] = 0;
-            $rs['msg'] = '重置失败，请重试';
+            $rs['msg'] = 'Reset failed, please try again';
         } else {
             $rs['ret'] = 1;
-            $rs['msg'] = '重置成功';
+            $rs['msg'] = 'Reset successful';
             $user->clean_link();
 
             // 禁止链接多次使用

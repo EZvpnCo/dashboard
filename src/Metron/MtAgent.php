@@ -2,10 +2,10 @@
 
 namespace App\Metron;
 
-use App\Models\{ User, Code, Shop, Bought, Payback, Paytake };
-use App\Services\{ Mail, Config, MetronSetting };
-use App\Utils\{GA, Hash, Check, Tools };
-use App\Metron\{ MtAuth, Metron };
+use App\Models\{User, Code, Shop, Bought, Payback, Paytake};
+use App\Services\{Mail, Config, MetronSetting};
+use App\Utils\{GA, Hash, Check, Tools};
+use App\Metron\{MtAuth, Metron};
 use Exception;
 use Ramsey\Uuid\Uuid;
 
@@ -13,8 +13,8 @@ class MtAgent extends \App\Controllers\BaseController
 {
     public function pages($request, $response, $args)
     {
-        if ( MtAuth::Auth()['agent'] !== 1) {
-            die( '无 Agent 授权' );
+        if (MtAuth::Auth()['agent'] !== 1) {
+            die('No Agent authorization');
         }
 
         $user       = $this->user;
@@ -27,15 +27,15 @@ class MtAgent extends \App\Controllers\BaseController
         # 最新3条返利
         $back_logs  = $backs->limit(3)->get();
         $back_news  = [];
-        foreach ($back_logs as $back_log){
+        foreach ($back_logs as $back_log) {
             $log_user = User::where('id', $back_log->userid)->first();
             if ($log_user === null) {
                 $back_news[] = [
-                    'name'      => '该用户已注销',
-                    'email'     => '该用户已注销',
-                    'avatar'    => '',
-                    'time'      => date('Y-m-d H:i:s', $back_log->datetime),
-                    'ref_get'   => $back_log->ref_get,
+                    'name' => 'The user has logged out',
+                    'email' => 'The user has logged out',
+                    'avatar' => '',
+                    'time' => date('Y-m-d H:i:s', $back_log->datetime),
+                    'ref_get' => $back_log->ref_get,
                 ];
             } else {
                 $back_news[] = [
@@ -46,11 +46,10 @@ class MtAgent extends \App\Controllers\BaseController
                     'ref_get'   => $back_log->ref_get,
                 ];
             }
-
         }
 
         # 今日数据
-        $unix_time  = strtotime(date('Y-m-d',time()));
+        $unix_time  = strtotime(date('Y-m-d', time()));
         $today_back = $backs->where('datetime', '>', $unix_time)->sum('ref_get') ?? 0;
         $today_user = User::where('ref_by', $user->id)->whereDate('reg_date', '=', date('Y-m-d'))->count();
 
@@ -72,22 +71,24 @@ class MtAgent extends \App\Controllers\BaseController
     public function edit_user($request, $response, $args)
     {
         $user = $this->user;
-        if ($user == null || !$user->isLogin || $user->agent < 1) { return 0; }
+        if ($user == null || !$user->isLogin || $user->agent < 1) {
+            return 0;
+        }
 
         $id = $args['id'];
         $edituser = User::find($id);
         if ($edituser->ref_by !== $user->id) {
-            return '您无权操作该用户';
+            return 'You do not have permission to operate this user';
         }
 
         $edituser_config = $edituser->config;
         if ($edituser_config['form_agent_create'] !== true) {
-            return '您无权操作通过邀请链接或邀请码注册的用户';
+            return 'You do not have permission to operate users registered through the invitation link or invitation code';
         }
 
         $shops = Shop::where('status', 1)->orderBy('name')->get();
         $email = explode('@', $edituser->email);
-        $email = [ $email[0], '@'.$email[1] ];
+        $email = [$email[0], '@' . $email[1]];
         return $this->view()
             ->assign('shops', $shops)
             ->assign('email', $email)
@@ -108,14 +109,14 @@ class MtAgent extends \App\Controllers\BaseController
         $edituser = User::find($id);
         if ($edituser->ref_by !== $user->id) {
             $res['ret'] = 0;
-            $res['msg'] = '您无权操作该用户';
+            $res['msg'] = 'You are not authorized to operate this user';
             return $response->getBody()->write(json_encode($res));
         }
 
         $edituser_config = $edituser->config;
         if ($edituser_config['form_agent_create'] !== true) {
             $res['ret'] = 0;
-            $res['msg'] = '您无权操作通过邀请链接或邀请码注册的用户';
+            $res['msg'] = 'You do not have permission to operate users who registered via invite link or invite code';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -130,58 +131,58 @@ class MtAgent extends \App\Controllers\BaseController
 
         switch ($mode) {
             case 'edit_user':
-                # 昵称检验
+                # nickname check
                 if (MetronSetting::get('change_username') !== true) {
-                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '管理员设置禁止修改昵称']));
+                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Administrator settings prohibit modification of nickname']));
                 }
-                if ($name == ''){
+                if ($name == '') {
                     $res['ret'] = 0;
-                    $res['msg'] = '昵称不允许留空';
+                    $res['msg'] = 'Nickname is not allowed to be blank';
                     return $response->getBody()->write(json_encode($res));
                 }
 
                 /*
-                $regname = '/^[0-9a-zA-Z_\x{4e00}-\x{9fa5}]+$/u';
-                if (!preg_match($regname,$name)){
-                    $res['ret'] = 0;
-                    $res['msg'] = '昵称仅支持中文、数字、字母和下划线的组合';
-                    return $response->getBody()->write(json_encode($res));
-                }*/
+                 $regname = '/^[0-9a-zA-Z_\x{4e00}-\x{9fa5}]+$/u';
+                 if (!preg_match($regname,$name)){
+                     $res['ret'] = 0;
+                     $res['msg'] = 'Nicknames only support combinations of Chinese, numbers, letters and underscores';
+                     return $response->getBody()->write(json_encode($res));
+                 }*/
                 if (strlen($name) > 24) {
                     $res['ret'] = 0;
-                    $res['msg'] = '昵称太长了';
+                    $res['msg'] = 'Nickname is too long';
                     return $response->getBody()->write(json_encode($res));
                 }
 
-                # 检测邮箱
+                # check mailbox
                 if ($edituser->email != $email) {
                     if (MetronSetting::get('change_usermail') !== true) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '管理员设置禁止修改邮箱']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Administrator settings forbid modification of mailbox']));
                     }
                     if ($email == '') {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '未填写邮箱']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Email is not filled']));
                     }
-                    if (MetronSetting::get('register_restricted_email') === true ) {
+                    if (MetronSetting::get('register_restricted_email') === true) {
                         if (!in_array($suffix, MetronSetting::get('list_of_available_mailboxes'))) {
                             $res['ret'] = 0;
-                            $res['msg'] = '禁止的邮箱后缀';
+                            $res['msg'] = 'Forbidden email suffixes';
                             return $response->getBody()->write(json_encode($res));
                         }
                         $email .= $suffix;
                     }
                     if (!Check::isEmailLegal($email)) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '邮箱无效']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Email is invalid']));
                     }
                     $checkemail = User::where('email', '=', $email)->first();
                     if ($checkemail != null) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '此邮箱已存在']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'This mailbox already exists']));
                     }
                 }
-                # 检测密码
+                # check password
                 if ($password != '') {
                     if (strlen($password) < 8) {
                         $res['ret'] = 0;
-                        $res['msg'] = '密码需8位以上';
+                        $res['msg'] = 'The password needs to be more than 8 characters';
                         return $response->getBody()->write(json_encode($res));
                     }
                     $edituser->pass = Hash::passwordHash($password);
@@ -189,66 +190,66 @@ class MtAgent extends \App\Controllers\BaseController
                     $edituser->clean_link();
                 }
 
-                $edituser->user_name    = $name;
-                $edituser->email        = $email;
-                $edituser->enable       = $enable;
-                if (!$edituser->save()){
+                $edituser->user_name = $name;
+                $edituser->email = $email;
+                $edituser->enable = $enable;
+                if (!$edituser->save()) {
                     $res['ret'] = 0;
-                    $res['msg'] = '保存失败';
+                    $res['msg'] = 'Failed to save';
                     return $response->getBody()->write(json_encode($res));
                 }
                 $res['ret'] = 1;
-                $res['msg'] = '保存成功';
+                $res['msg'] = 'Saved successfully';
                 return $response->getBody()->write(json_encode($res));
             case 'buy_shop':
-                # 开通套餐
+                # Open package
                 if ($shopid > 0) {
                     $shop = Shop::find($shopid);
                     if ($shop != null) {
                         if ($user->money < $shop->price) {
                             $res['ret'] = 0;
-                            $res['msg'] = '套餐开通失败，原因是您的钱包余额不足!';
+                            $res['msg'] = 'Failed to open the package because your wallet balance is insufficient!';
                             return $response->getBody()->write(json_encode($res));
                         }
                         $user->money = bcsub($user->money, $shop->price, 2);
                         $user->save();
 
-                        Metron::bought_usedd($edituser, 1, 0);
-                        $bought           = new Bought();
-                        $bought->userid   = $edituser->id;
-                        $bought->shopid   = $shop->id;
+                        Metron::bought_used($edituser, 1, 0);
+                        $bought = new Bought();
+                        $bought->userid = $edituser->id;
+                        $bought->shopid = $shop->id;
                         $bought->datetime = time();
-                        $bought->renew    = 0;
-                        $bought->coupon   = '';
-                        $bought->price    = $shop->price;
-                        $bought->usedd    = 1;
+                        $bought->renew = 0;
+                        $bought->coupon = '';
+                        $bought->price = $shop->price;
+                        $bought->used = 1;
                         $bought->save();
                         $shop->buy($edituser);
 
                         Metron::add_payback($user, $edituser, $shop->price);
                         $res['ret'] = 1;
-                        $res['msg'] = '套餐开通成功';
+                        $res['msg'] = 'Package opened successfully';
                         return $response->getBody()->write(json_encode($res));
                     } else {
                         $res['ret'] = 0;
-                        $res['msg'] = '套餐开通失败，原因是套餐不存在!';
+                        $res['msg'] = 'Failed to activate the package because the package does not exist!';
                         return $response->getBody()->write(json_encode($res));
                     }
                 } else {
                     $res['ret'] = 1;
-                    $res['msg'] = '不开通套餐无需保存';
+                    $res['msg'] = 'No need to save if you don\'t open a package';
                     return $response->getBody()->write(json_encode($res));
                 }
                 break;
             case 'reset_link':
                 $edituser->clean_link();
                 $res['ret'] = 1;
-                $res['msg'] = '重置成功';
+                $res['msg'] = 'Reset succeeded';
                 return $response->getBody()->write(json_encode($res));
         }
 
         $res['ret'] = 0;
-        $res['msg'] = '未知错误';
+        $res['msg'] = 'Unknown error';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -258,12 +259,13 @@ class MtAgent extends \App\Controllers\BaseController
     public function add_user($request, $response, $args)
     {
         $user = $this->user;
-        if ($user == null || !$user->isLogin || $user->agent < 1) { return 0; }
+        if ($user == null || !$user->isLogin || $user->agent < 1) {
+            return 0;
+        }
 
         $shop_plan = MetronSetting::get('shop_plan');
         foreach ($shop_plan as $shop_a) {
             foreach ($shop_a as $shop_b) {
-
             }
         }
         $shops = Shop::where('status', 1)->orderBy('name')->get();
@@ -286,10 +288,10 @@ class MtAgent extends \App\Controllers\BaseController
         $email     = strtolower($email);
         $suffix    = trim($request->getParam('email_suffix'));
 
-        if (MetronSetting::get('register_restricted_email') === true ) {
+        if (MetronSetting::get('register_restricted_email') === true) {
             if (!in_array($suffix, MetronSetting::get('list_of_available_mailboxes'))) {
                 $res['ret'] = 0;
-                $res['msg'] = '禁止的邮箱后缀';
+                $res['msg'] = 'Prohibited email suffixes';
                 return $response->getBody()->write(json_encode($res));
             }
             $email .= $suffix;
@@ -299,17 +301,17 @@ class MtAgent extends \App\Controllers\BaseController
         }
         if (!Check::isGmailSmall($email)) {
             $res['ret'] = 0;
-            $res['msg'] = '禁止使用带+号的Gmail虚拟邮箱';
+            $res['msg'] = 'Do not use Gmail virtual mailbox with + sign';
             return $response->getBody()->write(json_encode($res));
         }
 
         $newuser = User::where('email', $email)->first();
         if ($newuser != null) {
             $res['ret'] = 0;
-            $res['msg'] = '邮箱已经被注册了';
+            $res['msg'] = 'Email has been registered';
             return $response->getBody()->write(json_encode($res));
         }
-        
+
         $current_timestamp             = time();
         $newuser                       = new User();
         $pass                          = Tools::genRandomChar();
@@ -363,7 +365,7 @@ class MtAgent extends \App\Controllers\BaseController
 
         if ($newuser->save()) {
             $res['ret']         = 1;
-            $res['msg']         = '新用户注册成功' . PHP_EOL . '用户名： ' . $email . PHP_EOL . ' 随机初始密码： ' . $pass;
+            $res['msg'] = 'New user registered successfully' . PHP_EOL . 'Username: ' . $email . PHP_EOL . ' Random initial password: ' . $pass;
             $res['email_error'] = 'success';
             if ($shop_id > 0) {
                 $shop = Shop::find($shop_id);
@@ -378,25 +380,26 @@ class MtAgent extends \App\Controllers\BaseController
                     $bought->save();
                     $shop->buy($newuser);
                 } else {
-                    $res['msg'] .= '<br/>但是套餐添加失败了，原因是套餐不存在';
+                    $res['msg'] .= '<br/>But the package addition failed because the package does not exist';
                 }
             }
             /*
-            $newuser->addMoneyLog($newuser->money);
-            $subject            = $_ENV['appName'] . '-新用户注册通知';
-            $to                 = $newuser->email;
-            $text               = '您好，管理员已经为您生成账户，用户名: ' . $email . '，登录密码为：' . $pass . '，感谢您的支持。 ';
-            try {
-                Mail::send($to, $subject, 'newuser.tpl', [
-                    'user' => $newuser, 'text' => $text,
-                ], []);
-            } catch (Exception $e) {
-                $res['email_error'] = $e->getMessage();
-            }*/
+             $newuser->addMoneyLog($newuser->money);
+             $subject = $_ENV['appName'] . '-New User Registration Notification';
+             $to = $newuser->email;
+             $text = 'Hello, the administrator has created an account for you, username: ' . $email . ', login password: ' . $pass . ', thank you for your support. ';
+             try {
+                 Mail::send($to, $subject, 'newuser.tpl', [
+                     'user' => $newuser, 'text' => $text,
+                 ], []);
+             } catch (Exception $e) {
+                 $res['email_error'] = $e->getMessage();
+             }
+             */
             return $response->getBody()->write(json_encode($res));
         }
         $res['ret'] = 0;
-        $res['msg'] = '未知错误';
+        $res['msg'] = 'unknown mistake';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -411,85 +414,85 @@ class MtAgent extends \App\Controllers\BaseController
             return $response->getBody()->write(json_encode($res));
         }
 
-        $total = trim($request->getParam('total'));         # 金额
-        $type  = (int) trim($request->getParam('type'));    # 1:转余额 2:提现
+        $total = trim($request->getParam('total')); # amount
+        $type = (int) trim($request->getParam('type')); # 1: balance transfer 2: cash withdrawal
 
         if (!is_numeric($total)) {
             $res['ret'] = 0;
-            $res['msg'] = '非法金额';
+            $res['msg'] = 'Illegal amount';
             return $response->getBody()->write(json_encode($res));
         }
 
         if ($total > $user->back_money) {
             $res['ret'] = 0;
-            $res['msg'] = '可提现余额不足';
+            $res['msg'] = 'Insufficient withdrawal balance';
             return $response->getBody()->write(json_encode($res));
         }
 
-        # 提现
+        # withdraw
         if ($type === 2) {
-            # 检查是否有提现账号
+            # Check if there is a withdrawal account
             if (!$user->config['take_account']['acc'] || !$user->config['take_account']['type']) {
                 $res['ret'] = 0;
-                $res['msg'] = '您还未设置提现账号';
+                $res['msg'] = 'You have not set up a cash withdrawal account';
                 return $response->getBody()->write(json_encode($res));
             }
             $take_back_total = MetronSetting::get('take_back_total');
             if ($take_back_total !== 0 && $total < $take_back_total) {
                 $res['ret'] = 0;
-                $res['msg'] = '提现金额需大于 ' . $take_back_total . ' 元';
+                $res['msg'] = 'The withdrawal amount must be greater than ' . $take_back_total . 'yuan';
                 return $response->getBody()->write(json_encode($res));
             }
         }
 
-        # 创建提现记录
-        $paytake           = new Paytake();
-        $paytake->userid   = $user->id;
-        $paytake->type     = $type;
-        $paytake->total    = $total;
-        $paytake->status   = ($type === 1 ? 1 : 0);
+        # create withdrawal record
+        $paytake = new Paytake();
+        $paytake->userid = $user->id;
+        $paytake->type = $type;
+        $paytake->total = $total;
+        $paytake->status = ($type === 1 ? 1 : 0);
         $paytake->datetime = time();
         if (!$paytake->save()) {
             $res['ret'] = 0;
-            $res['msg'] = '创建提现申请失败, 请联系客服';
+            $res['msg'] = 'Failed to create withdrawal application, please contact customer service';
             return $response->getBody()->write(json_encode($res));
         }
 
-        # 扣除用户返利余额
+        # Deduct user rebate balance
         $user->back_money = bcsub($user->back_money, $total, 2);
 
-        # 转余额
-        if ($type === 1){
+        # transfer balance
+        if ($type === 1) {
             if ($total <= 0) {
                 $paytake->delete();
                 $res['ret'] = 0;
-                $res['msg'] = '提现金额需大于0元';
+                $res['msg'] = 'The withdrawal amount must be greater than 0 yuan';
                 return $response->getBody()->write(json_encode($res));
             }
-            # 转至余额 直接创建 code 记录 和 增加余额
-            $code               = new Code();
-            $code->code         = '#'.$paytake->id.' - '.'返利转余额';
-            $code->type         = 3;
-            $code->number       = $total;
-            $code->isused       = 1;
-            $code->userid       = $user->id;
-            $code->usedatetime  = date('Y-m-d H:i:s', time());
+            # go to balance directly create code record and increase balance
+            $code = new Code();
+            $code->code = '#' . $paytake->id . ' - ' . 'Rebate to balance';
+            $code->type = 3;
+            $code->number = $total;
+            $code->isused = 1;
+            $code->userid = $user->id;
+            $code->usedatetime = date('Y-m-d H:i:s', time());
             if (!$code->save()) {
                 $res['ret'] = 0;
-                $res['msg'] = '创建 code 记录失败, 请联系客服';
+                $res['msg'] = 'Failed to create code record, please contact customer service';
                 return $response->getBody()->write(json_encode($res));
             }
-            $user->money        = bcadd($user->money, $total, 2);
+            $user->money = bcadd($user->money, $total, 2);
         }
 
-        if (!$user->save()){
+        if (!$user->save()) {
             $res['ret'] = 0;
-            $res['msg'] = '出现错误, 请联系客服';
+            $res['msg'] = 'An error occurred, please contact customer service';
             return $response->getBody()->write(json_encode($res));
         }
 
         $res['ret'] = 1;
-        $res['msg'] = ($type === 1 ? '已提现至账号余额' : '提现申请成功' );
+        $res['msg'] = ($type === 1 ? 'Withdrawal to account balance' : 'Withdrawal application successful');
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -504,38 +507,38 @@ class MtAgent extends \App\Controllers\BaseController
             return $response->getBody()->write(json_encode($res));
         }
 
-        $acc   = trim($request->getParam('acc'));   # 账号
-        $type  = trim($request->getParam('type'));  # 类型
+        $acc = trim($request->getParam('acc')); # Account
+        $type = trim($request->getParam('type')); # type
 
-        if ( MtAuth::Auth()['agent'] !== 1) {
+        if (MtAuth::Auth()['agent'] !== 1) {
             $res['ret'] = 0;
-            $res['msg'] = '无 Agent 授权';
+            $res['msg'] = 'No Agent authorization';
             return $response->getBody()->write(json_encode($res));
         }
         if (!in_array($type, MetronSetting::get('take_account_type'))) {
             $res['ret'] = 0;
-            $res['msg'] = '不支持该账号类型提现';
+            $res['msg'] = 'This account type does not support withdrawal';
             return $response->getBody()->write(json_encode($res));
         }
         if (!$acc) {
             $res['ret'] = 0;
-            $res['msg'] = '提现账号不能留空';
+            $res['msg'] = 'Withdrawal account cannot be left blank';
             return $response->getBody()->write(json_encode($res));
         }
 
-        $config                         = $user->config;
+        $config = $user->config;
         $config['take_account']['type'] = $type;
-        $config['take_account']['acc']  = $acc;
-        $user->config                   = $config;
+        $config['take_account']['acc'] = $acc;
+        $user->config = $config;
 
-        if (!$user->save()){
+        if (!$user->save()) {
             $res['ret'] = 0;
-            $res['msg'] = '出现错误, 请联系客服';
+            $res['msg'] = 'An error occurred, please contact customer service';
             return $response->getBody()->write(json_encode($res));
         }
 
         $res['ret'] = 1;
-        $res['msg'] = '保存成功';
+        $res['msg'] = 'Saved successfully';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -544,16 +547,18 @@ class MtAgent extends \App\Controllers\BaseController
      */
     public function ajax_datatable($request, $response, $args)
     {
-        $name       = $args['name'];                        # 得到表名
-        $user       = $this->user;                          # 得到用户
-        $getMeta    = $request->getQueryParams();           # 获取所有请求数据
-        $page       = isset($getMeta['pagination']['page']) ? $getMeta['pagination']['page'] : 1;       # 得到当前页码
-        $sort       = isset($getMeta['sort']['sort']) ? $getMeta['sort']['sort'] : 'desc';             # 得到排序方法
-        $field      = isset($getMeta['sort']['field']) ? $getMeta['sort']['field'] : 'reg_date';            # 得到排序字段
-        $perpage    = isset($getMeta['pagination']['perpage']) ? $getMeta['pagination']['perpage'] : 10;    # 得到每页数量
-        $querydata  = isset($getMeta['query'][0]) ? $getMeta['query'][0] : "";                 # 筛选数据
+        $name = $args['name']; # get table name
+        $user = $this->user; # get user
+        $getMeta = $request->getQueryParams(); # Get all request data
+        $page = isset($getMeta['pagination']['page']) ? $getMeta['pagination']['page'] : 1; # Get the current page number
+        $sort = isset($getMeta['sort']['sort']) ? $getMeta['sort']['sort'] : 'desc'; # get sorting method
+        $field = isset($getMeta['sort']['field']) ? $getMeta['sort']['field'] : 'reg_date'; # get the sort field
+        $perpage = isset($getMeta['pagination']['perpage']) ? $getMeta['pagination']['perpage'] : 10; # get the number per page
+        $querydata = isset($getMeta['query'][0]) ? $getMeta['query'][0] : ""; # filter data
 
-        if ($user == null || !$user->isLogin || $user->agent < 1) { return 0; }
+        if ($user == null || !$user->isLogin || $user->agent < 1) {
+            return 0;
+        }
 
         switch ($name) {
             case 'agent_user':
@@ -562,18 +567,18 @@ class MtAgent extends \App\Controllers\BaseController
 
                 if ($field === 'unusedTraffic') {
                     # 根据剩余流量排序
-                    $users = $users->orderByRaw('transfer_enable - u - d '.$sort);
+                    $users = $users->orderByRaw('transfer_enable - u - d ' . $sort);
                 } else {
                     $users = $users->orderBy($field, $sort);
                 }
 
                 # 按等级筛选
-                if ( isset($getMeta['query']['class']) ) {
+                if (isset($getMeta['query']['class'])) {
                     $users = $users->where('class', $getMeta['query']['class']);
                 }
 
                 # 搜索
-                if ( !empty($querydata) ) {
+                if (!empty($querydata)) {
                     $users = $users->where(function ($query) use ($querydata) {
                         $query->where('id', 'LIKE', '%' . $querydata . '%')->orwhere('user_name', 'LIKE', '%' . $querydata . '%')->orwhere('email', 'LIKE', '%' . $querydata . '%');
                     });
@@ -584,7 +589,7 @@ class MtAgent extends \App\Controllers\BaseController
                 $data  = [];
                 # 每页数量
                 if ($perpage != -1) {
-                    $logs = $users->skip(($page - 1)*$perpage)->limit($perpage)->get();
+                    $logs = $users->skip(($page - 1) * $perpage)->limit($perpage)->get();
                 } else {
                     $logs = $users->get();
                 }
@@ -613,10 +618,10 @@ class MtAgent extends \App\Controllers\BaseController
                 }
                 break;
             case 'amount_records':
-                $time_a = strtotime(date('Y-m-d',$_SERVER['REQUEST_TIME'])) + 86400;
+                $time_a = strtotime(date('Y-m-d', $_SERVER['REQUEST_TIME'])) + 86400;
                 $time_b = $time_a + 86400;
                 $datas = [];
-                for ($i=0; $i < 7 ; $i++) {
+                for ($i = 0; $i < 7; $i++) {
                     $time_a -= 86400;
                     $time_b -= 86400;
                     $total   = Payback::where('ref_by', $user->id)->where('datetime', '>', $time_a)->where('datetime', '<', $time_b)->sum('ref_get');
@@ -629,7 +634,7 @@ class MtAgent extends \App\Controllers\BaseController
             case 'agent_take_log':
                 $paytakes = Paytake::where('userid', $user->id)->orderBy($field, $sort);
                 # 按状态筛选
-                if ( isset($getMeta['query']['status']) ) {
+                if (isset($getMeta['query']['status'])) {
                     $paytakes = $paytakes->where('status', $getMeta['query']['status']);
                 }
 
@@ -638,7 +643,7 @@ class MtAgent extends \App\Controllers\BaseController
                 $data  = [];
                 # 每页数量
                 if ($perpage != -1) {
-                    $paytakes = $paytakes->skip(($page - 1)*$perpage)->limit($perpage)->get();
+                    $paytakes = $paytakes->skip(($page - 1) * $perpage)->limit($perpage)->get();
                 } else {
                     $paytakes = $paytakes->get();
                 }
@@ -663,7 +668,7 @@ class MtAgent extends \App\Controllers\BaseController
             "sort"      => $sort,                       # 排序方式
             "field"     => $field,                      # 排序字段
         ];
-        $res  = [ 'meta' => $meta, 'data' => $data];
+        $res  = ['meta' => $meta, 'data' => $data];
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -676,34 +681,34 @@ class MtAgent extends \App\Controllers\BaseController
 
         if ($user == null || !$user->isLogin || $user->agent < 1) {
             $res['ret'] = 0;
-            $res['msg'] = '非法操作';
+            $res['msg'] = 'Illegal operation';
             return $response->getBody()->write(json_encode($res));
         }
 
-        $id         = $request->getParam('id');
-        $delluser   = User::find($id);
+        $id = $request->getParam('id');
+        $delluser = User::find($id);
 
         if ($delluser->ref_by !== $user->id) {
             $res['ret'] = 0;
-            $res['msg'] = '您无权操作该用户';
+            $res['msg'] = 'You are not authorized to operate this user';
             return $response->getBody()->write(json_encode($res));
         }
 
         $delluser_config = $delluser->config;
         if ($delluser_config['form_agent_create'] !== true) {
             $res['ret'] = 0;
-            $res['msg'] = '您无权操作通过邀请链接或邀请码注册的用户';
+            $res['msg'] = 'You do not have permission to operate users who registered via invite link or invite code';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (!$delluser->kill_user()) {
             $res['ret'] = 0;
-            $res['msg'] = '删除失败';
+            $res['msg'] = 'Delete failed';
             return $response->getBody()->write(json_encode($res));
         }
 
         $res['ret'] = 1;
-        $res['msg'] = '删除成功';
+        $res['msg'] = 'Deleted successfully';
         return $response->getBody()->write(json_encode($res));
     }
 }

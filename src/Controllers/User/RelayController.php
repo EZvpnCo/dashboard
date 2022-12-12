@@ -363,9 +363,9 @@ class RelayController extends UserController
         $maybe_rule_id        = Tools::has_conflict_rule($rule, $ruleset, 0, $rule->source_node_id);
         if ($maybe_rule_id != 0) {
             $rs['ret'] = 0;
-            $rs['msg'] = '您即将添加的规则与规则 ID:' . $maybe_rule_id . ' 冲突！';
+            $rs['msg'] = 'The rule you are about to add conflicts with rule ID:' . $maybe_rule_id . '! ';
             if ($maybe_rule_id == -1) {
-                $rs['msg'] = '您即将添加的规则可能会造成冲突！';
+                $rs['msg'] = 'The rules you are about to add may cause conflicts! ';
             }
             return $response->withJson($rs);
         }
@@ -374,14 +374,14 @@ class RelayController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '添加失败'
+                    'msg' => 'Failed to add'
                 ]
             );
         }
         return $response->withJson(
             [
                 'ret' => 1,
-                'msg' => '添加成功'
+                'msg' => 'Added successfully'
             ]
         );
     }
@@ -515,7 +515,7 @@ class RelayController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '起源节点错误'
+                    'msg' => 'origin node error'
                 ]
             );
         }
@@ -548,7 +548,7 @@ class RelayController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '目标节点错误'
+                    'msg' => 'target node error'
                 ]
             );
         }
@@ -573,7 +573,7 @@ class RelayController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '端口错误'
+                    'msg' => 'port error'
                 ]
             );
         }
@@ -582,7 +582,7 @@ class RelayController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '为了中转的稳定，您需要在<a href="/user/edit">资料编辑</a>处设置协议为 auth_aes128_md5 或 auth_aes128_sha1 后方可设置中转规则！'
+                    'msg' => 'For stable transit, you need to set the protocol to auth_aes128_md5 or auth_aes128_sha1 at <a href="/user/edit">data editing</a> before setting transit rules! '
                 ]
             );
         }
@@ -601,9 +601,9 @@ class RelayController extends UserController
         $maybe_rule_id        = Tools::has_conflict_rule($rule, $ruleset, $rule->id, $rule->source_node_id);
         if ($maybe_rule_id != 0) {
             $rs['ret'] = 0;
-            $rs['msg'] = '您即将添加的规则与规则 ID:' . $maybe_rule_id . ' 冲突！';
+            $rs['msg'] = 'The rule you are about to add conflicts with rule ID:' . $maybe_rule_id . '! ';
             if ($maybe_rule_id == -1) {
-                $rs['msg'] = '您即将添加的规则可能会造成冲突！';
+                $rs['msg'] = 'The rules you are about to add may cause conflicts! ';
             }
             return $response->withJson($rs);
         }
@@ -612,14 +612,14 @@ class RelayController extends UserController
             return $response->withJson(
                 [
                     'ret' => 0,
-                    'msg' => '修改失败'
+                    'msg' => 'Modification failed'
                 ]
             );
         }
         return $response->withJson(
             [
                 'ret' => 1,
-                'msg' => '修改成功'
+                'msg' => 'Modified successfully'
             ]
         );
     }
@@ -641,12 +641,12 @@ class RelayController extends UserController
         if (!$rule->delete()) {
             $rs = [
                 'ret' => 0,
-                'msg' => '删除失败'
+                'msg' => 'Delete failed'
             ];
         } else {
             $rs = [
                 'ret' => 1,
-                'msg' => '删除成功'
+                'msg' => 'deleted successfully'
             ];
         }
         return $response->withJson($rs);

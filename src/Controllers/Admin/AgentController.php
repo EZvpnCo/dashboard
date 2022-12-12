@@ -99,11 +99,11 @@ class AgentController extends AdminController
                 $paytake->status = 1;
                 if (!$paytake->save()) {
                     $res['ret'] = 0;
-                    $res['msg'] = '标记失败';
+                    $res['msg'] = 'Failed to mark';
                     return $response->getBody()->write(json_encode($res));
                 }
                 $res['ret'] = 1;
-                $res['msg'] = '标记成功';
+                $res['msg'] = 'Mark successful';
                 return $response->getBody()->write(json_encode($res));
             case 'go_back':
                 $paytake = Paytake::find($id);
@@ -113,11 +113,11 @@ class AgentController extends AdminController
                 $go_user->back_money = bcadd($go_user->back_money, $paytake->total, 2);
                 if (!$go_user->save()) {
                     $res['ret'] = 0;
-                    $res['msg'] = '退回失败';
+                    $res['msg'] = 'Failed to return';
                     return $response->getBody()->write(json_encode($res));
                 }
                 $res['ret'] = 1;
-                $res['msg'] = '退回成功';
+                $res['msg'] = 'Successful return';
                 return $response->getBody()->write(json_encode($res));
         }
     }

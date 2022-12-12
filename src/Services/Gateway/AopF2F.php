@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: tonyzou
@@ -28,7 +29,7 @@ class AopF2F extends AbstractPayment
         return $gateway;
     }
 
-    public function MetronPay($type, $price, $buyshop, $paylist_id=0)
+    public function MetronPay($type, $price, $buyshop, $paylist_id = 0)
     {
         $amount = $price;
         $user = Auth::getUser();
@@ -43,7 +44,7 @@ class AopF2F extends AbstractPayment
             $pl->save();
         } else {
             $pl = Paylist::find($paylist_id);
-            if ($pl->status === 1){
+            if ($pl->status === 1) {
                 return ['ret' => 0, 'msg' => "该订单已交易完成"];
             }
         }
@@ -83,7 +84,7 @@ class AopF2F extends AbstractPayment
         $user = Auth::getUser();
         if ($amount == '') {
             $res['ret'] = 0;
-            $res['msg'] = '订单金额错误：' . $amount;
+            $res['msg'] = 'Incorrect order amount:' . $amount;
             return $response->getBody()->write(json_encode($res));
         }
 

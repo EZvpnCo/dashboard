@@ -2,9 +2,9 @@
 
 namespace App\Metron;
 
-use App\Services\{ Mail, Config, MetronSetting };
-use App\Models\{ User, EmailVerify };
-use App\Utils\{ Tools, Check };
+use App\Services\{Mail, Config, MetronSetting};
+use App\Models\{User, EmailVerify};
+use App\Utils\{Tools, Check};
 
 class MtEmail
 {
@@ -13,34 +13,34 @@ class MtEmail
      */
     public function sendEmailCode($email, $user = null)
     {
-        if (!$this->checkEmailSuffix($email)){
-            return ['ret' => 0, 'msg' => '不支持的邮箱后缀'];
+        if (!$this->checkEmailSuffix($email)) {
+            return ['ret' => 0, 'msg' => 'Unsupported email suffix'];
         }
 
         if ($user->email == $email) {
-            return ['ret' => 0, 'msg' => '邮箱地址没有修改'];
+            return ['ret' => 0, 'msg' => 'Email address has not been changed'];
         }
         if ($email == '') {
-            return ['ret' => 0, 'msg' => '未填写邮箱'];
+            return ['ret' => 0, 'msg' => 'Email address not filled'];
         }
 
         if (!Check::isEmailLegal($email)) {
-            return ['ret' => 0, 'msg' => '邮箱无效'];
+            return ['ret' => 0, 'msg' => 'Invalid email'];
         }
 
         $user = User::where('email', '=', $email)->first();
         if ($user != null) {
-            return ['ret' => 0, 'msg' => '此邮箱已存在'];
+            return ['ret' => 0, 'msg' => 'This mailbox already exists'];
         }
 
         $ipcount = EmailVerify::where('ip', '=', $_SERVER['REMOTE_ADDR'])->where('expire_in', '>', time())->count();
         if ($ipcount >= (int) Config::getconfig('Register.string.Email_verify_iplimit')) {
-            return ['ret' => 0, 'msg' => '此IP请求次数过多'];
+            return ['ret' => 0, 'msg' => 'Too many requests from this IP'];
         }
 
         $mailcount = EmailVerify::where('email', '=', $email)->where('expire_in', '>', time())->count();
         if ($mailcount >= 3) {
-            return ['ret' => 0, 'msg' => '此邮箱请求次数过多'];
+            return ['ret' => 0, 'msg' => 'This email has been requested too many times'];
         }
 
         $code = Tools::genRandomNum(6);
@@ -51,7 +51,7 @@ class MtEmail
         $ev->code = $code;
         $ev->save();
 
-        $subject = $_ENV['appName'] . '- 验证邮件';
+        $subject = $_ENV['appName'] . '- verification email';
 
         try {
             Mail::send($email, $subject, 'auth/verify.tpl', [
@@ -60,11 +60,11 @@ class MtEmail
                 //BASE_PATH.'/public/assets/email/styles.css'
             ]);
         } catch (Exception $e) {
-            return ['ret' => 0, 'msg' => '邮件发送失败，请联系网站管理员'];
+            return ['ret' => 0, 'msg' => 'Email sending failed, please contact the site administrator.'];
         }
 
         $res['ret'] = 1;
-        $res['msg'] = '验证码发送成功，请查收邮件。';
+        $res['msg'] = 'The verification code has been sent successfully, please check your email.';
         return $res;
     }
 
@@ -74,7 +74,7 @@ class MtEmail
     public function checkEmailSuffix($email)
     {
         // 注册邮箱黑名单
-        $email_postfix = '@'.(explode("@",$email)[1]);
+        $email_postfix = '@' . (explode("@", $email)[1]);
         if (in_array($email_postfix, MetronSetting::get('disable_mailbox_list')) === true) {
             return false;
         }

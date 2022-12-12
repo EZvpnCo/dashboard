@@ -46,10 +46,10 @@ class MetronPay extends AbstractPayment
         # 不是重新支付订单 和 商店订单
         if ($paylist_id === 0 && $shopinfo['id'] === 0) {
             if ($price < MetronSetting::get('mix_amount')) {
-                return json_encode(['ret' => 0, 'msg' => '充值最低金额为 ' . MetronSetting::get('mix_amount') . ' 元']);
+                return json_encode(['ret' => 0, 'msg' => 'The minimum recharge amount is ' . MetronSetting::get('mix_amount') . ' 元']);
             }
             if ($price <= 0) {
-                return json_encode(['ret' => 0, 'msg' => "金额必须大于0元"]);
+                return json_encode(['ret' => 0, 'msg' => "The amount must be greater than 0$"]);
             }
         }
 
@@ -212,14 +212,14 @@ class MetronPay extends AbstractPayment
                 default:
                     $return = array(
                         'ret' => 0,
-                        'msg' => $payment_system . ' 支付系统不支持,请联系客服'
+                        'msg' => $payment_system . ' The payment system does not support it, please contact customer service'
                     );
                     return json_encode($return);
             }
             if ($result['ret'] === 1) {
                 $return = [
                     'ret' => 1,
-                    'msg' => '成功创建订单',
+                    'msg' => 'Order created successfully',
                     'type' => $result['type'],
                     'tradeno' => $result['tradeno'],
                     'url' => $result['url']
@@ -227,11 +227,10 @@ class MetronPay extends AbstractPayment
             } else {
                 $return = [
                     'ret' => 0,
-                    'msg' => isset($result['msg']) ? $result['msg'] : '未知错误',
+                    'msg' => isset($result['msg']) ? $result['msg'] : 'unknown mistake',
                 ];
             }
             return json_encode($return);
-
         } else if ($type == 'wxpay') {
             # 微信支付
             $payment_system = MetronSetting::get($pay_type);
@@ -313,7 +312,7 @@ class MetronPay extends AbstractPayment
                         ];
                     }
                     return json_encode($return);
-                case('stripe'):
+                case ('stripe'):
                     $type = 'wechat';
                     $stripe = new StripePay();
                     $result = $stripe->MetronPay($type, $price, $shopinfo, $paylist_id);
@@ -443,7 +442,7 @@ class MetronPay extends AbstractPayment
                     );
                     return json_encode($return);
             }
-        }  else if ($type == 'crypto') {
+        } else if ($type == 'crypto') {
             # 数字货币支付
             $payment_system = MetronSetting::get('pay_crypto');
             switch ($payment_system) {

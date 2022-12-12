@@ -19,10 +19,10 @@ class CodeController extends AdminController
     public function index($request, $response, $args)
     {
         $table_config['total_column'] = array(
-            'id' => 'ID', 'code' => '内容',
-            'type' => '类型', 'number' => '操作',
-            'isused' => '是否已经使用', 'userid' => '用户ID',
-            'user_name' => '用户名', 'usedatetime' => '使用时间'
+            'id' => 'ID', 'code' => 'content',
+            'type' => 'type', 'number' => 'operation',
+            'isused' => 'has been used', 'userid' => 'user ID',
+            'user_name' => 'username', 'usedatetime' => 'use time'
         );
         $table_config['default_show_column'] = array();
         foreach ($table_config['total_column'] as $column => $value) {
@@ -50,7 +50,7 @@ class CodeController extends AdminController
 
         if (Tools::isInt($n) == false) {
             $rs['ret'] = 0;
-            $rs['msg'] = '非法请求';
+            $rs['msg'] = 'Illegal request';
             return $response->getBody()->write(json_encode($rs));
         }
 
@@ -66,7 +66,7 @@ class CodeController extends AdminController
         }
 
         $rs['ret'] = 1;
-        $rs['msg'] = '充值码添加成功';
+        $rs['msg'] = 'Recharge code added successfully';
         return $response->getBody()->write(json_encode($rs));
     }
 
@@ -87,7 +87,7 @@ class CodeController extends AdminController
         $code->save();
 
         $rs['ret'] = 1;
-        $rs['msg'] = '添加成功';
+        $rs['msg'] = 'Added successfully';
         return $response->getBody()->write(json_encode($rs));
     }
 
@@ -99,28 +99,27 @@ class CodeController extends AdminController
         $datatables->edit('number', static function ($data) {
             switch ($data['type']) {
                 case -1:
-                    return '充值 ' . $data['number'] . ' 元';
+                    return 'recharge' . $data['number'] . 'yuan';
 
                 case -2:
-                    return '支出 ' . $data['number'] . ' 元';
+                    return 'expenditure' . $data['number'] . 'yuan';
 
                 default:
-                    return '已经废弃';
+                    return 'obsolete';
             }
         });
-
         $datatables->edit('isused', static function ($data) {
-            return $data['isused'] == 1 ? '已使用' : '未使用';
+            return $data['isused'] == 1 ? 'used' : 'unused';
         });
 
         $datatables->edit('userid', static function ($data) {
-            return $data['userid'] == 0 ? '未使用' : $data['userid'];
+            return $data['userid'] == 0 ? 'unused' : $data['userid'];
         });
 
         $datatables->edit('user_name', static function ($data) {
             $user = User::find($data['user_name']);
             if ($user == null) {
-                return '未使用';
+                return 'not used';
             }
 
             return $user->user_name;
@@ -129,18 +128,18 @@ class CodeController extends AdminController
         $datatables->edit('type', static function ($data) {
             switch ($data['type']) {
                 case -1:
-                    return '充值金额';
+                    return 'recharge amount';
 
                 case -2:
-                    return '财务支出';
+                    return 'financial expenditure';
 
                 default:
-                    return '已经废弃';
+                    return 'obsolete';
             }
         });
 
         $datatables->edit('usedatetime', static function ($data) {
-            return $data['usedatetime'] > '2000-1-1 0:0:0' ? $data['usedatetime'] : '未使用';
+            return $data['usedatetime'] > '2000-1-1 0:0:0' ? $data['usedatetime'] : 'Unused';
         });
 
         $body = $response->getBody();

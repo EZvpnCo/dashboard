@@ -13,7 +13,7 @@ class AutoController extends AdminController
     {
         $table_config['total_column'] = array(
             'id' => 'ID',
-            'datetime' => '时间', 'type' => '类型', 'value' => '内容'
+            'datetime' => 'time', 'type' => 'type', 'value' => 'content'
         );
         $table_config['default_show_column'] = array(
             'op', 'id',
@@ -38,11 +38,11 @@ class AutoController extends AdminController
 
         if (!$auto->save()) {
             $rs['ret'] = 0;
-            $rs['msg'] = '添加失败';
+            $rs['msg'] = 'Failed to add';
             return $response->getBody()->write(json_encode($rs));
         }
         $rs['ret'] = 1;
-        $rs['msg'] = '添加成功';
+        $rs['msg'] = 'Added successfully';
         return $response->getBody()->write(json_encode($rs));
     }
 
@@ -52,11 +52,11 @@ class AutoController extends AdminController
         $auto = Auto::find($id);
         if (!$auto->delete()) {
             $rs['ret'] = 0;
-            $rs['msg'] = '删除失败';
+            $rs['msg'] = 'Delete failed';
             return $response->getBody()->write(json_encode($rs));
         }
         $rs['ret'] = 1;
-        $rs['msg'] = '删除成功';
+        $rs['msg'] = 'Deleted successfully';
         return $response->getBody()->write(json_encode($rs));
     }
 
@@ -70,7 +70,7 @@ class AutoController extends AdminController
         });
 
         $datatables->edit('type', static function ($data) {
-            return $data['type'] == 1 ? '命令下发' : '命令被执行';
+            return $data['type'] == 1 ? 'Command issued' : 'Command executed';
         });
 
         $body = $response->getBody();

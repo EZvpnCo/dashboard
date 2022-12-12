@@ -48,13 +48,13 @@ class ApiController
 
         if ($user == null) {
             $res['ret'] = 0;
-            $res['msg'] = '401 账号错误';
+            $res['msg'] = '401 account error';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (!Hash::checkPassword($user->pass, $passwd)) {
             $res['ret'] = 0;
-            $res['msg'] = '402 密码错误';
+            $res['msg'] = '402 wrong password';
             return $response->getBody()->write(json_encode($res));
         }
         $tokenStr = Tools::genToken();
@@ -95,7 +95,8 @@ class ApiController
         $temparray = array();
         foreach ($nodes as $node) {
             if ($node->mu_only == 0) {
-                $temparray[] = array('remarks' => $node->name,
+                $temparray[] = array(
+                    'remarks' => $node->name,
                     'server' => $node->server,
                     'server_port' => $user->port,
                     'method' => $node->custom_method == 1 ? $user->method : $node->method,
@@ -108,7 +109,8 @@ class ApiController
                     'group' => Config::get('appName'),
                     'protocol' => str_replace('_compatible', '', (($node->custom_rss == 1 && !($user->obfs == 'plain' && $user->protocol == 'origin')) ? $user->protocol : 'origin')),
                     'obfs_udp' => false,
-                    'enable' => true);
+                    'enable' => true
+                );
             }
 
             if ($node->custom_rss == 1) {
@@ -116,7 +118,8 @@ class ApiController
                     $mu_user = User::where('port', '=', $mu_node->server)->first();
                     $mu_user->obfs_param = $user->getMuMd5();
 
-                    $temparray[] = array('remarks' => $node->name . '- ' . $mu_node->server . ' 单端口',
+                    $temparray[] = array(
+                        'remarks' => $node->name . '- ' . $mu_node->server . ' 单端口',
                         'server' => $node->server,
                         'server_port' => $mu_user->port,
                         'method' => $mu_user->method,
@@ -129,7 +132,8 @@ class ApiController
                         'udp_over_tcp' => false,
                         'protocol' => str_replace('_compatible', '', (($node->custom_rss == 1 && !($mu_user->obfs == 'plain' && $mu_user->protocol == 'origin')) ? $mu_user->protocol : 'origin')),
                         'obfs_udp' => false,
-                        'enable' => true);
+                        'enable' => true
+                    );
                 }
             }
         }

@@ -21,11 +21,11 @@ class AdminController extends UserController
     public function index($request, $response, $args)
     {
         $sts = new Analytics();
-	// admin增加收入和用户统计
+        // admin增加收入和用户统计
         $days = [];
 
         for ($i = 1; $i <= 5; $i++) {
-            $date_expression = '-'.$i.' days';
+            $date_expression = '-' . $i . ' days';
             $day = strtotime($date_expression);
             $days[] = date("Y-m-d", $day);
         }
@@ -74,7 +74,7 @@ class AdminController extends UserController
 
             if ($user == null) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请者更改失败，检查用户id是否输入正确';
+                $res['msg'] = 'Failed to change the inviter, check whether the user id is entered correctly';
                 return $response->getBody()->write(json_encode($res));
             }
             $uid = $user->id;
@@ -84,7 +84,7 @@ class AdminController extends UserController
         $user->ref_by = $request->getParam('refid');
         $user->save();
         $res['ret'] = 1;
-        $res['msg'] = '邀请者更改成功';
+        $res['msg'] = 'Inviter changed successfully';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -95,7 +95,7 @@ class AdminController extends UserController
 
         if (Tools::isInt($num) == false) {
             $res['ret'] = 0;
-            $res['msg'] = '非法请求';
+            $res['msg'] = 'Illegal request';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -108,7 +108,7 @@ class AdminController extends UserController
 
             if ($user == null) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请次数添加失败，检查用户id或者用户邮箱是否输入正确';
+                $res['msg'] = 'Failed to add the number of invitations, check whether the user id or user email is entered correctly';
                 return $response->getBody()->write(json_encode($res));
             }
             $uid = $user->id;
@@ -118,16 +118,16 @@ class AdminController extends UserController
         $user->invite_num += $num;
         $user->save();
         $res['ret'] = 1;
-        $res['msg'] = '邀请次数添加成功';
+        $res['msg'] = 'Invitations added successfully';
         return $response->getBody()->write(json_encode($res));
     }
 
     public function coupon($request, $response, $args)
     {
         $table_config['total_column'] = array(
-            'id' => 'ID', 'code' => '优惠码',
-            'expire' => '过期时间', 'shop' => '限定商品ID',
-            'credit' => '额度', 'onetime' => '次数'
+            'id' => 'ID', 'code' => 'Promo Code',
+            'expire' => 'Expire', 'shop' => 'Shop',
+            'credit' => 'Credit', 'onetime' => 'frequency'
         );
         $table_config['default_show_column'] = array();
         foreach ($table_config['total_column'] as $column => $value) {
@@ -146,14 +146,14 @@ class AdminController extends UserController
 
         if (empty($final_code) && ($generate_type == 1 || $generate_type == 3)) {
             $res['ret'] = 0;
-            $res['msg'] = '优惠码不能为空';
+            $res['msg'] = 'Coupon code cannot be empty';
             return $response->getBody()->write(json_encode($res));
         }
 
         if ($generate_type == 1) {
             if (Coupon::where('code', $final_code)->count() != 0) {
                 $res['ret'] = 0;
-                $res['msg'] = '优惠码已存在';
+                $res['msg'] = 'Coupon code already exists';
                 return $response->getBody()->write(json_encode($res));
             }
         } else {
@@ -179,18 +179,18 @@ class AdminController extends UserController
         $code->save();
 
         $res['ret'] = 1;
-        $res['msg'] = '优惠码添加成功';
+        $res['msg'] = 'Coupon code added successfully';
         return $response->getBody()->write(json_encode($res));
     }
 
     public function trafficLog($request, $response, $args)
     {
         $table_config['total_column'] = array(
-            'id' => 'ID', 'user_id' => '用户ID',
-            'user_name' => '用户名', 'node_name' => '使用节点',
-            'rate' => '倍率', 'origin_traffic' => '实际使用流量',
-            'traffic' => '结算流量',
-            'log_time' => '记录时间'
+            'id' => 'ID', 'user_id' => 'user ID',
+            'user_name' => 'username', 'node_name' => 'use node',
+            'rate' => 'magnification', 'origin_traffic' => 'actual traffic',
+            'traffic' => 'settlement traffic',
+            'log_time' => 'logging time'
         );
         $table_config['default_show_column'] = array(
             'id', 'user_id',
@@ -253,19 +253,19 @@ class AdminController extends UserController
 
         $stats = new Analytics();
 
-        $today_income = $stats->getIncome($date_in_timestamp,  $date_in_timestamp+86400);
-        $yesterday_income = $stats->getIncome($date_in_timestamp-86400, $date_in_timestamp);
+        $today_income = $stats->getIncome($date_in_timestamp,  $date_in_timestamp + 86400);
+        $yesterday_income = $stats->getIncome($date_in_timestamp - 86400, $date_in_timestamp);
 
-        $first_day_of_this_week_timestamp = strtotime("last monday midnight",$date_in_timestamp);
-        $first_day_of_next_week_timestamp = strtotime("next monday midnight",$date_in_timestamp);
+        $first_day_of_this_week_timestamp = strtotime("last monday midnight", $date_in_timestamp);
+        $first_day_of_next_week_timestamp = strtotime("next monday midnight", $date_in_timestamp);
         $this_week_income = $stats->getIncome($first_day_of_this_week_timestamp, $first_day_of_next_week_timestamp);
-        $first_day_of_last_week_timestamp = strtotime("last monday midnight",$date_in_timestamp-604800);
+        $first_day_of_last_week_timestamp = strtotime("last monday midnight", $date_in_timestamp - 604800);
         $last_week_income = $stats->getIncome($first_day_of_last_week_timestamp, $first_day_of_this_week_timestamp);
 
-        $first_day_of_this_month_timestamp = strtotime("first day of this month",$date_in_timestamp);
-        $first_day_of_next_month_timestamp = strtotime("first day of next month",$date_in_timestamp);
+        $first_day_of_this_month_timestamp = strtotime("first day of this month", $date_in_timestamp);
+        $first_day_of_next_month_timestamp = strtotime("first day of next month", $date_in_timestamp);
         $this_month_income = $stats->getIncome($first_day_of_this_month_timestamp, $first_day_of_next_month_timestamp);
-        $first_day_of_last_month_timestamp = strtotime("first day of last month",$date_in_timestamp);
+        $first_day_of_last_month_timestamp = strtotime("first day of last month", $date_in_timestamp);
         $last_moneth_income = $stats->getIncome($first_day_of_last_month_timestamp, $first_day_of_this_month_timestamp);
 
         $res['success'] = true;
@@ -290,19 +290,19 @@ class AdminController extends UserController
 
         $stats = new Analytics();
 
-        $today_users = $stats->getNewUsers($date_in_timestamp, $date_in_timestamp+86400);
-        $yesterday_users = $stats->getNewUsers($date_in_timestamp-86400, $date_in_timestamp);
+        $today_users = $stats->getNewUsers($date_in_timestamp, $date_in_timestamp + 86400);
+        $yesterday_users = $stats->getNewUsers($date_in_timestamp - 86400, $date_in_timestamp);
 
-        $first_day_of_this_week_timestamp = strtotime("last monday midnight",$date_in_timestamp);
-        $first_day_of_next_week_timestamp = strtotime("next monday midnight",$date_in_timestamp);
+        $first_day_of_this_week_timestamp = strtotime("last monday midnight", $date_in_timestamp);
+        $first_day_of_next_week_timestamp = strtotime("next monday midnight", $date_in_timestamp);
         $this_week_users = $stats->getNewUsers($first_day_of_this_week_timestamp, $first_day_of_next_week_timestamp);
-        $first_day_of_last_week_timestamp = strtotime("last monday midnight",$date_in_timestamp-604800);
+        $first_day_of_last_week_timestamp = strtotime("last monday midnight", $date_in_timestamp - 604800);
         $last_week_users = $stats->getNewUsers($first_day_of_last_week_timestamp, $first_day_of_this_week_timestamp);
 
-        $first_day_of_this_month_timestamp = strtotime("first day of this month",$date_in_timestamp);
-        $first_day_of_next_month_timestamp = strtotime("first day of next month",$date_in_timestamp);
+        $first_day_of_this_month_timestamp = strtotime("first day of this month", $date_in_timestamp);
+        $first_day_of_next_month_timestamp = strtotime("first day of next month", $date_in_timestamp);
         $this_month_users = $stats->getNewUsers($first_day_of_this_month_timestamp, $first_day_of_next_month_timestamp);
-        $first_day_of_last_month_timestamp = strtotime("first day of last month",$date_in_timestamp);
+        $first_day_of_last_month_timestamp = strtotime("first day of last month", $date_in_timestamp);
         $last_moneth_users = $stats->getNewUsers($first_day_of_last_month_timestamp, $first_day_of_this_month_timestamp);
 
         $res['success'] = true;
@@ -357,7 +357,7 @@ class AdminController extends UserController
     public function getRefUserCount($request, $response, $args)
     {
         $type = $request->getParam('type');
-        switch ($type){
+        switch ($type) {
             case "today":
                 $date_in_timestamp = strtotime(date('Y-m-d', time()));
                 break;
@@ -394,7 +394,7 @@ class AdminController extends UserController
     public function getRefMoneyCount($request, $response, $args)
     {
         $type = $request->getParam('type');
-        switch ($type){
+        switch ($type) {
             case "today":
                 $date_in_timestamp = strtotime(date('Y-m-d', time()));
                 break;
@@ -440,7 +440,7 @@ class AdminController extends UserController
             ->where('status', 1)->count();
         $data['month_success'] = Paylist::query()->where('datetime', '>=', strtotime(date('Y-m-01 00:00:00')))
             ->where('status', 1)->count();
-        $data['last_month_success'] = Paylist::query()->where('datetime', '>=', strtotime(date('Y-m-1',strtotime('last month'))))
+        $data['last_month_success'] = Paylist::query()->where('datetime', '>=', strtotime(date('Y-m-1', strtotime('last month'))))
             ->where('datetime', '<', strtotime(date('Y-m-01 00:00:00')))
             ->where('status', 1)->count();
 
@@ -459,7 +459,7 @@ class AdminController extends UserController
             ->where('status', 1)->where('rootid', 0)->count();
         $data['month_success'] = Ticket::query()->where('datetime', '>=', strtotime(date('Y-m-01 00:00:00')))
             ->where('status', 1)->where('rootid', 0)->count();
-        $data['last_month_success'] = Ticket::query()->where('datetime', '>=', strtotime(date('Y-m-1',strtotime('last month'))))
+        $data['last_month_success'] = Ticket::query()->where('datetime', '>=', strtotime(date('Y-m-1', strtotime('last month'))))
             ->where('datetime', '<', strtotime(date('Y-m-01 00:00:00')))
             ->where('status', 1)->where('rootid', 0)->count();
 

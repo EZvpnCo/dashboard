@@ -192,34 +192,34 @@ class MetronController extends BaseController
 
         if ($newname == '') {
             $res['ret'] = 0;
-            $res['msg'] = '昵称不允许留空';
+            $res['msg'] = 'Username is not allowed to be blank';
             return $response->getBody()->write(json_encode($res));
         }
         if (preg_match($regname, $newname)) {
             $res['ret'] = 0;
-            $res['msg'] = '不能包含符号';
+            $res['msg'] = 'Cannot contain symbols';
             return $response->getBody()->write(json_encode($res));
         }
         if (strlen($newname) > 18) {
             $res['ret'] = 0;
-            $res['msg'] = '昵称太长了';
+            $res['msg'] = 'Username is too long';
             return $response->getBody()->write(json_encode($res));
         }
         if (Metronsetting::get('change_username') != true) {
             $res['ret'] = 0;
-            $res['msg'] = '管理员设置不允许修改';
+            $res['msg'] = 'Administrator settings are not allowed to be modified';
             return $response->getBody()->write(json_encode($res));
         }
         $user->user_name = $newname;
 
         if ($user->save()) {
             $res['ret'] = 1;
-            $res['msg'] = '修改成功';
+            $res['msg'] = 'Modified successfully';
             return $response->getBody()->write(json_encode($res));
         }
 
         $res['ret'] = 0;
-        $res['msg'] = '未知错误';
+        $res['msg'] = 'Unknown error';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -241,69 +241,69 @@ class MetronController extends BaseController
                 $email = trim($request->getParam('email'));
                 $email_code = trim($request->getParam('email_code'));
 
-                /* 昵称检验 */
+                /* nickname check */
                 if ($user->user_name != $name) {
                     if (MetronSetting::get('change_username') !== true) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '管理员设置禁止修改昵称']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Administrator settings prohibit modification of nickname']));
                     }
                     $regname = '/^[0-9a-zA-Z_\x{4e00}-\x{9fa5}]+$/u';
                     if ($name == '') {
                         $res['ret'] = 0;
-                        $res['msg'] = '昵称不允许留空';
+                        $res['msg'] = 'Nickname is not allowed to be blank';
                         return $response->getBody()->write(json_encode($res));
                     }
                     if (!preg_match($regname, $name)) {
                         $res['ret'] = 0;
-                        $res['msg'] = '昵称仅支持中文、数字、字母和下划线的组合';
+                        $res['msg'] = 'Nicknames only support combinations of Chinese, numbers, letters and underscores';
                         return $response->getBody()->write(json_encode($res));
                     }
                     if (strlen($name) > 18) {
                         $res['ret'] = 0;
-                        $res['msg'] = '昵称太长了';
+                        $res['msg'] = 'Nickname is too long';
                         return $response->getBody()->write(json_encode($res));
                     }
                     $user->user_name = $name;
                     if (!$user->save()) {
                         $res['ret'] = 0;
-                        $res['msg'] = '昵称修改失败';
+                        $res['msg'] = 'Nickname modification failed';
                         return $response->getBody()->write(json_encode($res));
                     }
                 }
 
-                /* 邮箱校验 */
+                /* Mailbox verification */
                 if ($user->email != $email) {
                     if (MetronSetting::get('change_usermail') !== true) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '管理员设置禁止修改邮箱']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Administrator settings forbid modification of mailbox']));
                     }
                     if ($email == '') {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '未填写邮箱']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Email is not filled']));
                     }
                     if (!Check::isEmailLegal($email)) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '邮箱无效']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Email is invalid']));
                     }
                     $metron = new MtEmail();
                     if (!$metron->checkEmailSuffix($email)) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '不支持的邮箱后缀']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Unsupported email suffix']));
                     }
                     $checkemail = User::where('email', '=', $email)->first();
                     if ($checkemail) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '此邮箱已存在']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'This mailbox already exists']));
                     }
-                    if (Config::getconfig('Register.bool.Enable_email_verify')) {
+                    if (Config::getconfig('Register. bool. Enable_email_verify')) {
                         $mailcount = EmailVerify::where('email', '=', $email)->where('code', '=', $email_code)->where('expire_in', '>', time())->first();
                         if ($mailcount == null) {
-                            return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '您的邮箱验证码不正确或已过期']));
+                            return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Your email verification code is incorrect or has expired']));
                         }
                     }
 
                     $user->email = $email;
                     if (!$user->save()) {
-                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '邮箱修改失败']));
+                        return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Mailbox modification failed']));
                     }
                 }
 
                 $res['ret'] = 1;
-                $res['msg'] = '更新成功';
+                $res['msg'] = 'update completed';
                 return $response->getBody()->write(json_encode($res));
             case 'safe':
                 $old_passwd = $request->getParam('old_passwd');
@@ -312,13 +312,13 @@ class MetronController extends BaseController
                 $user = $this->user;
 
                 if (!Hash::checkPassword($user->pass, $old_passwd)) {
-                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '旧密码错误']));
+                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'old password error']));
                 }
                 if ($new_passwd != $ret_passwd) {
-                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '两次密码输入不符合']));
+                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'Two password input does not match']));
                 }
                 if (strlen($new_passwd) < 8) {
-                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => '密码需8位以上']));
+                    return $response->getBody()->write(json_encode(['ret' => 0, 'msg' => 'The password must be more than 8 characters']));
                 }
                 $hashPwd = Hash::passwordHash($new_passwd);
                 $user->pass = $hashPwd;
@@ -326,7 +326,7 @@ class MetronController extends BaseController
                 $user->clean_link();
 
                 $res['ret'] = 1;
-                $res['msg'] = '更新成功';
+                $res['msg'] = 'Update successful';
                 return $response->getBody()->write(json_encode($res));
             case 'sublink':
                 $user->uuid = Uuid::uuid3(
@@ -336,14 +336,14 @@ class MetronController extends BaseController
                 $user->save();
                 $user->clean_link();
                 $res['ret'] = 1;
-                $res['msg'] = '重置成功';
+                $res['msg'] = 'Reset succeeded';
                 return $response->getBody()->write(json_encode($res));
             case 'telegram':
                 $type = $request->getParam('type');
                 if ($type == 'unbind') {
                     $user->TelegramReset();
                     $res['ret'] = 1;
-                    $res['msg'] = '解绑成功';
+                    $res['msg'] = 'Unbind successfully';
                     return $response->getBody()->write(json_encode($res));
                 }
             case 'send_email_code':
@@ -398,10 +398,10 @@ class MetronController extends BaseController
         }
 
         if (!MetronSetting::get('shop_conversion')) {
-            $res = ['ret' => 0, 'msg' => '管理员设置不允许折算'];
+            $res = ['ret' => 0, 'msg' => 'Administrator settings do not allow conversion'];
             return $response->getBody()->write(json_encode($res, JSON_UNESCAPED_UNICODE));
         }
-        /* 识别用户 和 登录状态*/
+        /* Identify user and login status */
         $user = $this->user;
         if (!$user->isLogin) {
             $res['ret'] = -1;
@@ -409,20 +409,20 @@ class MetronController extends BaseController
         }
 
         $id = $request->getParam('id');
-        /* 获取套餐记录 */
+        /* Get package record */
         $bought = Bought::find($id);
 
         if ($bought->userid != $user->id) {
-            $res = ['ret' => 0, 'msg' => '非法操作'];
+            $res = ['ret' => 0, 'msg' => 'Illegal operation'];
             return $response->getBody()->write(json_encode($res, JSON_UNESCAPED_UNICODE));
         }
 
         $metron = new Metron();
         if ($request->getParam('ok') === 'ok') {
-            /* 返还操作 */
+            /* return operation */
             $res = $metron->PackageConversion_OK($user, $bought);
         } else {
-            /* 计算返还信息 */
+            /* Calculate return information */
             $res = $metron->getConversionInfo($user, $bought);
         }
 
@@ -442,22 +442,22 @@ class MetronController extends BaseController
         $mode = $request->getParam('mode');
 
         if (MetronSetting::get('advanceResetFlow') !== true) {
-            $res = ['ret' => 0, 'msg' => '管理员设置不允许重置'];
+            $res = ['ret' => 0, 'msg' => 'Admin settings do not allow reset'];
             return $response->getBody()->write(json_encode($res, JSON_UNESCAPED_UNICODE));
         }
 
         $user = $this->user;
         if (!$user->isLogin) {
-            $res = ['ret' => -1, 'msg' => '登录状态已失效'];
+            $res = ['ret' => -1, 'msg' => 'login status has expired'];
             return $response->getBody()->write(json_encode($res));
         }
         if ($user->class === -1) {
-            $res = ['ret' => 0, 'msg' => '未激活账号'];
+            $res = ['ret' => 0, 'msg' => 'Account not activated'];
             return $response->getBody()->write(json_encode($res));
         }
         $resetFlow_maxValue = MetronSetting::get('resetFlow_maxValue');
         if ($resetFlow_maxValue !== -1 && $user->transfer_enable - ($user->u + $user->d) > $resetFlow_maxValue * 1024 * 1024 * 1024) {
-            $res = ['ret' => 0, 'msg' => '流量大于 ' . $resetFlow_maxValue . 'GB 无法重置' . PHP_EOL . '您当前剩余' . round(($user->transfer_enable - ($user->u + $user->d)) / 1024 / 1024 / 1024, 2) . 'GB'];
+            $res = ['ret' => 0, 'msg' => 'Flow is greater than' . $resetFlow_maxValue . 'GB cannot be reset' . PHP_EOL . 'Your remaining' . round(($user->transfer_enable - ($user->u + $user->d)) / 1024 / 1024 / 1024, 2) . 'GB'];
             return $response->getBody()->write(json_encode($res, JSON_UNESCAPED_UNICODE));
         }
 
@@ -1336,7 +1336,7 @@ class MetronController extends BaseController
                 }
                 if (empty($data)) {
                     $res['ret'] = 0;
-                    $res['msg'] = '暂无记录';
+                    $res['msg'] = 'No record yet';
                     return $response->getBody()->write(json_encode($res));
                 }
                 //var_dump($data);
@@ -1367,7 +1367,7 @@ class MetronController extends BaseController
         $user->save();
 
         $res['ret'] = 1;
-        $res['msg'] = '切换成功';
+        $res['msg'] = 'Switch successfully';
         return $response->getBody()->write(json_encode($res));
     }
 }

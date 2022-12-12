@@ -171,7 +171,7 @@ class HomeController extends BaseController
         $key = $request->getParam('key');
         if (!$key || $key != $_ENV['key']) {
             $res['ret'] = 0;
-            $res['msg'] = '错误';
+            $res['msg'] = 'mistake';
             return $response->write(json_encode($res));
         }
         return $response->write(json_encode(['data' => AliPay::getList()]));
@@ -189,7 +189,7 @@ class HomeController extends BaseController
         $url = $request->getParam('url');
         if (!$key || $key != $_ENV['key']) {
             $res['ret'] = 0;
-            $res['msg'] = '错误';
+            $res['msg'] = 'mistake';
             return $response->write(json_encode($res));
         }
         return $response->write(json_encode(['res' => AliPay::setOrder($sn, $url)]));

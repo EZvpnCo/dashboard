@@ -98,7 +98,7 @@ class UserController extends BaseController
         if (!$paybacks_sum = Payback::where("ref_by", $this->user->id)->sum('ref_get')) {
             $paybacks_sum = 0;
         }
-        $class_left_days = floor((strtotime($this->user->class_expire)-time())/86400)+1;
+        $class_left_days = floor((strtotime($this->user->class_expire) - time()) / 86400) + 1;
         return $this->view()
             ->assign('class_left_days', $class_left_days)
             ->assign('paybacks_sum', $paybacks_sum)
@@ -204,14 +204,14 @@ class UserController extends BaseController
 
         if ($code == '') {
             $res['ret'] = 0;
-            $res['msg'] = '非法输入';
+            $res['msg'] = 'Illegal input';
             return $response->getBody()->write(json_encode($res));
         }
 
         $codeq = Code::where('code', '=', $code)->where('isused', '=', 0)->first();
         if ($codeq == null) {
             $res['ret'] = 0;
-            $res['msg'] = '此充值码错误';
+            $res['msg'] = 'This recharge code is wrong';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -225,8 +225,8 @@ class UserController extends BaseController
             $user->save();
 
             if ($user->ref_by != '' && $user->ref_by != 0 && $user->ref_by != null) {
-	    	Metron::add_payback( User::find($user->ref_by), $user, $codeq->number);
-		/*
+                Metron::add_payback(User::find($user->ref_by), $user, $codeq->number);
+                /*
                 $gift_user = User::where('id', '=', $user->ref_by)->first();
                 $gift_user->money += ($codeq->number * ($_ENV['code_payback'] / 100));
                 $gift_user->save();
@@ -242,13 +242,13 @@ class UserController extends BaseController
             }
 
             $res['ret'] = 1;
-            $res['msg'] = '充值成功，充值的金额为' . $codeq->number . '元。';
+            $res['msg'] = 'The recharge is successful, the recharge amount is' . $codeq->number . 'yuan. ';
 
             if ($_ENV['enable_donate'] == true) {
                 if ($this->user->is_hide == 1) {
-                    Telegram::Send('姐姐姐姐，一位不愿透露姓名的大老爷给我们捐了 ' . $codeq->number . ' 元呢~');
+                    Telegram::Send('Sister, sister, an old man who does not want to be named donated to us' . $codeq->number . 'Yuan~');
                 } else {
-                    Telegram::Send('姐姐姐姐，' . $this->user->user_name . ' 大老爷给我们捐了 ' . $codeq->number . ' 元呢~');
+                    Telegram::Send('Sister, sister,' . $this->user->user_name . 'The old man donated to us' . $codeq->number . 'Yuan~');
                 }
             }
 
@@ -288,7 +288,7 @@ class UserController extends BaseController
 
         if ($code == '') {
             $res['ret'] = 0;
-            $res['msg'] = '动态码不能为空';
+            $res['msg'] = 'Dynamic code cannot be empty';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -296,16 +296,16 @@ class UserController extends BaseController
         $rcode = $ga->verifyCode($user->ga_token, $code);
         if (!$rcode) {
             $res['ret'] = 0;
-            $res['msg'] = '动态码错误';
+            $res['msg'] = 'Dynamic code error';
             return $response->getBody()->write(json_encode($res));
         }
 
-        // 开启用户二步验证
+        // Enable user two-step verification
         $user->ga_enable = 1;
         $user->save();
 
         $res['ret'] = 1;
-        $res['msg'] = '成功开启二步验证';
+        $res['msg'] = 'Successfully turned on two-step verification';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -316,15 +316,15 @@ class UserController extends BaseController
 
         if ($enable == '') {
             $res['ret'] = 0;
-            $res['msg'] = '选项无效';
+            $res['msg'] = 'Invalid option';
             return $response->getBody()->write(json_encode($res));
         }
 
-        // 关闭二步验证需要确认账号密码
+        // Turn off two-step verification and need to confirm the account password
         $passwd = $request->getParam('passwd');
         if (!Hash::checkPassword($user->pass, $passwd)) {
             $res['ret'] = 0;
-            $res['msg'] = '密码错误';
+            $res['msg'] = 'Password error';
             return $this->echoJson($response, $res);
         }
 
@@ -333,7 +333,7 @@ class UserController extends BaseController
 
 
         $res['ret'] = 1;
-        $res['msg'] = '已关闭二步验证';
+        $res['msg'] = 'Two-step verification turned off';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -445,10 +445,10 @@ class UserController extends BaseController
         if ($opts['os'] == 'faq') {
             return $this->view()->display('user/tutorial/faq.tpl');
         }
-        $opts['os'] = str_replace(' ','',$opts['os']);
-        $opts['client'] = str_replace(' ','',$opts['client']);
+        $opts['os'] = str_replace(' ', '', $opts['os']);
+        $opts['client'] = str_replace(' ', '', $opts['client']);
         if ($opts['os'] != '' && $opts['client'] != '') {
-            $url = 'user/tutorial/'.$opts['os'].'/'.$opts['client'].'.tpl';
+            $url = 'user/tutorial/' . $opts['os'] . '/' . $opts['client'] . '.tpl';
             return $this->view()
                 ->assign('subInfo', LinkController::getSubinfo($this->user, 0))
                 ->assign('mergeSub', Config::get('mergeSub'))
@@ -521,7 +521,7 @@ class UserController extends BaseController
 
         if (!Tools::isInt($num) || $price < 0 || $num <= 0) {
             $res['ret'] = 0;
-            $res['msg'] = '非法请求';
+            $res['msg'] = 'Illegal request';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -536,7 +536,7 @@ class UserController extends BaseController
 
         if ($user->money < $amount) {
             $res['ret'] = 0;
-            $res['msg'] = '余额不足，总价为' . $amount . '元。';
+            $res['msg'] = 'Insufficient balance, the total price is ' . $amount . ' yuan. ';
             return $response->getBody()->write(json_encode($res));
         }
         $user->invite_num += $num;
@@ -544,7 +544,7 @@ class UserController extends BaseController
         $user->save();
         $res['invite_num'] = $user->invite_num;
         $res['ret'] = 1;
-        $res['msg'] = '邀请次数添加成功';
+        $res['msg'] = 'Invitations added successfully';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -556,13 +556,13 @@ class UserController extends BaseController
 
         if (!Tools::is_validate($customcode) || $price < 0 || $customcode == '' || strlen($customcode) > 32) {
             $res['ret'] = 0;
-            $res['msg'] = '非法请求,邀请链接后缀不能包含特殊符号且长度不能大于32字符';
+            $res['msg'] = 'Illegal request, the invitation link suffix cannot contain special symbols and the length cannot exceed 32 characters';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (InviteCode::where('code', $customcode)->count() != 0) {
             $res['ret'] = 0;
-            $res['msg'] = '此后缀名被抢注了';
+            $res['msg'] = 'This suffix has been registered';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -575,7 +575,7 @@ class UserController extends BaseController
 
         if ($user->money < $price) {
             $res['ret'] = 0;
-            $res['msg'] = '余额不足，总价为' . $price . '元。';
+            $res['msg'] = 'Insufficient balance, the total price is ' . $price . ' yuan. ';
             return $response->getBody()->write(json_encode($res));
         }
         $code = InviteCode::where('user_id', $user->id)->first();
@@ -584,7 +584,7 @@ class UserController extends BaseController
         $user->save();
         $code->save();
         $res['ret'] = 1;
-        $res['msg'] = '定制成功';
+        $res['msg'] = 'Customization succeeded';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -601,18 +601,18 @@ class UserController extends BaseController
         $user = $this->user;
         if (!Hash::checkPassword($user->pass, $oldpwd)) {
             $res['ret'] = 0;
-            $res['msg'] = '旧密码错误';
+            $res['msg'] = 'The old password is wrong';
             return $response->getBody()->write(json_encode($res));
         }
         if ($pwd != $repwd) {
             $res['ret'] = 0;
-            $res['msg'] = '两次输入不符合';
+            $res['msg'] = 'Two inputs do not match';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (strlen($pwd) < 8) {
             $res['ret'] = 0;
-            $res['msg'] = '密码太短啦';
+            $res['msg'] = 'The password is too short';
             return $response->getBody()->write(json_encode($res));
         }
         $hashPwd = Hash::passwordHash($pwd);
@@ -622,7 +622,7 @@ class UserController extends BaseController
         $user->clean_link();
 
         $res['ret'] = 1;
-        $res['msg'] = '修改成功';
+        $res['msg'] = 'Modified successfully';
         return $this->echoJson($response, $res);
     }
 
@@ -634,7 +634,7 @@ class UserController extends BaseController
         $user->save();
 
         $res['ret'] = 1;
-        $res['msg'] = '修改成功';
+        $res['msg'] = 'Modified successfully';
         return $this->echoJson($response, $res);
     }
 
@@ -681,13 +681,13 @@ class UserController extends BaseController
 
         if ($shop == null) {
             $res['ret'] = 0;
-            $res['msg'] = '非法请求';
+            $res['msg'] = 'Illegal request';
             return $response->getBody()->write(json_encode($res));
         }
 
         if ($shop->limitamount() != 0 && $shop->limitamount('can') <= 0) {
             $res['ret'] = 0;
-            $res['msg'] = '该商品已达到购买上限';
+            $res['msg'] = 'The product has reached the purchase limit';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -709,18 +709,18 @@ class UserController extends BaseController
 
         if ($coupon == null) {
             $res['ret'] = 0;
-            $res['msg'] = '优惠码无效';
+            $res['msg'] = 'Discount code invalid';
             return $response->getBody()->write(json_encode($res));
         }
-        // 优惠码时间过期
+        // Coupon code time expired
         if ($coupon->expire < time()) {
             $res['ret'] = 0;
-            $res['msg'] = '优惠码已过期';
+            $res['msg'] = 'Promo code has expired';
             return $response->getBody()->write(json_encode($res));
         }
         if ($coupon->order($shop->id) == false) {
             $res['ret'] = 0;
-            $res['msg'] = '此优惠码不可用于此商品';
+            $res['msg'] = 'This discount code cannot be used for this product';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -729,7 +729,7 @@ class UserController extends BaseController
             $use_count = Bought::where('userid', $user->id)->where('coupon', $coupon->code)->count();
             if ($use_count >= $use_limit) {
                 $res['ret'] = 0;
-                $res['msg'] = '优惠码次数已用完';
+                $res['msg'] = 'The coupon code has been exhausted';
                 return $response->getBody()->write(json_encode($res));
             }
         }
@@ -748,7 +748,7 @@ class UserController extends BaseController
         return $response->getBody()->write(json_encode($res));
     }
 
-    public function buy_traffic_package ($request, $response, $args)
+    public function buy_traffic_package($request, $response, $args)
     {
         $user = $this->user;
         $shop = $request->getParam('shop');
@@ -757,7 +757,7 @@ class UserController extends BaseController
 
         if ($shop == null || $shop->traffic_package() == 0) {
             $res['ret'] = 0;
-            $res['msg'] = '非法请求';
+            $res['msg'] = 'Illegal request';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -765,7 +765,7 @@ class UserController extends BaseController
 
         if ($user->class < $content->traffic_package->class->min || $user->class > $content->traffic_package->class->max) {
             $res['ret'] = 0;
-            $res['msg'] = '您当前的会员等级无法购买此流量包';
+            $res['msg'] = 'Your current membership level cannot purchase this traffic package';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -776,7 +776,7 @@ class UserController extends BaseController
 
         if (bccomp($user->money, $price, 2) == -1) {
             $res['ret'] = 0;
-            $res['msg'] = '喵喵喵~ 当前余额不足，总价为' . $price . '元。</br><a href="/user/code">点击进入充值界面</a>';
+            $res['msg'] = 'Meow Meow~ The current balance is insufficient, and the total price is ' . $price . 'yuan. </br><a href="/user/code">Click to enter the recharge interface</a>';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -795,7 +795,7 @@ class UserController extends BaseController
         $shop->buy($user);
 
         $res['ret'] = 1;
-        $res['msg'] = '购买成功';
+        $res['msg'] = 'Purchase successful';
 
         return $response->getBody()->write(json_encode($res));
     }
@@ -814,7 +814,7 @@ class UserController extends BaseController
 
         if ($shop == null) {
             $res['ret'] = 0;
-            $res['msg'] = '非法请求';
+            $res['msg'] = 'Illegal request';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -831,13 +831,13 @@ class UserController extends BaseController
 
             if ($coupon->order($shop->id) == false) {
                 $res['ret'] = 0;
-                $res['msg'] = '此优惠码不可用于此商品';
+                $res['msg'] = 'This discount code cannot be used for this product';
                 return $response->getBody()->write(json_encode($res));
             }
 
             if ($coupon->expire < time()) {
                 $res['ret'] = 0;
-                $res['msg'] = '此优惠码已过期';
+                $res['msg'] = 'This discount code has expired';
                 return $response->getBody()->write(json_encode($res));
             }
 
@@ -846,7 +846,7 @@ class UserController extends BaseController
                 $use_count = Bought::where('userid', $user->id)->where('coupon', $coupon->code)->count();
                 if ($use_count >= $use_limit) {
                     $res['ret'] = 0;
-                    $res['msg'] = '优惠码次数已用完';
+                    $res['msg'] = 'The coupon code has been exhausted';
                     return $response->getBody()->write(json_encode($res));
                 }
             }
@@ -862,7 +862,7 @@ class UserController extends BaseController
 
         if (bccomp($user->money, $price, 2) == -1) {
             $res['ret'] = 0;
-            $res['msg'] = '喵喵喵~ 当前余额不足，总价为' . $price . '元。</br><a href="/user/code">点击进入充值界面</a>';
+            $res['msg'] = 'Meow Meow~ The current balance is insufficient, and the total price is ' . $price . 'yuan. </br><a href="/user/code">Click to enter the recharge interface</a>';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -896,7 +896,7 @@ class UserController extends BaseController
         $shop->buy($user);
 
         $res['ret'] = 1;
-        $res['msg'] = '购买成功';
+        $res['msg'] = 'Purchase successful';
 
         return $response->getBody()->write(json_encode($res));
     }
@@ -926,7 +926,7 @@ class UserController extends BaseController
 
         if ($shop == null) {
             $rs['ret'] = 0;
-            $rs['msg'] = '关闭自动续费失败，订单不存在。';
+            $rs['msg'] = 'Failed to turn off automatic renewal, the order does not exist. ';
             return $response->getBody()->write(json_encode($rs));
         }
 
@@ -936,11 +936,11 @@ class UserController extends BaseController
 
         if (!$shop->save()) {
             $rs['ret'] = 0;
-            $rs['msg'] = '关闭自动续费失败';
+            $rs['msg'] = 'Failed to close auto-renewal';
             return $response->getBody()->write(json_encode($rs));
         }
         $rs['ret'] = 1;
-        $rs['msg'] = '关闭自动续费成功';
+        $rs['msg'] = 'Turn off auto-renewal successfully';
         return $response->getBody()->write(json_encode($rs));
     }
 
@@ -954,20 +954,20 @@ class UserController extends BaseController
 
         if ($user->telegram_id != 0) {
             $res['ret'] = 0;
-            $res['msg'] = '您绑定了 Telegram ，所以此项并不能被修改。';
+            $res['msg'] = 'You are bound to Telegram, so this item cannot be modified. ';
             return $response->getBody()->write(json_encode($res));
         }
 
         if ($wechat == '' || $type == '') {
             $res['ret'] = 0;
-            $res['msg'] = '非法输入';
+            $res['msg'] = 'Illegal input';
             return $response->getBody()->write(json_encode($res));
         }
 
         $user1 = User::where('im_value', $wechat)->where('im_type', $type)->first();
         if ($user1 != null) {
             $res['ret'] = 0;
-            $res['msg'] = '此联络方式已经被注册';
+            $res['msg'] = 'This contact has already been registered';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -977,7 +977,7 @@ class UserController extends BaseController
         $user->save();
 
         $res['ret'] = 1;
-        $res['msg'] = '修改成功';
+        $res['msg'] = 'Modified successfully';
         return $this->echoJson($response, $res);
     }
 
@@ -992,19 +992,19 @@ class UserController extends BaseController
 
         if ($obfs == '' || $protocol == '') {
             $res['ret'] = 0;
-            $res['msg'] = '非法输入';
+            $res['msg'] = 'Illegal input';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (!Tools::is_param_validate('obfs', $obfs)) {
             $res['ret'] = 0;
-            $res['msg'] = '混淆无效';
+            $res['msg'] = 'Invalid obfuscation';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (!Tools::is_param_validate('protocol', $protocol)) {
             $res['ret'] = 0;
-            $res['msg'] = '协议无效';
+            $res['msg'] = 'Protocol invalid';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -1016,13 +1016,13 @@ class UserController extends BaseController
 
         if (!Tools::checkNoneProtocol($user)) {
             $res['ret'] = 0;
-            $res['msg'] = '系统检测到您目前的加密方式为 none ，但您将要设置为的协议并不在以下协议<br>' . implode(',', Config::getSupportParam('allow_none_protocol')) . '<br>之内，请您先修改您的加密方式，再来修改此处设置。';
+            $res['msg'] = 'The system detects that your current encryption method is none, but the protocol you are about to set to is not in the following protocols<br>' . implode(',', Config::getSupportParam('allow_none_protocol')) . '<br>, please modify your encryption method first, and then modify the settings here. ';
             return $this->echoJson($response, $res);
         }
 
         if (!URL::SSCanConnect($user) && !URL::SSRCanConnect($user)) {
             $res['ret'] = 0;
-            $res['msg'] = '您这样设置之后，就没有客户端能连接上了，所以系统拒绝了您的设置，请您检查您的设置之后再进行操作。';
+            $res['msg'] = 'After you set this way, no client can connect, so the system rejects your setting, please check your setting before proceeding. ';
             return $this->echoJson($response, $res);
         }
 
@@ -1030,18 +1030,18 @@ class UserController extends BaseController
 
         if (!URL::SSCanConnect($user)) {
             $res['ret'] = 1;
-            $res['msg'] = '设置成功，但您目前的协议，混淆，加密方式设置会导致 Shadowsocks原版客户端无法连接，请您自行更换到 ShadowsocksR 客户端。';
+            $res['msg'] = 'The setting is successful, but your current protocol, obfuscation, and encryption settings will cause the original Shadowsocks client to fail to connect, please change to the ShadowsocksR client by yourself. ';
             return $this->echoJson($response, $res);
         }
 
         if (!URL::SSRCanConnect($user)) {
             $res['ret'] = 1;
-            $res['msg'] = '设置成功，但您目前的协议，混淆，加密方式设置会导致 ShadowsocksR 客户端无法连接，请您自行更换到 Shadowsocks 客户端。';
+            $res['msg'] = 'The setting is successful, but your current protocol, obfuscation, and encryption settings will cause the ShadowsocksR client to fail to connect, please change to the Shadowsocks client by yourself. ';
             return $this->echoJson($response, $res);
         }
 
         $res['ret'] = 1;
-        $res['msg'] = '设置成功，您可自由选用客户端来连接。';
+        $res['msg'] = 'The setting is successful, you can freely choose the client to connect. ';
         return $this->echoJson($response, $res);
     }
 
@@ -1053,7 +1053,7 @@ class UserController extends BaseController
 
         if ($theme == '') {
             $res['ret'] = 0;
-            $res['msg'] = '非法输入';
+            $res['msg'] = 'Illegal input';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -1061,7 +1061,7 @@ class UserController extends BaseController
         $user->save();
 
         $res['ret'] = 1;
-        $res['msg'] = '设置成功';
+        $res['msg'] = 'Setting succeeded';
         return $this->echoJson($response, $res);
     }
 
@@ -1072,16 +1072,16 @@ class UserController extends BaseController
             $user = $this->user;
             if ($value == 2 && $_ENV['enable_telegram'] === false) {
                 $res['ret'] = 0;
-                $res['msg'] = '修改失败，当前无法使用 Telegram 接收每日报告';
+                $res['msg'] = 'Modification failed, currently unable to use Telegram to receive daily reports';
                 return $this->echoJson($response, $res);
             }
             $user->sendDailyMail = $value;
             $user->save();
             $res['ret'] = 1;
-            $res['msg'] = '修改成功';
+            $res['msg'] = 'Modified successfully';
         } else {
             $res['ret'] = 0;
-            $res['msg'] = '非法输入';
+            $res['msg'] = 'Illegal input';
         }
         return $this->echoJson($response, $res);
     }
@@ -1094,7 +1094,7 @@ class UserController extends BaseController
 
         if ($pac == '') {
             $res['ret'] = 0;
-            $res['msg'] = '输入不能为空';
+            $res['msg'] = 'Enter cannot be empty';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -1102,7 +1102,7 @@ class UserController extends BaseController
         $user->save();
 
         $res['ret'] = 1;
-        $res['msg'] = '修改成功';
+        $res['msg'] = 'Modified successfully';
         return $this->echoJson($response, $res);
     }
 
@@ -1116,17 +1116,17 @@ class UserController extends BaseController
 
         if ($pwd == '') {
             $res['ret'] = 0;
-            $res['msg'] = '密码不能为空';
+            $res['msg'] = 'Password cannot be empty';
             return $response->withJson($res);
         }
         if (!Tools::is_validate($pwd)) {
             $res['ret'] = 0;
-            $res['msg'] = '密码无效';
+            $res['msg'] = 'Invalid password';
             return $response->withJson($res);
         }
         if ($otheruuid != null) {
             $res['ret'] = 0;
-            $res['msg'] = '目前出现一些问题，请稍后再试';
+            $res['msg'] = 'There are some problems, please try again later';
             return $response->withJson($res);
         }
 
@@ -1148,13 +1148,13 @@ class UserController extends BaseController
 
         if ($method == '') {
             $res['ret'] = 0;
-            $res['msg'] = '非法输入';
+            $res['msg'] = 'Illegal input';
             return $response->getBody()->write(json_encode($res));
         }
 
         if (!Tools::is_param_validate('method', $method)) {
             $res['ret'] = 0;
-            $res['msg'] = '加密无效';
+            $res['msg'] = 'Encryption invalid';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -1162,13 +1162,13 @@ class UserController extends BaseController
 
         if (!Tools::checkNoneProtocol($user)) {
             $res['ret'] = 0;
-            $res['msg'] = '系统检测到您将要设置的加密方式为 none ，但您的协议并不在以下协议<br>' . implode(',', Config::getSupportParam('allow_none_protocol')) . '<br>之内，请您先修改您的协议，再来修改此处设置。';
+            $res['msg'] = 'The system detected that the encryption method you are about to set is none, but your protocol is not in the following protocol<br>' . implode(',', Config::getSupportParam('allow_none_protocol')) . '<br>, please modify your agreement first, and then modify the settings here. ';
             return $this->echoJson($response, $res);
         }
 
         if (!URL::SSCanConnect($user) && !URL::SSRCanConnect($user)) {
             $res['ret'] = 0;
-            $res['msg'] = '您这样设置之后，就没有客户端能连接上了，所以系统拒绝了您的设置，请您检查您的设置之后再进行操作。';
+            $res['msg'] = 'After you set this way, no client can connect, so the system rejects your setting, please check your setting before proceeding. ';
             return $this->echoJson($response, $res);
         }
 
@@ -1176,18 +1176,18 @@ class UserController extends BaseController
 
         if (!URL::SSCanConnect($user)) {
             $res['ret'] = 1;
-            $res['msg'] = '设置成功，但您目前的协议，混淆，加密方式设置会导致 Shadowsocks原版客户端无法连接，请您自行更换到 ShadowsocksR 客户端。';
+            $res['msg'] = 'The setting is successful, but your current protocol, obfuscation, and encryption settings will cause the original Shadowsocks client to fail to connect, please change to the ShadowsocksR client by yourself. ';
             return $this->echoJson($response, $res);
         }
 
         if (!URL::SSRCanConnect($user)) {
             $res['ret'] = 1;
-            $res['msg'] = '设置成功，但您目前的协议，混淆，加密方式设置会导致 ShadowsocksR 客户端无法连接，请您自行更换到 Shadowsocks 客户端。';
+            $res['msg'] = 'The setting is successful, but your current protocol, obfuscation, and encryption settings will cause the ShadowsocksR client to fail to connect, please change to the Shadowsocks client by yourself. ';
             return $this->echoJson($response, $res);
         }
 
         $res['ret'] = 1;
-        $res['msg'] = '设置成功，您可自由选用两种客户端来进行连接。';
+        $res['msg'] = 'The setting is successful, you can freely choose two clients to connect. ';
         return $this->echoJson($response, $res);
     }
 
@@ -1216,14 +1216,14 @@ class UserController extends BaseController
             }
             if (!$ret) {
                 $res['ret'] = 0;
-                $res['msg'] = '系统无法接受您的验证结果，请刷新页面后重试。';
+                $res['msg'] = 'The system cannot accept your verification result, please refresh the page and try again. ';
                 return $response->getBody()->write(json_encode($res));
             }
         }
 
         if (strtotime($this->user->expire_in) < time()) {
             $res['ret'] = 0;
-            $res['msg'] = '您的账户已过期，无法签到。';
+            $res['msg'] = 'Your account has expired and cannot be signed in. ';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -1262,7 +1262,7 @@ class UserController extends BaseController
         $res = array();
         if (!Hash::checkPassword($user->pass, $passwd)) {
             $res['ret'] = 0;
-            $res['msg'] = ' 密码错误';
+            $res['msg'] = 'Password error';
             return $this->echoJson($response, $res);
         }
 
@@ -1270,10 +1270,10 @@ class UserController extends BaseController
             Auth::logout();
             $user->kill_user();
             $res['ret'] = 1;
-            $res['msg'] = '您的帐号已经从我们的系统中删除。欢迎下次光临!';
+            $res['msg'] = 'Your account has been removed from our system. Welcome next time!';
         } else {
             $res['ret'] = 0;
-            $res['msg'] = '管理员不允许删除，如需删除请联系管理员。';
+            $res['msg'] = 'The administrator does not allow deletion, please contact the administrator if you need to delete. ';
         }
         return $this->echoJson($response, $res);
     }
@@ -1323,7 +1323,7 @@ class UserController extends BaseController
                 $log->detect_rule_text = $log->DetectRule()->text;
                 $log->detect_rule_regex = $log->DetectRule()->regex;
                 $log->detect_rule_type = $log->DetectRule()->type;
-                $log->detect_rule_date = date('Y-m-d H:i:s',$log->datetime);
+                $log->detect_rule_date = date('Y-m-d H:i:s', $log->datetime);
             }
             $res['logs'] = $logs;
             return $this->echoJson($response, $res);
@@ -1417,7 +1417,7 @@ class UserController extends BaseController
                 $return .= URL::get_NewAllUrl($user, ['type' => 'vmess']) . PHP_EOL;
                 break;
             default:
-                $return .= '悟空别闹！';
+                $return .= 'Don\'t make trouble, Wukong! ';
                 break;
         }
         $response = $response->withHeader('Content-type', ' application/octet-stream; charset=utf-8')
@@ -1506,7 +1506,7 @@ class UserController extends BaseController
         // 创建 zip 并添加内容
         $zipArc->open($temp_file_path, \ZipArchive::CREATE);
         $zipArc->addFromString($user_config_file_name, $content);
-        $zipArc->addFromString('点击访问_' . $_ENV['appName'] . '.url', $site_url_content);
+        $zipArc->addFromString('Click to visit_' . $_ENV['appName'] . '.url', $site_url_content);
         Tools::folderToZip($client_path, $zipArc, strlen($client_path));
         $zipArc->close();
 
@@ -1529,7 +1529,7 @@ class UserController extends BaseController
         $token = $args['token'];
         $Etoken = Token::where('token', '=', $token)->where('create_time', '>', time() - 60 * 10)->first();
         if ($Etoken == null) {
-            return '下载链接已失效，请刷新页面后重新点击.';
+            return 'The download link is invalid, please refresh the page and click again.';
         }
         $user = User::find($Etoken->user_id);
         if ($user == null) {
@@ -1555,9 +1555,9 @@ class UserController extends BaseController
                 return $this->view()->display('user/settings/traffic_log.tpl');
             case 'profile':
                 $emailExplode    = explode('@', $user->email);
-                $email_suffix    = '@'.$emailExplode[1];
+                $email_suffix    = '@' . $emailExplode[1];
                 $email_whitelist = MetronSetting::get('list_of_available_mailboxes');
-                if ( !in_array($email_suffix, $email_whitelist) ) {
+                if (!in_array($email_suffix, $email_whitelist)) {
                     array_push($email_whitelist, $email_suffix);
                 }
                 return $this->view()->assign('email_name', $emailExplode[0])->assign('email_suffix', $email_suffix)->assign('email_whitelist', $email_whitelist)->display('user/settings/profile.tpl');
@@ -1568,22 +1568,22 @@ class UserController extends BaseController
             case 'sublink':
                 return $this->view()->display('user/settings/sublink.tpl');
             case 'relay':
-                $source_nodes = Node::where( static function ($query) use ($user) {
+                $source_nodes = Node::where(static function ($query) use ($user) {
                     $query->Where('node_group', '=', $user->node_group)
-                            ->orWhere('node_group', '=', 0);
-                } )->where('type', 1)->where( static function ($query) {
+                        ->orWhere('node_group', '=', 0);
+                })->where('type', 1)->where(static function ($query) {
                     $query->Where('sort', 10);
-                } )->where('node_class', '<=', $user->class)->orderBy('name')->get();
+                })->where('node_class', '<=', $user->class)->orderBy('name')->get();
 
-                $dist_nodes = Node::where( static function ($query) use ($user) {
+                $dist_nodes = Node::where(static function ($query) use ($user) {
                     $query->Where('node_group', '=', $user->node_group)->orWhere('node_group', '=', 0);
-                } )->where('type', 1)->where( static function ($query) {
-                    $query->Where('sort', 0) ->orWhere('sort', 10);
-                } )->where('node_class', '<=', $user->class)->orderBy('name')->get();
+                })->where('type', 1)->where(static function ($query) {
+                    $query->Where('sort', 0)->orWhere('sort', 10);
+                })->where('node_class', '<=', $user->class)->orderBy('name')->get();
 
-                $ports_raw = Node::where( static function ($query) use ($user) {
+                $ports_raw = Node::where(static function ($query) use ($user) {
                     $query->Where('node_group', '=', $user->node_group)->orWhere('node_group', '=', 0);
-                } )->where('type', 1)->where('sort', 9)->where('node_class', '<=', $user->class)->orderBy('name')->get();
+                })->where('type', 1)->where('sort', 9)->where('node_class', '<=', $user->class)->orderBy('name')->get();
 
                 $ports = [];
                 foreach ($ports_raw as $port_raw) {

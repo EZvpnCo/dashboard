@@ -46,13 +46,13 @@ class VueController extends BaseController
 
         if ($user == null) {
             $rs['ret'] = 0;
-            $rs['msg'] = '邮箱不存在';
+            $rs['msg'] = 'Mailbox does not exist';
             return $response->getBody()->write(json_encode($rs));
         }
 
         if (!Hash::checkPassword($user->pass, $passwd)) {
             $rs['ret'] = 0;
-            $rs['msg'] = '邮箱或者密码错误';
+            $rs['msg'] = 'Email or password error';
 
 
             $loginIP = new LoginIp();
@@ -76,19 +76,19 @@ class VueController extends BaseController
 
             if (!$code) {
                 $res['ret'] = 2;
-                $res['msg'] = '该账户已开启二步验证，请输入6位动态码';
+                $res['msg'] = 'This account has enabled two-step verification, please enter a 6-digit dynamic code';
                 return $response->getBody()->write(json_encode($res));
             }
             if (!$rcode) {
                 $res['ret'] = 0;
-                $res['msg'] = '两步验证码错误，如果您是丢失了生成器或者错误地设置了这个选项，您可以尝试重置密码，即可取消这个选项。';
+                $res['msg'] = 'The two-step verification code is wrong. If you lost the generator or set this option by mistake, you can try to reset the password to cancel this option. ';
                 return $response->getBody()->write(json_encode($res));
             }
         }
 
         Auth::login($user->id, $time);
         $rs['ret'] = 1;
-        $rs['msg'] = '登录成功';
+        $rs['msg'] = 'Login successful';
         $rs['data'] = $_SESSION['userInfo'];
 
         $loginIP = new LoginIp();
@@ -103,41 +103,40 @@ class VueController extends BaseController
 
     public function register_helper($name, $email, $passwd, $code, $imtype, $imvalue, $telegram_id)
     {
-        if (Config::getconfig('Register.string.Mode') === 'close') {
+        if (Config::getconfig('Register. string. Mode') === 'close') {
             $res['ret'] = 0;
-            $res['msg'] = '未开放注册。';
+            $res['msg'] = 'Not open for registration. ';
             return $res;
         }
 
-        //dumplin：1、邀请人等级为0则邀请码不可用；2、邀请人invite_num为可邀请次数，填负数则为无限
+        //dumplin: 1. If the inviter's level is 0, the invitation code is unavailable; 2. The inviter invite_num is the number of invitations that can be invited, and if you fill in a negative number, it is unlimited
         $c = InviteCode::where('code', $code)->first();
         if ($c == null) {
             if (Config::getconfig('Register.string.Mode') === 'invite' && MetronSetting::get('register_code') === true) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请码无效';
+                $res['msg'] = 'Invitation code invalid';
                 return $res;
             }
         } elseif ($c->user_id != 0) {
             $gift_user = User::where('id', '=', $c->user_id)->first();
             if ($gift_user == null) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请人不存在';
+                $res['msg'] = 'The inviter does not exist';
                 return $res;
             }
 
             if ($gift_user->class == 0) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请人不是VIP';
+                $res['msg'] = 'The inviter is not a VIP';
                 return $res;
             }
 
             if ($gift_user->invite_num == 0) {
                 $res['ret'] = 0;
-                $res['msg'] = '邀请人可用邀请次数为0';
+                $res['msg'] = 'The available number of invites for the inviter is 0';
                 return $res;
             }
         }
-
         // do reg user
         $user = new User();
 
@@ -209,21 +208,21 @@ class VueController extends BaseController
             $this->logUserIp($user->id, $_SERVER['REMOTE_ADDR']);
 
             $res['ret'] = 1;
-            $res['msg'] = '注册成功！正在进入登录界面';
+            $res['msg'] = 'Successful registration! Entering the login interface';
 
             Radius::Add($user, $user->passwd);
             return $res;
         }
         $res['ret'] = 0;
-        $res['msg'] = '未知错误';
+        $res['msg'] = 'Unknown error';
         return $res;
     }
 
     public function register($request, $response)
     {
-        if (Config::getconfig('Register.string.Mode') === 'close') {
+        if (Config::getconfig('Register. string. Mode') === 'close') {
             $res['ret'] = 0;
-            $res['msg'] = '未开放注册。';
+            $res['msg'] = 'Not open for registration. ';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -246,42 +245,42 @@ class VueController extends BaseController
         // check email format
         if (!Check::isEmailLegal($email)) {
             $res['ret'] = 0;
-            $res['msg'] = '邮箱无效';
+            $res['msg'] = 'Email is invalid';
             return $response->getBody()->write(json_encode($res));
         }
-        // 注册邮箱黑名单
+        // Register email blacklist
         $email_postfix = '@' . (explode("@", $email)[1]);
         if (in_array($email_postfix, MetronSetting::get('disable_mailbox_list')) === true) {
             $res['ret'] = 0;
-            $res['msg'] = '禁止的邮箱后缀';
+            $res['msg'] = 'Forbidden email suffixes';
             return $response->getBody()->write(json_encode($res));
         }
-        // 注册邮箱白名单
+        // Register email whitelist
         if (MetronSetting::get('register_restricted_email') === true) {
             if (in_array($email_postfix, MetronSetting::get('list_of_available_mailboxes')) === false) {
                 $res['ret'] = 0;
-                $res['msg'] = '非法请求';
+                $res['msg'] = 'Illegal request';
                 return $response->getBody()->write(json_encode($res));
             }
         }
         if (!Check::isGmailSmall($email)) {
             $res['ret'] = 0;
-            $res['msg'] = '禁止使用带+号的Gmail虚拟邮箱';
+            $res['msg'] = 'Do not use Gmail virtual mailbox with + sign';
             return $response->getBody()->write(json_encode($res));
         }
         // check email
         $user = User::where('email', $email)->first();
         if ($user != null) {
             $res['ret'] = 0;
-            $res['msg'] = '邮箱已经被注册了';
+            $res['msg'] = 'Email has been registered';
             return $response->getBody()->write(json_encode($res));
         }
 
-        if (Config::getconfig('Register.bool.Enable_email_verify')) {
+        if (Config::getconfig('Register. bool. Enable_email_verify')) {
             $mailcount = EmailVerify::where('email', '=', $email)->where('code', '=', $emailcode)->where('expire_in', '>', time())->first();
             if ($mailcount == null) {
                 $res['ret'] = 0;
-                $res['msg'] = '您的邮箱验证码不正确';
+                $res['msg'] = 'Your email verification code is incorrect';
                 return $response->getBody()->write(json_encode($res));
             }
         }
@@ -289,34 +288,18 @@ class VueController extends BaseController
         // check pwd length
         if (strlen($passwd) < 8) {
             $res['ret'] = 0;
-            $res['msg'] = '密码请大于8位';
+            $res['msg'] = 'The password must be greater than 8 characters';
             return $response->getBody()->write(json_encode($res));
         }
 
         // check pwd re
         if ($passwd != $repasswd) {
             $res['ret'] = 0;
-            $res['msg'] = '两次密码输入不符';
+            $res['msg'] = 'The two passwords do not match';
             return $response->getBody()->write(json_encode($res));
         }
 
-        /*
-                if ($imtype == '' || $imvalue == '') {
-                    $res['ret'] = 0;
-                    $res['msg'] = '请填上你的联络方式';
-                    return $response->getBody()->write(json_encode($res));
-                }
 
-                $user = User::where('im_value', $imvalue)->where('im_type', $imtype)->first();
-                if ($user != null) {
-                    $res['ret'] = 0;
-                    $res['msg'] = '此联络方式已注册';
-                    return $response->getBody()->write(json_encode($res));
-                }
-                if (Config::getconfig('Register.bool.Enable_email_verify')) {
-                    EmailVerify::where('email', '=', $email)->delete();
-                }
-        */
         $res = $this->register_helper($name, $email, $passwd, $code, $imtype, $imvalue, 0);
         return $response->getBody()->write(json_encode($res));
     }
@@ -325,7 +308,7 @@ class VueController extends BaseController
     {
         $res = [
             'ret' => 1,
-            'msg' => 'S授权有效',
+            'msg' => 'S authorization is valid',
             'key' => 'Bob'
         ];
         return $response->getBody()->write(json_encode($res, JSON_UNESCAPED_UNICODE));
@@ -398,7 +381,7 @@ class VueController extends BaseController
     {
         if (strtotime($this->user->expire_in) < time()) {
             $res['ret'] = 0;
-            $res['msg'] = '您的账户已过期，无法签到。';
+            $res['msg'] = 'Your account has expired and cannot be signed in. ';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -523,7 +506,7 @@ class VueController extends BaseController
         $user->telegram_id = 0;
         $user->save();
         $res['ret'] = 1;
-        $res['msg'] = '解绑成功';
+        $res['msg'] = 'Unbind successfully';
         return $response->getBody()->write(json_encode($res));
     }
 
@@ -550,9 +533,8 @@ class VueController extends BaseController
         }
         $paybacks->setPath('/#/user/panel');
         foreach ($paybacks as $payback) {
-            $payback['user_name'] = $payback->user() != null ? $payback->user()->user_name : '已注销';
+            $payback['user_name'] = $payback->user() != null ? $payback->user()->user_name : 'logged out';
         };
-
         $res['inviteInfo'] = array(
             'code' => $code,
             'paybacks' => $paybacks,
@@ -851,7 +833,7 @@ class VueController extends BaseController
         switch ($node->sort) {
             case 0:
                 if ((($user->class >= $node->node_class
-                            && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
+                        && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
                     && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)
                 ) {
 
@@ -887,10 +869,9 @@ class VueController extends BaseController
                 ) {
                     $email = $user->email;
                     $email = Radius::GetUserName($email);
-                    $json_show = 'VPN 信息<br>地址：' . $node->server
-                        . '<br>用户名：' . $email . '<br>密码：' . $this->user->passwd
-                        . '<br>支持方式：' . $node->method . '<br>备注：' . $node->info;
-
+                    $json_show = 'VPN info<br>address:' . $node->server
+                        . '<br>Username:' . $email . '<br>Password:' . $this->user->passwd
+                        . '<br>Support method:' . $node->method . '<br>Remarks:' . $node->info;
                     return $response->write(
                         $this->view()->assign('json_show', $json_show)->fetch('user/nodeinfovpn.tpl')
                     );
@@ -903,9 +884,9 @@ class VueController extends BaseController
                 ) {
                     $email = $user->email;
                     $email = Radius::GetUserName($email);
-                    $json_show = 'SSH 信息<br>地址：' . $node->server
-                        . '<br>用户名：' . $email . '<br>密码：' . $this->user->passwd
-                        . '<br>支持方式：' . $node->method . '<br>备注：' . $node->info;
+                    $json_show = 'SSH info<br>address:' . $node->server
+                        . '<br>Username:' . $email . '<br>Password:' . $this->user->passwd
+                        . '<br>Support method:' . $node->method . '<br>Remarks:' . $node->info;
 
                     return $response->write(
                         $this->view()->assign('json_show', $json_show)->fetch('user/nodeinfossh.tpl')
@@ -920,9 +901,9 @@ class VueController extends BaseController
                     $email = $user->email;
                     $email = Radius::GetUserName($email);
 
-                    $json_show = 'Anyconnect 信息<br>地址：' . $node->server
-                        . '<br>用户名：' . $email . '<br>密码：' . $this->user->passwd
-                        . '<br>支持方式：' . $node->method . '<br>备注：' . $node->info;
+                    $json_show = 'Anyconnect Information<br>Address:' . $node->server
+                        . '<br>Username:' . $email . '<br>Password:' . $this->user->passwd
+                        . '<br>Support method:' . $node->method . '<br>Remarks:' . $node->info;
 
                     return $response->write(
                         $this->view()->assign('json_show', $json_show)->fetch('user/nodeinfoanyconnect.tpl')
@@ -931,8 +912,9 @@ class VueController extends BaseController
                 break;
             case 10:
                 if ((($user->class >= $node->node_class
-                            && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
-                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)) {
+                        && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
+                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)
+                ) {
 
                     $res = [
                         'ret' => 1,
@@ -961,8 +943,9 @@ class VueController extends BaseController
                 break;
             case 11:
                 if ((($user->class >= $node->node_class
-                            && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
-                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)) {
+                        && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
+                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)
+                ) {
 
                     $res = [
                         'ret' => 1,
@@ -978,8 +961,9 @@ class VueController extends BaseController
                 break;
             case 12:
                 if ((($user->class >= $node->node_class
-                            && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
-                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)) {
+                        && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
+                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)
+                ) {
 
                     $res = [
                         'ret' => 1,
@@ -995,8 +979,9 @@ class VueController extends BaseController
                 break;
             case 13:
                 if ((($user->class >= $node->node_class
-                            && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
-                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)) {
+                        && ($user->node_group == $node->node_group || $node->node_group == 0)) || $user->is_admin)
+                    && ($node->node_bandwidth_limit == 0 || $node->node_bandwidth < $node->node_bandwidth_limit)
+                ) {
 
                     $res = [
                         'ret' => 1,
