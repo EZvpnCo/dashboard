@@ -37,7 +37,7 @@ $_ENV['db_prefix'] = '';
 
 
 // E-Mail settings--------------------------------------------------------------------------------------------
-$_ENV['mailDriver'] = 'none';      //none / mailgun / smtp / sendgrid / aliyunweb
+$_ENV['mailDriver'] = 'smtp';      //none / mailgun / smtp / sendgrid / aliyunweb
 $_ENV['sendPageLimit'] = 50;
 $_ENV['email_queue']     = true;
 
@@ -47,12 +47,12 @@ $_ENV['mailgun_domain'] = '';
 $_ENV['mailgun_sender'] = '';
 
 # smtp
-$_ENV['smtp_host'] = '';
-$_ENV['smtp_username'] = '';
-$_ENV['smtp_password'] = '';
+$_ENV['smtp_host'] = 'mail.ezvpn.co';
+$_ENV['smtp_username'] = 'no-reply@ezvpn.co';
+$_ENV['smtp_password'] = '12345678RaF';
 $_ENV['smtp_port'] = 465;
-$_ENV['smtp_name'] = '';
-$_ENV['smtp_sender'] = '';
+$_ENV['smtp_name'] = 'EZvpn';
+$_ENV['smtp_sender'] = 'no-reply@ezvpn.co';
 $_ENV['smtp_ssl'] = true;
 $_ENV['smtp_reply_to'] = $_ENV['smtp_username'];
 $_ENV['smtp_reply_to_name'] = $_ENV['smtp_sender'];
@@ -130,7 +130,7 @@ $_ENV['notify_limit_value'] = 20; //When the previous item is per, fill in the p
 
 // Subscription settings ------------------------------------------- -----------------------------------------
 $_ENV['Subscribe'] = true; //Whether this site provides subscription function
-$_ENV['subUrl'] = $_ENV['baseUrl'] . '/token/'; //Subscription address, if it needs to be the same as the site name, please do not modify
+$_ENV['subUrl'] = 'https://subscription.ezvpn.co' . '/user/'; //Subscription address, if it needs to be the same as the site name, please do not modify
 $_ENV['mergeSub'] = true; //merge subscription settings optional false / true
 $_ENV['enable_sub_extend'] = true; // Whether to enable the default display of traffic remaining, account expiration time and information in sub_message in the subscription
 
@@ -139,7 +139,7 @@ $_ENV['enable_sub_extend'] = true; // Whether to enable the default display of t
 // It can be used to push information such as the latest address for the user, as short as possible and the number should not be too much
 $_ENV['sub_message'] = [];
 $_ENV['disable_sub_mu_port'] = true; // Remove the single port information in the subscription
-$_ENV['subscribeLog'] = false; //Whether to record user subscription log
+$_ENV['subscribeLog'] = true; //Whether to record user subscription log
 $_ENV['subscribeLog_show'] = true; //Whether to allow users to view subscription records
 $_ENV['subscribeLog_keep_days'] = 7; //Subscribe log retention days
 $_ENV['mu_port_migration'] = true; // Send the offset port directly for the backend

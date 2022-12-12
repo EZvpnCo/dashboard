@@ -83,7 +83,7 @@ $_MT['user_level'] = [ // level => corresponding name display
 ##### User Registration ------------------------------------------- --------------------------------------------------
 $_MT['register_code'] = false; // true: the invitation code is required for registration, false: the invitation code is optional (admin panel - user registration - change the registration mode to invite)
 $_MT['register_restricted_email'] = true; // When set to true, you must use the specified email suffix when registering;
-$_MT['list_of_available_mailboxes'] = ['@ezvpn.co', '@gmail.com', '@outlook.com', '@yahoo.com',]; // The mailbox suffix that can be used for registered mailboxes, only takes effect when the above is set to true;
+$_MT['list_of_available_mailboxes'] = ['@ezvpn.co', '@gmail.com', '@outlook.com', '@yahoo.com', '@hotmail.com', '@ymail.com', '@live.com',]; // The mailbox suffix that can be used for registered mailboxes, only takes effect when the above is set to true;
 $_MT['disable_mailbox_list'] = [
     '@bcaoo.com', '@chacuo.net', '@tmpmail.net', '@tmail.ws', '@tmpmail.org', '@moimoi.re', '@bccto.me', ' @027168.com', '@disbox.org', '@linshiyouxiang.net', '@t.odmail.cn', '@tmails.net', '@moakt.co', '@moakt.ws', '@disbox.net', '@bareed.ws',
 ]; // Email suffixes that are prohibited from being used in registered email addresses;

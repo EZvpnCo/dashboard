@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="password" placeholder="password" name="passwd" id="passwd" autocomplete="new-password" />
+                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="password" placeholder="Password" name="passwd" id="passwd" autocomplete="new-password" />
                                             </div>
                                         </div>
                                         <div class="col-6">
