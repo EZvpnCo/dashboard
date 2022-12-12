@@ -11,7 +11,7 @@
                             <form class="form" id="login_form">
                                 <div id="login_form_1">
                                     <div class="form-group mt-5">
-                                        <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email Address" name="email" id="email" autocomplete="username" required />
+                                        <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email" name="email" id="email" autocomplete="username" required />
                                     </div>
                                     <div class="form-group mt-5">
                                         <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8" type="password" placeholder="Password" name="password" id="password" autocomplete="password" required/>
@@ -46,7 +46,7 @@
                                     <button type="button" id="login_submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">Login</button>
                                     
                                     <span class="m-3">or</span>
-                                    <a class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3" data-toggle="modal" data-target="#telegram-login-modal">Login with telegram</a>
+                                    <a class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3" data-toggle="modal" data-target="#telegram-login-modal">Login via telegram</a>
                                     
                                 </div>
                             </form>

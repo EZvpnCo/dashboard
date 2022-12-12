@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>registered &mdash; {$config["appName"]}</title>
+        <title>Registration &mdash; {$config["appName"]}</title>
         {include file='include/auth/head.tpl'}
 
                         <div class="register-signin">
                             <div class="mb-10">
-                                <h3>The new user registration</h3>
+                                <h3>Registration</h3>
                             </div>
                             <form class="form" id="register_form">
                                 <div id="register_form_1">
@@ -15,7 +15,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group mb-0">
-                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="text" placeholder="nickname" name="name" id="name" autocomplete="new-password" />
+                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="text" placeholder="Username" name="name" id="name" autocomplete="new-password" />
                                             </div>
                                         </div>
                                         <div class="col-6">
@@ -23,21 +23,21 @@
                                                 {if $metron['register_code'] === true}
                                                 <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" data-code="true" type="text" placeholder="Invite code" name="code" id="code" autocomplete="new-password" />
                                                 {else}
-                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" data-code="false" type="text" placeholder="Invite code(Can be left blank)" name="code" id="code" autocomplete="new-password" />
+                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" data-code="false" type="text" placeholder="Invite code (Can be left blank)" name="code" id="code" autocomplete="new-password" />
                                                 {/if}
                                             </div>
                                         </div>
                                     </div>
                                     {else}
                                     <div class="form-group mb-0" style="white-space:nowrap;">
-                                        <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 pr-0" type="text" placeholder="nickname" name="name" id="name" autocomplete="new-password" />
+                                        <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 pr-0" type="text" placeholder="Username" name="name" id="name" autocomplete="new-password" />
                                     </div>
                                     {/if}
 
                                     {if $metron['register_restricted_email'] === true}
                                     <div class="form-group mb-0" style="white-space:nowrap;">
                                         <div class="input-group mt-5">
-                                            <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-l-50 border-0 py-4 px-8 pr-0" type="text" placeholder="Email address" name="email" id="email" autocomplete="new-password" />
+                                            <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-l-50 border-0 py-4 px-8 pr-0" type="text" placeholder="Email" name="email" id="email" autocomplete="new-password" />
                                             <select class="btn btn-pill btn-outline-code font-weight-bold rounded-l-0 pr-5 opacity-70 bg-dark-o-70" id="email_postfix" style="-webkit-appearance: none;">
                                                 {foreach $metron['list_of_available_mailboxes'] as $email}
                                                 <option value="{$email}" {if $email@index === 0}selected=""{/if}>{$email}</option>
@@ -47,14 +47,14 @@
                                     </div>
                                     {else}
                                     <div class="form-group mb-0" style="white-space:nowrap;">
-                                        <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="text" placeholder="Email address" name="email" id="email" autocomplete="new-password" />
+                                        <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="text" placeholder="Email" name="email" id="email" autocomplete="new-password" />
                                     </div>
                                     {/if}
 
                                     {if $config['enable_email_verify'] == 'true'}
                                     <div class="form-group mb-0" style="white-space:nowrap;">
                                         <div class="input-group mt-5">
-                                            <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-l-50 border-0 py-4 px-8 pr-0" type="text" placeholder="Your email verification code" name="email_code" id="email_code" autocomplete="new-password" />
+                                            <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-l-50 border-0 py-4 px-8 pr-0" type="text" placeholder="Verification code" name="email_code" id="email_code" autocomplete="new-password" />
                                             <div class="input-group-append ml-0">
                                                 <button type="button" class="btn btn-pill btn-outline-code font-weight-bold pr-5 opacity-70 bg-dark-o-70" id="send_email" onclick="sendMail()">Get verification code</button>
                                             </div>
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="password" placeholder="Repeat the password" name="repasswd" id="repasswd" autocomplete="new-password"/>
+                                                <input class="form-control h-auto text-white placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8 mt-5" type="password" placeholder="Repeat password" name="repasswd" id="repasswd" autocomplete="new-password"/>
                                             </div>
                                         </div>
                                     </div>
@@ -90,12 +90,12 @@
                                 {/if}
                                 <div class="form-group d-flex flex-wrap justify-content-between align-items-center px-5">
                                     <label class="checkbox checkbox-outline checkbox-white text-white m-0">
-                                        <input type="checkbox" id="agree" name="agree"/>Registration is representative <a class="text-white font-weight-bold" data-toggle="modal" data-target="#tos-modal"><strong>The terms of service</strong></a>
+                                        <input type="checkbox" id="agree" name="agree"/>I'm agree with <a class="text-white font-weight-bold" data-toggle="modal" data-target="#tos-modal"><strong>The terms of service</strong></a>
                                         <span></span>
                                     </label>
                                 </div>
                                 <div class="form-group text-center mt-10" style="white-space:nowrap;">
-                                    <button type="button" id="register_submit" class="btn btn-pill btn-outline-white btn-block font-weight-bold opacity-90 px-15 py-3 ">registered</button>
+                                    <button type="button" id="register_submit" class="btn btn-pill btn-outline-white btn-block font-weight-bold opacity-90 px-15 py-3 ">Register</button>
                                 </div>
                             </form>
                             <div class="mt-10">
