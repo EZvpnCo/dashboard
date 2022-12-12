@@ -27,7 +27,7 @@ class Password
         if (!$pwdRst->save()) {
             return false;
         }
-        $subject = $_ENV['appName'] . '重置密码';
+        $subject = $_ENV['appName'] . ' - Reset Password';
         $resetUrl = $_ENV['baseUrl'] . '/password/token/' . $pwdRst->token;
         try {
             $result = Mail::send($email, $subject, 'password/reset.tpl', [
