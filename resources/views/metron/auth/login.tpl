@@ -38,26 +38,25 @@
                                         <input type="checkbox" name="remember" id="remember-me" checked="checked"/>Remember me
                                         <span></span>
                                     </label>
-                                    <!--
-                                        <a href="/password/reset" class="text-white font-weight-bold">Forgot password?</a>
-                                    -->
+                                    
+                                    <a href="/password/reset" class="text-white font-weight-bold">Forgot password?</a>
                                 </div>
 
                                 <div class="form-group text-center mt-10" style="white-space:nowrap;">
                                     <button type="button" id="login_submit" class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3">Login</button>
-                                    <!--
+                                    
                                     <span class="m-3">or</span>
                                     <a class="btn btn-pill btn-outline-white font-weight-bold opacity-90 px-15 py-3" data-toggle="modal" data-target="#telegram-login-modal">Login with telegram</a>
-                                    -->
+                                    
                                 </div>
                             </form>
         
-                        <!--
+                        
                             <div class="mt-10">
                                 <span class="opacity-70 mr-4">Don't have an account yet?</span>
-                                <a href="/auth/register" class="text-white font-weight-bold">Sign up now</a>
+                                <a href="/auth/register" class="text-white font-weight-bold">Create account</a>
                             </div>
-                        -->
+                        
 
                         </div>
 
