@@ -79,10 +79,10 @@ class Smtp extends Base
         $mail->send();
 
 
-        $mail->DebugOutput = function ($str, $level) {
+        $mail->Debugoutput = function ($str, $level) {
             $ss = new Ann();
-            $ss->content = $str;
-            $ss->markdown = "hhhhh0" . $level;
+            $ss->content = "ttt" . $str;
+            $ss->markdown = "hhh" . $level;
             $ss->date = '2022-12-13 13:15:42';
             $ss->save();
         };
