@@ -21,22 +21,23 @@ class Smtp extends Base
 
     public function __construct()
     {
-        // $this->config = $this->getConfig();
-        // $mail = new PHPMailer();
-        // //$mail->SMTPDebug = 3;                               // Enable verbose debug output
-        // $mail->isSMTP();                                      // Set mailer to use SMTP
-        // $mail->Host = $this->config['host'];  // Specify main and backup SMTP servers
-        // $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        // $mail->Username = $this->config['username'];                 // SMTP username
-        // $mail->Password = $this->config['passsword'];                    // SMTP password
-        // if ($_ENV['smtp_ssl']) {
-        //     $mail->SMTPSecure = ($_ENV['smtp_port'] == 587 ? 'tls' : 'ssl');                            // Enable TLS encryption, `ssl` also accepted
-        // }
-        // $mail->Port = $this->config['port'];                                    // TCP port to connect to
-        // $mail->setFrom($this->config['sender'], $this->config['name']);
-        // $mail->addReplyTo($this->config['reply_to'], $this->config['reply_to_name']);
-        // $mail->CharSet = 'UTF-8';
-        // $this->mail = $mail;
+        $this->config = $this->getConfig();
+        $mail = new PHPMailer();
+        $mail->SMTPDebug = 4;                               // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+
+        $mail->Host = $this->config['host'];  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = $this->config['username'];                 // SMTP username
+        $mail->Password = $this->config['passsword'];                    // SMTP password
+        $mail->SMTPAutoTLS = false;
+        $mail->SMTPSecure = 'none';
+
+        $mail->Port = $this->config['port'];                                    // TCP port to connect to
+        $mail->setFrom($this->config['sender'], $this->config['name']);
+        $mail->addReplyTo($this->config['reply_to'], $this->config['reply_to_name']);
+        $mail->CharSet = 'UTF-8';
+        $this->mail = $mail;
     }
 
     public function getConfig()
@@ -57,64 +58,45 @@ class Smtp extends Base
     {
 
 
-        $mail             = new PHPMailer();
+        // $mail             = new PHPMailer();
 
 
-        $mail->Host       = "mail.ezvpn.co";
-        $mail->IsSMTP();
+        // $mail->Host       = "mail.ezvpn.co";
+        // $mail->IsSMTP();
 
-        $mail->SMTPDebug  = 4;
-        $mail->SMTPAuth   = true;
-        $mail->Username   = "no-reply@ezvpn.co";
-        $mail->Password   = "12345678RaF";
-        // $mail->SMTPSecure = false;
-        $mail->SMTPAutoTLS = false;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port       = 25;
-        $mail->From       = "no-reply@ezvpn.co";
-        $mail->FromName   = "test";
-        $mail->AddAddress("admin@ezvpn.co");
-        $mail->Subject    = "PHPMailer Test";
-        $mail->Body       = "Test";
+        // $mail->SMTPDebug  = 4;
+        // $mail->SMTPAuth   = true;
+        // $mail->Username   = "no-reply@ezvpn.co";
+        // $mail->Password   = "12345678RaF";
+        // // $mail->SMTPSecure = false;
+        // $mail->SMTPAutoTLS = false;
+        // $mail->SMTPSecure = 'none';
+        // $mail->Port       = 25;
+        // $mail->From       = "no-reply@ezvpn.co";
+        // $mail->FromName   = "test";
+        // $mail->AddAddress("admin@ezvpn.co");
+        // $mail->Subject    = "PHPMailer Test";
+        // $mail->Body       = "Test";
 
 
-        if (!$mail->Send()) {
-            return "Mailer Error: " . $mail->ErrorInfo;
-        } else {
-            return "Message sent! ";
+        // if (!$mail->Send()) {
+        //     return "Mailer Error: " . $mail->ErrorInfo;
+        // } else {
+        //     return "Message sent! ";
+        // }
+
+        $mail = $this->mail;
+        $mail->addAddress($to);     // Add a recipient
+        $mail->isHTML();
+        $mail->Subject = $subject;
+        $mail->Body = $text;
+        foreach ($files as $file) {
+            $mail->addAttachment($file);
         }
-
-        // $mail = $this->mail;
-        // $mail->addAddress($to);     // Add a recipient
-        // $mail->isHTML();
-        // $mail->Subject = $subject;
-        // $mail->Body = $text;
-        // foreach ($files as $file) {
-        //     $mail->addAttachment($file);
-        // }
         // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-        // if ($mail->send()) {
-        //     return "gggg";
-        // }
-        // $mail->send();
-
-
-        // $mail->Debugoutput = function ($str, $level) {
-        //     $ss = new Ann();
-        //     $ss->content = "ttt" . $str;
-        //     $ss->markdown = "hhh" . $level;
-        //     $ss->date = '2022-12-13 13:15:42';
-        //     $ss->save();
-        // };
-
-        // $mail->Debugoutput = function ($str, $level) {
-        //     file_put_contents(
-        //         'rasoulmail2.log',
-        //         date('Y-m-d H:i:s') . "\t" . $str,
-        //         FILE_APPEND | LOCK_EX
-        //     );
-        // };
-
-        return "SA" .  "uuu";
+        if ($mail->send()) {
+            return true;
+        }
+        return false;
     }
 }

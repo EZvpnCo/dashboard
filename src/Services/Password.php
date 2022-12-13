@@ -25,7 +25,7 @@ class Password
         $pwdRst->expire_time = time() + 3600 * 24; // @todo
         $pwdRst->token = Tools::genRandomChar(64);
         if (!$pwdRst->save()) {
-            return "oooo";
+            return false;
         }
         $subject = $_ENV['appName'] . ' - Reset Password';
         $resetUrl = $_ENV['baseUrl'] . '/password/token/' . $pwdRst->token;
@@ -35,12 +35,10 @@ class Password
                 $subject,
                 'password/reset.tpl',
                 ['resetUrl' => $resetUrl],
-                [
-                    //BASE_PATH.'/public/assets/email/styles.css'
-                ]
+                []
             );
         } catch (Exception $e) {
-            return $e;
+            return false;
         }
         return $result;
     }
