@@ -130,7 +130,7 @@ $_ENV['notify_limit_value'] = 20; //When the previous item is per, fill in the p
 
 // Subscription settings ------------------------------------------- -----------------------------------------
 $_ENV['Subscribe'] = true; //Whether this site provides subscription function
-$_ENV['subUrl'] = 'https://subscription.ezvpn.co' . '/user/'; //Subscription address, if it needs to be the same as the site name, please do not modify
+$_ENV['subUrl'] = 'https://subscription.ezvpn.co' . '/token/'; //Subscription address, if it needs to be the same as the site name, please do not modify
 $_ENV['mergeSub'] = true; //merge subscription settings optional false / true
 $_ENV['enable_sub_extend'] = true; // Whether to enable the default display of traffic remaining, account expiration time and information in sub_message in the subscription
 
