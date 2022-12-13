@@ -235,9 +235,9 @@ $_MT['shop_activity_buy_time'] = '2020/03/15 00:00:00'; //The activity ends at t
 $_MT['shop_Experience_true'] = true; // Whether to display trial packages
 $_MT['shop_Experience_pos'] = 'top'; // trial package card position top : put in front of the regular package, bottom : put behind the regular package
 $_MT['shop_Experience_plan'] = [
-    'Trial A' => 1, // One trial package ID per line, can be added or deleted, recommended between 1-4
-    'Trial B' => 2,
-    'Try C' => 3,
+    'Trial(A)' => 1, // One trial package ID per line, can be added or deleted, recommended between 1-4
+    'Trial(B)' => 2,
+    'Trial(C)' => 3,
 ];
 
 /**
@@ -245,32 +245,28 @@ $_MT['shop_Experience_plan'] = [
  * The support features of the product are directly edited in the [Service Support] of the package, and the format is true-global node distribution; false-fast customer service response minus sign on the left true: means support false: means not supported The right side is text, with English semicolons; separated
  */
 $_MT['shop_plan'] = array(
-    'Bronze' => array(
+    'Gaming' => array(
         'Description' => array(
-            '1 Month' => 1,
-            '3 Month' => 2,
-            '6 Month' => 3,
+            '1-Device' => 4,
+            '5-Device' => 5,
+            'Club' => 6,
+            'Club(VIP)' => 7,
         ),
     ),
-    'Silver' => array(
+    'Trading' => array(
         'Description' => array(
-            '1 Month' => 4,
-            '3 Month' => 5,
-            '6 Month' => 6,
+            '1-Device' => 8,
+            '5-Device' => 9,
+            'Company' => 10,
+            'Company(VIP)' => 11,
         ),
     ),
-    'Golden' => array(
+    'Daily' => array(
         'Description' => array(
-            '1 Month' => 7,
-            '3 Month' => 8,
-            '6 Month' => 9,
-        ),
-    ),
-    'Diamond' => array(
-        'Description' => array(
-            '1 Month' => 7,
-            '3 Month' => 8,
-            '6 Month' => 9,
+            '1-Device' => 12,
+            '5-Device' => 13,
+            '1-Device(VIP)' => 14,
+            '5-Device(VIP)' => 15,
         ),
     ),
 );
