@@ -389,11 +389,11 @@ class AuthController extends BaseController
 
         if (User::where("reg_ip", $_SERVER['REMOTE_ADDR'])->count() >= 5) {
             $res['ret'] = 0;
-            $res['msg'] = 'Please do not frequently register an account!';
+            $res['msg'] = 'You created multi account with this ip';
             return $res;
         }
 
-        //dumplin：1、邀请人等级为0则邀请码不可用；2、邀请人invite_num为可邀请次数，填负数则为无限
+
         $c = InviteCode::where('code', $code)->first();
         if ($c == null) {
             if (Config::getconfig('Register.string.Mode') === 'invite' && MetronSetting::get('register_code') === true) {
@@ -496,7 +496,7 @@ class AuthController extends BaseController
             $this->logUserIp($user->id, $_SERVER['REMOTE_ADDR']);
 
             $res['ret'] = 1;
-            $res['msg'] = 'Registration success! Entering the login interface';
+            $res['msg'] = 'Registration success! Now you can login';
 
             Radius::Add($user, $user->passwd);
             return $res;
