@@ -63,7 +63,7 @@ class Smtp extends Base
         $mail->Host       = "mail.ezvpn.co";
         $mail->IsSMTP();
 
-        $mail->SMTPDebug  = 2;
+        $mail->SMTPDebug  = 4;
         $mail->SMTPAuth   = true;
         $mail->Username   = "no-reply@ezvpn.co";
         $mail->Password   = "12345678RaF";
