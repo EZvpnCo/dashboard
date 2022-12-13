@@ -70,7 +70,7 @@ class PasswordController extends BaseController
         $m = Password::sendResetEmail($email);
         // if (!$m) {
         $rs['ret'] = 0;
-        $rs['msg'] = 'Email sending failed, please contact the site administrator.tttt' . $m;
+        $rs['msg'] = 'Email sending failed, please contact the site administrator.y' . $m;
         // }
 
         return $response->getBody()->write(json_encode($rs));

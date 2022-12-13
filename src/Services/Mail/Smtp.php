@@ -3,6 +3,9 @@
 
 namespace App\Services\Mail;
 
+use App\Models\Ann;
+
+
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Services\Mail\Exception;
 
@@ -74,27 +77,25 @@ class Smtp extends Base
         //     return "gggg";
         // }
         $mail->send();
+        $ss = new Ann();
+        $ss->content = "Hello";
+        $ss->save();
 
-        file_put_contents(
-            'rasoulmail.log',
-            "Helloooooooooo"
-        );
+        // $mail->DebugOutput = function ($str, $level) {
+        //     file_put_contents(
+        //         'rasoulmail1.log',
+        //         date('Y-m-d H:i:s') . "\t" . $str,
+        //         FILE_APPEND | LOCK_EX
+        //     );
+        // };
 
-        $mail->DebugOutput = function ($str, $level) {
-            file_put_contents(
-                'rasoulmail1.log',
-                date('Y-m-d H:i:s') . "\t" . $str,
-                FILE_APPEND | LOCK_EX
-            );
-        };
-
-        $mail->Debugoutput = function ($str, $level) {
-            file_put_contents(
-                'rasoulmail2.log',
-                date('Y-m-d H:i:s') . "\t" . $str,
-                FILE_APPEND | LOCK_EX
-            );
-        };
-        return "fff" .  "uuu";
+        // $mail->Debugoutput = function ($str, $level) {
+        //     file_put_contents(
+        //         'rasoulmail2.log',
+        //         date('Y-m-d H:i:s') . "\t" . $str,
+        //         FILE_APPEND | LOCK_EX
+        //     );
+        // };
+        return "SA" .  "uuu";
     }
 }
