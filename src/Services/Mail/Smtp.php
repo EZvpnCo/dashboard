@@ -4,6 +4,8 @@
 namespace App\Services\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use App\Services\Mail\Exception;
+
 use App\Services\Config;
 
 class Smtp extends Base
@@ -47,6 +49,8 @@ class Smtp extends Base
 
     public function send($to, $subject, $text, $files)
     {
+
+
         $mail = new PHPMailer();
         $mail->SMTPDebug = 3;
         $mail->SMTPAuth = true;
@@ -70,10 +74,10 @@ class Smtp extends Base
         //     return "gggg";
         // }
         $mail->send();
-        $debug = '';
+
         $mail->Debugoutput = function ($str, $level) {
-            $GLOBALS['debug'] .= "$level: $str\n";
+            return "ddd" . "trrrrr";
         };
-        return "+" . $debug . "*";
+        return "fff" .  "uuu";
     }
 }
