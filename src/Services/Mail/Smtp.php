@@ -23,7 +23,7 @@ class Smtp extends Base
     {
         $this->config = $this->getConfig();
         $mail = new PHPMailer();
-        $mail->SMTPDebug = 4;                               // Enable verbose debug output
+        $mail->SMTPDebug = 0;                               // Enable verbose debug output
         $mail->isSMTP();                                      // Set mailer to use SMTP
 
         $mail->Host = $this->config['host'];  // Specify main and backup SMTP servers
@@ -56,44 +56,14 @@ class Smtp extends Base
 
     public function send($to, $subject, $text, $files)
     {
-
-
-        // $mail             = new PHPMailer();
-
-
-        // $mail->Host       = "mail.ezvpn.co";
-        // $mail->IsSMTP();
-
-        // $mail->SMTPDebug  = 4;
-        // $mail->SMTPAuth   = true;
-        // $mail->Username   = "no-reply@ezvpn.co";
-        // $mail->Password   = "12345678RaF";
-        // // $mail->SMTPSecure = false;
-        // $mail->SMTPAutoTLS = false;
-        // $mail->SMTPSecure = 'none';
-        // $mail->Port       = 25;
-        // $mail->From       = "no-reply@ezvpn.co";
-        // $mail->FromName   = "test";
-        // $mail->AddAddress("admin@ezvpn.co");
-        // $mail->Subject    = "PHPMailer Test";
-        // $mail->Body       = "Test";
-
-
-        // if (!$mail->Send()) {
-        //     return "Mailer Error: " . $mail->ErrorInfo;
-        // } else {
-        //     return "Message sent! ";
-        // }
-
         $mail = $this->mail;
-        $mail->addAddress($to);     // Add a recipient
+        $mail->addAddress($to);
         $mail->isHTML();
         $mail->Subject = $subject;
         $mail->Body = $text;
         foreach ($files as $file) {
             $mail->addAttachment($file);
         }
-        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         if ($mail->send()) {
             return true;
         }
