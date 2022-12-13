@@ -48,6 +48,15 @@ class Smtp extends Base
     public function send($to, $subject, $text, $files)
     {
         $mail = new PHPMailer();
+        $mail->SMTPDebug = true;
+        $mail->SMTPAuth = true;
+        $mail->CharSet = 'utf-8';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = '465';
+        $mail->Username = 'xxxxx@gmail.com';
+        $mail->Password = 'xxxxx';
+        $mail->Mailer = 'smtp';
         // $mail = $this->mail;
         // $mail->addAddress($to);     // Add a recipient
         // $mail->isHTML();
