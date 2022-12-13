@@ -40,7 +40,7 @@ class Password
                 ]
             );
         } catch (Exception $e) {
-            return $e;
+            return "mmm";
         }
         return $result;
     }
