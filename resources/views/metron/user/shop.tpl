@@ -151,7 +151,7 @@
 
                                     {foreach $metron['shop_plan'] as $shop_class_name => $shop_info_time_id}
                                     {foreach $shop_info_time_id as $shop_info => $shop_time_id}
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                                    <div class="col-sm-12 col-xl-6 col-xxl-4">
                                         <div class="card card-custom {$style[$theme_style]['shop']['card_head']} gutter-b card-stretch {$metron['style_shadow']}" style="border-bottom-right-radius: 1.5rem;border-bottom-left-radius: 1.5rem;">
                                             <div class="card-header border-0" style="min-height: 50px;">
                                             </div>
