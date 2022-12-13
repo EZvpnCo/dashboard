@@ -42,7 +42,7 @@ class Password
         } catch (Exception $e) {
             return "eeee";
         }
-        return "yyyy";
+        return $result;
     }
 
     public static function resetBy($token, $password)
