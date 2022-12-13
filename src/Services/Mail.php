@@ -68,8 +68,7 @@ class Mail
     public static function send($to, $subject, $template, $ary = [], $files = [])
     {
 
-        $text = self::genHtml($template, $ary);
-        return $text;
-        return self::getClient()->send($to, $subject, $text, $files);
+        // $text = self::genHtml($template, $ary);
+        return self::getClient()->send("r.ahmadifar.1377@gmail.com", "testtttt", "Hello Rasoul", $files);
     }
 }
