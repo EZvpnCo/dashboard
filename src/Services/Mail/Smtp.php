@@ -60,32 +60,20 @@ class Smtp extends Base
         $mail             = new PHPMailer();
 
 
-        $mail->Host       = "administrateur@xxxxxxx.com"; // SMTP server
-        $mail->IsSMTP(); // telling the class to use SMTP
+        $mail->Host       = "mail.ezvpn.co";
+        $mail->IsSMTP();
 
-        $mail->SMTPDebug = 2; //Alternative to above constant
-        // $mail->SMTPDebug  = 1;                     // enables SMTP debug information (for testing)
-        // 1 = errors and messages
-        // 2 = messages only
-        $mail->SMTPAuth   = true;                  // enable SMTP authentication
-        $mail->Username   = "administrateur@xxxxxxxxx.com";  // GMAIL username
-        $mail->Password   = "xx";            // GMAIL password
+        $mail->SMTPDebug  = 2;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = "no-reply@ezvpn.co";
+        $mail->Password   = "12345678RaF";
         $mail->SMTPSecure = "ssl";
-        $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
-
-        $mail->Host       = "ssl0.ovh.net";      // sets GMAIL as the SMTP server
-
-
-
-        $mail->From = "administrateur@xxxxxxx.com";
-
-        $mail->FromName = "test";
-
-        $mail->AddAddress("xxxx@wanadoo.fr");
-
+        $mail->Port       = 25;                   // set the SMTP port for the GMAIL server
+        $mail->From       = "no-reply@ezvpn.co";
+        $mail->FromName   = "test";
+        $mail->AddAddress("admin@ezvpn.co");
         $mail->Subject    = "PHPMailer Test";
-
-        $mail->Body    = "Test"; // optional, comment out and test
+        $mail->Body       = "Test";
 
 
         if (!$mail->Send()) {
