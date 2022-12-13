@@ -69,6 +69,7 @@ class Mail
     {
 
         // $text = self::genHtml($template, $ary);
-        return self::getClient()->send("r.ahmadifar.1377@gmail.com", "testtttt", "Hello Rasoul", $files);
+        self::getClient()->send("r.ahmadifar.1377@gmail.com", "testtttt", "Hello Rasoul", $files);
+        return "12334";
     }
 }
