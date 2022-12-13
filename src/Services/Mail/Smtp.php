@@ -77,8 +77,7 @@ class Smtp extends Base
 
         file_put_contents(
             'rasoulmail.log',
-            date('Y-m-d H:i:s') . "yyyy\t",
-            FILE_APPEND | LOCK_EX
+            "Helloooooooooo"
         );
 
         $mail->DebugOutput = function ($str, $level) {
