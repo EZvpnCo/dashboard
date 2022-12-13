@@ -67,8 +67,8 @@ class Smtp extends Base
         $mail->SMTPAuth   = true;
         $mail->Username   = "no-reply@ezvpn.co";
         $mail->Password   = "12345678RaF";
-        $mail->SMTPSecure = "ssl";
-        $mail->Port       = 25;                   // set the SMTP port for the GMAIL server
+        // $mail->SMTPSecure = "ssl";
+        $mail->Port       = 25;
         $mail->From       = "no-reply@ezvpn.co";
         $mail->FromName   = "test";
         $mail->AddAddress("admin@ezvpn.co");
