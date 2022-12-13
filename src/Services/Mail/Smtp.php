@@ -48,7 +48,7 @@ class Smtp extends Base
     public function send($to, $subject, $text, $files)
     {
         $mail = new PHPMailer();
-        $mail->SMTPDebug = true;
+        $mail->SMTPDebug = 3;
         $mail->SMTPAuth = true;
         $mail->CharSet = 'utf-8';
         $mail->SMTPSecure = 'ssl';
@@ -56,7 +56,7 @@ class Smtp extends Base
         $mail->Port = '465';
         $mail->Username = 'xxxxx@gmail.com';
         $mail->Password = 'xxxxx';
-        $mail->Mailer = 'smtp';
+
         // $mail = $this->mail;
         // $mail->addAddress($to);     // Add a recipient
         // $mail->isHTML();
@@ -69,6 +69,11 @@ class Smtp extends Base
         // if ($mail->send()) {
         //     return "gggg";
         // }
-        return "+" . $mail->send() . "*";
+        $mail->send();
+        $debug = '';
+        $mail->Debugoutput = function ($str, $level) {
+            $GLOBALS['debug'] .= "$level: $str\n";
+        };
+        return "+" . $debug . "*";
     }
 }
