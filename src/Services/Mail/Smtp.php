@@ -61,7 +61,7 @@ class Smtp extends Base
 
 
         $mail->Host       = "administrateur@xxxxxxx.com"; // SMTP server
-        //$mail->IsSMTP(); // telling the class to use SMTP
+        $mail->IsSMTP(); // telling the class to use SMTP
 
         $mail->SMTPDebug = 2; //Alternative to above constant
         // $mail->SMTPDebug  = 1;                     // enables SMTP debug information (for testing)
