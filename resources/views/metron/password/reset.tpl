@@ -3,7 +3,6 @@
     <head>
         <title>Forget password &mdash; {$config["appName"]}</title>
         {include file='include/auth/head.tpl'}
-
                         <div class="login-signin">
                             <div class="mb-10">
                                 <h3>Forget password</h3>
@@ -23,7 +22,6 @@
                                 <a href="/auth/login" class="text-white font-weight-bold">Back to login</a>
                             </div>
                         </div>
-
                         {include file='include/auth/scripts.tpl'}
     </body>
 </html>
