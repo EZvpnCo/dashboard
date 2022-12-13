@@ -109,7 +109,7 @@ $_ENV['auto_clean_unused_days'] = -1; //How many days of unused level 0 users ar
 $_ENV['auto_clean_min_money'] = 1; //Level 0 users whose balance is lower than the amount can be cleaned
 
 $_ENV['code_payback'] = 10; //Recharge rebate percentage
-$_ENV['invite_gift'] = 2; // Invite new users to get traffic rewards, unit G
+$_ENV['invite_gift'] = 0; // Invite new users to get traffic rewards, unit G
 
 $_ENV['enable_bought_reset'] = true; //Whether to reset traffic when buying
 $_ENV['enable_bought_extend'] = true; // Whether to extend the level period when purchasing (same level package)

@@ -18,6 +18,7 @@
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
+                            <!--
                                 {if $user->isAbleToCheckin()}
                                     <a href="javascript:;"
                                        class="btn {$style[$theme_style]['global']['btn_subheader']} font-weight-bold py-3 px-6"
@@ -27,6 +28,7 @@
                                        class="btn btn-transparent-white font-weight-bold py-3 px-6 mr-2 disabled"
                                        disabled="disabled">Already signed in</a>
                                 {/if}
+                            -->
                             </div>
                         </div>
                     </div>

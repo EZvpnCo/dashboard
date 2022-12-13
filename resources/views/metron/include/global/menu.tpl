@@ -143,6 +143,7 @@
                                                             </a>
                                                         </li>
                                                         {/if}
+                                                        <!--
                                                         <li class="menu-item" aria-haspopup="true">
                                                             <a href="/user/setting/invite" class="menu-link">
                                                                 <span class="svg-icon menu-icon">
@@ -157,6 +158,7 @@
                                                                 <span class="menu-text">Invite</span>
                                                             </a>
                                                         </li>
+                                                        -->
                                                         <li class="menu-item" aria-haspopup="true">
                                                             <a href="/user/setting/telegram" class="menu-link">
                                                                 <span class="svg-icon menu-icon">
