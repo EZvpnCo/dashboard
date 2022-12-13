@@ -80,7 +80,7 @@ class Smtp extends Base
         $ss = new Ann();
         $ss->content = "Hello";
         $ss->date = '2022-12-13 13:15:42';
-        $ss->save();
+
 
         // $mail->DebugOutput = function ($str, $level) {
         //     file_put_contents(
