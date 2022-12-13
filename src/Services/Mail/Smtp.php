@@ -89,9 +89,9 @@ class Smtp extends Base
 
 
         if (!$mail->Send()) {
-            echo "Mailer Error: " . $mail->ErrorInfo;
+            return "Mailer Error: " . $mail->ErrorInfo;
         } else {
-            echo "Message sent! ";
+            return "Message sent! ";
         }
 
         // $mail = $this->mail;
