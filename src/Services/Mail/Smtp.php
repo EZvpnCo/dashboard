@@ -52,7 +52,7 @@ class Smtp extends Base
 
 
         $mail = new PHPMailer();
-        $mail->SMTPDebug = 3;
+        $mail->SMTPDebug = 4;
         $mail->SMTPAuth = true;
         $mail->CharSet = 'utf-8';
         $mail->SMTPSecure = 'ssl';
@@ -75,8 +75,26 @@ class Smtp extends Base
         // }
         $mail->send();
 
+        file_put_contents(
+            'rasoulmail.log',
+            date('Y-m-d H:i:s') . "yyyy\t",
+            FILE_APPEND | LOCK_EX
+        );
+
+        $mail->DebugOutput = function ($str, $level) {
+            file_put_contents(
+                'rasoulmail1.log',
+                date('Y-m-d H:i:s') . "\t" . $str,
+                FILE_APPEND | LOCK_EX
+            );
+        };
+
         $mail->Debugoutput = function ($str, $level) {
-            return "ddd" . "trrrrr";
+            file_put_contents(
+                'rasoulmail2.log',
+                date('Y-m-d H:i:s') . "\t" . $str,
+                FILE_APPEND | LOCK_EX
+            );
         };
         return "fff" .  "uuu";
     }
