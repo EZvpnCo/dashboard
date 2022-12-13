@@ -40,9 +40,9 @@ class Password
                 ]
             );
         } catch (Exception $e) {
-            return "mmm";
+            return "eeee";
         }
-        return $result;
+        return "yyyy";
     }
 
     public static function resetBy($token, $password)
