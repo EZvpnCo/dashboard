@@ -59,6 +59,6 @@ class Smtp extends Base
         // if ($mail->send()) {
         //     return "gggg";
         // }
-        return $mail->send();
+        return "+" . $mail->send() . "*";
     }
 }
