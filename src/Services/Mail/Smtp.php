@@ -11,6 +11,9 @@ use App\Services\Mail\Exception;
 
 use App\Services\Config;
 
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 class Smtp extends Base
 {
     private $mail;
@@ -54,15 +57,42 @@ class Smtp extends Base
     {
 
 
-        $mail = new PHPMailer();
-        $mail->SMTPDebug = 4;
-        $mail->SMTPAuth = true;
-        $mail->CharSet = 'utf-8';
-        $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = '465';
-        $mail->Username = 'xxxxx@gmail.com';
-        $mail->Password = 'xxxxx';
+        $mail             = new PHPMailer();
+
+
+        $mail->Host       = "administrateur@xxxxxxx.com"; // SMTP server
+        //$mail->IsSMTP(); // telling the class to use SMTP
+
+        $mail->SMTPDebug = 2; //Alternative to above constant
+        // $mail->SMTPDebug  = 1;                     // enables SMTP debug information (for testing)
+        // 1 = errors and messages
+        // 2 = messages only
+        $mail->SMTPAuth   = true;                  // enable SMTP authentication
+        $mail->Username   = "administrateur@xxxxxxxxx.com";  // GMAIL username
+        $mail->Password   = "xx";            // GMAIL password
+        $mail->SMTPSecure = "ssl";
+        $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+
+        $mail->Host       = "ssl0.ovh.net";      // sets GMAIL as the SMTP server
+
+
+
+        $mail->From = "administrateur@xxxxxxx.com";
+
+        $mail->FromName = "test";
+
+        $mail->AddAddress("xxxx@wanadoo.fr");
+
+        $mail->Subject    = "PHPMailer Test";
+
+        $mail->Body    = "Test"; // optional, comment out and test
+
+
+        if (!$mail->Send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            echo "Message sent! ";
+        }
 
         // $mail = $this->mail;
         // $mail->addAddress($to);     // Add a recipient
@@ -76,16 +106,16 @@ class Smtp extends Base
         // if ($mail->send()) {
         //     return "gggg";
         // }
-        $mail->send();
+        // $mail->send();
 
 
-        $mail->Debugoutput = function ($str, $level) {
-            $ss = new Ann();
-            $ss->content = "ttt" . $str;
-            $ss->markdown = "hhh" . $level;
-            $ss->date = '2022-12-13 13:15:42';
-            $ss->save();
-        };
+        // $mail->Debugoutput = function ($str, $level) {
+        //     $ss = new Ann();
+        //     $ss->content = "ttt" . $str;
+        //     $ss->markdown = "hhh" . $level;
+        //     $ss->date = '2022-12-13 13:15:42';
+        //     $ss->save();
+        // };
 
         // $mail->Debugoutput = function ($str, $level) {
         //     file_put_contents(
@@ -94,6 +124,7 @@ class Smtp extends Base
         //         FILE_APPEND | LOCK_EX
         //     );
         // };
+
         return "SA" .  "uuu";
     }
 }
