@@ -25,18 +25,24 @@ class Password
         $pwdRst->expire_time = time() + 3600 * 24; // @todo
         $pwdRst->token = Tools::genRandomChar(64);
         if (!$pwdRst->save()) {
-            return false;
+            return "false";
         }
         $subject = $_ENV['appName'] . ' - Reset Password';
         $resetUrl = $_ENV['baseUrl'] . '/password/token/' . $pwdRst->token;
         try {
-            $result = Mail::send($email, $subject, 'password/reset.tpl', [
-                'resetUrl' => $resetUrl
-            ], [
-                //BASE_PATH.'/public/assets/email/styles.css'
-            ]);
+            $result = Mail::send(
+                $email,
+                $subject,
+                'password/reset.tpl',
+                [
+                    'resetUrl' => $resetUrl
+                ],
+                [
+                    //BASE_PATH.'/public/assets/email/styles.css'
+                ]
+            );
         } catch (Exception $e) {
-            return false;
+            return $e;
         }
         return $result;
     }
