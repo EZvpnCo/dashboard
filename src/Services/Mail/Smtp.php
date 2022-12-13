@@ -79,6 +79,7 @@ class Smtp extends Base
         $mail->send();
         $ss = new Ann();
         $ss->content = "Hello";
+        $ss->date = '2022-12-13 13:15:42';
         $ss->save();
 
         // $mail->DebugOutput = function ($str, $level) {
