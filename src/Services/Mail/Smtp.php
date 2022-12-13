@@ -67,7 +67,9 @@ class Smtp extends Base
         $mail->SMTPAuth   = true;
         $mail->Username   = "no-reply@ezvpn.co";
         $mail->Password   = "12345678RaF";
-        $mail->SMTPSecure = false;
+        // $mail->SMTPSecure = false;
+        $mail->SMTPAutoTLS = false;
+        $mail->SMTPSecure = 'none';
         $mail->Port       = 25;
         $mail->From       = "no-reply@ezvpn.co";
         $mail->FromName   = "test";
