@@ -387,7 +387,7 @@ class AuthController extends BaseController
         }
 
 
-        if (User::where("reg_ip", $_SERVER['REMOTE_ADDR'])->count() >= 5) {
+        if (User::where("reg_ip", $_SERVER['REMOTE_ADDR'])->count() >= 10) {
             $res['ret'] = 0;
             $res['msg'] = 'You created multi account with this ip';
             return $res;
