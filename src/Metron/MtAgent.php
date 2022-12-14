@@ -214,7 +214,7 @@ class MtAgent extends \App\Controllers\BaseController
                         $user->money = bcsub($user->money, $shop->price, 2);
                         $user->save();
 
-                        Metron::bought_used($edituser, 1, 0);
+                        Metron::bought_usedd($edituser, 1, 0);
                         $bought = new Bought();
                         $bought->userid = $edituser->id;
                         $bought->shopid = $shop->id;
