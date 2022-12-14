@@ -208,7 +208,7 @@ class MtAgent extends \App\Controllers\BaseController
                     if ($shop != null) {
                         if ($user->money < $shop->price) {
                             $res['ret'] = 0;
-                            $res['msg'] = '套餐开通失败，原因是您的钱包余额不足!';
+                            $res['msg'] = 'Package activation failed because your wallet balance is insufficient!';
                             return $response->getBody()->write(json_encode($res));
                         }
                         $user->money = bcsub($user->money, $shop->price, 2);
@@ -228,16 +228,16 @@ class MtAgent extends \App\Controllers\BaseController
 
                         Metron::add_payback($user, $edituser, $shop->price);
                         $res['ret'] = 1;
-                        $res['msg'] = '套餐开通成功';
+                        $res['msg'] = 'Package opened successfully';
                         return $response->getBody()->write(json_encode($res));
                     } else {
                         $res['ret'] = 0;
-                        $res['msg'] = '套餐开通失败，原因是套餐不存在!';
+                        $res['msg'] = 'Package activation failed because the package does not exist!';
                         return $response->getBody()->write(json_encode($res));
                     }
                 } else {
                     $res['ret'] = 1;
-                    $res['msg'] = '不开通套餐无需保存';
+                    $res['msg'] = 'There is no need to save if the package is not activated';
                     return $response->getBody()->write(json_encode($res));
                 }
                 break;
