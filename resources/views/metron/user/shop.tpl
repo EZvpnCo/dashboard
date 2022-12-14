@@ -281,7 +281,8 @@
                                                             <div class="row text-center {$style[$theme_style]['shop']['card_text']}">
                                                                 <div class="col pl-6 pt-6 pb-0">
                                                                     <div class="font-size-sm text-muted font-weight-bold">Traffic</div>
-                                                                    <div class="font-size-h4 font-weight-bolder">{$shop->bandwidth()} GB</div>
+                                                                    <!--<div class="font-size-h4 font-weight-bolder">{$shop->bandwidth()} GB</div>-->
+                                                                    <div class="font-size-h4 font-weight-bolder">Unlimited</div>
                                                                 </div>
                                                                 <div class="col pl-6 pt-6 pb-0">
                                                                     <div class="font-size-sm text-muted font-weight-bold">Reset cycle</div>
@@ -291,7 +292,7 @@
                                                             <div class="row text-center {$style[$theme_style]['shop']['card_text']}">
                                                                 <div class="col pl-6 pt-6 pb-0">
                                                                     <div class="font-size-sm text-muted font-weight-bold">Devices</div>
-                                                                    <div class="font-size-h4 font-weight-bolder">{if {$shop->connector()} == '0' }Unlimited{else}{$shop->connector()}Device{/if}</div>
+                                                                    <div class="font-size-h4 font-weight-bolder">{if {$shop->connector()} == '0' }Unlimited{else}{$shop->connector()} Device{/if}</div>
                                                                 </div>
                                                                 <div class="col pl-6 pt-6 pb-0">
                                                                     <div class="font-size-sm text-muted font-weight-bold">Peak rate</div>
