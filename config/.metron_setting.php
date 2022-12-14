@@ -249,38 +249,38 @@ $_MT['shop_plan'] = array(
         'Description' => array(
             '1 Device - 1 Month' => 4,
             '3 Device - 1 Month' => 5,
-            '5 Device - 1 Month' => 5,
-            '1 Device - 3 Month' => 4,
-            '3 Device - 3 Month' => 5,
-            '5 Device - 3 Month' => 5,
+            '5 Device - 1 Month' => 6,
+            '1 Device - 3 Month' => 7,
+            '3 Device - 3 Month' => 8,
+            '5 Device - 3 Month' => 9,
         ),
     ),
     'Daily(VIP)' => array(
         'Description' => array(
-            '1 Device - 1 Month' => 4,
-            '3 Device - 1 Month' => 5,
-            '5 Device - 1 Month' => 5,
-            '1 Device - 3 Month' => 4,
-            '3 Device - 3 Month' => 5,
-            '5 Device - 3 Month' => 5,
+            '1 Device - 1 Month' => 10,
+            '3 Device - 1 Month' => 11,
+            '5 Device - 1 Month' => 12,
+            '1 Device - 3 Month' => 13,
+            '3 Device - 3 Month' => 14,
+            '5 Device - 3 Month' => 15,
         ),
     ),
-    'Trading' => array(
-        'Description' => array(
-            '1-Device' => 8,
-            '5-Device' => 9,
-            'Company' => 10,
-            'Company(VIP)' => 11,
-        ),
-    ),
-    'Gaming' => array(
-        'Description' => array(
-            '1-Device' => 12,
-            '5-Device' => 13,
-            'Club' => 14,
-            'Club(VIP)' => 15,
-        ),
-    ),
+    // 'Trading' => array(
+    //     'Description' => array(
+    //         '1-Device' => 8,
+    //         '5-Device' => 9,
+    //         'Company' => 10,
+    //         'Company(VIP)' => 11,
+    //     ),
+    // ),
+    // 'Gaming' => array(
+    //     'Description' => array(
+    //         '1-Device' => 12,
+    //         '5-Device' => 13,
+    //         'Club' => 14,
+    //         'Club(VIP)' => 15,
+    //     ),
+    // ),
 );
 
 
