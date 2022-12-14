@@ -14,7 +14,7 @@
 {else}
     <link href="{$metron['assets_url']}/css/style/white/plugins.white.css" rel="stylesheet" type="text/css" />
     <link href="{$metron['assets_url']}/css/style/white/giatun.white.css" rel="stylesheet" type="text/css" />
-    <link href="{$metron['assets_url']}/css/style/white/style.white.css" rel="stylesheet" type="text/css" />
+    <link href="/theme/metron/css/style.white.css" rel="stylesheet" type="text/css" />
 {/if}
 <link href="/favicon.ico" rel="shortcut icon" />
 </head>

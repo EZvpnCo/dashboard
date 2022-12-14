@@ -245,7 +245,23 @@ $_MT['shop_Experience_plan'] = [
  * The support features of the product are directly edited in the [Service Support] of the package, and the format is true-global node distribution; false-fast customer service response minus sign on the left true: means support false: means not supported The right side is text, with English semicolons; separated
  */
 
-
+/**
+ 
+.nav.nav-pills.nav-primary .nav-link.active i {
+  color: #FFFFFF;
+}
+.nav.nav-pills.nav-primary .nav-link.active .nav-text {
+  color: #FFFFFF;
+  font-size: 16px !important;
+}
+.nav.nav-pills.nav-primary .nav-link i {
+  color: #969696;
+}
+.nav.nav-pills.nav-primary .nav-text {
+  color: #969696;
+  font-size: 16px !important;
+}
+ */
 
 $iMonth = '<i class="fas fa-calendar-alt"></i>';
 $iDevice = '<i class="fas fa-laptop"></i>';
@@ -258,20 +274,18 @@ $iFive = '5X';
 $_MT['shop_plan'] = array(
     'Daily' => array(
         'Description' => array(
-            ($iOne . $iDevice) . '<br>' . ($iOne . $iMonth)  => 4,
-            ($iFive . $iDevice) . '<br>' . ($iOne . $iMonth) => 5,
-            ($iOne . $iDevice) . '<br>' . ($iThree . $iMonth)  => 6,
-            ($iFive . $iDevice) . '<br>' . ($iThree . $iMonth) => 7
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth)  => 4,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 5,
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth)  => 6,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 7,
         ),
     ),
     'Daily(VIP)' => array(
         'Description' => array(
-            '1 Device - 1 Month' => 10,
-            '3 Device - 1 Month' => 11,
-            '5 Device - 1 Month' => 12,
-            '1 Device - 3 Month' => 13,
-            '3 Device - 3 Month' => 14,
-            '5 Device - 3 Month' => 15,
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth)  => 8,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 9,
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth)  => 10,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 11,
         ),
     ),
     // 'Trading' => array(
