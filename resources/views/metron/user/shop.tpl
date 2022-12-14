@@ -21,11 +21,26 @@
             .nav.nav-pills.nav-primary .show>.nav-link .nav-text, .nav.nav-pills.nav-primary .nav-link:hover:not(.active) .nav-text {
                 color: #3faf4c;
             }
-
             .nav.nav-pills.nav-primary .nav-link.active .nav-text {
                 color: #545454;
                 font-size: 16px !important;
             }
+
+            
+            .bg-radial-gradient-plan-1 .btn.btn-primary {
+                color: #FFFFFF;
+                background-color: #00ad12;
+                border-color: #00ad12;
+            }
+            .bg-radial-gradient-plan-1 .btn.btn-primary:hover:not(.btn-text) {
+                color: #FFFFFF;
+                background-color: #2aff6c;
+                border-color: #2aff6c;
+            }
+            .bg-radial-gradient-plan-1 .text-primary {
+                color: #00ad12 !important;
+            }
+
         </style>
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
