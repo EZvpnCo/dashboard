@@ -18,11 +18,10 @@
                 background-color: transparent;
                 border: 2px solid #3faf4c !important;
             }
-            .nav.nav-pills.nav-primary .show>.nav-link,
-            .nav.nav-pills.nav-primary .nav-link:hover:not(.active) {
+            .nav.nav-pills.nav-primary .show>.nav-link .nav-text, .nav.nav-pills.nav-primary .nav-link:hover:not(.active) .nav-text {
                 color: #3faf4c;
-                background-color: transparent;
             }
+
             .nav.nav-pills.nav-primary .nav-link.active .nav-text {
                 color: #545454;
                 font-size: 16px !important;
