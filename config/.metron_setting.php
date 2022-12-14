@@ -70,16 +70,9 @@ $_MT['invite_user_for'] = false; // Only users who are set as rebate rebates can
 $_MT['take_back_total'] = 1; // The amount to apply for transfer and withdrawal must be greater than the amount, 0 means no limit
 $_MT['agent_menu_enable'] = true; // The menu displays the agent center (the agent center requires additional Agent authorization, which cannot be used without purchase);
 $_MT['take_cash_enable'] = false; // Non-agents (invitation registration page) are allowed to apply for cash withdrawal, the subject needs to have Agent authorization, if there is no authorization, keep it closed, and the default is to withdraw cash to the wallet balance
-$_MT['take_account_type'] = ['Alipay', 'USDT-ERC20', 'USDT-TRC20']; // Allow the user to set the account type when setting the withdrawal account, which can be added in an array, just for the convenience of management and identification Withdrawal account type has no other function
+$_MT['take_account_type'] = ['USDT-TRC20']; // Allow the user to set the account type when setting the withdrawal account, which can be added in an array, just for the convenience of management and identification Withdrawal account type has no other function
 
-##### Membership level name ------------------------------------------ --------------------------------------------------
-$_MT['user_level'] = [ // level => corresponding name display
-    -1 => 'NotActive',
-    0 => 'Free membership',
-    1 => 'Bronze',
-    2 => 'Silver',
-    3 => 'Diamond',
-];
+
 ##### User Registration ------------------------------------------- --------------------------------------------------
 $_MT['register_code'] = false; // true: the invitation code is required for registration, false: the invitation code is optional (admin panel - user registration - change the registration mode to invite)
 $_MT['register_restricted_email'] = true; // When set to true, you must use the specified email suffix when registering;
@@ -221,7 +214,7 @@ $_MT['shop_formalities'] = 2; // The handling fee is deducted when the package i
 $_MT['advanceResetFlow'] = false; // advance reset flow
 $_MT['resetFlow_maxValue'] = 5; // When the user flow is lower than the number (GB), the reset is allowed, -1 means no limit
 
-$_MT['shop_pop_enable'] = true; // Display information on the top of the store package, which can be used to display promotions, offers, etc. to users
+$_MT['shop_pop_enable'] = false; // Display information on the top of the store package, which can be used to display promotions, offers, etc. to users
 $_MT['shop_pop_info'] = '
 <p>Available packages </p>
 '; // The content displayed at the top of the package is written in html
@@ -245,23 +238,23 @@ $_MT['shop_Experience_plan'] = [
  * The support features of the product are directly edited in the [Service Support] of the package, and the format is true-global node distribution; false-fast customer service response minus sign on the left true: means support false: means not supported The right side is text, with English semicolons; separated
  */
 
-/**
- 
-.nav.nav-pills.nav-primary .nav-link.active i {
-  color: #FFFFFF;
-}
-.nav.nav-pills.nav-primary .nav-link.active .nav-text {
-  color: #FFFFFF;
-  font-size: 16px !important;
-}
-.nav.nav-pills.nav-primary .nav-link i {
-  color: #969696;
-}
-.nav.nav-pills.nav-primary .nav-text {
-  color: #969696;
-  font-size: 16px !important;
-}
- */
+##### Membership level name ------------------------------------------ --------------------------------------------------
+$_MT['user_level'] = [ // level => corresponding name display
+    -1 => 'NotActive',
+    0 => 'Free',
+    1 => 'Normal',
+    2 => 'VIP',
+    3 => 'Full',
+];
+
+$_MT['node_class_name'] = [ // The name corresponding to the class of the node
+    0 => 'Public Nodes',
+    1 => 'Golden Nodes',
+    2 => 'Diamond Nodes',
+    3 => 'Super Nodes',
+];
+
+
 
 $iMonth = '<i class="fas fa-calendar-alt"></i>';
 $iDevice = '<i class="fas fa-laptop"></i>';
@@ -327,13 +320,7 @@ $_MT['enable_node_traffic_rate'] = true; // Whether to display the traffic rate 
 $_MT['enable_online_user'] = true; // Whether to display the online number of nodes
 $_MT['enable_node_load'] = true; // Whether to display the load of the node
 $_MT['node_flag_mode'] = 'name'; // name: regular matching region of the slave node name (the regular method is in the flag option of . A node with a status of us displays the American flag. us This is the national ISO 3166 code, Google it if you don’t understand it.
-$_MT['node_class_name'] = [ // The name corresponding to the class of the node
-    0 => 'Public',
-    1 => 'Bronze',
-    2 => 'Silver',
-    3 => 'Golden',
-    4 => 'Diamond',
-];
+
 # ┌────────────────────────────────────────────────────────────────────────────────────────── ──────────────────────────────────────────────────────────────────────────────────────────────────── ─────────┐
 # │ TG robot settings │
 # └──────────────────────────────────────────────── ──────────────────────────────────────────────────────────────────────────────────────────────────── ─────────┘
