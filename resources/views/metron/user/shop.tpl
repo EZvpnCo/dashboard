@@ -26,7 +26,7 @@
                 font-size: 16px !important;
             }
 
-            
+
             .bg-radial-gradient-plan-1 .btn.btn-primary {
                 color: #FFFFFF;
                 background-color: #00ad12;
@@ -39,6 +39,36 @@
             }
             .bg-radial-gradient-plan-1 .text-primary {
                 color: #00ad12 !important;
+            }
+
+
+            .bg-radial-gradient-plan-2 .btn.btn-primary {
+                color: #FFFFFF;
+                background-color: #00a1ad;
+                border-color: #00a1ad;
+            }
+            .bg-radial-gradient-plan-2 .btn.btn-primary:hover:not(.btn-text) {
+                color: #FFFFFF;
+                background-color: #2affba;
+                border-color: #2affba;
+            }
+            .bg-radial-gradient-plan-2 .text-primary {
+                color: #00a1ad !important;
+            }
+
+
+            .bg-radial-gradient-plan-3 .btn.btn-primary {
+                color: #FFFFFF;
+                background-color: #0069ad;
+                border-color: #0069ad;
+            }
+            .bg-radial-gradient-plan-3 .btn.btn-primary:hover:not(.btn-text) {
+                color: #FFFFFF;
+                background-color: #2ac4ff;
+                border-color: #2ac4ff;
+            }
+            .bg-radial-gradient-plan-3 .text-primary {
+                color: #0069ad !important;
             }
 
         </style>
