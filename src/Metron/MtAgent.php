@@ -208,36 +208,36 @@ class MtAgent extends \App\Controllers\BaseController
                     if ($shop != null) {
                         if ($user->money < $shop->price) {
                             $res['ret'] = 0;
-                            $res['msg'] = 'Failed to open the package because your wallet balance is insufficient!';
+                            $res['msg'] = '套餐开通失败，原因是您的钱包余额不足!';
                             return $response->getBody()->write(json_encode($res));
                         }
                         $user->money = bcsub($user->money, $shop->price, 2);
                         $user->save();
 
                         Metron::bought_usedd($edituser, 1, 0);
-                        $bought = new Bought();
-                        $bought->userid = $edituser->id;
-                        $bought->shopid = $shop->id;
+                        $bought           = new Bought();
+                        $bought->userid   = $edituser->id;
+                        $bought->shopid   = $shop->id;
                         $bought->datetime = time();
-                        $bought->renew = 0;
-                        $bought->coupon = '';
-                        $bought->price = $shop->price;
-                        $bought->used = 1;
+                        $bought->renew    = 0;
+                        $bought->coupon   = '';
+                        $bought->price    = $shop->price;
+                        $bought->usedd    = 1;
                         $bought->save();
                         $shop->buy($edituser);
 
                         Metron::add_payback($user, $edituser, $shop->price);
                         $res['ret'] = 1;
-                        $res['msg'] = 'Package opened successfully';
+                        $res['msg'] = '套餐开通成功';
                         return $response->getBody()->write(json_encode($res));
                     } else {
                         $res['ret'] = 0;
-                        $res['msg'] = 'Failed to activate the package because the package does not exist!';
+                        $res['msg'] = '套餐开通失败，原因是套餐不存在!';
                         return $response->getBody()->write(json_encode($res));
                     }
                 } else {
                     $res['ret'] = 1;
-                    $res['msg'] = 'No need to save if you don\'t open a package';
+                    $res['msg'] = '不开通套餐无需保存';
                     return $response->getBody()->write(json_encode($res));
                 }
                 break;
