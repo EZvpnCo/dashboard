@@ -245,12 +245,24 @@ $_MT['shop_Experience_plan'] = [
  * The support features of the product are directly edited in the [Service Support] of the package, and the format is true-global node distribution; false-fast customer service response minus sign on the left true: means support false: means not supported The right side is text, with English semicolons; separated
  */
 $_MT['shop_plan'] = array(
-    'Gaming' => array(
+    'Daily' => array(
         'Description' => array(
-            '1-Device' => 4,
-            '5-Device' => 5,
-            'Club' => 6,
-            'Club(VIP)' => 7,
+            '1 Device - 1 Month' => 4,
+            '3 Device - 1 Month' => 5,
+            '5 Device - 1 Month' => 5,
+            '1 Device - 3 Month' => 4,
+            '3 Device - 3 Month' => 5,
+            '5 Device - 3 Month' => 5,
+        ),
+    ),
+    'Daily(VIP)' => array(
+        'Description' => array(
+            '1 Device - 1 Month' => 4,
+            '3 Device - 1 Month' => 5,
+            '5 Device - 1 Month' => 5,
+            '1 Device - 3 Month' => 4,
+            '3 Device - 3 Month' => 5,
+            '5 Device - 3 Month' => 5,
         ),
     ),
     'Trading' => array(
@@ -261,12 +273,12 @@ $_MT['shop_plan'] = array(
             'Company(VIP)' => 11,
         ),
     ),
-    'Daily' => array(
+    'Gaming' => array(
         'Description' => array(
             '1-Device' => 12,
             '5-Device' => 13,
-            '1-Device(VIP)' => 14,
-            '5-Device(VIP)' => 15,
+            'Club' => 14,
+            'Club(VIP)' => 15,
         ),
     ),
 );
