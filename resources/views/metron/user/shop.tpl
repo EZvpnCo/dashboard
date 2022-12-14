@@ -163,7 +163,13 @@
                                     {foreach $metron['shop_plan'] as $shop_class_name => $shop_info_time_id}
                                     {foreach $shop_info_time_id as $shop_info => $shop_time_id}
                                     <div class="col-xs-12 col-lg-6">
-                                        <div class="card card-custom {if $shop_class_name == 'Daily' or $shop_class_name == 'Daily+'} bg-radial-gradient-plan-1{/if} gutter-b card-stretch {$metron['style_shadow']}" style="border-bottom-right-radius: 1.5rem;border-bottom-left-radius: 1.5rem;">
+                                        <div class="card card-custom
+                                        {if $shop_class_name == 'Daily' or $shop_class_name == 'Daily+'} bg-radial-gradient-plan-1
+                                        {elseif $shop_class_name == 'Trade' or $shop_class_name == 'Trade+'} bg-radial-gradient-plan-2
+                                        {elseif $shop_class_name == 'Game' or $shop_class_name == 'Game+'} bg-radial-gradient-plan-3
+                                        {else} bg-radial-gradient-primary
+                                        {/if}
+                                        gutter-b card-stretch {$metron['style_shadow']}" style="border-bottom-right-radius: 1.5rem;border-bottom-left-radius: 1.5rem;">
                                             <div class="card-header border-0" style="min-height: 50px;">
                                             </div>
                                             <div class="card-body d-flex flex-column p-0" style="position: relative;">
