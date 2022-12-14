@@ -13,6 +13,20 @@
             .bg-radial-gradient-plan-3 {
                 background: radial-gradient(#0069ad, #2ac4ff);
             }
+            .nav.nav-pills.nav-primary .nav-link.active {
+                color: #545454 !important;
+                background-color: transparent;
+                border: 2px solid #3faf4c !important;
+            }
+            .nav.nav-pills.nav-primary .show>.nav-link,
+            .nav.nav-pills.nav-primary .nav-link:hover:not(.active) {
+                color: #3faf4c;
+                background-color: transparent;
+            }
+            .nav.nav-pills.nav-primary .nav-link.active .nav-text {
+                color: #545454;
+                font-size: 16px !important;
+            }
         </style>
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
