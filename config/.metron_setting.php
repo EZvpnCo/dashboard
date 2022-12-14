@@ -267,18 +267,18 @@ $iFive = '5';
 $_MT['shop_plan'] = array(
     'Daily' => array(
         'Description' => array(
-            ($iOne . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth)  => 4,
-            ($iFive . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 5,
-            ($iOne . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth)  => 6,
-            ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 7,
+            ($iOne . ' ' . $iDevice) . ' <br> ' . ($iOne . ' ' . $iMonth)  => 4,
+            ($iFive . ' ' . $iDevice) . ' <br> ' . ($iOne . ' ' . $iMonth) => 5,
+            ($iOne . ' ' . $iDevice) . ' <br> ' . ($iThree . ' ' . $iMonth)  => 6,
+            ($iFive . ' ' . $iDevice) . ' <br> ' . ($iThree . ' ' . $iMonth) => 7,
         ),
     ),
     'Daily+' => array(
         'Description' => array(
-            ($iOne . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth)  => 8,
-            ($iFive . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 9,
-            ($iOne . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth)  => 10,
-            ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 11,
+            ($iOne . ' ' . $iDevice) . ' <br> ' . ($iOne . ' ' . $iMonth)  => 8,
+            ($iFive . ' ' . $iDevice) . ' <br> ' . ($iOne . ' ' . $iMonth) => 9,
+            ($iOne . ' ' . $iDevice) . ' <br> ' . ($iThree . ' ' . $iMonth)  => 10,
+            ($iFive . ' ' . $iDevice) . ' <br> ' . ($iThree . ' ' . $iMonth) => 11,
         ),
     ),
     'Trade' => array(
