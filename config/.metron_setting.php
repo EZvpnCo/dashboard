@@ -280,7 +280,7 @@ $_MT['shop_plan'] = array(
             ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 7,
         ),
     ),
-    'Daily(VIP)' => array(
+    'Daily+' => array(
         'Description' => array(
             ($iOne . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth)  => 8,
             ($iFive . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 9,
@@ -288,22 +288,34 @@ $_MT['shop_plan'] = array(
             ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 11,
         ),
     ),
-    // 'Trading' => array(
-    //     'Description' => array(
-    //         '1-Device' => 8,
-    //         '5-Device' => 9,
-    //         'Company' => 10,
-    //         'Company(VIP)' => 11,
-    //     ),
-    // ),
-    // 'Gaming' => array(
-    //     'Description' => array(
-    //         '1-Device' => 12,
-    //         '5-Device' => 13,
-    //         'Club' => 14,
-    //         'Club(VIP)' => 15,
-    //     ),
-    // ),
+    'Trade' => array(
+        'Description' => array(
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 12,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 13,
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth)  => 14,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 15,
+        ),
+    ),
+    'Trade+' => array(
+        'Description' => array(
+            'Company' . '<br>' . ($iOne . ' ' . $iMonth) => 16,
+            'Company(VIP)' . '<br>' . ($iOne . ' ' . $iMonth) => 17,
+        ),
+    ),
+    'Game' => array(
+        'Description' => array(
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 18,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iOne . ' ' . $iMonth) => 19,
+            ($iOne . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth)  => 20,
+            ($iFive . ' ' . $iDevice) . '<br>' . ($iThree . ' ' . $iMonth) => 21,
+        ),
+    ),
+    'Game+' => array(
+        'Description' => array(
+            'Club' . '<br>' . ($iOne . ' ' . $iMonth) => 22,
+            'Club(VIP)' . '<br>' . ($iOne . ' ' . $iMonth) => 23,
+        ),
+    ),
 );
 
 
