@@ -471,9 +471,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="use_coupon_code" onclick="shop.coupon();">Use promo code</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="order_input" onclick="shop.buyok('{$config['payment_system']}');">Determine to buy</button>
-                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal" onclick="shop.coupon('clear');">cancel</button>
+                <!--<button type="button" class="btn btn-success" id="use_coupon_code" onclick="shop.coupon();">Use promo code</button>-->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="order_input" onclick="shop.buyok('{$config['payment_system']}');">Buy</button>
+                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal" onclick="shop.coupon('clear');">Cancel</button>
             </div>
         </div>
     </div>
