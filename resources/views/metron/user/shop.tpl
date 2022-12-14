@@ -350,5 +350,182 @@
         </div>
         {include file='include/global/scripts.tpl'}
 
+<!-- modal -->
+<div class="modal fade" id="buy_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}" id="exampleModalLongTitle"><strong>Confirm buy</strong></h4>
+            </div>
+            <div class="modal-body">
+                <label class="row col-12 col-form-label kt-font-boldest" id="shop_name">Name of commodity:</label>
+                <label class="row col-12 col-form-label kt-font-boldest" id="shop_credit" style="display: none">Preferential quota:</label>
+                <label class="row col-12 col-form-label kt-font-boldest" id="shop_total">Set amount:</label>
+                <label class="row col-12 col-form-label kt-font-boldest" id="shop_stneed">Still need to pay:</label>
+                <label class="row col-12 col-form-label kt-font-boldest kt-padding-b-0" id="autor"><span class="kt-padding-t-5">Automatic renewal: when due</span>
+                <span class="kt-switch kt-switch--sm kt-switch--icon">
+                    <label class="kt-padding-0">
+                        <input type="checkbox" name="autorenew" id="autorenew">
+                        <span></span>
+                    </label>
+                </span>
+                </label>
+                <div class="form-group row form-group-marginless" style="display: none" id="shop_payment">
+                    <label class="col-lg-12 col-form-label kt-font-boldest">Payment method:</label>
+                    <div class="col-lg-12">
+                        <ul class="dashboard-tabs nav nav-pills row row-paddingless m-0 p-0" role="tablist" id="pay_the">
+                        {if $config['payment_system'] == 'metronpay'}
+                            {if $metron['pay_alipay'] != 'none' && $metron['pay_alipay'] != ''}
+                                <li class="nav-alipay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center active" data-toggle="pill" data-name="pay_alipay">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-alipay icon-2x"></i>
+                                    </span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Alipay</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $metron['pay_alipay_2'] != 'none' && $metron['pay_alipay_2'] != ''}
+                                <li class="nav-alipay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_alipay_2">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-alipay icon-2x"></i>
+                                    </span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Alipay</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $metron['pay_alipay_3'] != 'none' && $metron['pay_alipay_3'] != ''}
+                                <li class="nav-alipay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_alipay_3">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-alipay icon-2x"></i>
+                                    </span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Alipay</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $metron['pay_wxpay'] != 'none' && $metron['pay_wxpay'] != ''}
+                                <li class="nav-wxpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_wxpay">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-weixin icon-2x"></i>
+                                    </span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">WeChat pay</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $metron['pay_wxpay_2'] != 'none' && $metron['pay_wxpay_2'] != ''}
+                                <li class="nav-wxpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_wxpay_2">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-weixin icon-2x"></i>
+                                    </span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">WeChat pay</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $metron['pay_wxpay_3'] != 'none' && $metron['pay_wxpay_3'] != ''}
+                                <li class="nav-wxpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_wxpay_3">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-weixin icon-2x"></i>
+                                    </span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">WeChat pay</span>
+                                    </a>
+                                </li>
+                            {/if}
+                            {if $metron['pay_qqpay'] != 'none' && $metron['pay_qqpay'] != ''}
+                            <li class="nav-qqpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center {if ($metron['pay_alipay'] == 'none' || $metron['pay_alipay'] == '') && ($metron['pay_wxpay'] == 'none' || $metron['pay_wxpay'] == '')}active{/if}" data-toggle="pill" data-name="pay_qqpay">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-qq icon-2x"></i>
+                                    </span>
+                                    <span class="nav-text font-size-lg py-2 font-weight-bold text-center">QQThe wallet</span>
+                                </a>
+                            </li>
+                            {/if}
+                            {if $metron['pay_crypto'] != 'none' && $metron['pay_crypto'] != ''}
+                            <li class="nav-crypto nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_crypto">
+                                    <span class="nav-icon py-2 w-auto">
+                                        <i class="fab fa-bitcoin icon-2x"></i>
+                                    </span>
+                                    <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Digital currency</span>
+                                </a>
+                            </li>
+                            {/if}
+                        {/if}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-3" style="display: none" id="input_coupon_code">
+                    <div class="input-group input-group-lg input-group-solid" >
+                        <input type="text" class="form-control" value="" name="shop_code" placeholder="Please enter the coupon code" id="coupon"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" onclick="shop.couponre('{$config['payment_system']}');">determine</button>
+                            <button class="btn btn-primary" type="button" onclick="shop.coupon('clear');">Cancel the use</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="use_coupon_code" onclick="shop.coupon();">Use promo code</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="order_input" onclick="shop.buyok('{$config['payment_system']}');">Determine to buy</button>
+                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal" onclick="shop.coupon('clear');">cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Online top-up payment -->
+<div class="modal fade" id="metronpay-modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title {$style[$theme_style]['modal']['text_title']}" id="metronpay-title"><strong>Payment confirmation</strong></h5>
+            </div>
+            <div class="modal-body kt-padding-t-30">
+                <p class="align-center pt-3" id="metronpay-modal-body-url" style="display: none;">Click to open the new page for payment, If long time not to account, please contact customer service</p>
+                <p id="metronpay-modal-body-qrcode" style="display: none;"></p>
+            </div>
+            <div class="modal-footer">
+                <a id="to-pay" href="##" class="btn btn-primary">To pay</a>
+                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Traffic package -->
+<div class="modal fade" id="traffic_package_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Buy temporary traffic overlay package</strong></h4>
+            </div>
+            <div class="modal-body">
+                <code>Flow superposition package in your package flow reset when reset together, please take into consideration the purchase</code>
+                <div class="pb-3"></div>
+                <ul class="dashboard-tabs nav nav-pills row nav-primary row-paddingless m-0 p-0" role="tablist" id="traffic-package">
+                    {foreach $shops as $traffic_shop}
+                    {if $traffic_shop->traffic_package() != 0}
+                    <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center {if $traffic_shop@index eq 1}active{/if}" data-toggle="pill" data-name="{$traffic_shop->id}">
+                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">¥ {$traffic_shop->price}</span>
+                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">{$traffic_shop->name}</span>
+                        </a>
+                    </li>
+                    {/if}
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary buyTrafficPackage" type="button" onclick="shop.buy_traffic();">buy</button>
+                <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>
