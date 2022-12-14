@@ -3,6 +3,17 @@
     <head>
         <title>Shop &mdash; {$config["appName"]}</title>
         {include file='include/global/head.tpl'}
+        <style>
+            .bg-radial-gradient-plan-1 {
+                background: radial-gradient(#00ad12, #2aff6c);
+            }
+            .bg-radial-gradient-plan-2 {
+                background: radial-gradient(#00a1ad, #2affba);
+            }
+            .bg-radial-gradient-plan-3 {
+                background: radial-gradient(#0069ad, #2ac4ff);
+            }
+        </style>
         <div class="d-flex flex-column flex-root">
             <div class="d-flex flex-row flex-column-fluid page">
                 <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
@@ -151,8 +162,11 @@
 
                                     {foreach $metron['shop_plan'] as $shop_class_name => $shop_info_time_id}
                                     {foreach $shop_info_time_id as $shop_info => $shop_time_id}
+                                    {$shop_info_time_id}
+                                    @
+                                    {$shop_time_id}
                                     <div class="col-xs-12 col-lg-6">
-                                        <div class="card card-custom {$style[$theme_style]['shop']['card_head']} gutter-b card-stretch {$metron['style_shadow']}" style="border-bottom-right-radius: 1.5rem;border-bottom-left-radius: 1.5rem;">
+                                        <div class="card card-custom gutter-b card-stretch {$metron['style_shadow']}" style="border-bottom-right-radius: 1.5rem;border-bottom-left-radius: 1.5rem;">
                                             <div class="card-header border-0" style="min-height: 50px;">
                                             </div>
                                             <div class="card-body d-flex flex-column p-0" style="position: relative;">

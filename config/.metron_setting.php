@@ -256,12 +256,12 @@ $_MT['node_class_name'] = [ // The name corresponding to the class of the node
 
 
 
-$iMonth = '<i class="fas fa-calendar-alt"></i>';
-$iDevice = '<i class="fas fa-laptop"></i>';
+$iMonth = 'Month';
+$iDevice = 'User';
 
-$iOne = '1X';
-$iThree = '3X';
-$iFive = '5X';
+$iOne = '1';
+$iThree = '3';
+$iFive = '5';
 
 
 $_MT['shop_plan'] = array(
