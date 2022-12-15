@@ -440,7 +440,7 @@ class MtAgent extends \App\Controllers\BaseController
             $take_back_total = MetronSetting::get('take_back_total');
             if ($take_back_total !== 0 && $total < $take_back_total) {
                 $res['ret'] = 0;
-                $res['msg'] = 'The withdrawal amount must be greater than ' . $take_back_total . 'yuan';
+                $res['msg'] = 'The withdrawal amount must be greater than ' . $take_back_total . '$';
                 return $response->getBody()->write(json_encode($res));
             }
         }
@@ -466,7 +466,7 @@ class MtAgent extends \App\Controllers\BaseController
             if ($total <= 0) {
                 $paytake->delete();
                 $res['ret'] = 0;
-                $res['msg'] = 'The withdrawal amount must be greater than 0 yuan';
+                $res['msg'] = 'The withdrawal amount must be greater than 0 $';
                 return $response->getBody()->write(json_encode($res));
             }
             # go to balance directly create code record and increase balance

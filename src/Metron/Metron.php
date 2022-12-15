@@ -406,7 +406,7 @@ class Metron
 
         if (bccomp($user->money, $price, 2) == -1) {
             $res['ret'] = 0;
-            $res['msg'] = 'Insufficient balance, the total price is ' . $price . 'yuan; your balance is ' . $user->money . 'yuan';
+            $res['msg'] = 'Insufficient balance, the total price is ' . $price . '$; your balance is ' . $user->money . '$';
 
             $shopinfo['status'] = 'Insufficient balance';
             $ps->shop = json_encode($shopinfo, JSON_UNESCAPED_UNICODE);

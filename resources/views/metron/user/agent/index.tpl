@@ -303,7 +303,7 @@
                                 <i class="fab fas fa-wallet icon-2x"></i>
                             </span>
                             <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Go to the balance<br/>
-                            <small>0 yuan The lift</small></span>
+                            <small>0 $ The lift</small></span>
                         </a>
                     </li>
                     <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
@@ -312,7 +312,7 @@
                                 <i class="fab fas fa-people-arrows icon-2x"></i>
                             </span>
                             <span class="nav-text font-size-lg py-2 font-weight-bold text-center">To apply for cash withdrawals<br />
-                            <small>{$metron['take_back_total']} yuan The lift</small></span>
+                            <small>{$metron['take_back_total']} $ The lift</small></span>
                         </a>
                     </li>
                 </ul>

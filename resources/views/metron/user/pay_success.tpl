@@ -39,7 +39,7 @@
 															<h3 class="display-4 text-center font-weight-bolder">Being processed, please wait&nbsp;<span class="spinner spinner-darker-primary spinner-lg spinner-right ml-12"></span></h3>
                                                             <script>setTimeout('window.location.reload()', 5000);</script>
 														{else if !$result['shop_status']}
-															<h3 class="display-4 text-center font-weight-bolder">Successful top-up {$result['money']} yuan</h3>
+															<h3 class="display-4 text-center font-weight-bolder">Successful top-up {$result['money']} $</h3>
 														{else}
 															<h3 class="display-4 text-center font-weight-bolder">Purchase failed:{$result['shop_status']}</h3><br /><p class="text-center font-weight-bolder">Top-up amount will be returned to the purse<br />You can go to the store to buy and use the balance payment</p>{/if}
 

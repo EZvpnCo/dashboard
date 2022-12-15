@@ -3,24 +3,24 @@
   from '/www/wwwroot/subscribe/resources/conf/surge2/default.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array(
   'version' => '3.1.47',
   'unifunc' => 'content_634c55dba69d62_57874500',
   'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    '4bcceb1bc4d7952ab72502eba1a69913c2204a22' => 
-    array (
+  'file_dependency' =>
+  array(
+    '4bcceb1bc4d7952ab72502eba1a69913c2204a22' =>
+    array(
       0 => '/www/wwwroot/subscribe/resources/conf/surge2/default.tpl',
       1 => 1665876375,
       2 => 'file',
     ),
   ),
-  'includes' => 
-  array (
-  ),
-),false)) {
-function content_634c55dba69d62_57874500 (Smarty_Internal_Template $_smarty_tpl) {
+  'includes' =>
+  array(),
+), false)) {
+  function content_634c55dba69d62_57874500(Smarty_Internal_Template $_smarty_tpl)
+  {
 ?>PROCESS-NAME,aria2c,DIRECT
 PROCESS-NAME,fdm,DIRECT
 PROCESS-NAME,Folx,DIRECT
@@ -913,7 +913,7 @@ DOMAIN-SUFFIX,didialift.com,DIRECT
 DOMAIN-SUFFIX,didiglobal.com,DIRECT
 DOMAIN-SUFFIX,udache.com,DIRECT
 DOMAIN-SUFFIX,343480.com,DIRECT
-DOMAIN-SUFFIX,baduziyuan.com,DIRECT
+DOMAIN-SUFFIX,baduzi$.com,DIRECT
 DOMAIN-SUFFIX,com-hs-hkdy.com,DIRECT
 DOMAIN-SUFFIX,czybjz.com,DIRECT
 DOMAIN-SUFFIX,dandanzan.com,DIRECT

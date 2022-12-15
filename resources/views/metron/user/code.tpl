@@ -29,7 +29,7 @@
                                                 <div class="p-4">
                                                     <h3 class="{$style[$theme_style]['global']['title']} font-weight-bolder my-7">Balance</h3>
                                                     <p class="{$style[$theme_style]['global']['title']} display-2 display1-lg pb-10" style="padding-top: 10px; padding-bottom: 10px"><span class="display-4"><strong>$</strong> </span><strong>{$user->money}</strong></p>
-                                                    <!--<a href="Javascript:;" class="btn btn-danger font-weight-bold px-6 py-3" onclick="code.payTab();">Increase wallet balance</a>-->
+                                                    <a href="Javascript:;" class="btn btn-danger font-weight-bold px-6 py-3" onclick="code.payTab();">Increase wallet balance</a>
                                                 </div>
                                             </div>
                                         </div>

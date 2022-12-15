@@ -675,7 +675,7 @@
   - DOMAIN-SUFFIX,didiglobal.com,DIRECT
   - DOMAIN-SUFFIX,udache.com,DIRECT
   - DOMAIN-SUFFIX,343480.com,DIRECT
-  - DOMAIN-SUFFIX,baduziyuan.com,DIRECT
+  - DOMAIN-SUFFIX,baduzi$.com,DIRECT
   - DOMAIN-SUFFIX,com-hs-hkdy.com,DIRECT
   - DOMAIN-SUFFIX,czybjz.com,DIRECT
   - DOMAIN-SUFFIX,dandanzan.com,DIRECT

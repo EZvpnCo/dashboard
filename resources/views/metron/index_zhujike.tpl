@@ -75,7 +75,7 @@
             {foreach $I18N['plans-info'][$i18n->lang] as $name => $plan}
                 <li>
                     <div class="head"><h4 id="price-1"><big>{$plan['currency']}{$plan['price']}
-                                yuan/{$plan['billing']}</big>
+                                $/{$plan['billing']}</big>
                             <small> {$plan['name']}</small></h4></div>
                     <ul>
                         {foreach $plan['features'] as $feature}

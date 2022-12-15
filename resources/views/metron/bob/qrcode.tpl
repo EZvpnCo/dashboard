@@ -85,9 +85,9 @@
     var tradeno = getQueryParam('tradeno');
 
     if (payment == 'alipay') {
-        $('#title').text('Open the alipay，scan to pay'+price+'yuan');
+        $('#title').text('Open the alipay，scan to pay'+price+'$');
     } else if (payment == 'wechat') {
-        $('#title').text('Open the WeChat，scan to pay'+price+'yuan');
+        $('#title').text('Open the WeChat，scan to pay'+price+'$');
     }
 
     var qrcode = decodeURIComponent(getQueryParam('qrcode'));

@@ -64,7 +64,7 @@
                                                                         <div class="h5 pt-1">You will be a one-off <code>{$config["invite_gift"]}GB</code> Traffic reward</div>
                                                                     {/if}
                                                                     {if $config['invite_get_money'] > 0}
-                                                                        <div class="h5 pt-1">TAWill get <code>{$config["invite_get_money"]}</code> Yuan reward as the initial capital</div>
+                                                                        <div class="h5 pt-1">TAWill get <code>{$config["invite_get_money"]}</code> $ reward as the initial capital</div>
                                                                     {/if}
                                                                     <div class="h6 pt-3" style="font-size: 0.8em">The remaining &nbsp;<code>{$user->invite_num}</code>&nbsp; Invited the number of times</div>
                                                                     <div class="pt-2">
@@ -91,7 +91,7 @@
                                                                     {/if}
                                                                     {if $config['custom_invite_price']>=0}
                                                                     <div class="form-group" id="pay_code_form">
-                                                                        <label>Custom invite code  {$config['custom_invite_price']}yuan/time</label>
+                                                                        <label>Custom invite code  {$config['custom_invite_price']}$/time</label>
                                                                         <div class="input-group input-group-solid">
                                                                             <input type="text" class="form-control" placeholder="Enter the invitation code" id="custom-invite-link"/>
                                                                             <div class="input-group-append">
@@ -188,7 +188,7 @@
                                 <i class="fab fas fa-wallet icon-2x"></i>
                             </span>
                             <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Go to the balance<br/>
-                            <small>0 yuan The lift</small></span>
+                            <small>0 $ The lift</small></span>
                         </a>
                     </li>
                     {if $metron['take_cash_enable'] === true}
@@ -198,7 +198,7 @@
                                 <i class="fab fas fa-people-arrows icon-2x"></i>
                             </span>
                             <span class="nav-text font-size-lg py-2 font-weight-bold text-center">To apply for cash withdrawals<br />
-                            <small>{$metron['take_back_total']} yuan The lift</small></span>
+                            <small>{$metron['take_back_total']} $ The lift</small></span>
                         </a>
                     </li>
                     {/if}

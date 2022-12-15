@@ -99,10 +99,10 @@ class CodeController extends AdminController
         $datatables->edit('number', static function ($data) {
             switch ($data['type']) {
                 case -1:
-                    return 'recharge' . $data['number'] . 'yuan';
+                    return 'recharge' . $data['number'] . '$';
 
                 case -2:
-                    return 'expenditure' . $data['number'] . 'yuan';
+                    return 'expenditure' . $data['number'] . '$';
 
                 default:
                     return 'obsolete';

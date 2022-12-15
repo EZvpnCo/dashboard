@@ -242,13 +242,13 @@ class UserController extends BaseController
             }
 
             $res['ret'] = 1;
-            $res['msg'] = 'The recharge is successful, the recharge amount is' . $codeq->number . 'yuan. ';
+            $res['msg'] = 'The recharge is successful, the recharge amount is' . $codeq->number . '$. ';
 
             if ($_ENV['enable_donate'] == true) {
                 if ($this->user->is_hide == 1) {
-                    Telegram::Send('Sister, sister, an old man who does not want to be named donated to us' . $codeq->number . 'Yuan~');
+                    Telegram::Send('Sister, sister, an old man who does not want to be named donated to us' . $codeq->number . '$~');
                 } else {
-                    Telegram::Send('Sister, sister,' . $this->user->user_name . 'The old man donated to us' . $codeq->number . 'Yuan~');
+                    Telegram::Send('Sister, sister,' . $this->user->user_name . 'The old man donated to us' . $codeq->number . '$~');
                 }
             }
 
@@ -536,7 +536,7 @@ class UserController extends BaseController
 
         if ($user->money < $amount) {
             $res['ret'] = 0;
-            $res['msg'] = 'Insufficient balance, the total price is ' . $amount . ' yuan. ';
+            $res['msg'] = 'Insufficient balance, the total price is ' . $amount . ' $. ';
             return $response->getBody()->write(json_encode($res));
         }
         $user->invite_num += $num;
@@ -575,7 +575,7 @@ class UserController extends BaseController
 
         if ($user->money < $price) {
             $res['ret'] = 0;
-            $res['msg'] = 'Insufficient balance, the total price is ' . $price . ' yuan. ';
+            $res['msg'] = 'Insufficient balance, the total price is ' . $price . ' $. ';
             return $response->getBody()->write(json_encode($res));
         }
         $code = InviteCode::where('user_id', $user->id)->first();
@@ -776,7 +776,7 @@ class UserController extends BaseController
 
         if (bccomp($user->money, $price, 2) == -1) {
             $res['ret'] = 0;
-            $res['msg'] = 'Meow Meow~ The current balance is insufficient, and the total price is ' . $price . 'yuan. </br><a href="/user/code">Click to enter the recharge interface</a>';
+            $res['msg'] = 'Meow Meow~ The current balance is insufficient, and the total price is ' . $price . '$. </br><a href="/user/code">Click to enter the recharge interface</a>';
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -862,7 +862,7 @@ class UserController extends BaseController
 
         if (bccomp($user->money, $price, 2) == -1) {
             $res['ret'] = 0;
-            $res['msg'] = 'Meow Meow~ The current balance is insufficient, and the total price is ' . $price . 'yuan. </br><a href="/user/code">Click to enter the recharge interface</a>';
+            $res['msg'] = 'Meow Meow~ The current balance is insufficient, and the total price is ' . $price . '$. </br><a href="/user/code">Click to enter the recharge interface</a>';
             return $response->getBody()->write(json_encode($res));
         }
 
