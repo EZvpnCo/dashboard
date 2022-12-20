@@ -477,18 +477,18 @@ class MetronController extends BaseController
     {
         $user = $this->user;
         if (!$user->isLogin) {
-            $res = ['ret' => -1, 'msg' => '登录状态已失效'];
+            $res = ['ret' => -1, 'msg' => 'login status has expired'];
             return $response->getBody()->write(json_encode($res));
         }
 
         $id = $args['id'];
         $node = Node::find($id);
         if ($node == null) {
-            $res = ['ret' => 0, 'msg' => '节点错误,请刷新页面重新获取'];
+            $res = ['ret' => 0, 'msg' => 'Node error, please refresh the page to get it again'];
             return $response->getBody()->write(json_encode($res));
         }
         if ($user->class < $node->node_class) {
-            $res = ['ret' => 0, 'msg' => '权限不足'];
+            $res = ['ret' => 0, 'msg' => 'Insufficient permissions'];
             return $response->getBody()->write(json_encode($res));
         }
 
@@ -507,10 +507,10 @@ class MetronController extends BaseController
                         $url = URL::getItemUrl($nodeinfo, 1);
                     }
                 } else {
-                    $mu_user = 0;
+                    $in_user = 0;
                     $nodeinfo = $node->getItem($user, 0);
                     if ($nodeinfo == null) {
-                        $res = ['ret' => 0, 'msg' => '您的协议配置不支持连接该节点'];
+                        $res = ['ret' => 0, 'msg' => 'Your protocol configuration does not support connecting to the node'];
                         return $response->getBody()->write(json_encode($res));
                     }
                     if (URL::SSRCanConnect($user, $mu_user)) {
@@ -568,7 +568,7 @@ class MetronController extends BaseController
             default:
                 $res = [
                     'ret' => 0,
-                    'msg' => '该节点暂不支持查看配置',
+                    'msg' => 'This node does not support viewing configuration',
                 ];
                 break;
         }

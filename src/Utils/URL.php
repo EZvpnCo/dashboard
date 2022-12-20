@@ -175,18 +175,18 @@ class URL
 
         // 节点订阅筛选(定制)
         if (MetronSetting::get('nodes_filter') === true && isset($rules['nodefilter'])) {
-            if ($rules['nodefilter']['mode']=='nodes_class') {
-                if ($rules['nodefilter']['nodes_class']['the']=='>='){
+            if ($rules['nodefilter']['mode'] == 'nodes_class') {
+                if ($rules['nodefilter']['nodes_class']['the'] == '>=') {
                     $query->where('node_class', '>=', $rules['nodefilter']['nodes_class']['value']);
                 }
-                if ($rules['nodefilter']['nodes_class']['the']=='='){
+                if ($rules['nodefilter']['nodes_class']['the'] == '=') {
                     $query->whereIn('node_class', $rules['nodefilter']['nodes_class']['value']);
                 }
             }
-            if ($rules['nodefilter']['mode']=='nodes_id' && isset($rules['nodefilter']['nodes_id']) && count($rules['nodefilter']['nodes_id']) > 0) {
+            if ($rules['nodefilter']['mode'] == 'nodes_id' && isset($rules['nodefilter']['nodes_id']) && count($rules['nodefilter']['nodes_id']) > 0) {
                 $query->whereIn('id', $rules['nodefilter']['nodes_id']);
             }
-            if ( isset($rules['nodefilter']['sort']) ) {
+            if (isset($rules['nodefilter']['sort'])) {
                 $query->orderBy($rules['nodefilter']['sort']['type'], $rules['nodefilter']['sort']['value']);
             }
         }
@@ -197,7 +197,7 @@ class URL
             $regex = MetronSetting::get('nodes_regex');
             foreach ($nodes as $node) {
                 preg_match($regex, $node->name, $matches);
-                if(isset($matches[0])) {
+                if (isset($matches[0])) {
                     $node->name = trim(trim($node->name, $matches[0]));
                 }
             }
@@ -493,19 +493,21 @@ class URL
         $item['remark'] = $item['ps'];
         $item['id'] = $user->getUuid();
         $item['class'] = $node->node_class;
-        $node = 'vless://' . $item['id'] . '@' . $item['add'] .':'. $item['port']
+        $node = 'vless://' . $item['id'] . '@' . $item['add'] . ':' . $item['port']
             . '?encryption=none&type=' . $item['net'] . '&headerType=none';
-        if (isset($item['host']) && $item['host']){
-            $node .= '&host='.$item['host'];
+        if (isset($item['host']) && $item['host']) {
+            $node .= '&host=' . $item['host'];
         }
-        if (isset($item['path']) && $item['path']){
-            $node .= '&path='.$item['path'];
+        if (isset($item['path']) && $item['path']) {
+            $node .= '&path=' . $item['path'];
         }
-        if (isset($item['security']) && $item['security']){
-            $node .= '&security='.$item['security'];
+        if (isset($item['security']) && $item['security']) {
+            $node .= '&security=' . $item['security'];
+        } else if (isset($item['tls']) && $item['tls']) {
+            $node .= '&security=' . $item['tls'];
         }
-        if (isset($item['flow']) && $item['flow']){
-            $node .= '&flow='.$item['flow'];
+        if (isset($item['flow']) && $item['flow']) {
+            $node .= '&flow=' . $item['flow'];
         }
         $node .= '#' . $item['remark'];
         if (!$arrout) {

@@ -597,8 +597,8 @@
         $("td span:contains('Yes')").addClass("text-success");
         $("td span:contains('No')").addClass("text-danger");
         $("td span:contains('Unknow')").addClass("text-warning");
-        $("td span:contains('仅限自制')").addClass("text-info");
-        //触发模态框的同时调用此方法
+        $("td span:contains('HomeMade')").addClass("text-info");
+        
         function showVless(id) {
             $.get('/user/nodeinfo/' + id, function (res) {
                 let data = JSON.parse(res)
@@ -609,7 +609,7 @@
                 $("#nodeinfo-v2ray-vless-modal-id").text(data.info.id)
                 $("#nodeinfo-v2ray-vless-modal-net").text(data.info.net)
                 $("#nodeinfo-v2ray-vless-modal-path").text(data.info.path)
-                $("#nodeinfo-v2ray-vless-modal-tls").text(data.info.security)
+                $("#nodeinfo-v2ray-vless-modal-tls").text(data.info.tls)
                 $("#nodeinfo-v2ray-vless-modal-flow").text(data.info.flow)
                 $("#nodeinfo-v2ray-vless-modal-url").attr('data-clipboard-text', data.url)
             });
