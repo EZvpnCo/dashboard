@@ -316,7 +316,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="payViaDigitalCurrensies();">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="code.metronPay('{$config['payment_system']}', '', '0', '');">Ok</button>
                 <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">cancel</button>
             </div>
         </div>
@@ -325,11 +325,16 @@
 
 
 <script>
-function payViaDigitalCurrensies(){
-    alert("test");
+function payByDigitalCurrency(){
+    var amount = +document.querySelector("#amount").value;
+    alert(amount);
 }
-</script>
 
+function payAgainByDigitalCurrency(payID){
+    alert(payID);
+}
+
+</script>
 
 <!-- Pay order to pay -->
 <div class="modal fade" id="metronPay_restart_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
