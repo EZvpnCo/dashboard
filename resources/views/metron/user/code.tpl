@@ -316,7 +316,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="code.metronPay('{$config['payment_system']}', '', '0', '');">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="payByDigitalCurrency();">Ok</button>
                 <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">cancel</button>
             </div>
         </div>
