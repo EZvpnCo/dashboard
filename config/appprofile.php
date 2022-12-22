@@ -398,7 +398,7 @@ $_ENV['Surfboard_Profiles'] = [
                     'regex' => '(.*)',
                     'right-proxies' => ['🎃 Nothing'],
                 ],
-                'url' => 'https://www.google.com/',
+                'url' => 'http://www.google.com/',
                 'interval' => 43200,
 
             ],
