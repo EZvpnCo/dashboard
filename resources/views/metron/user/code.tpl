@@ -221,7 +221,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Choice of payment</strong></h4>
+                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Choose payment way</strong></h4>
             </div>
             <div class="modal-body pb-0">
                 <div class="form-group row form-group-marginless">
@@ -305,7 +305,7 @@
                                         <span class="nav-icon py-2 w-auto">
                                             <i class="fab fa-bitcoin icon-2x"></i>
                                         </span>
-                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Digital currency</span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Digital currencies</span>
                                     </a>
                                 </li>
                                 {/if}
@@ -316,12 +316,21 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="code.metronPay('{$config['payment_system']}', '', '0', '');">determine</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="payViaDigitalCurrensies();">Ok</button>
                 <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">cancel</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+function payViaDigitalCurrensies(){
+    alert("test");
+}
+</script>
+
+
 <!-- Pay order to pay -->
 <div class="modal fade" id="metronPay_restart_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -372,12 +381,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_restart_input" onclick="code.metronPay_restart('{$config['payment_system']}', '', '0', '');">determine</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_restart_input" onclick="code.metronPay_restart('{$config['payment_system']}', '', '0', '');">Ok</button>
                 <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">cancel</button>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Package conversion -->
 <div class="modal fade" id="PackageConversion-modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -394,7 +404,7 @@
                 <label class="row col-12 col-form-label kt-font-boldest" id="zs_money"></label>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="Conversion_ok" onclick="code.Conversion_ok();">Determine the conversion</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="Conversion_ok" onclick="code.Conversion_ok();">Ok</button>
                 <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal" onclick="">cancel</button>
             </div>
         </div>
