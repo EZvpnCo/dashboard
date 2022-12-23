@@ -2,10 +2,10 @@
 
 namespace App\Services\Gateway;
 
-use App\Services\View;
 use App\Services\Auth;
-use App\Services\Config;
+use App\Services\View;
 use App\Models\Paylist;
+use App\Services\Config;
 
 class NowPayment extends AbstractPayment
 {
@@ -102,7 +102,7 @@ class NowPayment extends AbstractPayment
             }
         }
 
-        $data['price_amount'] = (int)($price);
+        $data['price_amount'] = (int)($price) || $pl->total;
         $data['price_currency'] = "usd";
         $data['pay_currency'] = "usdttrc20";
         $data['order_id'] = $pl->tradeno;
