@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: tonyzou
@@ -55,7 +56,7 @@ abstract class AbstractPayment
         $p = Paylist::where('tradeno', $pid)->first();
 
         if ($p->status == 1) {
-            return ['errcode' => 0, 'errmsg' => '交易已完成'];
+            return ['errcode' => 0, 'errmsg' => 'Payment success'];
         }
 
         $p->status = 1;
@@ -71,20 +72,20 @@ abstract class AbstractPayment
         $codeq->usedatetime = date('Y-m-d H:i:s');
         $codeq->userid = $user->id;
         $codeq->save();
-        
+
         if ($p->shop != null) {
             $p_buy = Metron::metronpay_buyshop($pid);
         }
 
         if ($user->ref_by != '' && $user->ref_by != 0 && $user->ref_by != null) {
-            Metron::add_payback( User::find($user->ref_by), $user, $codeq->number);
+            Metron::add_payback(User::find($user->ref_by), $user, $codeq->number);
         }
 
         if ($_ENV['enable_donate'] == true) {
             if ($user->is_hide == 1) {
-                Telegram::Send('一位不愿透露姓名的大老爷给我们捐了 ' . $codeq->number . ' 元!');
+                Telegram::Send('An old man who did not want to be named donated to us ' . $codeq->number . ' $!');
             } else {
-                Telegram::Send($user->user_name . ' 大老爷给我们捐了 ' . $codeq->number . ' 元！');
+                Telegram::Send($user->user_name . ' Grandpa donated to us ' . $codeq->number . ' $！');
             }
         }
 
@@ -92,12 +93,12 @@ abstract class AbstractPayment
             MtTelegram::SendPayment($user, $p, $codeq);
         }
 
-        return ['errcode' => 1, 'errmsg' => '回调处理完成'];;
+        return ['errcode' => 1, 'errmsg' => 'Callback processing complete'];;
     }
 
     public static function generateGuid()
     {
-        mt_srand((double)microtime() * 10000);
+        mt_srand((float)microtime() * 10000);
         $charid = strtoupper(md5(uniqid(mt_rand() + time(), true)));
         $hyphen = chr(45);
         $uuid = chr(123)

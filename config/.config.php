@@ -331,6 +331,13 @@ $_ENV['tron_app_id'] = '';
 $_ENV['tron_app_secret'] = '';
 
 
+# now payment
+$_ENV['nowpayment_api_url'] = 'https://api.nowpayments.io';
+$_ENV['nowpayment_api_key'] = '78SGXEP-D2VMXXV-PBEV9VE-MFT56Y1';
+$_ENV['nowpayment_app_id'] = 'EZvpn';
+$_ENV['nowpayment_username'] = 'info@ezvpn.co';
+$_ENV['nowpayment_password'] = 'I7pR*N9Qi@5t';
+
 #wolfpay
 $_ENV['wolfpay'] = [
     'config' => [

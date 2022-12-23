@@ -198,7 +198,7 @@ $_MT['pay_qqpay'] = 'none'; // QQ wallet default
 $_MT['max_qqpay_num'] = 0; // When using WeChat payment, the amount is greater than or equal to the set value, use the payment method below
 $_MT['max_qqpay_pay'] = 'none'; // When the payment amount is greater than the value set above, use this payment method
 
-$_MT['pay_crypto'] = 'bobpay'; // digital currency payment
+$_MT['pay_crypto'] = 'nowpayment'; // digital currency payment
 
 $_MT['mix_amount'] = 0; // Limit the minimum recharge each time, store purchase packages are not subject to this limit. (Because a very low amount may appear after the store deducts the balance)
 

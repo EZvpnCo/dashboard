@@ -44,10 +44,10 @@ class MetronPay extends AbstractPayment
             ];
         }
 
-        # 不是重新支付订单 和 商店订单
+        # not repay orders and store orders
         if ($paylist_id === 0 && $shopinfo['id'] === 0) {
             if ($price < MetronSetting::get('mix_amount')) {
-                return json_encode(['ret' => 0, 'msg' => 'The minimum recharge amount is ' . MetronSetting::get('mix_amount') . ' 元']);
+                return json_encode(['ret' => 0, 'msg' => 'The minimum recharge amount is ' . MetronSetting::get('mix_amount') . ' $']);
             }
             if ($price <= 0) {
                 return json_encode(['ret' => 0, 'msg' => "The amount must be greater than 0$"]);
@@ -444,7 +444,7 @@ class MetronPay extends AbstractPayment
                     return json_encode($return);
             }
         } else if ($type == 'crypto') {
-            # 数字货币支付
+            # Digital currency payment
             $payment_system = MetronSetting::get('pay_crypto');
             switch ($payment_system) {
                 case ('bobpay'):
@@ -464,15 +464,32 @@ class MetronPay extends AbstractPayment
                         );
                     }
                     return json_encode($return);
+                case ('nowpayment'):
+                    $pp = new NowPayment();
+                    $result = $pp->MetronPay($type, $price, $shopinfo, $paylist_id);
+                    if ($result['errcode'] == 0) {
+                        $return = array(
+                            'ret' => 1,
+                            'type' => 'url',
+                            'tradeno' => $result['pid'],
+                            'url' => $result['url']
+                        );
+                    } else {
+                        $return = array(
+                            'ret' => 0,
+                            'msg' => $result['errmsg']
+                        );
+                    }
+                    return json_encode($return);
                 default:
                     $return = array(
                         'ret' => 0,
-                        'msg' => $payment_system . ' 支付系统错误,请联系客服'
+                        'msg' => $payment_system . ' Payment Error, please contact customer services'
                     );
                     return json_encode($return);
             }
         } else {
-            return json_encode(['ret' => 0, 'msg' => '错误的支付方式']);
+            return json_encode(['ret' => 0, 'msg' => 'Payment way error']);
         }
     }
 

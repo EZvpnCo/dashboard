@@ -61,7 +61,6 @@ class Payment
 
     public static function purchase($request, $response, $args)
     {
-        return 'gggg';
         return self::getClient($request, $response, $args)->purchase($request, $response, $args);
     }
 }

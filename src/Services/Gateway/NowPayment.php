@@ -7,27 +7,27 @@ use App\Services\Auth;
 use App\Services\Config;
 use App\Models\Paylist;
 
-class BobTronPay extends AbstractPayment
+class NowPayment extends AbstractPayment
 {
 
-    private $appSecret;
+    private $apiKey;
     private $gatewayUri;
 
     /**
-     * 签名初始化
-     * @param merKey    签名密钥
+     * signature initialization
+     * @param merKey signature key
      */
 
     public function __construct()
     {
-        $apiUrl = Config::get('tron_api_url');
-        $this->appSecret = Config::get('tron_app_secret');
-        $this->gatewayUri = "{$apiUrl}/api/v1/tron";
+        $apiUrl = Config::get('nowpayment_api_url');
+        $this->apiKey = Config::get('nowpayment_api_key');
+        $this->gatewayUri = "{$apiUrl}/v1";
     }
 
 
     /**
-     * @name    准备签名/验签字符串
+     * @name    Prepare signature/verification string
      */
     public function prepareSign($data)
     {
@@ -36,21 +36,21 @@ class BobTronPay extends AbstractPayment
     }
 
     /**
-     * @name    生成签名
+     * @name    generate signature
      * @param sourceData
-     * @return    签名数据
+     * @return    signature data
      */
     public function sign($data)
     {
-        return strtolower(md5($data . $this->appSecret));
+        return strtolower(md5($data . $this->apiKey));
     }
 
     /*
-     * @name    验证签名
-     * @param   signData 签名数据
-     * @param   sourceData 原数据
-     * @return
-     */
+    * @name verification signature
+    * @param signData signature data
+    * @param sourceData original data
+    * @return
+    */
     public function verify($data, $signature)
     {
         unset($data['sign']);
@@ -62,13 +62,19 @@ class BobTronPay extends AbstractPayment
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->gatewayUri);
-        curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_ENCODING, '');
+        curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 0);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'x-api-key: ' . $this->apiKey,
+            'Content-Type: application/json'
+        ]);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, ['User-Agent: BobTronPay']);
+
         $data = curl_exec($curl);
         curl_close($curl);
 
@@ -78,7 +84,7 @@ class BobTronPay extends AbstractPayment
     public function MetronPay($type, $price, $buyshop, $paylist_id = 0)
     {
         if ($paylist_id == 0 && $price <= 0) {
-            return ['errcode' => -1, 'errmsg' => '非法的金额'];
+            return ['errcode' => -1, 'errmsg' => 'illegal amount'];
         }
         $user = Auth::getUser();
         if ($paylist_id == 0) {
@@ -92,22 +98,25 @@ class BobTronPay extends AbstractPayment
         } else {
             $pl = Paylist::find($paylist_id);
             if ($pl->status === 1) {
-                return ['errcode' => -1, 'errmsg' => "该订单已交易完成"];
+                return ['errcode' => -1, 'errmsg' => "The order has been completed"];
             }
         }
-        $data['app_id'] = Config::get('tron_app_id');
-        $data['out_trade_no'] = $pl->tradeno;
-        $data['total_amount'] = (int)($price * 100);
-        $data['notify_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
-        $data['return_url'] = Config::get('baseUrl') . '/user/payment/return';
-        $params = $this->prepareSign($data);
-        $data['sign'] = $this->sign($params);
+
+        $data['price_amount'] = (int)($price);
+        $data['price_currency'] = "usd";
+        $data['pay_currency'] = "usdt";
+        $data['order_id'] = $pl->tradeno;
+        $data['order_description'] = ":)";
+        $data['is_fixed_rate'] = true;
+        $data['is_fee_paid_by_user'] = true;
+        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay' .
+            Config::get('baseUrl') . '/user/payment/return';; /**/
+
         $result = json_decode($this->post($data), true);
         if ($result['code'] === 0) {
-            return ['errcode' => -1, 'msg' => '支付网关处理失败'];
+            return ['errcode' => -1, 'msg' => 'Payment gateway processing failed'];
         }
         $result['pid'] = $pl->tradeno;
-
         return ['url' => $result['url'], 'errcode' => 0, 'pid' => $pl->tradeno];
     }
 
@@ -116,7 +125,7 @@ class BobTronPay extends AbstractPayment
     {
         $price = $request->getParam('amount');
         if ($price <= 0) {
-            return json_encode(['code' => -1, 'msg' => '非法的金额.']);
+            return json_encode(['code' => -1, 'msg' => 'illegal amount.']);
         }
         $user = Auth::getUser();
         $pl = new Paylist();
@@ -124,16 +133,22 @@ class BobTronPay extends AbstractPayment
         $pl->total = $price;
         $pl->tradeno = self::generateGuid();
         $pl->save();
-        $data['app_id'] = Config::get('tron_app_id');
-        $data['out_trade_no'] = $pl->tradeno;
-        $data['total_amount'] = (int)($price * 100);
-        $data['notify_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
-        $data['return_url'] = Config::get('baseUrl') . '/user/payment/return?tradeno=' . $pl->tradeno;
-        $params = $this->prepareSign($data);
-        $data['sign'] = $this->sign($params);
+
+
+        $data['price_amount'] = (int)($price);
+        $data['price_currency'] = "usd";
+        $data['pay_currency'] = "usdt";
+        $data['order_id'] = $pl->tradeno;
+        $data['order_description'] = ":)";
+        $data['is_fixed_rate'] = true;
+        $data['is_fee_paid_by_user'] = true;
+        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay' .
+            Config::get('baseUrl') . '/user/payment/return?tradeno=' . $pl->tradeno; /**/
+
+
         $result = json_decode($this->post($data), true);
         if (!isset($result['data'])) {
-            return json_encode(['code' => -1, 'msg' => '支付网关处理失败']);
+            return json_encode(['code' => -1, 'msg' => 'Payment gateway processing failed']);
         }
         $result['pid'] = $pl->tradeno;
         return json_encode(['url' => $result['data']['pay_url'], 'code' => 0, 'pid' => $pl->tradeno]);
@@ -141,7 +156,6 @@ class BobTronPay extends AbstractPayment
 
     public function notify($request, $response, $args)
     {
-        //        file_put_contents(BASE_PATH . '/storage/bobpay.log', json_encode($request->getParams()) . "\r\n", FILE_APPEND);
         if (!$this->verify($request->getParams(), $request->getParam('sign'))) {
             die('FAIL');
         }
