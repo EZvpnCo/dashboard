@@ -109,15 +109,23 @@ class NowPayment extends AbstractPayment
         $data['order_description'] = ":)";
         $data['is_fixed_rate'] = true;
         $data['is_fee_paid_by_user'] = true;
-        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay' .
-            Config::get('baseUrl') . '/user/payment/return';; /**/
+        $data['success_url'] = Config::get('baseUrl') . '/user/payment/return';
+        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
+
 
         $result = json_decode($this->post($data), true);
-        if ($result['code'] === 0) {
-            return ['errcode' => -1, 'msg' => 'Payment gateway processing failed'];
+        if (!$result['id']) {
+            return [
+                'errcode' => -1,
+                'msg' => 'Payment gateway processing failed'
+            ];
         }
         $result['pid'] = $pl->tradeno;
-        return ['url' => $result['url'], 'errcode' => 0, 'pid' => $pl->tradeno];
+        return [
+            'url' => $result['invoice_url'],
+            'errcode' => 0,
+            'pid' => $pl->tradeno
+        ];
     }
 
 
@@ -137,21 +145,27 @@ class NowPayment extends AbstractPayment
 
         $data['price_amount'] = (int)($price);
         $data['price_currency'] = "usd";
-        $data['pay_currency'] = "usdt";
         $data['order_id'] = $pl->tradeno;
-        $data['order_description'] = ":)";
+        $data['order_description'] = "EZvpn :)";
         $data['is_fixed_rate'] = true;
         $data['is_fee_paid_by_user'] = true;
-        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay' .
-            Config::get('baseUrl') . '/user/payment/return?tradeno=' . $pl->tradeno; /**/
+        $data['success_url'] = Config::get('baseUrl') . '/user/payment/return?tradeno=' . $pl->tradeno;
+        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
 
 
         $result = json_decode($this->post($data), true);
-        if (!isset($result['data'])) {
-            return json_encode(['code' => -1, 'msg' => 'Payment gateway processing failed']);
+        if (!isset($result['id'])) {
+            return json_encode([
+                'code' => -1,
+                'msg' => 'Payment gateway processing failed'
+            ]);
         }
         $result['pid'] = $pl->tradeno;
-        return json_encode(['url' => $result['data']['pay_url'], 'code' => 0, 'pid' => $pl->tradeno]);
+        return json_encode([
+            'url' => $result['invoice_url'],
+            'code' => 0,
+            'pid' => $pl->tradeno
+        ]);
     }
 
     public function notify($request, $response, $args)
