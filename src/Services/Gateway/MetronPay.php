@@ -622,6 +622,10 @@ class MetronPay extends AbstractPayment
                 $tron = new BobTronPay();
                 $tron->notify($request, $response, $args);
                 return;
+            case ('nowpayment'):
+                $tron = new NowPayment();
+                $tron->notify($request, $response, $args);
+                return;
             default:
                 return 'failed';
         }
