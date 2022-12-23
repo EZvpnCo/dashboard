@@ -113,20 +113,20 @@ class NowPayment extends AbstractPayment
         $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
 
 
-        $result = json_decode($this->post($data), true);
-        return $result;
-        if (!$result['id']) {
-            return [
-                'errcode' => -1,
-                'msg' => 'Payment gateway processing failed'
-            ];
-        }
-        $result['pid'] = $pl->tradeno;
-        return [
-            'url' => $result['invoice_url'],
-            'errcode' => 0,
-            'pid' => $pl->tradeno
-        ];
+        // $result = json_decode($this->post($data), true);
+        return $this->post($data) + "mm";
+        // if (!$result['id']) {
+        //     return [
+        //         'errcode' => -1,
+        //         'msg' => 'Payment gateway processing failed'
+        //     ];
+        // }
+        // $result['pid'] = $pl->tradeno;
+        // return [
+        //     'url' => $result['invoice_url'],
+        //     'errcode' => 0,
+        //     'pid' => $pl->tradeno
+        // ];
     }
 
 
