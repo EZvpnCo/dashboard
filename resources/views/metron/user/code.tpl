@@ -331,7 +331,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Choose payment</strong></h4>
+                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Choose payment way</strong></h4>
             </div>
             <div class="modal-body pb-0">
                 <div class="form-group row form-group-marginless">
@@ -340,24 +340,64 @@
                             <ul class="dashboard-tabs nav nav-pills row row-paddingless m-0 p-0" role="tablist" id="reset_pay_the">
                             {if $config['payment_system'] == 'metronpay'}
                                 {if $metron['pay_alipay'] != 'none' && $metron['pay_alipay'] != ''}
-                                <li class="nav-alipay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
-                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_alipay">
+                                    <li class="nav-alipay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center active" data-toggle="pill" data-name="pay_alipay">
                                         <span class="nav-icon py-2 w-auto">
                                             <i class="fab fa-alipay icon-2x"></i>
                                         </span>
-                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Alipay</span>
-                                    </a>
-                                </li>
+                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Alipay</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if $metron['pay_alipay_2'] != 'none' && $metron['pay_alipay_2'] != ''}
+                                    <li class="nav-alipay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_alipay_2">
+                                        <span class="nav-icon py-2 w-auto">
+                                            <i class="fab fa-alipay icon-2x"></i>
+                                        </span>
+                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Alipay</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if $metron['pay_alipay_3'] != 'none' && $metron['pay_alipay_3'] != ''}
+                                    <li class="nav-alipay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_alipay_3">
+                                        <span class="nav-icon py-2 w-auto">
+                                            <i class="fab fa-alipay icon-2x"></i>
+                                        </span>
+                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Alipay</span>
+                                        </a>
+                                    </li>
                                 {/if}
                                 {if $metron['pay_wxpay'] != 'none' && $metron['pay_wxpay'] != ''}
-                                <li class="nav-wxpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
-                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_wxpay">
+                                    <li class="nav-wxpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_wxpay">
                                         <span class="nav-icon py-2 w-auto">
                                             <i class="fab fa-weixin icon-2x"></i>
                                         </span>
-                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">WeChat pay</span>
-                                    </a>
-                                </li>
+                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">WeChat pay</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if $metron['pay_wxpay_2'] != 'none' && $metron['pay_wxpay_2'] != ''}
+                                    <li class="nav-wxpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_wxpay_2">
+                                        <span class="nav-icon py-2 w-auto">
+                                            <i class="fab fa-weixin icon-2x"></i>
+                                        </span>
+                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">WeChat pay</span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {if $metron['pay_wxpay_3'] != 'none' && $metron['pay_wxpay_3'] != ''}
+                                    <li class="nav-wxpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                        <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_wxpay_3">
+                                        <span class="nav-icon py-2 w-auto">
+                                            <i class="fab fa-weixin icon-2x"></i>
+                                        </span>
+                                            <span class="nav-text font-size-lg py-2 font-weight-bold text-center">WeChat pay</span>
+                                        </a>
+                                    </li>
                                 {/if}
                                 {if $metron['pay_qqpay'] != 'none' && $metron['pay_qqpay'] != ''}
                                 <li class="nav-qqpay nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
@@ -366,6 +406,16 @@
                                             <i class="fab fa-qq icon-2x"></i>
                                         </span>
                                         <span class="nav-text font-size-lg py-2 font-weight-bold text-center">QQThe wallet</span>
+                                    </a>
+                                </li>
+                                {/if}
+                                {if $metron['pay_crypto'] != 'none' && $metron['pay_crypto'] != ''}
+                                <li class="nav-crypto nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_crypto">
+                                        <span class="nav-icon py-2 w-auto">
+                                            <i class="fab fa-bitcoin icon-2x"></i>
+                                        </span>
+                                        <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Digital currencies</span>
                                     </a>
                                 </li>
                                 {/if}
