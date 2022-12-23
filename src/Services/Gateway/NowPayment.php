@@ -173,8 +173,11 @@ class NowPayment extends AbstractPayment
 
     public function notify($request, $response, $args)
     {
-        $this->postPayment($request->getParam('out_trade_no'), 'BobPay');
-        die('SUCCESS');
+        if ($request->getParam('payment_status') === 'finished') {
+            $this->postPayment($request->getParam('order_id'), 'NowPayment');
+            die('SUCCESS');
+        }
+        die('FAIL');
     }
 
     public function getPurchaseHTML()
