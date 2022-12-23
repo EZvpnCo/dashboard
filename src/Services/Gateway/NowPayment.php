@@ -22,7 +22,7 @@ class NowPayment extends AbstractPayment
     {
         $apiUrl = Config::get('nowpayment_api_url');
         $this->apiKey = Config::get('nowpayment_api_key');
-        $this->gatewayUri = "{$apiUrl}/v1";
+        $this->gatewayUri = "{$apiUrl}/v1/invoice";
     }
 
 
@@ -109,12 +109,11 @@ class NowPayment extends AbstractPayment
         $data['order_description'] = ":)";
         $data['is_fixed_rate'] = true;
         $data['is_fee_paid_by_user'] = true;
-        $data['success_url'] = Config::get('baseUrl') . '/user/payment/return';
+        $data['success_url'] = Config::get('baseUrl') . '/user/payment/return?tradeno=' . $pl->tradeno;
         $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
 
 
         $result = json_decode($this->post($data), true);
-        return die(json_encode($result));
         if (!$result['id']) {
             return [
                 'errcode' => -1,
