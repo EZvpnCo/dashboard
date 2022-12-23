@@ -114,6 +114,7 @@ class NowPayment extends AbstractPayment
 
 
         $result = json_decode($this->post($data), true);
+        return $result;
         if (!$result['id']) {
             return [
                 'errcode' => -1,
