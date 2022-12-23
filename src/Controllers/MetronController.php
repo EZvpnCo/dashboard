@@ -607,7 +607,7 @@ class MetronController extends BaseController
                 foreach ($codes as $code) {
                     $dataarr['id'] = $code->id;
                     $dataarr['code'] = $code->code;
-                    $dataarr['number'] = $code->number . '元';
+                    $dataarr['number'] = $code->number . '$';
                     $dataarr['usedatetime'] = $code->usedatetime;
                     $data[] = $dataarr;
                 }
@@ -1113,8 +1113,8 @@ class MetronController extends BaseController
                     $dataarr['id'] = $log->id;
                     $dataarr['user_name'] = $log->user_name;
                     $dataarr['reg_date'] = $log->reg_date;
-                    $dataarr['accumulated_recharge'] = $number . ' 元';
-                    $dataarr['get_rebates'] = $backprice . ' 元';
+                    $dataarr['accumulated_recharge'] = $number . ' $';
+                    $dataarr['get_rebates'] = $backprice . ' $';
                     $data[] = $dataarr;
                 }
                 break;
