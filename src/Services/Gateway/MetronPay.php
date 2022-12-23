@@ -467,7 +467,6 @@ class MetronPay extends AbstractPayment
                 case ('nowpayment'):
                     $pp = new NowPayment();
                     $result = $pp->MetronPay($type, $price, $shopinfo, $paylist_id);
-                    return $result;
                     if ($result['errcode'] == 0) {
                         $return = array(
                             'ret' => 1,
