@@ -28,7 +28,7 @@ class Payment
                 return new AopF2F();
             case ('payjs'):
                 return new PAYJS($_ENV['payjs_key']);
-            case("metronpay"):
+            case ("metronpay"):
                 return new MetronPay();
             default:
                 return null;
@@ -61,6 +61,7 @@ class Payment
 
     public static function purchase($request, $response, $args)
     {
+        return 'gggg';
         return self::getClient($request, $response, $args)->purchase($request, $response, $args);
     }
 }

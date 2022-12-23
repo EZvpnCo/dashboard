@@ -784,7 +784,7 @@ class MetronController extends BaseController
                                                                 Actions:
                                                             </li>
                                                             <li class="navi-item">
-                                                                <a href="javascript:;" class="navi-link" onclick="payAgainByDigitalCurrency(' . $pay->id . ')">
+                                                                <a href="javascript:;" class="navi-link" onclick="code.metronPay_restart(\'\', \'\', \'0\' , ' . $pay->id . ')">
                                                                     <span class="navi-icon"><i class="fab fa-amazon-pay"></i></span>
                                                                     <span class="navi-text">Pay again</span>
                                                                 </a>

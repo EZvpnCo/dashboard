@@ -10,6 +10,7 @@ class MetronPay extends AbstractPayment
 {
     public function purchase($request, $response, $args, $telegram = 0)
     {
+
         if ($telegram === 0) {
             $price = $request->getParam('price') ?? 0;
             $pay_type = $request->getParam('type');
