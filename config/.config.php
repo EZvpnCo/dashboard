@@ -84,7 +84,7 @@ $_ENV['backup_notify'] = false;                            //Backup notification
 //User Registration Settings-----------------------------------------------------------------------------------------
 $_ENV['reg_auto_reset_day'] = 0;                         //The traffic reset date when registering, 0 means no reset
 $_ENV['reg_auto_reset_bandwidth'] = 0;                         //The traffic that needs to be reset, 0 means no reset
-$_ENV['random_group'] = '0';                       //Random grouping during registration, groups randomly assigned during registration, please separate multiple groups with English half-width commas
+$_ENV['random_group'] = '1';                       //Random grouping during registration, groups randomly assigned during registration, please separate multiple groups with English half-width commas
 
 $_ENV['reg_forbidden_ip'] = '127.0.0.0/8,::1/128';     //When registering, access to the IP list is prohibited by default, separated by half-width English commas
 $_ENV['min_port'] = 10000;                     //The minimum value of the user port pool, if the value is 0, the user will not be assigned a multi-user port when registering, suitable for pure V2Ray/Trojan airports
