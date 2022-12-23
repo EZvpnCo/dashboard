@@ -97,12 +97,13 @@ class NowPayment extends AbstractPayment
             $pl->save();
         } else {
             $pl = Paylist::find($paylist_id);
+            $price = $pl->total;
             if ($pl->status === 1) {
                 return ['errcode' => -1, 'errmsg' => "The order has been completed"];
             }
         }
 
-        $data['price_amount'] = (int)($price) || $pl->total;
+        $data['price_amount'] = (int)($price);
         $data['price_currency'] = "usd";
         $data['pay_currency'] = "usdttrc20";
         $data['order_id'] = $pl->tradeno;
