@@ -73,7 +73,7 @@ class NowPayment extends AbstractPayment
             'x-api-key: ' . $this->apiKey,
             'Content-Type: application/json'
         ]);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
 
         $data = curl_exec($curl);
         curl_close($curl);
