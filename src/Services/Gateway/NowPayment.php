@@ -111,7 +111,7 @@ class NowPayment extends AbstractPayment
         $data['is_fixed_rate'] = true;
         $data['is_fee_paid_by_user'] = true;
         $data['success_url'] = Config::get('baseUrl') . '/user/payment/return?tradeno=' . $pl->tradeno;
-        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
+        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/nowpayment';
 
 
         $result = json_decode($this->post($data), true);
@@ -152,7 +152,7 @@ class NowPayment extends AbstractPayment
         $data['is_fixed_rate'] = true;
         $data['is_fee_paid_by_user'] = true;
         $data['success_url'] = Config::get('baseUrl') . '/user/payment/return?tradeno=' . $pl->tradeno;
-        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/bobpay';
+        $data['ipn_callback_url'] = Config::get('baseUrl') . '/payment/notify/nowpayment';
 
 
         $result = json_decode($this->post($data), true);
@@ -173,9 +173,6 @@ class NowPayment extends AbstractPayment
 
     public function notify($request, $response, $args)
     {
-        if (!$this->verify($request->getParams(), $request->getParam('sign'))) {
-            die('FAIL');
-        }
         $this->postPayment($request->getParam('out_trade_no'), 'BobPay');
         die('SUCCESS');
     }
