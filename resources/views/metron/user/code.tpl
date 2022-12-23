@@ -316,7 +316,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="payByDigitalCurrency();">Ok</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="metronPay_input" onclick="code.metronPay('{$config['payment_system']}', '', '0', '');">Ok</button>
                 <button type="button" class="btn {$style[$theme_style]['modal']['btn_close']} font-weight-bold" data-dismiss="modal">cancel</button>
             </div>
         </div>
@@ -324,24 +324,14 @@
 </div>
 
 
-<script>
-function payByDigitalCurrency(){
-    var amount = +document.querySelector("#amount").value;
-    alert(amount);
-}
 
-function payAgainByDigitalCurrency(payID){
-    alert(payID);
-}
-
-</script>
 
 <!-- Pay order to pay -->
 <div class="modal fade" id="metronPay_restart_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Choice of payment</strong></h4>
+                <h4 class="modal-title {$style[$theme_style]['modal']['text_title']}"><strong>Choose payment</strong></h4>
             </div>
             <div class="modal-body pb-0">
                 <div class="form-group row form-group-marginless">

@@ -80,6 +80,10 @@ class AopF2F extends AbstractPayment
 
     public function purchase($request, $response, $args)
     {
+        $res['ret'] = 0;
+        $res['msg'] = 'Incorrect offfrder amount:';
+        return json_encode($res);
+
         $amount = $request->getParam('amount');
         $user = Auth::getUser();
         if ($amount == '') {
@@ -103,7 +107,7 @@ class AopF2F extends AbstractPayment
             'total_amount' => $pl->total
         ]);
 
-        /** @var \Omnipay\Alipay\Responses\AopTradePreCreateResponse $response */
+
         $aliResponse = $request->send();
 
         // 获取收款二维码内容
