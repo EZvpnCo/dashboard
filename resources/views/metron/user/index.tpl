@@ -215,7 +215,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                <div class="text-dark-50 font-weight-normal font-size-lg-h4 font-size-h5">{$ann->content}</div>
+                                                <div class="font-weight-normal font-size-lg-h4 font-size-h5" style="color:white;">{$ann->content}</div>
                                             </div>
                                         </div>
                                     </div>
