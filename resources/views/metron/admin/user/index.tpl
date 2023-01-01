@@ -83,7 +83,6 @@
                         </div>
                     </div>
                 </div>
-                <script src="/theme/metron/js/jszip.js"></script>
                 <script>
                     async function toDataUrl(url) {
                         return new Promise((resolve, reject) => {
