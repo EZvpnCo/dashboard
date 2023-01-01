@@ -99,16 +99,12 @@
                             xhr.send();
                         });
                     }
-                    async function downloadAllAvatars(){
+                    function downloadAllAvatars(){
                         alert("mm");
                         var zip = new JSZip();
                         zip.file("Hello.txt", "Hello World\n");
                         const img = await toDataUrl("https://gravatar.loli.net/avatar/fed49100fadfce926fbc0ac676b69f2f?&d=monsterid");
                         zip.file("img.png", img);
-                        zip.generateAsync({type:"blob"})
-                        .then(function(content) {
-                            saveAs(content, "avatars.zip");
-                        });
                     }
                 </script>
 
