@@ -41,7 +41,7 @@ class UserController extends AdminController
             'remark'                => 'Remark',
             'email'                 => 'Email',
             'money'                 => 'Money',
-            'avatar'                 => 'Avatar',
+            'mavatar'                 => 'Avatar',
             'im_type'               => 'Contact type',
             'im_value'              => 'Contact detail',
             'node_group' => 'Group',
@@ -577,7 +577,7 @@ class UserController extends AdminController
             $tempdata['auto_reset_day']       = $user->auto_reset_day;
             $tempdata['auto_reset_bandwidth'] = $user->auto_reset_bandwidth;
             $tempdata['ref_by']               = $user->ref_by;
-            $tempdata['avatar']               = $user->ref_by;
+            $tempdata['mavatar']               = $user->node_group;
             if ($user->ref_by == 0) {
                 $tempdata['ref_by_user_name'] = 'system invitation';
             } else {
