@@ -536,7 +536,7 @@ class UserController extends AdminController
 
             $tempdata['id']         = $user->id;
             $tempdata['user_name']  = $user->user_name;
-            $tempdata['remark']     = $user->remark;
+            $tempdata['remark']     = $user->getGravatarAttribute();
             $tempdata['email']      = $user->email;
             $tempdata['money']      = $user->money;
             $tempdata['im_value']   = $user->im_value;
