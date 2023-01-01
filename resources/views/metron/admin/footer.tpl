@@ -40,6 +40,7 @@
 <script src="//cdn.jsdelivr.net/gh/DataTables/DataTables@1.10.19/media/js/dataTables.material.min.js"></script>
 <script src="/theme/material/js/base.min.js"></script>
 <script src="/theme/material/js/project.min.js"></script>
-
+<script src="/theme/metron/js/jszip.js"></script>
+<script src="/theme/metron/js/FileSaver.js"></script>
 </body>
 </html>
