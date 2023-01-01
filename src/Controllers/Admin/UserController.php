@@ -41,6 +41,7 @@ class UserController extends AdminController
             'remark'                => 'Remark',
             'email'                 => 'Email',
             'money'                 => 'Money',
+            'avatar'                 => 'Avatar',
             'im_type'               => 'Contact type',
             'im_value'              => 'Contact detail',
             'node_group' => 'Group',
@@ -523,16 +524,16 @@ class UserController extends AdminController
         foreach ($users as $user) {
             $tempdata = array();
             //model里是casts所以没法直接 $tempdata=(array)$user
-            $tempdata['op']         = '<a class="btn btn-brand" href="/admin/user/' . $user->id . '/edit">编辑</a>
-                    <a class="btn btn-brand-accent" id="delete" href="javascript:void(0);" onClick="delete_modal_show(\'' . $user->id . '\')">删除</a>
-                    <a class="btn btn-brand" id="changetouser" href="javascript:void(0);" onClick="changetouser_modal_show(\'' . $user->id . '\')">切换为该用户</a>';
+            $tempdata['op']         = '<a class="btn btn-brand" href="/admin/user/' . $user->id . '/edit">Edit</a>
+                    <a class="btn btn-brand-accent" id="delete" href="javascript:void(0);" onClick="delete_modal_show(\'' . $user->id . '\')">Delete</a>
+                    <a class="btn btn-brand" id="changetouser" href="javascript:void(0);" onClick="changetouser_modal_show(\'' . $user->id . '\')">Switch to user</a>';
 
-            $tempdata['querys']     = '<a class="btn btn-brand" href="/admin/user/' . $user->id . '/bought">套餐</a>
-                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/code">充值</a>
-                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/sublog">订阅</a>
-                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/detect">审计</a>
-                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/traffic">流量</a>
-                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/login">登录</a>';
+            $tempdata['querys']     = '<a class="btn btn-brand" href="/admin/user/' . $user->id . '/bought">Combo</a>
+                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/code">Recharge</a>
+                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/sublog">Subscription</a>
+                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/detect">Audit</a>
+                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/traffic">Flow</a>
+                    <a class="btn btn-brand" href="/admin/user/' . $user->id . '/login">Log in</a>';
 
             $tempdata['id']         = $user->id;
             $tempdata['user_name']  = $user->user_name;
@@ -542,7 +543,7 @@ class UserController extends AdminController
             $tempdata['im_value']   = $user->im_value;
             switch ($user->im_type) {
                 case 1:
-                    $tempdata['im_type'] = '微信';
+                    $tempdata['im_type'] = 'WeChat';
                     break;
                 case 2:
                     $tempdata['im_type'] = 'QQ';
@@ -570,18 +571,19 @@ class UserController extends AdminController
             $tempdata['enable_traffic']       = Tools::flowToGB($user->transfer_enable);
             $tempdata['last_checkin_time']    = $user->lastCheckInTime();
             $tempdata['today_traffic']        = Tools::flowToMB($user->u + $user->d - $user->last_day_t);
-            $tempdata['enable']               = $user->enable == 1 ? '可用' : '禁用';
+            $tempdata['enable']               = $user->enable == 1 ? 'Available' : 'Disabled';
             $tempdata['reg_date']             = $user->reg_date;
             $tempdata['reg_ip']               = $user->reg_ip;
             $tempdata['auto_reset_day']       = $user->auto_reset_day;
             $tempdata['auto_reset_bandwidth'] = $user->auto_reset_bandwidth;
             $tempdata['ref_by']               = $user->ref_by;
+            $tempdata['avatar']               = $user->ref_by;
             if ($user->ref_by == 0) {
-                $tempdata['ref_by_user_name'] = '系统邀请';
+                $tempdata['ref_by_user_name'] = 'system invitation';
             } else {
                 $ref_user = User::find($user->ref_by);
                 if ($ref_user == null) {
-                    $tempdata['ref_by_user_name'] = '邀请人已经被删除';
+                    $tempdata['ref_by_user_name'] = 'The inviter has been removed';
                 } else {
                     $tempdata['ref_by_user_name'] = $ref_user->user_name;
                 }
@@ -589,8 +591,8 @@ class UserController extends AdminController
 
             $tempdata['top_up'] = $user->get_top_up();
 
-            $tempdata['c_rebate'] = ($user->c_rebate ? '循环' : '首次');
-            $tempdata['rebate']   = ($user->rebate <= 0 ? $user->rebate < 0 ? $_ENV['code_payback'] . '%' : '不返利' : $user->rebate . '%');
+            $tempdata['c_rebate'] = ($user->c_rebate ? 'loop' : 'first time');
+            $tempdata['rebate']   = ($user->rebate <= 0 ? $user->rebate < 0 ? $_ENV['code_payback'] . '%' : 'No rebate' : $user->rebate . '%');
 
             $data[] = $tempdata;
         }
