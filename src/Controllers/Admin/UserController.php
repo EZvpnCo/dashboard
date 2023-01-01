@@ -38,7 +38,7 @@ class UserController extends AdminController
             'querys'                => 'Query',
             'id'                    => 'ID',
             'user_name'             => 'Username',
-            'remark'                => 'Remark',
+            'remark'                => 'Avatar',
             'email'                 => 'Email',
             'money'                 => 'Money',
             'im_type'               => 'Contact type',
