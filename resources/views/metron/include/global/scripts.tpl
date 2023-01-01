@@ -4,8 +4,7 @@
 <script src="/theme/metron/js/metron-plugin.js"></script>
 <script src="/theme/metron/js/scripts.js"></script>
 <script src="/theme/metron/js/metron.js"></script>
-<script src="/theme/metron/js/jszip.js"></script>
-<script src="/theme/metron/js/FileSaver.js"></script>
+
 
 {if $metron['enable_cust'] === 'crisp' && $metron['crisp_id'] != ''}
     {include file='include/global/crisp.tpl'}
