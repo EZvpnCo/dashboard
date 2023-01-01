@@ -83,15 +83,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    let dataaa = []
-                    for(let p=0;p<$("tbody").find("tr").length;p++){
-                        const name = 'img-'+p;
-                        const url = $("tbody").find(`tr:eq(${p})`).find("img")[0].src;
-                        if(url) dataaa.push({name,url});
-                    }
-                    downloadAllAvatars(dataaa);
-                </script>
 
                 <div class="table-responsive">
                     {include file='table/table.tpl'}
