@@ -84,33 +84,32 @@
                     </div>
                 </div>
                 <script src="/theme/metron/js/jszip.js"></script>
-                <script src="/theme/metron/js/FileSaver.js"></script>
                 <script>
-                async function toDataUrl(url) {
-                    return new Promise((resolve, reject) => {
-                        var xhr = new XMLHttpRequest();
-                        xhr.onload = function() {
-                            var reader = new FileReader();
-                            reader.onloadend = function() {
-                                resolve(reader.result);
-                            }
-                            reader.readAsDataURL(xhr.response);
-                        };
-                        xhr.open('GET', url);
-                        xhr.responseType = 'blob';
-                        xhr.send();
-                    });
-                }
-                async function downloadAllAvatars(){
-                    var zip = new JSZip();
-                    zip.file("Hello.txt", "Hello World\n");
-                    const img = await toDataUrl("https://gravatar.loli.net/avatar/fed49100fadfce926fbc0ac676b69f2f?&d=monsterid");
-                    zip.file("img.png", img);
-                    zip.generateAsync({type:"blob"})
-                    .then(function(content) {
-                        saveAs(content, "avatars.zip");
-                    });
-                }
+                    async function toDataUrl(url) {
+                        return new Promise((resolve, reject) => {
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = function() {
+                                var reader = new FileReader();
+                                reader.onloadend = function() {
+                                    resolve(reader.result);
+                                }
+                                reader.readAsDataURL(xhr.response);
+                            };
+                            xhr.open('GET', url);
+                            xhr.responseType = 'blob';
+                            xhr.send();
+                        });
+                    }
+                    async function downloadAllAvatars(){
+                        var zip = new JSZip();
+                        zip.file("Hello.txt", "Hello World\n");
+                        const img = await toDataUrl("https://gravatar.loli.net/avatar/fed49100fadfce926fbc0ac676b69f2f?&d=monsterid");
+                        zip.file("img.png", img);
+                        zip.generateAsync({type:"blob"})
+                        .then(function(content) {
+                            saveAs(content, "avatars.zip");
+                        });
+                    }
                 </script>
 
                 <div class="table-responsive">
