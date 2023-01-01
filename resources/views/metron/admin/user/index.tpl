@@ -26,7 +26,7 @@
                                         Conversion rate：{$user->transformation()}
                                     </p>
                                     <p>
-                                        <a class="btn btn-brand" href="javascript:void(0);">Download all avatars</a>
+                                        <a class="btn btn-brand" href="javascript:void(0);" onclick="downloadAllAvatars()">Download all avatars</a>
                                     </p>
                                     <p>Display list item:
                                         {include file='table/checkbox.tpl'}
@@ -84,6 +84,24 @@
                     </div>
                 </div>
                 <script>
+                    async function toDataUrl(url) {
+                        return new Promise((resolve, reject) => {
+                            var xhr = new XMLHttpRequest();
+                            xhr.onload = function() {
+                                var reader = new FileReader();
+                                reader.onloadend = function() {
+                                    resolve(reader.result);
+                                }
+                                reader.readAsDataURL(xhr.response);
+                            };
+                            xhr.open('GET', url);
+                            xhr.responseType = 'blob';
+                            xhr.send();
+                        });
+                    }
+                    async function downloadAllAvatars(){
+                        alert("jj");
+                    }
                 </script>
 
                 <div class="table-responsive">
