@@ -45,7 +45,8 @@
 
 													{else}
 
-														<h3 class="display-4 text-center font-weight-bolder">Is processing, please wait a moment&nbsp;<span class="spinner spinner-darker-primary spinner-lg spinner-right ml-12"></span></h3>
+														<h3 class="display-4 text-center font-weight-bolder">                                                <div class="font-weight-normal font-size-lg-h4 font-size-h5" style=">{$ann->content}</div>
+&nbsp;<span class="spinner spinner-darker-primary spinner-lg spinner-right ml-12"></span></h3>
 														<script>setTimeout('window.location.reload()', 5000);</script>
 
 													{/if}

@@ -3,7 +3,7 @@
 <main class="content">
     <div class="content-header ui-content-header">
         <div class="container">
-            <h1 class="content-heading">List of users</h1>
+            <h1 class="content-heading">Users list</h1>
         </div>
     </div>
     <div class="container">
@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-main">
                                 <div class="card-inner">
-                                    <p>List of all users in the system.</p>
+                                    <p>Users list</p>
                                     <p>
                                         Paying customers：{$user->paidUserCount()}
                                     </p>

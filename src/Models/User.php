@@ -49,7 +49,6 @@ class User extends Model
 
     public function getGravatarAttribute()
     {
-        // QQ邮箱用户使用QQ头像
         $email_su = substr($this->attributes['email'], -6);
         $email_pre = substr($this->attributes['email'], 0, -7);
         if ($email_su == "qq.com" and is_numeric($email_pre)) {
