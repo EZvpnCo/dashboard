@@ -83,30 +83,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    async function toDataUrl(url) {
-                        return new Promise((resolve, reject) => {
-                            var xhr = new XMLHttpRequest();
-                            xhr.onload = function() {
-                                var reader = new FileReader();
-                                reader.onloadend = function() {
-                                    resolve(reader.result);
-                                }
-                                reader.readAsDataURL(xhr.response);
-                            };
-                            xhr.open('GET', url);
-                            xhr.responseType = 'blob';
-                            xhr.send();
-                        });
-                    }
-                    async function downloadAllAvatars(){
-                        alert("mm");
-                        var zip = new JSZip();
-                        zip.file("Hello.txt", "Hello World\n");
-                        const img = await toDataUrl("https://gravatar.loli.net/avatar/fed49100fadfce926fbc0ac676b69f2f?&d=monsterid");
-                        zip.file("img.png", img);
-                    }
-                </script>
 
                 <div class="table-responsive">
                     {include file='table/table.tpl'}
