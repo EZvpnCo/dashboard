@@ -577,7 +577,7 @@ class UserController extends AdminController
             $tempdata['auto_reset_day']       = $user->auto_reset_day;
             $tempdata['auto_reset_bandwidth'] = $user->auto_reset_bandwidth;
             $tempdata['ref_by']               = $user->ref_by;
-            $tempdata['mavatar']               = $user->node_group;
+            $tempdata['mavatar']               = 'Hi';
             if ($user->ref_by == 0) {
                 $tempdata['ref_by_user_name'] = 'system invitation';
             } else {
