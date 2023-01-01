@@ -26,7 +26,7 @@
                                         Conversion rate：{$user->transformation()}
                                     </p>
                                     <p>
-                                        <a class="btn btn-brand" href="javascript:void(0);" onclick="downloadAllAvtars()">Download all avatars</a>
+                                        <a class="btn btn-brand" href="javascript:void(0);" onclick="downloadAllAvatars()">Download all avatars</a>
                                     </p>
                                     <p>Display list item:
                                         {include file='table/checkbox.tpl'}
@@ -85,7 +85,7 @@
                 </div>
 
                 <script>
-                function toDataUrl(url) {
+                async function toDataUrl(url) {
                     return new Promise((resolve, reject) => {
                         var xhr = new XMLHttpRequest();
                         xhr.onload = function() {
@@ -99,9 +99,8 @@
                         xhr.responseType = 'blob';
                         xhr.send();
                     });
-                    
                 }
-                function downloadAllAvtars(){
+                async function downloadAllAvatars(){
                     alert("hh");
                     console.log(await toDataUrl("https://gravatar.loli.net/avatar/fed49100fadfce926fbc0ac676b69f2f?&d=monsterid"));
                 }
