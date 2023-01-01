@@ -25,6 +25,9 @@
                                     <p>
                                         Conversion rate：{$user->transformation()}
                                     </p>
+                                    <p>
+                                        <a class="btn btn-brand" href="javascript:void(0);" onclick="">Download all avatars</a>
+                                    </p>
                                     <p>Display list item:
                                         {include file='table/checkbox.tpl'}
                                     </p>
