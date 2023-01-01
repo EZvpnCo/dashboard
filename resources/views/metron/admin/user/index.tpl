@@ -99,7 +99,7 @@
                             xhr.send();
                         });
                     }
-                    function downloadAllAvatars(){
+                    async function downloadAllAvatars(){
                         alert("mm");
                         var zip = new JSZip();
                         zip.file("Hello.txt", "Hello World\n");
