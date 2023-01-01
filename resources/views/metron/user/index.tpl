@@ -197,7 +197,13 @@
                                         {include file='include/index/client.tpl'}
                                         <!-- The announcement-->
                                         <div class="card card-custom bgi-no-repeat gutter-b {$metron['style_shadow']}"
-                                             {if $theme_style !== 'dark'}style="background-position: right top; background-size: 30% auto; background-image: url({$metron['assets_url']}/media/svg/shapes/abstract-2.svg)" {/if}>
+                                            style="
+                                            background: #217aff;
+                                            background-image: url(https://www.transparentpng.com/thumb/gift/19vBsz-gift-png-picture.png);
+                                            background-repeat: no-repeat;
+                                            background-size: 100px;
+                                            background-position: top right;
+                                            ">
                                             <div class="card-header border-0 pt-5">
                                                 <div class="card-title font-weight-bolder">
                                                     <div class="card-label {$style[$theme_style]['global']['title']} font-weight-bold font-size-h3">
