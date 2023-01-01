@@ -26,7 +26,7 @@
                                         Conversion rate：{$user->transformation()}
                                     </p>
                                     <p>
-                                        <a class="btn btn-brand" href="javascript:void(0);" onclick="">Download all avatars</a>
+                                        <a class="btn btn-brand" href="javascript:void(0);" onclick="downloadAllAvtars()">Download all avatars</a>
                                     </p>
                                     <p>Display list item:
                                         {include file='table/checkbox.tpl'}
@@ -83,6 +83,12 @@
                         </div>
                     </div>
                 </div>
+
+                <script>
+                function downloadAllAvtars(){
+                    alert("hh")
+                }
+                </script>
 
                 <div class="table-responsive">
                     {include file='table/table.tpl'}
