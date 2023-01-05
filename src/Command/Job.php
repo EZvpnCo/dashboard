@@ -41,15 +41,15 @@ use Exception;
 class Job extends Command
 {
     public $description = ''
-    . '├─=: php xcat Job [选项]' . PHP_EOL
-    . '│ ├─ UserGa                  - 二次验证' . PHP_EOL
-    . '│ ├─ DailyJob                - 每日任务' . PHP_EOL
-    . '│ ├─ CheckJob                - 检查任务，每分钟' . PHP_EOL
-    . '│ ├─ CheckUserClassExpire    - 检查用户会员等级过期任务，每分钟' . PHP_EOL
-    . '│ ├─ CheckUserExpire         - 检查账号过期任务，每小钟' . PHP_EOL
-    . '│ ├─ UserJob                 - 用户账户相关任务，每小时' . PHP_EOL
-    . '│ ├─ updatedownload          - 检查客户端更新' . PHP_EOL
-    . '│ ├─ SendMail                - 批量发送邮件' . PHP_EOL;
+        . '├─=: php xcat Job [选项]' . PHP_EOL
+        . '│ ├─ UserGa                  - 二次验证' . PHP_EOL
+        . '│ ├─ DailyJob                - 每日任务' . PHP_EOL
+        . '│ ├─ CheckJob                - 检查任务，每分钟' . PHP_EOL
+        . '│ ├─ CheckUserClassExpire    - 检查用户会员等级过期任务，每分钟' . PHP_EOL
+        . '│ ├─ CheckUserExpire         - 检查账号过期任务，每小钟' . PHP_EOL
+        . '│ ├─ UserJob                 - 用户账户相关任务，每小时' . PHP_EOL
+        . '│ ├─ updatedownload          - 检查客户端更新' . PHP_EOL
+        . '│ ├─ SendMail                - 批量发送邮件' . PHP_EOL;
 
     public function boot()
     {
@@ -134,7 +134,7 @@ class Job extends Command
                 $bought_users[] = $bought->userid;
                 if ($auto_reset_mode === 'metron') {
                     if ($user->class > 0 && (int)((time() - $bought->datetime) / 86400) % $shop->reset() == 0 && (int)((time() - $bought->datetime) / 86400) != 0) {
-                        echo('用户ID:' . $user->id . ' 根据套餐ID:' . $shop->id . ' 重置流量为' . $shop->reset_value() . 'GB' . PHP_EOL);
+                        echo ('用户ID:' . $user->id . ' 根据套餐ID:' . $shop->id . ' 重置流量为' . $shop->reset_value() . 'GB' . PHP_EOL);
                         $user->transfer_enable = Tools::toGB($shop->reset_value());
                         $user->u = 0;
                         $user->d = 0;
@@ -152,7 +152,7 @@ class Job extends Command
                     }
                 } else if ($auto_reset_mode === 'sspanel') {
                     if ((time() - $shop->reset_exp() * 86400 < $bought->datetime) && (int)((time() - $bought->datetime) / 86400) % $shop->reset() == 0 && (int)((time() - $bought->datetime) / 86400) != 0) {
-                        echo('流量重置-' . $user->id . "\n");
+                        echo ('流量重置-' . $user->id . "\n");
                         $user->transfer_enable = Tools::toGB($shop->reset_value());
                         $user->u = 0;
                         $user->d = 0;
@@ -169,7 +169,6 @@ class Job extends Command
                         );
                     }
                 }
-
             }
         }
 
@@ -342,11 +341,11 @@ class Job extends Command
                         );
                         $opts = array(
                             'http' =>
-                                array(
-                                    'method' => 'POST',
-                                    'header' => 'Content-type: application/x-www-form-urlencoded',
-                                    'content' => $postdata
-                                )
+                            array(
+                                'method' => 'POST',
+                                'header' => 'Content-type: application/x-www-form-urlencoded',
+                                'content' => $postdata
+                            )
                         );
                         $context = stream_context_create($opts);
                         file_get_contents('https://sc.ftqq.com/' . $ScFtqq_SCKEY . '.send', false, $context);
@@ -389,11 +388,11 @@ class Job extends Command
 
                         $opts = array(
                             'http' =>
-                                array(
-                                    'method' => 'POST',
-                                    'header' => 'Content-type: application/x-www-form-urlencoded',
-                                    'content' => $postdata
-                                )
+                            array(
+                                'method' => 'POST',
+                                'header' => 'Content-type: application/x-www-form-urlencoded',
+                                'content' => $postdata
+                            )
                         );
                         $context = stream_context_create($opts);
                         file_get_contents('https://sc.ftqq.com/' . $ScFtqq_SCKEY . '.send', false, $context);
@@ -450,15 +449,15 @@ class Job extends Command
                             if ($Userlocation != $location['country'] && $nodes == null && $nodes2 == null) {
                                 $user = User::where('id', '=', $userlog->userid)->first();
                                 echo 'Send warn mail to user: ' . $user->id . '-' . iconv(
-                                        'gbk',
-                                        'utf-8//IGNORE',
-                                        $Userlocation
-                                    ) . '-' . iconv('gbk', 'utf-8//IGNORE', $location['country']);
+                                    'gbk',
+                                    'utf-8//IGNORE',
+                                    $Userlocation
+                                ) . '-' . iconv('gbk', 'utf-8//IGNORE', $location['country']);
                                 $text = '您好，系统发现您的账号在 ' . iconv(
-                                        'gbk',
-                                        'utf-8//IGNORE',
-                                        $Userlocation
-                                    ) . ' 有异常登录，请您自己自行核实登录行为。有异常请及时修改密码。';
+                                    'gbk',
+                                    'utf-8//IGNORE',
+                                    $Userlocation
+                                ) . ' 有异常登录，请您自己自行核实登录行为。有异常请及时修改密码。';
                                 $user->sendMail(
                                     $_ENV['appName'] . '-系统警告',
                                     'news/warn.tpl',
@@ -486,8 +485,8 @@ class Job extends Command
             }
 
             if ($user->enable == 1 && (strtotime($user->expire_in) > time() || strtotime(
-                        $user->expire_in
-                    ) < 644447105) && $user->transfer_enable > $user->u + $user->d) {
+                $user->expire_in
+            ) < 644447105) && $user->transfer_enable > $user->u + $user->d) {
                 $sinuser->delete();
                 Radius::Add($user, $user->passwd);
             }
@@ -598,7 +597,7 @@ class Job extends Command
 
                 $ticket->status = 0;
                 $ticket->save();
-                echo('关闭工单ID:' . $ticket->id . PHP_EOL);
+                echo ('关闭工单ID:' . $ticket->id . PHP_EOL);
             }
         }
 
@@ -850,17 +849,17 @@ class Job extends Command
             ->get();
 
         foreach ($users as $user) {
-            $text = '您好，系统发现您的账号等级已经过期了。';
+            $text = 'Hello, the system found that your account level has expired.';
             $reset_traffic = $_ENV['class_expire_reset_traffic'];
             if ($reset_traffic >= 0) {
                 $user->transfer_enable = Tools::toGB($reset_traffic);
                 $user->u = 0;
                 $user->d = 0;
                 $user->last_day_t = 0;
-                $text .= '流量已经被重置为' . $reset_traffic . 'GB';
+                $text .= 'Flow has been reset to ' . $reset_traffic . 'GB';
             }
             $user->sendMail(
-                $_ENV['appName'] . '-您的账户等级已经过期了',
+                $_ENV['appName'] . '- Your account level has expired',
                 'news/warn.tpl',
                 [
                     'text' => $text
