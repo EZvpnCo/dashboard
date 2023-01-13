@@ -29,7 +29,8 @@
                                                 <div class="p-4">
                                                     <h3 class="{$style[$theme_style]['global']['title']} font-weight-bolder my-7">Balance</h3>
                                                     <p class="{$style[$theme_style]['global']['title']} display-2 display1-lg pb-10" style="padding-top: 10px; padding-bottom: 10px"><span class="display-4"><strong>$</strong> </span><strong>{$user->money}</strong></p>
-                                                    <a href="Javascript:;" class="btn btn-danger font-weight-bold px-6 py-3" onclick="code.payTab();">Increase wallet balance</a>
+                                                    <a href="Javascript:;" class="btn btn-danger font-weight-bold px-6 py-3" onclick="code.payTab();">
+                                                    <i class="fa fa-plus"></i>Increase wallet balance</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -301,9 +302,9 @@
                                 {/if}
                                 {if $metron['pay_crypto'] != 'none' && $metron['pay_crypto'] != ''}
                                 <li class="nav-crypto nav-item d-flex col flex-grow-1 flex-shrink-0 mr-3 mb-3 mb-lg-0 cursor_onclick">
-                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_crypto">
+                                    <a class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center" data-toggle="pill" data-name="pay_crypto" style="background: rgb(83, 174, 148);">
                                         <span class="nav-icon py-2 w-auto">
-                                            <i class="fab fa-bitcoin icon-2x"></i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" width="50" height="50"><path d="M1123.42 866.76V718h340.18V491.34H537.28V718H877.5v148.64C601 879.34 393.1 934.1 393.1 999.7s208 120.36 484.4 133.14v476.5h246V1132.8c276-12.74 483.48-67.46 483.48-133s-207.48-120.26-483.48-133m0 225.64v-.12c-6.94.44-42.6 2.58-122 2.58-63.48 0-108.14-1.8-123.88-2.62v.2C633.34 1081.66 451 1039.12 451 988.22S633.36 894.84 877.62 884v166.1c16 1.1 61.76 3.8 124.92 3.8 75.86 0 114-3.16 121-3.8V884c243.8 10.86 425.72 53.44 425.72 104.16s-182 93.32-425.72 104.18" fill="#fff"/></svg>
                                         </span>
                                         <span class="nav-text font-size-lg py-2 font-weight-bold text-center">Digital currencies</span>
                                     </a>

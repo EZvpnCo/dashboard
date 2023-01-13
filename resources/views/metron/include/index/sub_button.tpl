@@ -80,10 +80,14 @@
                                                         {if in_array('v2ray',$metron['index_sub'])}
                                                         <!-- V2RayTo subscribe to -->
                                                         <div class="btn-group mb-3 mr-3">
-                                                            <button type="button" class="btn btn-pill btn-v2ray copy-text" data-clipboard-text="{$subInfo["v2ray"]}"><i class="metron-v2rayng text-white"></i>&nbsp;&nbsp;copy V2Ray To subscribe to&nbsp;&nbsp;</button>
+                                                            <button type="button" class="btn btn-pill btn-v2ray copy-text" data-clipboard-text="{$subInfo["v2ray"]}">
+                                                                <i class="metron-v2rayng text-white"></i>
+                                                                &nbsp;&nbsp;Universal subscription&nbsp;&nbsp;
+                                                                <b>(OneClick/Fair/EZvpn/v2rayN)</b>
+                                                            </button>
                                                         </div>
                                                         {/if}
-                                                        {if in_array('v2ray',$metron['index_sub'])}
+                                                        {if in_array('v2ray-vless',$metron['index_sub'])}
                                                             <!-- V2RayTo subscribe to -->
                                                             <div class="btn-group mb-3 mr-3">
                                                                 <button type="button" class="btn btn-pill btn-v2ray copy-text" data-clipboard-text="{$subInfo["v2ray_vless"]}"><i class="metron-v2rayng text-white"></i>&nbsp;&nbsp;copy V2Ray-VLESS To subscribe to&nbsp;&nbsp;</button>
@@ -92,7 +96,10 @@
                                                         {if in_array('surfboard',$metron['index_sub'])}
                                                         <!-- SurfboardTo subscribe to -->
                                                         <div class="btn-group mb-3 mr-3">
-                                                            <button type="button" class="btn btn-pill btn-surfboard copy-text" data-clipboard-text="{$subInfo["surfboard"]}"><i class="metron-surfboard text-white"></i>&nbsp;&nbsp;copy Surfboard To subscribe to&nbsp;&nbsp;</button>
+                                                            <button type="button" class="btn btn-pill btn-surfboard copy-text" data-clipboard-text="{$subInfo["surfboard"]}">
+                                                                <i class="metron-surfboard text-white"></i>
+                                                                &nbsp;&nbsp;Surfboard subscription&nbsp;&nbsp;
+                                                            </button>
                                                         </div>
                                                         {/if}
                                                         {if in_array('kitsunebi',$metron['index_sub'])}

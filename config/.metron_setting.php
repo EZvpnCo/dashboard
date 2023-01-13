@@ -341,26 +341,40 @@ $_MT['Telegram_Payment'] = true; // User recharge reminder
  * Windows Client ---------------------------------------------- ----------------------------------------------
  */
 $_MT['client_windows'] = [
-    // 'clash' => array( // An array is a client, which can be added or deleted by itself
-    // 'name' => 'Bob Accelerator', // client name
-    // 'img' => 'https://img-youpai.weixiaoi.com/tu/2021/0406/1617693954210406.png', // icon, use png transparent file
-    // 'url' => '/user/tutorial?os=Windows&client=Clash', // URL address of the installation tutorial
-    // 'down' => 'https://www.google.com', // client download address in the tutorial page
-    // 'vs' => 'v3.2.4', // version number
-    // ),
+    'ezvpn' => array(
+        'name' => 'EZvpn',
+        'img' => '/theme/metron/images/clients/windows/EZvpn.png',
+        'url' => '/user/tutorial?os=Windows&client=EZvpn',
+        'down' => 'http://dl.ezvpn.co/downloads/windows/EZvpn.exe',
+        'vs' => '1.9.7',
+    ),
+    'v2rayn' => array(
+        'name' => 'v2rayN',
+        'img' => '/theme/metron/images/clients/windows/v2rayN.png',
+        'url' => '/user/tutorial?os=Windows&client=v2rayN',
+        'down' => 'http://dl.ezvpn.co/downloads/windows/v2rayN.zip',
+        'vs' => '6.6',
+    ),
 ];
 
 /**
  * Android client ----------------------------------------------- ----------------------------------------------
  */
 $_MT['client_android'] = [
-    // 'clash' => array(
-    // 'name' => 'Bob Accelerator',
-    // 'img' => 'https://img-youpai.weixiaoi.com/tu/2021/0406/1617693954210406.png',
-    // 'url' => '/user/tutorial?os=Android&client=Clash',
-    // 'down' => 'https://www.google.com',
-    // 'vs' => 'v2.0.0',
-    // ),
+    'surfboard' => array(
+        'name' => 'Surfboard',
+        'img' => '/theme/metron/images/clients/android/Surfboard.webp',
+        'url' => '/user/tutorial?os=Android&client=Surfboard',
+        'down' => 'https://play.google.com/store/apps/details?id=com.getsurfboard',
+        'vs' => 'v2.19.3',
+    ),
+    'oneclick' => array(
+        'name' => 'OneClick',
+        'img' => '/theme/metron/images/clients/android/OneClick.webp',
+        'url' => '/user/tutorial?os=Android&client=OneClick',
+        'down' => 'https://play.google.com/store/apps/details?id=earth.oneclick',
+        'vs' => 'v2.6.0',
+    ),
 ];
 
 
@@ -381,18 +395,13 @@ $_MT['client_macos'] = [
  * Apple iOS client --------------------------------------------- -----------------------------------------------
  */
 $_MT['client_ios'] = [
-    // 'Shadowrocket' => array(
-    // 'name' => 'Shadowrocket',
-    // 'img' => $_MT['assets_url'].'/media/client-logos/shadowrocket-ico.png',
-    // 'url' => '/user/tutorial?os=iOS&client=Shadowrocket',
-    // 'vs' => 'v0.10.0',
-    // ),
-    // 'Quantumult' => array(
-    // 'name' => 'Quantumult',
-    // 'img' => $_MT['assets_url'].'/media/client-logos/quantumult-ico.png',
-    // 'url' => '/user/tutorial?os=iOS&client=Quantumult',
-    // 'vs' => 'v1.1.0.1',
-    // ),
+    'oneclick' => array(
+        'name' => 'OneClick',
+        'img' => '/theme/metron/images/clients/ios/OneClick.webp',
+        'url' => '/user/tutorial?os=iOS&client=OneClick',
+        'down' => 'https://apps.apple.com/us/app/oneclick-safe-easy-fast/id1545555197',
+        'vs' => 'v2.5.0',
+    ),
 ];
 # Tutorial page sharing account
 $_MT['ios_class'] = 2; //How many levels of iOS accounts are visible (included)
