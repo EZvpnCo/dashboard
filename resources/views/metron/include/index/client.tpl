@@ -52,7 +52,7 @@
                                                                             <div class="font-size-sm text-muted font-weight-bold mt-1">{$c_w['vs']}</div>
                                                                         </div>
                                                                     </div>
-                                                                    <a href="{$c_w['down']}" class="btn btn-primary font-weight-bold btn-pill">Click on the download</a>
+                                                                    <a href="{$c_w['down']}" class="btn btn-primary font-weight-bold btn-pill" target="_blank">Click on the download</a>
                                                                 </div>
                                                                 {if !$c_w@last}
                                                                 <div class="separator separator-dashed mb-5"></div>
@@ -102,7 +102,7 @@
                                                                             <div class="font-size-sm text-muted font-weight-bold mt-1">{$c_w['vs']}</div>
                                                                         </div>
                                                                     </div>
-                                                                    <a href="{$c_w['down']}" class="btn btn-primary font-weight-bold btn-pill">Click on the download</a>
+                                                                    <a href="{$c_w['down']}" class="btn btn-primary font-weight-bold btn-pill" target="_blank">Click on the download</a>
                                                                 </div>
                                                                 {if !$c_w@last}
                                                                 <div class="separator separator-dashed mb-5"></div>
@@ -127,7 +127,7 @@
                                                                             <div class="font-size-sm text-muted font-weight-bold mt-1">{$c_w['vs']}</div>
                                                                         </div>
                                                                     </div>
-                                                                    <a href="{$c_w['down']}" class="btn btn-primary font-weight-bold btn-pill">Click on the download</a>
+                                                                    <a href="{$c_w['down']}" class="btn btn-primary font-weight-bold btn-pill" target="_blank">Click on the download</a>
                                                                 </div>
                                                                 {if !$c_w@last}
                                                                 <div class="separator separator-dashed mb-5"></div>
