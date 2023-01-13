@@ -102,7 +102,7 @@
                                                                             <div class="font-size-sm text-muted font-weight-bold mt-1">{$c_w['vs']}</div>
                                                                         </div>
                                                                     </div>
-                                                                    <a href="{$c_w['url']}" class="btn btn-primary font-weight-bold btn-pill">Install the tutorial</a>
+                                                                    <a href="{$c_w['down']}" class="btn btn-primary font-weight-bold btn-pill">Click on the download</a>
                                                                 </div>
                                                                 {if !$c_w@last}
                                                                 <div class="separator separator-dashed mb-5"></div>
