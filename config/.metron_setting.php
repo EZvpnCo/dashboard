@@ -117,7 +117,7 @@ $_MT['nodes_miniName'] = false; // Allow users to enable node regular matching t
 $_MT['nodes_regex'] = '/\[(.*?)\]/'; // Regular expression for node name shortening in node filter settings, characters in [ ] will be removed by default
 # Which subscriptions are displayed in the subscription box on the home page Optional: ssr, v2ray, surge, clash, surfboard, kitsunebi, shadowrocket, quantumult, quantumultx,
 $_MT['index_sub'] = [
-    // 'ssr',
+    'ssr',
     'v2ray',
     // 'surge',
     // 'clash',
