@@ -367,7 +367,7 @@ return function (SlimApp $app) {
         $this->group('/help', function () {
             $this->get('/document',             App\Controllers\Admin\HelpController::class . ':index');
             $this->get('/document/create',      App\Controllers\Admin\HelpController::class . ':create');
-            $this->get('/document/gethelpclass',App\Controllers\Admin\HelpController::class . ':getHelpClass');
+            $this->get('/document/gethelpclass', App\Controllers\Admin\HelpController::class . ':getHelpClass');
             $this->get('/document/{id}/edit',   App\Controllers\Admin\HelpController::class . ':edit');
             $this->put('/document/{id}',        App\Controllers\Admin\HelpController::class . ':update');
             $this->delete('/document',          App\Controllers\Admin\HelpController::class . ':delete');
@@ -476,5 +476,14 @@ return function (SlimApp $app) {
         $this->get('/node',          App\Controllers\Api\V1\ApiController::class . ':node')->add(new Api());
         $this->get('/user/{id}',     App\Controllers\Api\V1\ApiController::class . ':userInfo')->add(new Api());
         $this->get('/sublink',       App\Controllers\Api\Client\ClientApiController::class . ':GetSubLink');
+    });
+
+
+
+
+    // Telegram main bot
+    $app->group('/tlgrmBot', function () {
+        $this->get('/servers',            App\Controllers\User\NodeController::class . ':getUserAllURL');
+        // $this->get('/connections',            App\Controllers\UserController::class . ':getUserAllURL');
     });
 };
