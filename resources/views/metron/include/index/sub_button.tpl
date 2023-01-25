@@ -1,12 +1,12 @@
                                                         {if in_array('ssr',$metron['index_sub'])}
                                                         <!-- SSRTo subscribe to -->
                                                         <div class="btn-group mb-3 mr-3">
-                                                            <button type="button" class="btn btn-pill btn-ssr dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="metron-ssr1 text-white"></i>&nbsp;&nbsp;SSR To subscribe to&nbsp;&nbsp;</button>
+                                                            <button type="button" class="btn btn-pill btn-ssr dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="metron-ssr1 text-white"></i>&nbsp;&nbsp;SSR subscription&nbsp;&nbsp;</button>
                                                             <div class="dropdown-menu">
-                                                                <button type="button" class="dropdown-item copy-text" data-clipboard-text="{$subInfo["ssr"]}">copy SSR To subscribe to</button>
+                                                                <button type="button" class="dropdown-item copy-text" data-clipboard-text="{$subInfo["ssr"]}">Copy link</button>
                                                                 <div class="dropdown-divider">
                                                                 </div>
-                                                                <button type="button" class="dropdown-item" href="##" onclick="importSublink('ssr')">A key to import SSR</button>
+                                                                <button type="button" class="dropdown-item" href="##" onclick="importSublink('ssr')">Import link</button>
                                                             </div>
                                                         </div>
                                                         {/if}
