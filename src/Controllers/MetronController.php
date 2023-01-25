@@ -525,9 +525,9 @@ class MetronController extends BaseController
                     'ret' => 1,
                     'sort' => (int)$node->sort,
                     'info' => $nodeinfo,
-                    // 'mu_user' => $mu_user,
-                    // 'mu_only' => $node->mu_only,
-                    // 'url' => $url
+                    'mu_user' => $mu_user,
+                    'mu_only' => $node->mu_only,
+                    'url' => $url
                 ];
                 break;
             case '11':
