@@ -499,14 +499,13 @@ class MetronController extends BaseController
                     # 不是多端口节点
                     $mu_port = Node::where('sort', '=', 9)->first();
                     $mu_user = User::where('port', '=', $mu_port->server)->value('port');
-
-                    // if (URL::SSRCanConnect($user, $mu_user)) {
-                    // $nodeinfo = $node->getItem($user, $mu_user, 0, 0);
-                    //     $url = URL::getItemUrl($nodeinfo, 0);
-                    // } else if (URL::SSCanConnect($user, $mu_user)) {
-                    //     $nodeinfo = $node->getItem($user, $mu_user, 0, 1);
-                    //     $url = URL::getItemUrl($nodeinfo, 1);
-                    // }
+                    if (URL::SSRCanConnect($user, $mu_user)) {
+                        $nodeinfo = $node->getItem($user, $mu_user, 0, 0);
+                        $url = URL::getItemUrl($nodeinfo, 0);
+                    } else if (URL::SSCanConnect($user, $mu_user)) {
+                        $nodeinfo = $node->getItem($user, $mu_user, 0, 1);
+                        $url = URL::getItemUrl($nodeinfo, 1);
+                    }
                 } else {
                     $in_user = 0;
                     $nodeinfo = $node->getItem($user, 0);
