@@ -497,8 +497,9 @@ class MetronController extends BaseController
             case '10':
                 if ($node->mu_only != -1) {
                     # 不是多端口节点
-                    $mu_port = Node::where('sort', '=', 9)->first();
-                    $mu_user = User::where('port', '=', $mu_port->server)->value('port');
+                    // $mu_port = Node::where('sort', '=', 9)->first();
+                    // $mu_user = User::where('port', '=', $mu_port->server)->value('port');
+                    $mu_user = 10030;
                     if (URL::SSRCanConnect($user, $mu_user)) {
                         $nodeinfo = $node->getItem($user, $mu_user, 0, 0);
                         $url = URL::getItemUrl($nodeinfo, 0);
