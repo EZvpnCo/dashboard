@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    {include file='table/table.tpl'}
+                    
                 </div>
 
                 <div aria-hidden="true" class="modal modal-va-middle fade" id="delete_modal" role="dialog"

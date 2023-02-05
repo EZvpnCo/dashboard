@@ -155,9 +155,9 @@ class LinkController extends BaseController
                 $query_value = $opts[$key];
                 if ($query_value != '0' && $query_value != '') {
                     // 兼容代码开始
-//                    if ($key == 'sub' && $query_value == 4) {
-//                        $query_value = 1;
-//                    }
+                    //                    if ($key == 'sub' && $query_value == 4) {
+                    //                        $query_value = 1;
+                    //                    }
                     // 兼容代码结束
                     if ($key == 'list') {
                         $SubscribeExtend = self::getSubscribeExtend($query_value);
@@ -443,7 +443,7 @@ class LinkController extends BaseController
             // apps
             'ssa' => '?list=ssa',
             'ssd' => '?ssd=1',
-            'anxray'=> '?anxray=1',
+            'anxray' => '?anxray=1',
             'clash' => '?clash=1',
             'clash_provider' => '?list=clash',
             'surge' => '?surge=' . $int,
